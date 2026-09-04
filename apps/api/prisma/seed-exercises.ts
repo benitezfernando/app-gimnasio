@@ -1,4 +1,4 @@
-import { PrismaClient, ExerciseCategory, ExerciseSource } from '@prisma/client';
+import { Prisma, PrismaClient, ExerciseCategory, ExerciseSource } from '@prisma/client';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 const LICENCIA_MEDIA = 'Gym Visual - uso comercial requiere licencia propia';
 const ATRIBUCION_MEDIA = '© Gym Visual - https://gymvisual.com/';
+const TAMANO_LOTE = 100;
 
 /**
  * IMPORTANTE: esta forma está inferida de la documentación pública del repo
@@ -30,7 +31,8 @@ interface DatasetExercise {
 }
 
 function validarItem(item: DatasetExercise, index: number): void {
-  const identificador = item?.id && String(item.id).trim().length > 0 ? item.id : `<sin id, índice ${index}>`;
+  const identificador =
+    item?.id && String(item.id).trim().length > 0 ? item.id : `<sin id, índice ${index}>`;
 
   if (!item?.id || String(item.id).trim().length === 0) {
     throw new Error(
@@ -49,7 +51,7 @@ function validarItem(item: DatasetExercise, index: number): void {
   }
 }
 
-function mapCategoria(raw: string, categoriasNoReconocidas?: Set<string>): ExerciseCategory {
+function mapCategoria(raw: string, categoriasNoReconocidas: Set<string>): ExerciseCategory {
   const normalizado = raw.trim().toLowerCase();
   switch (normalizado) {
     case 'strength':
@@ -61,7 +63,7 @@ function mapCategoria(raw: string, categoriasNoReconocidas?: Set<string>): Exerc
     case 'plyometrics':
       return ExerciseCategory.PLYOMETRICS;
     default:
-      categoriasNoReconocidas?.add(raw);
+      categoriasNoReconocidas.add(raw);
       return ExerciseCategory.OTHER;
   }
 }
@@ -71,47 +73,48 @@ function cargarDataset(rutaJson: string): DatasetExercise[] {
   return JSON.parse(contenido) as DatasetExercise[];
 }
 
-async function seedExercise(
-  item: DatasetExercise,
-  index: number,
-  categoriasNoReconocidas: Set<string>,
-): Promise<ExerciseCategory> {
+/** Campos compartidos entre `create` y `update` — una sola fuente de verdad para el mapeo. */
+function mapFields(item: DatasetExercise, categoria: ExerciseCategory) {
+  return {
+    nombre: item.name,
+    categoria,
+    grupoMuscular: item.muscle_group,
+    gruposMuscularesSecundarios: item.secondary_muscles ?? [],
+    equipamiento: item.equipment ?? null,
+    imageUrl: item.image ?? null,
+    gifUrl: item.gif_url ?? null,
+    instrucciones: item.instructions?.es ?? null,
+    licenciaMedia: LICENCIA_MEDIA,
+    atribucionMedia: ATRIBUCION_MEDIA,
+  };
+}
+
+function buildUpsert(item: DatasetExercise, index: number, categoriasNoReconocidas: Set<string>) {
   validarItem(item, index);
-
   const categoria = mapCategoria(item.category, categoriasNoReconocidas);
+  const campos = mapFields(item, categoria);
 
-  await prisma.exercise.upsert({
-    where: { id: item.id },
-    create: {
-      id: item.id,
-      gymId: null,
-      nombre: item.name,
-      categoria,
-      grupoMuscular: item.muscle_group,
-      gruposMuscularesSecundarios: item.secondary_muscles ?? [],
-      equipamiento: item.equipment ?? null,
-      imageUrl: item.image ?? null,
-      gifUrl: item.gif_url ?? null,
-      instrucciones: item.instructions?.es ?? null,
-      fuente: ExerciseSource.CATALOG,
-      licenciaMedia: LICENCIA_MEDIA,
-      atribucionMedia: ATRIBUCION_MEDIA,
-    },
-    update: {
-      nombre: item.name,
-      categoria,
-      grupoMuscular: item.muscle_group,
-      gruposMuscularesSecundarios: item.secondary_muscles ?? [],
-      equipamiento: item.equipment ?? null,
-      imageUrl: item.image ?? null,
-      gifUrl: item.gif_url ?? null,
-      instrucciones: item.instructions?.es ?? null,
-      licenciaMedia: LICENCIA_MEDIA,
-      atribucionMedia: ATRIBUCION_MEDIA,
-    },
-  });
+  return {
+    categoria,
+    operacion: prisma.exercise.upsert({
+      where: { externalId: item.id },
+      create: {
+        externalId: item.id,
+        gymId: null,
+        fuente: ExerciseSource.CATALOG,
+        ...campos,
+      },
+      update: campos,
+    }),
+  };
+}
 
-  return categoria;
+function partirEnLotes<T>(items: T[], tamano: number): T[][] {
+  const lotes: T[][] = [];
+  for (let i = 0; i < items.length; i += tamano) {
+    lotes.push(items.slice(i, i + tamano));
+  }
+  return lotes;
 }
 
 async function main(): Promise<void> {
@@ -125,11 +128,22 @@ async function main(): Promise<void> {
   const categoriasNoReconocidas = new Set<string>();
   let contadorOther = 0;
 
-  for (const [index, item] of ejercicios.entries()) {
-    const categoria = await seedExercise(item, index, categoriasNoReconocidas);
-    if (categoria === ExerciseCategory.OTHER) {
-      contadorOther += 1;
+  const lotes = partirEnLotes(ejercicios, TAMANO_LOTE);
+  let procesados = 0;
+
+  for (const lote of lotes) {
+    const upserts = lote.map((item, indiceEnLote) =>
+      buildUpsert(item, procesados + indiceEnLote, categoriasNoReconocidas),
+    );
+
+    await prisma.$transaction(upserts.map((u) => u.operacion) as Prisma.PrismaPromise<unknown>[]);
+
+    for (const { categoria } of upserts) {
+      if (categoria === ExerciseCategory.OTHER) {
+        contadorOther += 1;
+      }
     }
+    procesados += lote.length;
   }
 
   if (contadorOther > 0) {
@@ -139,7 +153,9 @@ async function main(): Promise<void> {
     );
   }
 
-  console.log(`Listo: ${ejercicios.length} ejercicios importados/actualizados (fuente: CATALOG, ${ATRIBUCION_MEDIA}).`);
+  console.log(
+    `Listo: ${ejercicios.length} ejercicios importados/actualizados (fuente: CATALOG, ${ATRIBUCION_MEDIA}).`,
+  );
 }
 
 main()

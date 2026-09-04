@@ -49,6 +49,7 @@ model User {
 // ExerciseCatalog (HLD §3)
 model Exercise {
   id                          String           @id @default(uuid())
+  externalId                  String?          @unique
   gymId                       String?
   nombre                      String
   categoria                   ExerciseCategory @default(OTHER)
@@ -68,6 +69,8 @@ model Exercise {
   ejerciciosDeInstance RoutineInstanceExercise[]
 
   @@index([gymId])
+  @@index([grupoMuscular])
+  @@index([categoria])
 }
 
 // Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)

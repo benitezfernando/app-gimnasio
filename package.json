@@ -10,7 +10,32 @@
     "dev:web": "pnpm --filter web dev",
     "build": "pnpm -r --filter ./apps/* build",
     "prisma:generate": "pnpm --filter api prisma:generate",
-    "prisma:validate": "pnpm --filter api prisma:validate"
+    "prisma:validate": "pnpm --filter api prisma:validate",
+    "seed:exercises": "pnpm --filter api seed:exercises",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
   },
   "packageManager": "pnpm@9.0.0"
 }
