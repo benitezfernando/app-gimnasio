@@ -11,10 +11,12 @@
 | Backend | NestJS (monolito modular) | Ya es tu stack diario, capas domain/application/infra estrictas |
 | DB + Auth + Storage | Supabase (Postgres) | Todo gratis y managed, Postgres real (exportable), Auth con roles, Storage para media |
 | ORM | Prisma | ACID estricto, tipado, migraciones |
-| Catálogo de ejercicios | Free Exercise DB (open-source, ~800 ejercicios, JSON + imágenes/GIFs) | Cero esfuerzo de contenido para arrancar, sin licenciamiento |
+| Catálogo de ejercicios | [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (1.324 ejercicios, JSON + imagen + GIF animado, instrucciones en español) | Reemplaza a Free Exercise DB (~800 ejercicios, solo imagen estática): más volumen, cumple el requisito de animación por ejercicio (PRD HU-09) e instrucciones nativas en es. **Ojo con la licencia** (ver nota abajo). |
 | Mensajería/eventos | Ninguno por ahora | Kafka/RabbitMQ es over-engineering para este scope. Se agrega si aparece un caso real de integración async (ej. notificaciones push) |
 
 **Pushback registrado:** no vamos con microservicios ni arquitectura event-driven en el MVP. Monolito modular con bounded contexts bien separados — la extracción a servicios queda barata el día que haga falta, pero hoy es puro overhead operativo para un gym.
+
+**⚠️ Gate de licencia de media (bloqueante para monetización, no para el MVP de un solo gym):** la estructura/código de `exercises-dataset` es MIT, pero las imágenes y GIFs son © Gym Visual. Redistribución permitida, pero **uso comercial requiere licencia propia de Gym Visual**. Mientras la app se use solo para el gym de Fer, no aplica. **Antes de ofrecer la app como servicio pago a otros gimnasios (Fase 3, multi-gym) hay que auditar y reemplazar toda la media de origen Gym Visual** (o conseguir licencia comercial). Cada `Exercise` de catálogo lleva `licenciaMedia` y `atribucionMedia` en el modelo justamente para poder auditar esto en un query.
 
 ## 2. Arquitectura general
 
@@ -58,8 +60,9 @@ Cada bounded context expone su propio módulo NestJS; comunicación entre contex
 - Un profesor/alumno pertenece a un único gym (`gymId` como tenant discriminator en toda entidad)
 
 ### ExerciseCatalog
-- `Exercise` (id, nombre, grupoMuscular, equipamiento, mediaUrl [gif/video], iconUrl, fuente: 'catalog' | 'custom', gymId nullable)
-- Seed inicial desde Free Exercise DB (import script, corre una vez)
+- `Exercise` (id, nombre, categoria, grupoMuscular, gruposMuscularesSecundarios[], equipamiento, imageUrl, gifUrl, instrucciones [texto en español], fuente: 'catalog' | 'custom', licenciaMedia, atribucionMedia, gymId nullable)
+- Seed inicial desde [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (script idempotente, no corre como parte de la migración automática — ver Fase 0 §6)
+- `licenciaMedia`/`atribucionMedia`: trackean que la media (imagen + GIF) es © Gym Visual, uso comercial requiere licencia propia — ver gate de licencia en §1. El código/estructura del dataset es MIT; la media no.
 - `gymId: null` = ejercicio del catálogo global; `gymId` seteado = ejercicio custom subido por un profesor de ese gym (soporta el híbrido a futuro sin cambiar el modelo)
 
 ### Routines
@@ -78,7 +81,7 @@ Modelo **plantilla → clon al asignar** (decisión de producto, ver PRD §3): l
 |---|---|
 | ADMIN | CRUD de profesores/alumnos del gym, ver todo, futura config multi-gym |
 | PROFESOR | CRUD de rutinas propias, asignar/reasignar a alumnos de su gym, ver progreso (fase 2) |
-| ALUMNO | Ver su rutina vigente, ver detalle de cada ejercicio (video/animación/ícono) |
+| ALUMNO | Ver su rutina vigente, ver detalle de cada ejercicio (imagen + GIF animado) |
 
 Scoping por `gymId` en cada query de repo — nunca confiar en el filtro del frontend.
 
@@ -97,13 +100,13 @@ Scoping por `gymId` en cada query de repo — nunca confiar en el filtro del fro
 **Fase 0 — Scaffolding**
 - Monorepo pnpm workspaces, apps `api` + `web`
 - Setup Supabase (proyecto, schema inicial, Auth)
-- Prisma schema con las 3 entidades core + seed de Free Exercise DB
+- Prisma schema con las 3 entidades core + seed de [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset)
 
 **Fase 1 — MVP funcional**
 - Auth + roles funcionando end-to-end
 - Admin: alta de profesores/alumnos
 - Profesor: crear rutina, asignar a alumno, editar
-- Alumno: ver rutina vigente con detalle de ejercicio (media + ícono)
+- Alumno: ver rutina vigente con detalle de ejercicio (imagen + GIF animado; `imageUrl` sirve de fallback/ícono cuando no hay `gifUrl`)
 
 **Fase 2 — Calidad de vida**
 - Historial de rutinas, versionado
@@ -119,5 +122,5 @@ Scoping por `gymId` en cada query de repo — nunca confiar en el filtro del fro
 
 1. Scaffolding del monorepo (pnpm workspaces + NestJS + Next.js)
 2. Proyecto Supabase + schema Prisma inicial
-3. Script de import del catálogo Free Exercise DB
+3. Script de import del catálogo [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (idempotente, corre a demanda — no en la migración automática)
 4. Auth end-to-end con los 3 roles

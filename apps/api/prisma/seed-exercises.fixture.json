@@ -1,0 +1,28 @@
+[
+  {
+    "id": "3_4_Sit-Up",
+    "name": "3/4 Sit-Up",
+    "category": "strength",
+    "muscle_group": "abdominals",
+    "secondary_muscles": ["hip flexors"],
+    "equipment": "body only",
+    "image": "images/3_4_Sit-Up/0.jpg",
+    "gif_url": "images/3_4_Sit-Up/0.gif",
+    "instructions": {
+      "es": "Acostate boca arriba con las rodillas flexionadas. Cruzá los brazos sobre el pecho y subí el torso 3/4 del recorrido de una sentadilla abdominal completa."
+    }
+  },
+  {
+    "id": "Adductor",
+    "name": "Adductor",
+    "category": "strength",
+    "muscle_group": "adductors",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "image": "images/Adductor/0.jpg",
+    "gif_url": "images/Adductor/0.gif",
+    "instructions": {
+      "es": "Sentate en la máquina de aductores con las piernas separadas apoyadas en los cojines. Juntá las piernas contra la resistencia de forma controlada."
+    }
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "name": "app-gimnasio",
+  "private": true,
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:api": "pnpm --filter api start:dev",
+    "dev:web": "pnpm --filter web dev",
+    "build": "pnpm -r --filter ./apps/* build",
+    "prisma:generate": "pnpm --filter api prisma:generate",
+    "prisma:validate": "pnpm --filter api prisma:validate"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  PROFESOR
+  ALUMNO
+}
+
+enum ExerciseSource {
+  CATALOG
+  CUSTOM
+}
+
+enum ExerciseCategory {
+  STRENGTH
+  CARDIO
+  STRETCHING
+  PLYOMETRICS
+  OTHER
+}
+
+// Identity (HLD §3)
+model User {
+  id        String   @id @default(uuid())
+  gymId     String
+  email     String
+  nombre    String
+  role      Role
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  templatesComoProfesor  RoutineTemplate[] @relation("ProfesorTemplates")
+  instanciasComoProfesor RoutineInstance[] @relation("ProfesorInstances")
+  instanciasComoAlumno   RoutineInstance[] @relation("AlumnoInstances")
+
+  @@unique([gymId, email])
+  @@index([gymId])
+}
+
+// ExerciseCatalog (HLD §3)
+model Exercise {
+  id                          String           @id @default(uuid())
+  gymId                       String?
+  nombre                      String
+  categoria                   ExerciseCategory @default(OTHER)
+  grupoMuscular               String
+  gruposMuscularesSecundarios String[]         @default([])
+  equipamiento                String?
+  imageUrl                    String?
+  gifUrl                      String?
+  instrucciones               String?
+  fuente                      ExerciseSource   @default(CATALOG)
+  licenciaMedia               String?
+  atribucionMedia             String?
+  createdAt                   DateTime         @default(now())
+  updatedAt                   DateTime         @updatedAt
+
+  ejerciciosDeTemplate RoutineTemplateExercise[]
+  ejerciciosDeInstance RoutineInstanceExercise[]
+
+  @@index([gymId])
+}
+
+// Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)
+model RoutineTemplate {
+  id          String   @id @default(uuid())
+  gymId       String
+  profesorId  String
+  nombre      String
+  descripcion String?
+  activa      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  profesor         User                      @relation("ProfesorTemplates", fields: [profesorId], references: [id])
+  ejercicios       RoutineTemplateExercise[]
+  instanciasOrigen RoutineInstance[]         @relation("OrigenTemplate")
+
+  @@index([gymId])
+  @@index([profesorId])
+}
+
+model RoutineTemplateExercise {
+  id           String  @id @default(uuid())
+  templateId   String
+  exerciseId   String
+  orden        Int
+  series       Int
+  repeticiones Int
+  descanso     Int
+  notas        String?
+
+  template RoutineTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+
+  @@unique([templateId, orden])
+  @@index([exerciseId])
+}
+
+model RoutineInstance {
+  id               String    @id @default(uuid())
+  gymId            String
+  profesorId       String
+  alumnoId         String
+  nombre           String
+  origenTemplateId String?
+  vigenteDesde     DateTime  @default(now())
+  vigenteHasta     DateTime?
+  activa           Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  profesor       User                      @relation("ProfesorInstances", fields: [profesorId], references: [id])
+  alumno         User                      @relation("AlumnoInstances", fields: [alumnoId], references: [id])
+  origenTemplate RoutineTemplate?          @relation("OrigenTemplate", fields: [origenTemplateId], references: [id])
+  ejercicios     RoutineInstanceExercise[]
+
+  @@index([gymId])
+  @@index([alumnoId])
+  @@index([profesorId])
+}
+
+model RoutineInstanceExercise {
+  id           String  @id @default(uuid())
+  instanceId   String
+  exerciseId   String
+  orden        Int
+  series       Int
+  repeticiones Int
+  descanso     Int
+  notas        String?
+
+  instance RoutineInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+
+  @@unique([instanceId, orden])
+  @@index([exerciseId])
+}

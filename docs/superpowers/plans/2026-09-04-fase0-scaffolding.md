@@ -12,7 +12,8 @@
 
 - No usar `nest new` / `create-next-app` interactivos — todo el contenido de archivos se escribe explícito en este plan (reproducible, revisable en diff).
 - No crear entidad `Gym` ni tabla de tenants — el HLD (§3, §4) solo define `gymId: string` como discriminador escalar en cada entidad, no un modelo `Gym`. No inventar lo que no está.
-- No incluir setup de Supabase ni seed de Free Exercise DB en este plan — quedan fuera del pedido explícito del usuario (son los otros ítems de Fase 0 en el HLD, pero no fueron pedidos ahora).
+- No incluir setup de Supabase en este plan — queda fuera del pedido explícito del usuario.
+- **Adenda 2026-09-04:** el usuario pidió incorporar el seed del catálogo de ejercicios, con cambio de fuente de datos: se usa [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (MIT, 1.324 ejercicios, imagen+GIF+instrucciones es) en vez de Free Exercise DB. La media (imagen/GIF) es © Gym Visual — redistribución permitida, uso comercial requiere licencia propia; no bloquea el MVP de un gym pero sí antes de vender la app a otros gyms (Fase 3). Ver Tasks 8-9 y `docs/hld-mvp.md` §1/§3, `docs/prd-mvp.md` §6 regla 6 (ya actualizados).
 - `domain/` sin dependencias de framework (ni `@nestjs/*` ni Prisma) — ver HLD §2.
 - Scoping por `gymId` es una convención de dato (columna + índice), no lógica de autorización — eso es Fase 1.
 - No commit — el usuario revisa antes de commitear (instrucción explícita).
@@ -577,12 +578,14 @@ Expected: `Generated Prisma Client` sin errores
 - Create: `apps/web/app/globals.css`
 - Create: `apps/web/app/layout.tsx`
 - Create: `apps/web/app/page.tsx`
-- Create: `apps/web/app/(admin)/page.tsx`
-- Create: `apps/web/app/(profesor)/page.tsx`
-- Create: `apps/web/app/(alumno)/page.tsx`
+- Create: `apps/web/app/(admin)/admin/page.tsx`
+- Create: `apps/web/app/(profesor)/profesor/page.tsx`
+- Create: `apps/web/app/(alumno)/alumno/page.tsx`
 
 **Interfaces:**
 - Produces: nada consumido por otras tasks — es la app `web` final del workspace.
+
+**Nota (encontrada en ejecución, no en el diseño original):** los route groups `(admin)/(profesor)/(alumno)` de Next.js App Router NO agregan segmento a la URL — un `page.tsx` en cada uno de esos 3 grupos más el de la raíz colisionan, las 4 resuelven a `/`. Por eso cada dashboard de rol vive en `(grupo)/segmento/page.tsx` (p.ej. `(admin)/admin/page.tsx` → `/admin`): el grupo sigue sirviendo para agrupar layout/guards compartidos por rol (HLD §2), el segmento le da una URL propia.
 
 - [ ] **Step 1: `apps/web/package.json`**
 
@@ -711,7 +714,7 @@ export default function HomePage() {
 }
 ```
 
-- [ ] **Step 9: `apps/web/app/(admin)/page.tsx`**
+- [ ] **Step 9: `apps/web/app/(admin)/admin/page.tsx`**
 
 ```tsx
 export default function AdminPage() {
@@ -719,7 +722,7 @@ export default function AdminPage() {
 }
 ```
 
-- [ ] **Step 10: `apps/web/app/(profesor)/page.tsx`**
+- [ ] **Step 10: `apps/web/app/(profesor)/profesor/page.tsx`**
 
 ```tsx
 export default function ProfesorPage() {
@@ -727,7 +730,7 @@ export default function ProfesorPage() {
 }
 ```
 
-- [ ] **Step 11: `apps/web/app/(alumno)/page.tsx`**
+- [ ] **Step 11: `apps/web/app/(alumno)/alumno/page.tsx`**
 
 ```tsx
 export default function AlumnoPage() {
@@ -738,11 +741,230 @@ export default function AlumnoPage() {
 - [ ] **Step 12: Instalar dependencias y compilar**
 
 Run: `cd apps/web && pnpm install --no-frozen-lockfile && pnpm exec next build`
-Expected: build sin errores (rutas `/`, `/(admin)`, `/(profesor)`, `/(alumno)` listadas en el output)
+Expected: build sin errores (rutas `/`, `/admin`, `/profesor`, `/alumno` listadas en el output)
 
 ---
 
-### Task 8: Verificación integral del monorepo
+### Task 8: Prisma schema — actualizar `Exercise` para exercises-dataset
+
+**Files:**
+- Modify: `apps/api/prisma/schema.prisma`
+
+**Interfaces:**
+- Consumes: modelo `Exercise` creado en Task 6 (a modificar in-place).
+- Produces: `Exercise` con el shape que Task 9 (seed script) necesita.
+
+**Contexto:** el usuario cambió la fuente del catálogo de Free Exercise DB a [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (MIT, 1.324 ejercicios, imagen + GIF + instrucciones en español). La media (imagen/GIF) es © Gym Visual — ver gate de licencia en `docs/hld-mvp.md` §1 y `docs/prd-mvp.md` §6 regla 6.
+
+- [ ] **Step 1: Reemplazar el modelo `Exercise` en `apps/api/prisma/schema.prisma`** (mismo archivo de Task 6, solo cambia este modelo — el resto del schema queda igual)
+
+```prisma
+enum ExerciseCategory {
+  STRENGTH
+  CARDIO
+  STRETCHING
+  PLYOMETRICS
+  OTHER
+}
+
+model Exercise {
+  id                          String           @id @default(uuid())
+  gymId                       String?
+  nombre                      String
+  categoria                   ExerciseCategory @default(OTHER)
+  grupoMuscular                String
+  gruposMuscularesSecundarios String[]         @default([])
+  equipamiento                String?
+  imageUrl                    String?
+  gifUrl                      String?
+  instrucciones                String?
+  fuente                      ExerciseSource   @default(CATALOG)
+  licenciaMedia               String?
+  atribucionMedia              String?
+  createdAt                   DateTime         @default(now())
+  updatedAt                   DateTime         @updatedAt
+
+  ejerciciosDeTemplate RoutineTemplateExercise[]
+  ejerciciosDeInstance RoutineInstanceExercise[]
+
+  @@index([gymId])
+}
+```
+
+Notas de mapeo respecto al Task 6 original: `mediaUrl`/`iconUrl` se reemplazan por `imageUrl`/`gifUrl` (el dataset trae ambos por separado); se agregan `categoria` (enum, default `OTHER` para no romper filas existentes), `gruposMuscularesSecundarios` (array), `instrucciones` (texto largo, nullable — no todo ejercicio del dataset trae instrucciones en `es`), `licenciaMedia` y `atribucionMedia` (nullable — solo se completan para ejercicios de catálogo vía el seed; un ejercicio custom subido por un profesor en Fase 2 no las necesita).
+
+- [ ] **Step 2: Validar y regenerar el client**
+
+Run: `cd apps/api && pnpm exec prisma validate && pnpm exec prisma generate`
+Expected: `The schema at prisma/schema.prisma is valid 🚀` seguido de `Generated Prisma Client` sin errores. Si `pnpm` no está en PATH en el sandbox, usar `npx --yes prisma@5.20.0` (mismo patrón que Task 6/5).
+
+---
+
+### Task 9: Seed script del catálogo de ejercicios (exercises-dataset)
+
+**Files:**
+- Create: `apps/api/prisma/seed-exercises.ts`
+- Modify: `apps/api/package.json` (agregar script `seed:exercises` y dependencia dev `tsx` para correr TS directo)
+
+**Interfaces:**
+- Consumes: `Exercise` de Task 8 (`prisma.exercise` del client generado), enums `ExerciseCategory`/`ExerciseSource`.
+- Produces: comando `pnpm --filter api seed:exercises` — idempotente, no se ejecuta como parte de ninguna migración automática (HLD §6/§7).
+
+**Contexto:** el dataset se clona/descarga aparte (no vive en este repo — demasiado grande y con licencia de media distinta a la del código). El script asume que ya existe un checkout local del dataset (ver `EXERCISES_DATASET_PATH` abajo) con una carpeta `data/` de JSON y carpetas `images/`/`videos` para la media; en este Fase 0 el script debe funcionar contra un JSON de ejemplo (no requiere red ni el dataset real clonado) para poder probarlo, y quedar listo para apuntarlo al dataset real después.
+
+- [ ] **Step 1: Agregar dependencia `tsx` y script en `apps/api/package.json`**
+
+Agregar a `devDependencies`: `"tsx": "^4.19.0"`. Agregar a `scripts`: `"seed:exercises": "tsx prisma/seed-exercises.ts"`.
+
+- [ ] **Step 2: Crear fixture de prueba `apps/api/prisma/seed-exercises.fixture.json`** (representa el shape real del dataset, minimizado a 2 ejercicios para poder correr el seed sin la red ni el dataset clonado)
+
+```json
+[
+  {
+    "id": "3_4_Sit-Up",
+    "name": "3/4 Sit-Up",
+    "category": "strength",
+    "muscle_group": "abdominals",
+    "secondary_muscles": ["hip flexors"],
+    "equipment": "body only",
+    "image": "images/3_4_Sit-Up/0.jpg",
+    "gif_url": "images/3_4_Sit-Up/0.gif",
+    "instructions": {
+      "es": "Acostate boca arriba con las rodillas flexionadas. Cruzá los brazos sobre el pecho y subí el torso 3/4 del recorrido de una sentadilla abdominal completa."
+    }
+  },
+  {
+    "id": "Adductor",
+    "name": "Adductor",
+    "category": "strength",
+    "muscle_group": "adductors",
+    "secondary_muscles": [],
+    "equipment": "machine",
+    "image": "images/Adductor/0.jpg",
+    "gif_url": "images/Adductor/0.gif",
+    "instructions": {
+      "es": "Sentate en la máquina de aductores con las piernas separadas apoyadas en los cojines. Juntá las piernas contra la resistencia de forma controlada."
+    }
+  }
+]
+```
+
+- [ ] **Step 3: Crear `apps/api/prisma/seed-exercises.ts`**
+
+```typescript
+import { PrismaClient, ExerciseCategory, ExerciseSource } from '@prisma/client';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const prisma = new PrismaClient();
+
+const LICENCIA_MEDIA = 'Gym Visual - uso comercial requiere licencia propia';
+const ATRIBUCION_MEDIA = '© Gym Visual - https://gymvisual.com/';
+
+interface DatasetExercise {
+  id: string;
+  name: string;
+  category: string;
+  muscle_group: string;
+  secondary_muscles: string[];
+  equipment: string | null;
+  image: string | null;
+  gif_url: string | null;
+  instructions?: { es?: string };
+}
+
+function mapCategoria(raw: string): ExerciseCategory {
+  const normalizado = raw.trim().toLowerCase();
+  switch (normalizado) {
+    case 'strength':
+      return ExerciseCategory.STRENGTH;
+    case 'cardio':
+      return ExerciseCategory.CARDIO;
+    case 'stretching':
+      return ExerciseCategory.STRETCHING;
+    case 'plyometrics':
+      return ExerciseCategory.PLYOMETRICS;
+    default:
+      return ExerciseCategory.OTHER;
+  }
+}
+
+function cargarDataset(rutaJson: string): DatasetExercise[] {
+  const contenido = readFileSync(rutaJson, 'utf-8');
+  return JSON.parse(contenido) as DatasetExercise[];
+}
+
+async function seedExercise(item: DatasetExercise): Promise<void> {
+  await prisma.exercise.upsert({
+    where: { id: item.id },
+    create: {
+      id: item.id,
+      gymId: null,
+      nombre: item.name,
+      categoria: mapCategoria(item.category),
+      grupoMuscular: item.muscle_group,
+      gruposMuscularesSecundarios: item.secondary_muscles ?? [],
+      equipamiento: item.equipment ?? null,
+      imageUrl: item.image ?? null,
+      gifUrl: item.gif_url ?? null,
+      instrucciones: item.instructions?.es ?? null,
+      fuente: ExerciseSource.CATALOG,
+      licenciaMedia: LICENCIA_MEDIA,
+      atribucionMedia: ATRIBUCION_MEDIA,
+    },
+    update: {
+      nombre: item.name,
+      categoria: mapCategoria(item.category),
+      grupoMuscular: item.muscle_group,
+      gruposMuscularesSecundarios: item.secondary_muscles ?? [],
+      equipamiento: item.equipment ?? null,
+      imageUrl: item.image ?? null,
+      gifUrl: item.gif_url ?? null,
+      instrucciones: item.instructions?.es ?? null,
+      licenciaMedia: LICENCIA_MEDIA,
+      atribucionMedia: ATRIBUCION_MEDIA,
+    },
+  });
+}
+
+async function main(): Promise<void> {
+  const rutaDataset = process.env.EXERCISES_DATASET_PATH
+    ? join(process.env.EXERCISES_DATASET_PATH, 'data', 'exercises.json')
+    : join(__dirname, 'seed-exercises.fixture.json');
+
+  const ejercicios = cargarDataset(rutaDataset);
+  console.log(`Importando ${ejercicios.length} ejercicios desde ${rutaDataset}...`);
+
+  for (const item of ejercicios) {
+    await seedExercise(item);
+  }
+
+  console.log(`Listo: ${ejercicios.length} ejercicios importados/actualizados (fuente: CATALOG, ${ATRIBUCION_MEDIA}).`);
+}
+
+main()
+  .catch((error) => {
+    console.error('Error corriendo el seed de ejercicios:', error);
+    process.exitCode = 1;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+```
+
+- [ ] **Step 4: Correr el seed contra el fixture (requiere una DB Postgres accesible vía `DATABASE_URL`; si no hay una disponible en este entorno, correr `prisma migrate dev` o levantar Postgres queda fuera de esta task — reportar como concern, no como bloqueo)**
+
+Run: `cd apps/api && pnpm exec tsx prisma/seed-exercises.ts` (o `npx --yes tsx prisma/seed-exercises.ts` si `pnpm` no está en PATH)
+Expected (con DB accesible): `Importando 2 ejercicios desde .../seed-exercises.fixture.json...` seguido de `Listo: 2 ejercicios importados/actualizados...`. Sin DB accesible: reportar el error de conexión tal cual — no es un fallo del script, es un prerequisito de infra fuera de este plan (Supabase/Postgres local).
+
+- [ ] **Step 5: Verificar idempotencia (solo si Step 4 corrió contra una DB real)**
+
+Run: correr el mismo comando del Step 4 una segunda vez.
+Expected: mismo output, sin errores de constraint (el `upsert` por `id` lo garantiza), y sin filas duplicadas.
+
+---
+
+### Task 10: Verificación integral del monorepo
 
 **Files:** ninguno (solo comandos)
 
@@ -766,6 +988,11 @@ Expected: `The schema at prisma/schema.prisma is valid 🚀`
 Run: `pnpm --filter web build`
 Expected: exit 0
 
-- [ ] **Step 5: Reportar al usuario**
+- [ ] **Step 5: Confirmar que el seed script existe y compila (sin ejecutarlo si no hay DB)**
 
-No hacer commit. Informar que Fase 0 (scaffolding pedido) está lista para revisión manual (`git status`, `git diff`) antes de commitear.
+Run: `cd apps/api && pnpm exec tsc --noEmit prisma/seed-exercises.ts`
+Expected: sin errores de tipos (confirma que el script matchea el client de Prisma generado en Task 8, aunque no haya DB para correrlo de punta a punta)
+
+- [ ] **Step 6: Reportar al usuario**
+
+No hacer commit. Informar que Fase 0 (scaffolding pedido, incluyendo el cambio de catálogo a exercises-dataset) está lista para revisión manual (`git status`, `git diff`) antes de commitear. Recordar el gate de licencia de media (Gym Visual) documentado en HLD/PRD.
