@@ -11,3 +11,5 @@ out/
 # genéricamente para otros repos) — en este proyecto sí se trackean.
 !CLAUDE.md
 !docs/
+!docs/superpowers/
+!docs/superpowers/plans/
