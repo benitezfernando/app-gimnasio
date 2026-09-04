@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.next/
+out/
+*.log
+.env
+.env.local
+.DS_Store
+
+# Excepciones al .gitignore global (~/.gitignore_global ignora CLAUDE.md y docs/
+# genéricamente para otros repos) — en este proyecto sí se trackean.
+!CLAUDE.md
+!docs/
