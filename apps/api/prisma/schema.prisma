@@ -29,14 +29,15 @@ enum ExerciseCategory {
 
 // Identity (HLD §3)
 model User {
-  id        String   @id @default(uuid())
-  gymId     String
-  email     String
-  nombre    String
-  role      Role
-  activo    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  authUserId String   @unique
+  gymId      String
+  email      String
+  nombre     String
+  role       Role
+  activo     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   templatesComoProfesor  RoutineTemplate[] @relation("ProfesorTemplates")
   instanciasComoProfesor RoutineInstance[] @relation("ProfesorInstances")
