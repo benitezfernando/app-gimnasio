@@ -20,4 +20,15 @@ describe('SupabaseAdminAuthProvider', () => {
     process.env.SUPABASE_SERVICE_ROLE_KEY = 'fake-service-role-key';
     expect(() => new SupabaseAdminAuthProvider()).not.toThrow();
   });
+
+  it('expone los 5 métodos del AuthProviderPort', () => {
+    process.env.SUPABASE_URL = 'https://example.supabase.co';
+    process.env.SUPABASE_SERVICE_ROLE_KEY = 'fake-service-role-key';
+    const provider = new SupabaseAdminAuthProvider();
+    expect(typeof provider.createStaffUser).toBe('function');
+    expect(typeof provider.createAlumnoUser).toBe('function');
+    expect(typeof provider.signInStaff).toBe('function');
+    expect(typeof provider.signInAlumno).toBe('function');
+    expect(typeof provider.deleteAuthUser).toBe('function');
+  });
 });

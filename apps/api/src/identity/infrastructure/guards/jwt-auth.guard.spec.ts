@@ -40,7 +40,10 @@ describe('JwtAuthGuard', () => {
     process.env.SUPABASE_URL = TEST_SUPABASE_URL;
     userRepository = {
       findByAuthUserId: jest.fn(),
-      findByGymIdAndEmail: jest.fn(),
+      findByGymIdAndUsername: jest.fn(),
+      findByGymId: jest.fn(),
+      findById: jest.fn(),
+      deactivate: jest.fn(),
       create: jest.fn(),
     };
     reflector = { getAllAndOverride: jest.fn().mockReturnValue(false) };
@@ -141,7 +144,7 @@ describe('JwtAuthGuard', () => {
       id: 'user-1',
       authUserId: 'auth-user-1',
       gymId: 'gym-1',
-      email: 'x@gym.com',
+      username: 'x',
       nombre: 'X',
       role: Role.ALUMNO,
       activo: false,
@@ -169,7 +172,7 @@ describe('JwtAuthGuard', () => {
       id: 'user-1',
       authUserId: 'auth-user-1',
       gymId: 'gym-1',
-      email: 'x@gym.com',
+      username: 'x',
       nombre: 'X',
       role: Role.PROFESOR,
       activo: true,

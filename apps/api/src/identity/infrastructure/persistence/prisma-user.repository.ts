@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Role as PrismaRole } from '@prisma/client';
+import { Prisma, Role as PrismaRole } from '@prisma/client';
 import { PrismaService } from '../../../shared-kernel/prisma.service';
 import { UserRecord, UserRepositoryPort } from '../../application/ports/user-repository.port';
 import { Role } from '../../domain/role';
+import { DuplicateUsernameError } from '../../application/errors/duplicate-username.error';
 
 interface PrismaUserRow {
   id: string;
   authUserId: string;
   gymId: string;
-  email: string;
+  username: string;
   nombre: string;
   role: PrismaRole;
   activo: boolean;
@@ -23,33 +24,57 @@ export class PrismaUserRepository implements UserRepositoryPort {
     return user ? this.toRecord(user) : null;
   }
 
-  async findByGymIdAndEmail(gymId: string, email: string): Promise<UserRecord | null> {
+  async findByGymIdAndUsername(gymId: string, username: string): Promise<UserRecord | null> {
     const user = await this.prisma.user.findUnique({
-      where: { gymId_email: { gymId, email } },
+      where: { gymId_username: { gymId, username } },
     });
     return user ? this.toRecord(user) : null;
+  }
+
+  async findByGymId(gymId: string, role?: Role): Promise<UserRecord[]> {
+    const users = await this.prisma.user.findMany({
+      where: { gymId, ...(role ? { role: role as unknown as PrismaRole } : {}) },
+      orderBy: { nombre: 'asc' },
+    });
+    return users.map((u) => this.toRecord(u));
+  }
+
+  async findById(id: string): Promise<UserRecord | null> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    return user ? this.toRecord(user) : null;
+  }
+
+  async deactivate(id: string): Promise<UserRecord> {
+    const user = await this.prisma.user.update({ where: { id }, data: { activo: false } });
+    return this.toRecord(user);
   }
 
   async create(data: {
     gymId: string;
     authUserId: string;
-    email: string;
+    username: string;
     nombre: string;
     role: Role;
   }): Promise<UserRecord> {
-    const user = await this.prisma.user.create({
-      data: {
-        gymId: data.gymId,
-        authUserId: data.authUserId,
-        email: data.email,
-        nombre: data.nombre,
-        // Los valores de `Role` (dominio) y `PrismaRole` son idénticos por
-        // diseño (ver identity/domain/role.ts) — cast explícito documentado,
-        // no una coincidencia accidental.
-        role: data.role as unknown as PrismaRole,
-      },
-    });
-    return this.toRecord(user);
+    try {
+      const user = await this.prisma.user.create({
+        data: {
+          gymId: data.gymId,
+          authUserId: data.authUserId,
+          username: data.username,
+          nombre: data.nombre,
+          // Los valores de `Role` (dominio) y `PrismaRole` son idénticos por
+          // diseño (ver identity/domain/role.ts) — cast explícito documentado.
+          role: data.role as unknown as PrismaRole,
+        },
+      });
+      return this.toRecord(user);
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new DuplicateUsernameError(data.username, data.gymId);
+      }
+      throw error;
+    }
   }
 
   private toRecord(user: PrismaUserRow): UserRecord {
@@ -57,7 +82,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
       id: user.id,
       authUserId: user.authUserId,
       gymId: user.gymId,
-      email: user.email,
+      username: user.username,
       nombre: user.nombre,
       role: user.role as unknown as Role,
       activo: user.activo,

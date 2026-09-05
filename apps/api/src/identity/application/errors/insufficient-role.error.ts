@@ -1,6 +1,8 @@
 export class InsufficientRoleError extends Error {
-  constructor(rolActual: string) {
-    super(`El rol '${rolActual}' no puede invitar usuarios. Se requiere ADMIN o PROFESOR.`);
+  constructor(rolActual: string, rolesRequeridos: string[]) {
+    super(
+      `El rol '${rolActual}' no está autorizado. Se requiere uno de: ${rolesRequeridos.join(', ')}.`,
+    );
     this.name = 'InsufficientRoleError';
   }
 }

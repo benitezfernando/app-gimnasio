@@ -32,7 +32,7 @@ model User {
   id         String   @id @default(uuid())
   authUserId String   @unique
   gymId      String
-  email      String
+  username   String
   nombre     String
   role       Role
   activo     Boolean  @default(true)
@@ -43,7 +43,7 @@ model User {
   instanciasComoProfesor RoutineInstance[] @relation("ProfesorInstances")
   instanciasComoAlumno   RoutineInstance[] @relation("AlumnoInstances")
 
-  @@unique([gymId, email])
+  @@unique([gymId, username])
   @@index([gymId])
 }
 
