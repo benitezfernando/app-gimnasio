@@ -34,30 +34,51 @@ model User {
   templatesComoProfesor  RoutineTemplate[] @relation("ProfesorTemplates")
   instanciasComoProfesor RoutineInstance[] @relation("ProfesorInstances")
   instanciasComoAlumno   RoutineInstance[] @relation("AlumnoInstances")
+  alumnosAsignados       ProfesorAlumno[]  @relation("CarteraDelProfesor")
+  profesoresAsignados    ProfesorAlumno[]  @relation("ProfesoresDelAlumno")
 
   @@unique([gymId, username])
   @@index([gymId])
 }
 
+// Cartera profesor↔alumno — relación muchos-a-muchos (PRD §6 regla 9,
+// HLD §3 Identity). `gymId` es redundante con el de los dos User (todo
+// usuario pertenece a un único gym), pero se guarda para poder scopear
+// queries sin join, mismo criterio que el resto del schema.
+model ProfesorAlumno {
+  id         String   @id @default(uuid())
+  gymId      String
+  profesorId String
+  alumnoId   String
+  asignadoEn DateTime @default(now())
+
+  profesor User @relation("CarteraDelProfesor", fields: [profesorId], references: [id])
+  alumno   User @relation("ProfesoresDelAlumno", fields: [alumnoId], references: [id])
+
+  @@unique([profesorId, alumnoId])
+  @@index([gymId])
+  @@index([alumnoId])
+}
+
 // ExerciseCatalog (HLD §3)
 model Exercise {
-  id                          String   @id @default(uuid())
-  externalId                  String?  @unique
+  id                          String         @id @default(uuid())
+  externalId                  String?        @unique
   gymId                       String?
   nombre                      String
   parteCuerpo                 String
   grupoMuscular               String
-  gruposMuscularesSecundarios String[] @default([])
+  gruposMuscularesSecundarios String[]       @default([])
   equipamiento                String?
   imageUrl                    String?
   gifUrl                      String?
   instrucciones               String?
-  pasos                       String[] @default([])
+  pasos                       String[]       @default([])
   fuente                      ExerciseSource @default(CATALOG)
   licenciaMedia               String?
   atribucionMedia             String?
-  createdAt                   DateTime @default(now())
-  updatedAt                   DateTime @updatedAt
+  createdAt                   DateTime       @default(now())
+  updatedAt                   DateTime       @updatedAt
 
   ejerciciosDeTemplate RoutineTemplateExercise[]
   ejerciciosDeInstance RoutineInstanceExercise[]

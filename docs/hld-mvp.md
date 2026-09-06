@@ -1,22 +1,24 @@
 # App Gimnasio — HLD MVP
 
-**Estado:** Fase de diseño — decisiones de stack tomadas, pendiente scaffolding.
+**Estado:** Fase 0 (scaffolding), Fase 1 (auth end-to-end) y catálogo de ejercicios expuesto, implementados. En curso: Routines.
 **Alcance MVP:** un solo gimnasio (el de Fer), pensado para escalar a multi-gym sin reescritura del modelo de datos.
 
 ## 1. Decisiones tomadas
 
-| Decisión | Elección | Motivo |
-|---|---|---|
-| Frontend | Next.js (web responsive / PWA) | 1 codebase para 3 roles, deploy gratis en Vercel, instalable en el celu del alumno sin store |
-| Backend | NestJS (monolito modular) | Ya es tu stack diario, capas domain/application/infra estrictas |
-| DB + Auth + Storage | Supabase (Postgres) | Todo gratis y managed, Postgres real (exportable), Auth con roles, Storage para media |
-| ORM | Prisma | ACID estricto, tipado, migraciones |
-| Catálogo de ejercicios | [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (1.324 ejercicios, JSON + imagen + GIF animado, instrucciones en español) | Reemplaza a Free Exercise DB (~800 ejercicios, solo imagen estática): más volumen, cumple el requisito de animación por ejercicio (PRD HU-09) e instrucciones nativas en es. **Ojo con la licencia** (ver nota abajo). |
-| Mensajería/eventos | Ninguno por ahora | Kafka/RabbitMQ es over-engineering para este scope. Se agrega si aparece un caso real de integración async (ej. notificaciones push) |
+| Decisión                     | Elección                                                                                                                  | Motivo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend                     | Next.js (web responsive / PWA)                                                                                            | 1 codebase para 3 roles, deploy gratis en Vercel, instalable en el celu del alumno sin store                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Backend                      | NestJS (monolito modular)                                                                                                 | Ya es tu stack diario, capas domain/application/infra estrictas                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| DB + Auth + Storage          | Supabase (Postgres)                                                                                                       | Todo gratis y managed, Postgres real (exportable), Auth con roles, Storage para media                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ORM                          | Prisma                                                                                                                    | ACID estricto, tipado, migraciones                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Catálogo de ejercicios       | [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (1.324 ejercicios, GIF+imagen, español) | Cumple el requisito de animación por ejercicio; gate de licencia documentado antes de Fase 3 (media © Gym Visual)                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Mensajería/eventos           | Ninguno por ahora                                                                                                         | Kafka/RabbitMQ es over-engineering para este scope. Se agrega si aparece un caso real de integración async (ej. notificaciones push)                                                                                                                                                                                                                                                                                                                                                                                    |
+| UI/estilo visual             | Inspiración de referencia solamente, componentes propios (Tailwind)                                                       | Ver "Política de código/assets de terceros" abajo. Referencia concreta: mood de openGym (demo pública en `opengym.duarte-santos.ch`, mirable como screenshot, no como código) — tema claro/oscuro con paleta de acento configurable, set de íconos curado propio (no emojis ni ícono-pack genérico sin curar), cards de ejercicio con la demo animada como elemento central. Heatmap de actividad estilo GitHub y mapa muscular corporal son referencia de diseño para Fase 2 (tracking de progreso), no del MVP actual |
+| Prioridad de diseño frontend | Mobile-first                                                                                                              | ~90% del uso esperado es desde el navegador del celular. Sigue siendo PWA responsive (sin Capacitor) — no cambia la arquitectura, sí prioriza breakpoints y tamaños táctiles pensados primero para pantalla chica                                                                                                                                                                                                                                                                                                       |
 
 **Pushback registrado:** no vamos con microservicios ni arquitectura event-driven en el MVP. Monolito modular con bounded contexts bien separados — la extracción a servicios queda barata el día que haga falta, pero hoy es puro overhead operativo para un gym.
 
-**⚠️ Gate de licencia de media (bloqueante para monetización, no para el MVP de un solo gym):** la estructura/código de `exercises-dataset` es MIT, pero las imágenes y GIFs son © Gym Visual. Redistribución permitida, pero **uso comercial requiere licencia propia de Gym Visual**. Mientras la app se use solo para el gym de Fer, no aplica. **Antes de ofrecer la app como servicio pago a otros gimnasios (Fase 3, multi-gym) hay que auditar y reemplazar toda la media de origen Gym Visual** (o conseguir licencia comercial). Cada `Exercise` de catálogo lleva `licenciaMedia` y `atribucionMedia` en el modelo justamente para poder auditar esto en un query.
+**Política de código/assets de terceros:** cualquier proyecto open-source usado como referencia (ej. openGym, en cualquiera de sus forks/versiones) es válido como inspiración visual o conceptual — mirar capturas de pantalla, paleta, composición general — pero **nunca como fuente de código a copiar o adaptar**. Ya nos cruzamos este tema dos veces: el catálogo de ejercicios (dataset con media de terceros) y ahora el estilo del frontend (openGym está bajo AGPL-3.0, viral para cualquier intento futuro de cobrar el servicio a otros gimnasios). Regla simple: se reconstruye desde cero con componentes propios, nunca se clona/pega código de un repo de terceros sin verificar la licencia primero.
 
 ## 2. Arquitectura general
 
@@ -26,11 +28,11 @@ Monolito modular NestJS con capas estrictas por bounded context:
 apps/
   api/                        # NestJS
     src/
-      identity/                # users, roles, auth
+      identity/                # users, roles, auth, cartera profesor↔alumno
         domain/
         application/
         infrastructure/
-      routines/                # rutinas, asignación profesor→alumno
+      routines/                # plantillas e instancias de rutina
         domain/
         application/
         infrastructure/
@@ -38,7 +40,7 @@ apps/
         domain/
         application/
         infrastructure/
-      shared-kernel/           # value objects comunes (GymId, UserId, etc.)
+      shared-kernel/           # value objects comunes (GymId, UserId, DomainError)
   web/                         # Next.js
     app/
       (admin)/
@@ -50,22 +52,36 @@ apps/
 - `application/`: casos de uso (services), puertos (interfaces de repos).
 - `infrastructure/`: adaptadores Prisma, controllers, guards, Supabase client.
 
-Cada bounded context expone su propio módulo NestJS; comunicación entre contextos vía interfaces de application layer, no acceso directo a repos ajenos.
+Cada bounded context expone su propio módulo NestJS; comunicación entre contextos vía interfaces de application layer, no acceso directo a repos ajenos. Dirección de dependencias permitida: `routines` → `identity`, nunca al revés.
 
 ## 3. Bounded contexts
 
 ### Identity
-- `User` (id, gymId, email, role: ADMIN | PROFESOR | ALUMNO, nombre)
+
+- `User` (id, gymId, username, authUserId, role: ADMIN | PROFESOR | ALUMNO, nombre, activo)
+- **Sin email real en ningún lado** — decisión explícita: la app no manda ni pide mails. El alta es 100% en persona/manual (Admin o Profesor define username + password y se la entrega directamente).
+- **Mapeo técnico a Supabase Auth:** Supabase Auth requiere nativamente email o teléfono como identificador, así que se genera un _email sintético_ interno, único por combinación gym+username para evitar colisión entre gyms (ej. `<username>+<gymId>@gym.internal`). Este valor **nunca se muestra ni se comunica al usuario** — vive exclusivamente en `identity/infrastructure/auth/`, encapsulado igual que el `service_role` key.
+- **Login:** pasa por el backend, no directo del frontend contra Supabase. El frontend nunca conoce el patrón del email sintético. Error de login siempre genérico ("usuario o contraseña incorrectos"), sin distinguir "no existe" de "password incorrecta" (evita enumeración de usuarios).
+- **Password diferenciada por rol (decisión explícita):**
+  - ADMIN/PROFESOR: `{ gymId, username, password }` — password real, definida por quien los crea, login estándar.
+  - ALUMNO: `{ gymId, username }` — **sin password real.** El backend deriva una password interna determinística (`HMAC-SHA256(AUTH_DERIVE_SECRET, gymId:username)`, secret propio en `.env`, nunca el mismo que el JWT secret de Supabase) y la usa contra Supabase Auth de forma transparente, tanto al crear la cuenta como en cada login. Nunca se persiste en texto plano ni se muestra a nadie.
+  - **Riesgo aceptado explícitamente:** el username de alumno es legible (`nombre.apellido`), no un código aleatorio. Cualquiera que sepa el nombre de un alumno del gym puede entrar a ver su rutina — sin password real de por medio, el username ES el secreto. Fernando aceptó este riesgo por escrito porque el impacto es bajo (solo lectura de la rutina propia, sin datos sensibles). Mitigación mínima: rate-limit del endpoint de login (por IP y por username) para no dejar la puerta abierta a scraping masivo de todo el padrón de alumnos.
+- `username` de ALUMNO autogenerado al crear la cuenta (`nombre.apellido`, slug; sufijo numérico incremental si colisiona dentro del gym). `username` de ADMIN/PROFESOR definido manualmente por quien lo crea.
 - Auth vía Supabase Auth (JWT), guards de NestJS validan rol + gymId en cada request
+- `username` único por gym (`@@unique([gymId, username])`), no global — dos gyms distintos pueden tener cada uno un "juan.perez"
 - Un profesor/alumno pertenece a un único gym (`gymId` como tenant discriminator en toda entidad)
+- **`ProfesorAlumno`** (id, gymId, profesorId, alumnoId, asignadoEn) — relación muchos-a-muchos, confirmada con el profesor real (ya no es asunción, ver PRD §6 regla 9). Constraint único sobre `(profesorId, alumnoId)`. Gestionada solo por ADMIN (HU-03b), salvo la fila automática que se crea cuando un PROFESOR da de alta a un alumno (queda en su propia cartera). Quitar un profesor de la cartera de un alumno borra solo esta fila de relación, nunca las `RoutineInstance` que ese profesor ya le haya asignado.
 
 ### ExerciseCatalog
-- `Exercise` (id, nombre, categoria, grupoMuscular, gruposMuscularesSecundarios[], equipamiento, imageUrl, gifUrl, instrucciones [texto en español], fuente: 'catalog' | 'custom', licenciaMedia, atribucionMedia, gymId nullable)
-- Seed inicial desde [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (script idempotente, no corre como parte de la migración automática — ver Fase 0 §6)
-- `licenciaMedia`/`atribucionMedia`: trackean que la media (imagen + GIF) es © Gym Visual, uso comercial requiere licencia propia — ver gate de licencia en §1. El código/estructura del dataset es MIT; la media no.
+
+- `Exercise` (id, externalId, gymId nullable, nombre, parteCuerpo, grupoMuscular, gruposMuscularesSecundarios[], equipamiento, imageUrl, gifUrl, instrucciones [es], pasos[], fuente: CATALOG | CUSTOM, licenciaMedia, atribucionMedia)
+- **Dataset elegido: [hasaneyldrm/exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset)** (1.324 ejercicios, GIF animado + imagen estática, instrucciones nativas en español) — reemplaza la elección inicial de Free Exercise DB porque cumple el requisito funcional de animación por ejercicio (Free Exercise DB solo tiene imagen estática). Import script idempotente, corre a demanda (seed), nunca como parte de la migración automática. La media vive en un bucket público de Supabase Storage (`exercise-media`), subida por un script propio.
+- `licenciaMedia` / `atribucionMedia`: la media del dataset es © Gym Visual, redistribución permitida pero **uso comercial requiere licencia propia** — campos existen para poder auditar/reemplazar selectivamente. Ver PRD §6 (regla 6) para el gate de Fase 3.
 - `gymId: null` = ejercicio del catálogo global; `gymId` seteado = ejercicio custom subido por un profesor de ese gym (soporta el híbrido a futuro sin cambiar el modelo)
+- Expuesto como `GET /exercises` (búsqueda + filtros por parteCuerpo/equipamiento + paginación) y `GET /exercises/:id` (detalle), legibles por cualquier rol autenticado — el catálogo es global y de solo lectura.
 
 ### Routines
+
 Modelo **plantilla → clon al asignar** (decisión de producto, ver PRD §3): la plantilla es un punto de partida reusable; al asignarla se clona en una instancia propia del alumno, editable sin afectar la plantilla ni otras instancias.
 
 - `RoutineTemplate` (id, gymId, profesorId, nombre, descripción, activa, createdAt)
@@ -74,53 +90,75 @@ Modelo **plantilla → clon al asignar** (decisión de producto, ver PRD §3): l
 - `RoutineInstanceExercise` (id, instanceId, exerciseId, orden, series, repeticiones, descanso, notas)
 - Al asignar: `RoutineTemplateExercise[]` se clona 1:1 en `RoutineInstanceExercise[]` de la nueva `RoutineInstance`. A partir de ahí son independientes — editar la plantilla NO propaga a instancias ya asignadas, y editar una instancia NO afecta a otros alumnos.
 - **Asunción MVP:** un alumno tiene una única `RoutineInstance` vigente (`activa: true`) a la vez. Al asignar una nueva, la anterior pasa a histórica (`activa: false`, `vigenteHasta` = ahora). Ver PRD para reglas de negocio completas.
+- **`RoutineInstance.profesorId` es el creador, y es inmutable.** No se usa nunca para autorizar: la autorización sale exclusivamente de la cartera vigente. Queda como dato de trazabilidad (quién armó originalmente esa rutina).
+- **Autorización por cartera (crítico, confirmado con el profesor real):** un PROFESOR solo puede crear una `RoutineInstance` para un alumno si existe una fila `ProfesorAlumno(profesorId, alumnoId)` — nunca solo por compartir `gymId`. Mismo chequeo para leer/editar una `RoutineInstance` ya existente: se valida contra la cartera actual, no contra quién la creó originalmente (si el alumno tiene 2 profesores, ambos pueden editar la misma instancia). `RoutineTemplate` no tiene este chequeo — es propiedad exclusiva del profesor que la creó, cartera aparte. Este chequeo de cartera va en el caso de uso, igual que la jerarquía de roles en `CreateUserUseCase` — nunca solo en el guard de rol.
 
 ## 4. Roles y autorización
 
-| Rol | Puede |
-|---|---|
-| ADMIN | CRUD de profesores/alumnos del gym, ver todo, futura config multi-gym |
-| PROFESOR | CRUD de rutinas propias, asignar/reasignar a alumnos de su gym, ver progreso (fase 2) |
-| ALUMNO | Ver su rutina vigente, ver detalle de cada ejercicio (imagen + GIF animado) |
+| Rol      | Puede                                                                                                                                                                      |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ADMIN    | CRUD de profesores/alumnos del gym, gestión de cartera (`ProfesorAlumno`), ver todo, futura config multi-gym                                                               |
+| PROFESOR | CRUD de plantillas propias, asignar/ajustar rutinas solo de los alumnos de su cartera (nunca de otro alumno del mismo gym sin asignación explícita), ver progreso (fase 2) |
+| ALUMNO   | Ver su rutina vigente, ver detalle de cada ejercicio (imagen + GIF animado)                                                                                                |
 
-Scoping por `gymId` en cada query de repo — nunca confiar en el filtro del frontend.
+Scoping por `gymId` en cada query de repo — nunca confiar en el filtro del frontend. En `Routines`, el scoping por `gymId` no alcanza: hace falta además el chequeo de cartera contra `ProfesorAlumno`.
+
+**Convención de respuesta ante acceso denegado (vale para todos los bounded contexts, no solo Identity):**
+
+- **Recurso de otro gym, o inexistente → `404`, indistinguibles entre sí.** Nunca `403`. Un `403` sobre un recurso de otro gym confirma que ese recurso existe, y eso permite enumerar usuarios, rutinas o cualquier otro identificador ajeno probando IDs. Es el mismo criterio que el error genérico de login ("usuario o contraseña incorrectos", sin distinguir "no existe" de "password incorrecta"). En la práctica: si el `gymId` del recurso no coincide con el del usuario autenticado, el caso de uso tira el mismo error de "no encontrado" que si el ID no existiera.
+- **Recurso del propio gym al que el usuario no tiene acceso por una relación que legítimamente puede conocer → `403`.** El caso concreto es la cartera: un PROFESOR que intenta operar sobre un alumno de su mismo gym que no está en su cartera recibe `403`, no `404` (PRD HU-05). No hay filtración: ese profesor ya sabe que el alumno existe, comparten gym.
+- **Rol insuficiente para la operación → `403`**, resuelto por `RolesGuard` antes de llegar al caso de uso.
+
+La regla se implementa en los casos de uso, no en los guards: el guard no sabe a qué gym pertenece el recurso que se está pidiendo.
 
 ## 5. Stack técnico
 
 - **Frontend:** Next.js 14+ (App Router), Tailwind, componentes por rol en route groups `(admin)`, `(profesor)`, `(alumno)`
 - **Backend:** NestJS + Prisma + class-validator + Passport (JWT de Supabase)
 - **DB:** Supabase Postgres (free tier: 500MB, pausa por inactividad en free tier — a monitorear)
-- **Storage:** Supabase Storage (para media custom que suban los profesores a futuro)
-- **Auth:** Supabase Auth (email/password para arrancar; social login queda para después)
-- **Deploy:** Vercel (frontend) + Railway o Render free tier (API NestJS) — a definir cuál de los dos al momento de deployar
+- **Storage:** Supabase Storage (bucket público `exercise-media` con la media del catálogo; media custom de profesores a futuro)
+- **Auth:** Supabase Auth (username/password según rol — ver Identity; social login queda para después)
+- **Deploy:** Vercel (frontend, gratis, sin trade-offs relevantes) + **Render Hobby** (API NestJS, gratis indefinido). Decisión cerrada en septiembre 2026: Railway dejó de ser gratis para uso 24/7 (ahora es trial de $5/30 días + $1/mes de crédito no acumulable, insuficiente para un backend corriendo continuamente). Render Hobby es gratis indefinido pero con dos trade-offs aceptados: (1) el servicio duerme tras 15 min sin tráfico y tarda ~1 min en despertar en el primer request — aceptable para el uso esperado (gym chico, consultas esporádicas), no para tráfico constante; (2) límite de 750 hs gratis/mes por workspace, que un solo servicio 24/7 consume casi entero — no deja margen para sumar otro servicio sin pagar. La Postgres gratis de Render (que expira a los 30 días) no aplica, la DB real es Supabase. Migrar a plan pago cuando haya multi-gym real (Fase 3).
+  - **Mecánica de deploy dual-host desde un monorepo:** cada plataforma apunta a una subcarpeta del mismo repo vía "Root Directory" (`apps/web` en Vercel, `apps/api` en Render) — son builds y deploys completamente independientes, no comparten proceso ni entorno. Comunicación por HTTP normal (el frontend le pega a la URL pública del backend) — requiere configurar CORS en NestJS para aceptar el origen de Vercel. Variables de entorno configuradas por separado en cada plataforma, nunca compartidas automáticamente.
 - **Repo:** monorepo simple con pnpm workspaces (no NX completo — es innecesario para 2 apps; si esto crece a multi-gym con más servicios, se migra a NX como en point-api)
 
-## 6. Roadmap por fases
+## 6. Deuda técnica aceptada explícitamente
+
+- **`apiFetch` (fetch server-side de Server Components) sin retry-on-401 propio.** El `middleware.ts` refresca proactivamente si faltan <5 min para expirar en cada navegación, y el proxy same-origin cubre el retry para fetches client-side — pero si una pestaña queda abierta sin navegar por más de 1h y dispara una Server Action, se puede colar un token vencido sin reintento, resultando en un redirect a `/login` en vez de una renovación transparente. Caso borde de baja frecuencia, aceptado para MVP. Resolver si en la práctica resulta molesto.
+- ~~**Proxy BFF (`app/api/proxy/[...path]/route.ts`) sin cobertura de test real.**~~ **Saldada en el Bloque 3A.** El panel de cartera de `/admin` es el primer consumidor real de `browser-api-client`, y `apps/web/app/api/proxy/[...path]/route.spec.ts` cubre passthrough 200, el ciclo 401→refresh→retry con la query string preservada en ambos intentos, y el caso donde el refresh también falla.
+
+## 7. Roadmap por fases
 
 **Fase 0 — Scaffolding**
+
 - Monorepo pnpm workspaces, apps `api` + `web`
 - Setup Supabase (proyecto, schema inicial, Auth)
-- Prisma schema con las 3 entidades core + seed de [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset)
+- Prisma schema con las entidades core + seed de [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset)
 
 **Fase 1 — MVP funcional**
+
 - Auth + roles funcionando end-to-end
-- Admin: alta de profesores/alumnos
-- Profesor: crear rutina, asignar a alumno, editar
+- Admin: alta de profesores/alumnos, gestión de cartera
+- Profesor: crear plantilla, asignar rutina a alumnos de su cartera, editar
 - Alumno: ver rutina vigente con detalle de ejercicio (imagen + GIF animado; `imageUrl` sirve de fallback/ícono cuando no hay `gifUrl`)
 
 **Fase 2 — Calidad de vida**
+
 - Historial de rutinas, versionado
 - Progreso del alumno (marcar ejercicio completado, series/reps reales vs planificadas)
 - Media custom subida por el profesor (reemplaza catálogo genérico)
 
 **Fase 3 — Multi-gym**
+
 - Onboarding self-service de gyms nuevos
 - Panel de super-admin (por encima de `ADMIN` de gym) para gestionar tenants
 - Evaluar si en ese punto migra de Supabase free a un plan pago o a infra propia (AWS, alineado a tu stack)
 
-## 7. Próximos pasos concretos
+## 8. Próximos pasos concretos
 
-1. Scaffolding del monorepo (pnpm workspaces + NestJS + Next.js)
-2. Proyecto Supabase + schema Prisma inicial
-3. Script de import del catálogo [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (idempotente, corre a demanda — no en la migración automática)
-4. Auth end-to-end con los 3 roles
+1. ~~Scaffolding del monorepo (pnpm workspaces + NestJS + Next.js)~~ — hecho (Fase 0)
+2. ~~Proyecto Supabase + schema Prisma inicial~~ — hecho (Fase 0)
+3. ~~Script de import del catálogo [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset) (idempotente, corre a demanda)~~ — hecho, 1.324 ejercicios + media en Storage
+4. ~~Auth end-to-end con los 3 roles~~ — hecho (Fase 1)
+5. Cartera `ProfesorAlumno` (backend + UI de admin) — en curso
+6. Routines: plantillas, instancias con chequeo de cartera, UI de profesor y de alumno

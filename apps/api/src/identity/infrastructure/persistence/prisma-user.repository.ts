@@ -49,24 +49,41 @@ export class PrismaUserRepository implements UserRepositoryPort {
     return this.toRecord(user);
   }
 
-  async create(data: {
-    gymId: string;
-    authUserId: string;
-    username: string;
-    nombre: string;
-    role: Role;
-  }): Promise<UserRecord> {
+  async create(
+    data: {
+      gymId: string;
+      authUserId: string;
+      username: string;
+      nombre: string;
+      role: Role;
+    },
+    vinculoCartera?: { profesorId: string },
+  ): Promise<UserRecord> {
     try {
-      const user = await this.prisma.user.create({
-        data: {
-          gymId: data.gymId,
-          authUserId: data.authUserId,
-          username: data.username,
-          nombre: data.nombre,
-          // Los valores de `Role` (dominio) y `PrismaRole` son idénticos por
-          // diseño (ver identity/domain/role.ts) — cast explícito documentado.
-          role: data.role as unknown as PrismaRole,
-        },
+      const user = await this.prisma.$transaction(async (tx) => {
+        const creado = await tx.user.create({
+          data: {
+            gymId: data.gymId,
+            authUserId: data.authUserId,
+            username: data.username,
+            nombre: data.nombre,
+            // Los valores de `Role` (dominio) y `PrismaRole` son idénticos por
+            // diseño (ver identity/domain/role.ts) — cast explícito documentado.
+            role: data.role as unknown as PrismaRole,
+          },
+        });
+
+        if (vinculoCartera) {
+          await tx.profesorAlumno.create({
+            data: {
+              gymId: data.gymId,
+              profesorId: vinculoCartera.profesorId,
+              alumnoId: creado.id,
+            },
+          });
+        }
+
+        return creado;
       });
       return this.toRecord(user);
     } catch (error) {

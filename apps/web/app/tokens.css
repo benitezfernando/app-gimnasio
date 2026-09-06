@@ -7,6 +7,7 @@
   --color-accent: 23 23 23;
   --color-accent-fg: 255 255 255;
   --color-danger: 220 38 38;
+  --color-success: 22 163 74;
 
   --color-region-chest: 220 38 38;
   --color-region-back: 37 99 235;
@@ -29,4 +30,5 @@
   --color-accent: 245 245 244;
   --color-accent-fg: 23 23 23;
   --color-danger: 248 113 113;
+  --color-success: 74 222 128;
 }

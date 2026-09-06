@@ -18,11 +18,21 @@ export interface UserRepositoryPort {
   findByGymId(gymId: string, role?: Role): Promise<UserRecord[]>;
   findById(id: string): Promise<UserRecord | null>;
   deactivate(id: string): Promise<UserRecord>;
-  create(data: {
-    gymId: string;
-    authUserId: string;
-    username: string;
-    nombre: string;
-    role: Role;
-  }): Promise<UserRecord>;
+  create(
+    data: {
+      gymId: string;
+      authUserId: string;
+      username: string;
+      nombre: string;
+      role: Role;
+    },
+    /**
+     * Si viene seteado, crea también la fila de cartera `ProfesorAlumno`
+     * en la misma transacción — el alta de un alumno por un PROFESOR
+     * (HU-02) queda automáticamente en su cartera. Solo tiene sentido
+     * cuando `data.role === Role.ALUMNO`; `CreateUserUseCase` es quien
+     * decide cuándo pasarlo.
+     */
+    vinculoCartera?: { profesorId: string },
+  ): Promise<UserRecord>;
 }

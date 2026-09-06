@@ -11,7 +11,7 @@ function BotonCrear() {
     <button
       type="submit"
       disabled={pending}
-      className="min-h-11 w-full rounded-lg bg-neutral-900 px-4 text-base font-medium text-white active:bg-neutral-700 disabled:opacity-50 sm:w-auto"
+      className="min-h-11 w-full rounded-lg bg-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50 sm:w-auto"
     >
       {pending ? 'Creando...' : 'Crear alumno'}
     </button>
@@ -19,14 +19,14 @@ function BotonCrear() {
 }
 
 const INPUT_CLASSES =
-  'min-h-11 rounded-lg border border-neutral-300 px-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none';
+  'min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none';
 
 export function CreateAlumnoForm() {
   const [estado, formAction] = useFormState(createAlumnoAction, ESTADO_INICIAL);
 
   return (
-    <section className="rounded-2xl bg-white p-4 shadow-sm sm:p-6">
-      <h2 className="mb-4 text-lg font-semibold text-neutral-900">Nuevo alumno</h2>
+    <section className="rounded-2xl bg-surface p-4 shadow-sm sm:p-6">
+      <h2 className="mb-4 text-lg font-semibold text-text">Nuevo alumno</h2>
       <form action={formAction} className="flex flex-col gap-3">
         <input
           name="nombre"
@@ -44,12 +44,12 @@ export function CreateAlumnoForm() {
         />
         <BotonCrear />
         {estado.error && (
-          <p role="alert" className="text-sm text-red-600">
+          <p role="alert" className="text-sm text-danger">
             {estado.error}
           </p>
         )}
         {estado.usernameGenerado && (
-          <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800">
+          <p className="rounded-lg bg-success/10 p-3 text-sm text-success">
             Usuario creado: <strong className="font-semibold">{estado.usernameGenerado}</strong> —
             comunicáselo en persona (es lo único que necesita para entrar).
           </p>

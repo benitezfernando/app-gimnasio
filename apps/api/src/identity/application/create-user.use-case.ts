@@ -96,14 +96,25 @@ export class CreateUserUseCase {
 
     const { authUserId } = await this.authProvider.createAlumnoUser(gymId, username);
 
+    // Cartera automática (HU-02, PRD regla 9): si quien da de alta al
+    // alumno es un PROFESOR, ese alumno queda en su cartera desde el
+    // primer momento. Si es ADMIN, no se crea ningún vínculo — la
+    // asignación queda para HU-03b.
+    const vinculoCartera =
+      input.invocadoPor.role === Role.PROFESOR ? { profesorId: input.invocadoPor.id } : undefined;
+
+    const datosUsuario = {
+      gymId,
+      authUserId,
+      username,
+      nombre: `${input.nombre} ${input.apellido}`,
+      role: Role.ALUMNO,
+    };
+
     try {
-      return await this.userRepository.create({
-        gymId,
-        authUserId,
-        username,
-        nombre: `${input.nombre} ${input.apellido}`,
-        role: Role.ALUMNO,
-      });
+      return vinculoCartera
+        ? await this.userRepository.create(datosUsuario, vinculoCartera)
+        : await this.userRepository.create(datosUsuario);
     } catch (error) {
       // Best-effort: si falla, queda un usuario Supabase huérfano que hay
       // que limpiar manualmente — no existe (todavía) un mecanismo de

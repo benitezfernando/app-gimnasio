@@ -78,3 +78,40 @@ export async function deactivateUserAction(userId: string): Promise<{ error: str
   revalidatePath('/admin');
   return { error: null };
 }
+
+export async function assignProfesorAction(
+  alumnoId: string,
+  profesorId: string,
+): Promise<{ error: string | null }> {
+  try {
+    await apiFetch(`/users/${alumnoId}/profesores`, {
+      method: 'POST',
+      body: JSON.stringify({ profesorId }),
+    });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado asignando el profesor.' };
+  }
+
+  revalidatePath('/admin');
+  return { error: null };
+}
+
+export async function removeProfesorAction(
+  alumnoId: string,
+  profesorId: string,
+): Promise<{ error: string | null }> {
+  try {
+    await apiFetch(`/users/${alumnoId}/profesores/${profesorId}`, { method: 'DELETE' });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado quitando el profesor.' };
+  }
+
+  revalidatePath('/admin');
+  return { error: null };
+}

@@ -296,4 +296,67 @@ describe('CreateUserUseCase', () => {
       expect(authProvider.deleteAuthUser).toHaveBeenCalledWith('auth-a');
     });
   });
+
+  describe('cartera automática al crear alumno (HU-02, regla 9)', () => {
+    it('si el alta la hace un PROFESOR, pasa el vínculo de cartera a userRepository.create', async () => {
+      userRepository.findByGymIdAndUsername.mockResolvedValue(null);
+      authProvider.createAlumnoUser.mockResolvedValue({ authUserId: 'auth-x' });
+      userRepository.create.mockResolvedValue({
+        id: 'u1',
+        authUserId: 'auth-x',
+        gymId: 'gym-1',
+        username: 'juan.perez',
+        nombre: 'Juan Perez',
+        role: Role.ALUMNO,
+        activo: true,
+      });
+
+      await useCase.execute({
+        role: Role.ALUMNO,
+        nombre: 'Juan',
+        apellido: 'Perez',
+        invocadoPor: profesor,
+      });
+
+      expect(userRepository.create).toHaveBeenCalledWith(
+        {
+          gymId: 'gym-1',
+          authUserId: 'auth-x',
+          username: 'juan.perez',
+          nombre: 'Juan Perez',
+          role: Role.ALUMNO,
+        },
+        { profesorId: 'prof-1' },
+      );
+    });
+
+    it('si el alta la hace un ADMIN, NO pasa ningún vínculo de cartera', async () => {
+      userRepository.findByGymIdAndUsername.mockResolvedValue(null);
+      authProvider.createAlumnoUser.mockResolvedValue({ authUserId: 'auth-y' });
+      userRepository.create.mockResolvedValue({
+        id: 'u2',
+        authUserId: 'auth-y',
+        gymId: 'gym-1',
+        username: 'ana.gomez',
+        nombre: 'Ana Gomez',
+        role: Role.ALUMNO,
+        activo: true,
+      });
+
+      await useCase.execute({
+        role: Role.ALUMNO,
+        nombre: 'Ana',
+        apellido: 'Gomez',
+        invocadoPor: admin,
+      });
+
+      expect(userRepository.create).toHaveBeenCalledWith({
+        gymId: 'gym-1',
+        authUserId: 'auth-y',
+        username: 'ana.gomez',
+        nombre: 'Ana Gomez',
+        role: Role.ALUMNO,
+      });
+    });
+  });
 });

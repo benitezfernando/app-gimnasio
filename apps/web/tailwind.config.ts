@@ -14,6 +14,7 @@ const config: Config = {
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         'accent-fg': 'rgb(var(--color-accent-fg) / <alpha-value>)',
         danger: 'rgb(var(--color-danger) / <alpha-value>)',
+        success: 'rgb(var(--color-success) / <alpha-value>)',
       },
     },
   },
