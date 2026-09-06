@@ -3,15 +3,27 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import * as jwt from 'jsonwebtoken';
+import { generateKeyPair } from 'jose';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { UserRepositoryPort } from '../../application/ports/user-repository.port';
 import { Role } from '../../domain/role';
+import { buildTestJwtKeys, signTestToken, TestJwtKeys } from './testing/jwt-test-support';
 
-const TEST_SECRET = 'test-supabase-jwt-secret';
 const TEST_SUPABASE_URL = 'https://test-project.supabase.co';
 const TEST_ISSUER = `${TEST_SUPABASE_URL}/auth/v1`;
-const VALID_TOKEN_OPTIONS = { audience: 'authenticated', issuer: TEST_ISSUER };
+
+// `createRemoteJWKSet` hace un fetch real por HTTPS — mockeado para que el
+// guard resuelva contra el JWKS LOCAL de prueba (`buildTestJwtKeys`) en vez
+// de pegarle a la red. `jwtVerify`/`SignJWT`/etc quedan reales (requireActual).
+jest.mock('jose', () => {
+  const actual = jest.requireActual('jose');
+  return { ...actual, createRemoteJWKSet: jest.fn() };
+});
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createRemoteJWKSet: mockCreateRemoteJWKSet } = jest.requireMock('jose') as {
+  createRemoteJWKSet: jest.Mock;
+};
 
 function buildContext(authorizationHeader?: string): {
   context: ExecutionContext;
@@ -29,15 +41,19 @@ function buildContext(authorizationHeader?: string): {
 }
 
 describe('JwtAuthGuard', () => {
-  const originalSecret = process.env.SUPABASE_JWT_SECRET;
   const originalSupabaseUrl = process.env.SUPABASE_URL;
   let userRepository: jest.Mocked<UserRepositoryPort>;
   let reflector: any;
   let guard: JwtAuthGuard;
+  let keys: TestJwtKeys;
+
+  beforeAll(async () => {
+    keys = await buildTestJwtKeys();
+  });
 
   beforeEach(() => {
-    process.env.SUPABASE_JWT_SECRET = TEST_SECRET;
     process.env.SUPABASE_URL = TEST_SUPABASE_URL;
+    mockCreateRemoteJWKSet.mockReturnValue(keys.jwks);
     userRepository = {
       findByAuthUserId: jest.fn(),
       findByGymIdAndUsername: jest.fn(),
@@ -51,22 +67,11 @@ describe('JwtAuthGuard', () => {
   });
 
   afterAll(() => {
-    if (originalSecret === undefined) {
-      delete process.env.SUPABASE_JWT_SECRET;
-    } else {
-      process.env.SUPABASE_JWT_SECRET = originalSecret;
-    }
     if (originalSupabaseUrl === undefined) {
       delete process.env.SUPABASE_URL;
     } else {
       process.env.SUPABASE_URL = originalSupabaseUrl;
     }
-  });
-
-  it('lanza InternalServerErrorException si SUPABASE_JWT_SECRET no está configurado', async () => {
-    delete process.env.SUPABASE_JWT_SECRET;
-    const { context } = buildContext('Bearer cualquier-token');
-    await expect(guard.canActivate(context)).rejects.toThrow(InternalServerErrorException);
   });
 
   it('lanza InternalServerErrorException si SUPABASE_URL no está configurado', async () => {
@@ -80,50 +85,46 @@ describe('JwtAuthGuard', () => {
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
-  it('rechaza un token con firma inválida', async () => {
-    const tokenConOtraFirma = jwt.sign(
-      { sub: 'auth-user-1', aud: 'authenticated' },
-      'otra-firma-distinta',
-      {
-        issuer: TEST_ISSUER,
-      },
-    );
+  it('rechaza un token firmado con una key que no está en la JWKS (firma inválida)', async () => {
+    const { privateKey: otraPrivateKey } = await generateKeyPair('ES256');
+    const tokenConOtraFirma = await signTestToken(otraPrivateKey, {
+      issuer: TEST_ISSUER,
+      sub: 'auth-user-1',
+    });
     const { context } = buildContext(`Bearer ${tokenConOtraFirma}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
   it('rechaza un token expirado', async () => {
-    const tokenExpirado = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      expiresIn: -10,
-      ...VALID_TOKEN_OPTIONS,
+    const tokenExpirado = await signTestToken(keys.privateKey, {
+      issuer: TEST_ISSUER,
+      expiresInSeconds: -10,
     });
     const { context } = buildContext(`Bearer ${tokenExpirado}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
   it('rechaza un token con audience incorrecta', async () => {
-    const token = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      audience: 'wrong-audience',
+    const token = await signTestToken(keys.privateKey, {
       issuer: TEST_ISSUER,
-      expiresIn: '1h',
+      audience: 'wrong-audience',
     });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
   it('rechaza un token con issuer incorrecto', async () => {
-    const token = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      audience: 'authenticated',
+    const token = await signTestToken(keys.privateKey, {
       issuer: 'https://otro-proyecto.supabase.co/auth/v1',
-      expiresIn: '1h',
     });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
   it('rechaza un token sin exp', async () => {
-    const token = jwt.sign({ sub: 'auth-user-1', aud: 'authenticated' }, TEST_SECRET, {
+    const token = await signTestToken(keys.privateKey, {
       issuer: TEST_ISSUER,
+      incluirExp: false,
     });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
@@ -131,9 +132,9 @@ describe('JwtAuthGuard', () => {
 
   it('rechaza un token válido si no existe un User con ese authUserId', async () => {
     userRepository.findByAuthUserId.mockResolvedValue(null);
-    const token = jwt.sign({ sub: 'auth-user-sin-user' }, TEST_SECRET, {
-      ...VALID_TOKEN_OPTIONS,
-      expiresIn: '1h',
+    const token = await signTestToken(keys.privateKey, {
+      issuer: TEST_ISSUER,
+      sub: 'auth-user-sin-user',
     });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
@@ -149,20 +150,14 @@ describe('JwtAuthGuard', () => {
       role: Role.ALUMNO,
       activo: false,
     });
-    const token = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      ...VALID_TOKEN_OPTIONS,
-      expiresIn: '1h',
-    });
+    const token = await signTestToken(keys.privateKey, { issuer: TEST_ISSUER });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
 
   it('rechaza con UnauthorizedException si el repositorio de usuarios tira un error', async () => {
     userRepository.findByAuthUserId.mockRejectedValue(new Error('DB caída'));
-    const token = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      ...VALID_TOKEN_OPTIONS,
-      expiresIn: '1h',
-    });
+    const token = await signTestToken(keys.privateKey, { issuer: TEST_ISSUER });
     const { context } = buildContext(`Bearer ${token}`);
     await expect(guard.canActivate(context)).rejects.toThrow(UnauthorizedException);
   });
@@ -177,10 +172,7 @@ describe('JwtAuthGuard', () => {
       role: Role.PROFESOR,
       activo: true,
     });
-    const token = jwt.sign({ sub: 'auth-user-1' }, TEST_SECRET, {
-      ...VALID_TOKEN_OPTIONS,
-      expiresIn: '1h',
-    });
+    const token = await signTestToken(keys.privateKey, { issuer: TEST_ISSUER });
     const { context, request } = buildContext(`Bearer ${token}`);
 
     const resultado = await guard.canActivate(context);

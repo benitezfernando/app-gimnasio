@@ -23,6 +23,20 @@ import { buildSyntheticEmail, deriveAlumnoPassword } from './synthetic-credentia
 export class SupabaseAdminAuthProvider implements AuthProviderPort {
   private readonly client: SupabaseClient;
 
+  /**
+   * Deduplica llamadas concurrentes de `refreshSession` con el MISMO
+   * refresh_token: Supabase lo rota (invalida) en cada uso exitoso, así
+   * que si dos requests llegan casi al mismo tiempo con el mismo token,
+   * solo la primera debe golpear a Supabase — la segunda espera esa misma
+   * promesa y recibe el mismo resultado, en vez de reintentar con un
+   * token que la primera ya invalidó (lo que forzaría un re-login
+   * espurio). Se limpia en `finally` sin importar éxito o falla, así un
+   * refresh fallido no deja la entrada trabada para el siguiente intento.
+   * Es un Map en memoria de proceso — mismo alcance/limitación que el de
+   * LoginRateLimitGuard, suficiente para el MVP de una sola instancia.
+   */
+  private readonly refrescosEnCurso = new Map<string, Promise<AuthSession>>();
+
   constructor() {
     const url = process.env.SUPABASE_URL;
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -52,6 +66,19 @@ export class SupabaseAdminAuthProvider implements AuthProviderPort {
 
   async signInAlumno(gymId: string, username: string): Promise<AuthSession> {
     return this.iniciarSesion(gymId, username, deriveAlumnoPassword(gymId, username));
+  }
+
+  async refreshSession(refreshToken: string): Promise<AuthSession> {
+    const enCurso = this.refrescosEnCurso.get(refreshToken);
+    if (enCurso) {
+      return enCurso;
+    }
+
+    const promesa = this.ejecutarRefresh(refreshToken).finally(() => {
+      this.refrescosEnCurso.delete(refreshToken);
+    });
+    this.refrescosEnCurso.set(refreshToken, promesa);
+    return promesa;
   }
 
   async deleteAuthUser(authUserId: string): Promise<void> {
@@ -92,6 +119,22 @@ export class SupabaseAdminAuthProvider implements AuthProviderPort {
 
     if (error || !data.session) {
       throw new Error('Credenciales inválidas');
+    }
+
+    return {
+      accessToken: data.session.access_token,
+      refreshToken: data.session.refresh_token,
+      authUserId: data.user.id,
+    };
+  }
+
+  private async ejecutarRefresh(refreshToken: string): Promise<AuthSession> {
+    const { data, error } = await this.client.auth.refreshSession({
+      refresh_token: refreshToken,
+    });
+
+    if (error || !data.session || !data.user) {
+      throw new Error(`No se pudo refrescar la sesión: ${error?.message ?? 'sin sesión'}`);
     }
 
     return {

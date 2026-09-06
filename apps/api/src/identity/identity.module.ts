@@ -4,6 +4,7 @@ import { USER_REPOSITORY } from './application/ports/user-repository.port';
 import { AUTH_PROVIDER } from './application/ports/auth-provider.port';
 import { CreateUserUseCase } from './application/create-user.use-case';
 import { LoginUseCase } from './application/login.use-case';
+import { RefreshSessionUseCase } from './application/refresh-session.use-case';
 import { ListUsersUseCase } from './application/list-users.use-case';
 import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
 import { PrismaUserRepository } from './infrastructure/persistence/prisma-user.repository';
@@ -23,6 +24,7 @@ import { LoginRateLimitGuard } from './infrastructure/guards/login-rate-limit.gu
     { provide: AUTH_PROVIDER, useClass: SupabaseAdminAuthProvider },
     CreateUserUseCase,
     LoginUseCase,
+    RefreshSessionUseCase,
     ListUsersUseCase,
     DeactivateUserUseCase,
     LoginRateLimitGuard,

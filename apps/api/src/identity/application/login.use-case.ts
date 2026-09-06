@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AUTH_PROVIDER, AuthProviderPort, AuthSession } from './ports/auth-provider.port';
 import { USER_REPOSITORY, UserRepositoryPort } from './ports/user-repository.port';
 import { InvalidCredentialsError } from './errors/invalid-credentials.error';
+import { verifyActiveUser } from './verify-active-user';
 
 export interface LoginInput {
   gymId: string;
@@ -42,10 +43,7 @@ export class LoginUseCase {
       throw new InvalidCredentialsError();
     }
 
-    const user = await this.userRepository.findByAuthUserId(session.authUserId);
-    if (!user || !user.activo) {
-      throw new InvalidCredentialsError();
-    }
+    await verifyActiveUser(this.userRepository, session.authUserId);
 
     return session;
   }

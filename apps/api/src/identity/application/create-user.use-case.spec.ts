@@ -28,6 +28,7 @@ describe('CreateUserUseCase', () => {
       createAlumnoUser: jest.fn(),
       signInStaff: jest.fn(),
       signInAlumno: jest.fn(),
+      refreshSession: jest.fn(),
       deleteAuthUser: jest.fn(),
     };
     useCase = new CreateUserUseCase(userRepository, authProvider);

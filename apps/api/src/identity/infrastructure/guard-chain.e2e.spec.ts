@@ -2,7 +2,6 @@ import { Controller, Get, INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
 import request = require('supertest');
-import * as jwt from 'jsonwebtoken';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { GymScopeGuard } from './guards/gym-scope.guard';
@@ -14,9 +13,21 @@ import {
   UserRepositoryPort,
   UserRecord,
 } from '../application/ports/user-repository.port';
+import { buildTestJwtKeys, signTestToken, TestJwtKeys } from './guards/testing/jwt-test-support';
 
-const TEST_SECRET = 'e2e-test-secret';
 const TEST_SUPABASE_URL = 'https://e2e-test.supabase.co';
+
+// Ver nota en jwt-auth.guard.spec.ts: mockeado para resolver contra un
+// JWKS local de prueba, sin red.
+jest.mock('jose', () => {
+  const actual = jest.requireActual('jose');
+  return { ...actual, createRemoteJWKSet: jest.fn() };
+});
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createRemoteJWKSet: mockCreateRemoteJWKSet } = jest.requireMock('jose') as {
+  createRemoteJWKSet: jest.Mock;
+};
 
 @Controller('test')
 class GuardChainTestController {
@@ -38,12 +49,10 @@ class GuardChainTestController {
   }
 }
 
-function firmarToken(sub: string): string {
-  return jwt.sign({ sub }, TEST_SECRET, {
-    audience: 'authenticated',
-    issuer: `${TEST_SUPABASE_URL}/auth/v1`,
-    expiresIn: '1h',
-  });
+let claves: TestJwtKeys;
+
+function firmarToken(sub: string): Promise<string> {
+  return signTestToken(claves.privateKey, { issuer: `${TEST_SUPABASE_URL}/auth/v1`, sub });
 }
 
 describe('Cadena de guards (e2e): JwtAuthGuard -> RolesGuard -> GymScopeGuard', () => {
@@ -84,8 +93,9 @@ describe('Cadena de guards (e2e): JwtAuthGuard -> RolesGuard -> GymScopeGuard', 
   };
 
   beforeAll(async () => {
-    process.env.SUPABASE_JWT_SECRET = TEST_SECRET;
     process.env.SUPABASE_URL = TEST_SUPABASE_URL;
+    claves = await buildTestJwtKeys();
+    mockCreateRemoteJWKSet.mockReturnValue(claves.jwks);
 
     const moduleRef = await Test.createTestingModule({
       controllers: [GuardChainTestController],
@@ -116,35 +126,35 @@ describe('Cadena de guards (e2e): JwtAuthGuard -> RolesGuard -> GymScopeGuard', 
   it('rechaza con rol insuficiente (403)', async () => {
     await request(app.getHttpServer())
       .get('/test/admin-only')
-      .set('Authorization', `Bearer ${firmarToken('auth-alumno')}`)
+      .set('Authorization', `Bearer ${await firmarToken('auth-alumno')}`)
       .expect(403);
   });
 
   it('rechaza a un usuario desactivado (401), aunque el rol sea correcto', async () => {
     await request(app.getHttpServer())
       .get('/test/admin-only')
-      .set('Authorization', `Bearer ${firmarToken('auth-desactivado')}`)
+      .set('Authorization', `Bearer ${await firmarToken('auth-desactivado')}`)
       .expect(401);
   });
 
   it('permite con el rol correcto (200)', async () => {
     await request(app.getHttpServer())
       .get('/test/admin-only')
-      .set('Authorization', `Bearer ${firmarToken('auth-admin')}`)
+      .set('Authorization', `Bearer ${await firmarToken('auth-admin')}`)
       .expect(200);
   });
 
   it('rechaza acceso a un gym distinto en la URL (403)', async () => {
     await request(app.getHttpServer())
       .get('/test/scoped/gym-B')
-      .set('Authorization', `Bearer ${firmarToken('auth-admin')}`)
+      .set('Authorization', `Bearer ${await firmarToken('auth-admin')}`)
       .expect(403);
   });
 
   it('permite acceso al propio gym en la URL (200)', async () => {
     await request(app.getHttpServer())
       .get('/test/scoped/gym-A')
-      .set('Authorization', `Bearer ${firmarToken('auth-admin')}`)
+      .set('Authorization', `Bearer ${await firmarToken('auth-admin')}`)
       .expect(200);
   });
 });
