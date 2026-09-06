@@ -10,6 +10,7 @@
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "seed:exercises": "tsx prisma/seed-exercises.ts",
+    "upload-exercise-media": "tsx prisma/upload-exercise-media.ts",
     "seed:admin": "tsx prisma/seed-admin.ts"
   },
   "dependencies": {

@@ -19,14 +19,6 @@ enum ExerciseSource {
   CUSTOM
 }
 
-enum ExerciseCategory {
-  STRENGTH
-  CARDIO
-  STRETCHING
-  PLYOMETRICS
-  OTHER
-}
-
 // Identity (HLD §3)
 model User {
   id         String   @id @default(uuid())
@@ -49,29 +41,30 @@ model User {
 
 // ExerciseCatalog (HLD §3)
 model Exercise {
-  id                          String           @id @default(uuid())
-  externalId                  String?          @unique
+  id                          String   @id @default(uuid())
+  externalId                  String?  @unique
   gymId                       String?
   nombre                      String
-  categoria                   ExerciseCategory @default(OTHER)
+  parteCuerpo                 String
   grupoMuscular               String
-  gruposMuscularesSecundarios String[]         @default([])
+  gruposMuscularesSecundarios String[] @default([])
   equipamiento                String?
   imageUrl                    String?
   gifUrl                      String?
   instrucciones               String?
-  fuente                      ExerciseSource   @default(CATALOG)
+  pasos                       String[] @default([])
+  fuente                      ExerciseSource @default(CATALOG)
   licenciaMedia               String?
   atribucionMedia             String?
-  createdAt                   DateTime         @default(now())
-  updatedAt                   DateTime         @updatedAt
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
 
   ejerciciosDeTemplate RoutineTemplateExercise[]
   ejerciciosDeInstance RoutineInstanceExercise[]
 
   @@index([gymId])
-  @@index([grupoMuscular])
-  @@index([categoria])
+  @@index([parteCuerpo])
+  @@index([equipamiento])
 }
 
 // Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)

@@ -1,28 +1,48 @@
 [
   {
-    "id": "3_4_Sit-Up",
-    "name": "3/4 Sit-Up",
-    "category": "strength",
-    "muscle_group": "abdominals",
-    "secondary_muscles": ["hip flexors"],
-    "equipment": "body only",
-    "image": "images/3_4_Sit-Up/0.jpg",
-    "gif_url": "images/3_4_Sit-Up/0.gif",
+    "id": "0001",
+    "name": "3/4 sit-up",
+    "body_part": "waist",
+    "target": "abs",
+    "secondary_muscles": ["hip flexors", "lower back"],
+    "equipment": "body weight",
+    "image": "images/0001-2gPfomN.jpg",
+    "gif_url": "videos/0001-2gPfomN.gif",
     "instructions": {
-      "es": "Acostate boca arriba con las rodillas flexionadas. Cruzá los brazos sobre el pecho y subí el torso 3/4 del recorrido de una sentadilla abdominal completa."
-    }
+      "es": "Túmbate sobre tu espalda con las rodillas flexionadas y los pies apoyados en el suelo. Coloca las manos detrás de la cabeza con los codos apuntando hacia afuera. Activando el abdomen, levanta lentamente la parte superior del cuerpo del suelo, curvándote hacia adelante hasta que tu torso forme un ángulo de 45 grados. Haz una pausa por un momento en la parte superior, luego baja lentamente la parte superior del cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado."
+    },
+    "instruction_steps": {
+      "es": [
+        "Túmbate sobre tu espalda con las rodillas flexionadas y los pies apoyados en el suelo.",
+        "Coloca las manos detrás de la cabeza con los codos apuntando hacia afuera.",
+        "Activando el abdomen, levanta lentamente la parte superior del cuerpo del suelo, curvándote hacia adelante hasta que tu torso forme un ángulo de 45 grados.",
+        "Haz una pausa por un momento en la parte superior, luego baja lentamente la parte superior del cuerpo de vuelta a la posición inicial.",
+        "Repite el número de repeticiones deseado."
+      ]
+    },
+    "attribution": "© Gym visual — https://gymvisual.com/"
   },
   {
-    "id": "Adductor",
-    "name": "Adductor",
-    "category": "strength",
-    "muscle_group": "adductors",
-    "secondary_muscles": [],
-    "equipment": "machine",
-    "image": "images/Adductor/0.jpg",
-    "gif_url": "images/Adductor/0.gif",
+    "id": "0002",
+    "name": "45° side bend",
+    "body_part": "waist",
+    "target": "abs",
+    "secondary_muscles": ["obliques"],
+    "equipment": "body weight",
+    "image": "images/0002-Hy9D21L.jpg",
+    "gif_url": "videos/0002-Hy9D21L.gif",
     "instructions": {
-      "es": "Sentate en la máquina de aductores con las piernas separadas apoyadas en los cojines. Juntá las piernas contra la resistencia de forma controlada."
-    }
+      "es": "Ponte de pie con los pies separados a la altura de los hombros y los brazos extendidos hacia abajo a los lados. Manteniendo la espalda recta y el core activado, flexiona lentamente el torso hacia un lado, bajando la mano hacia la rodilla. Haz una pausa por un momento en la parte inferior, luego regresa lentamente a la posición inicial. Repite del otro lado. Continúa alternando lados durante el número de repeticiones deseado."
+    },
+    "instruction_steps": {
+      "es": [
+        "Ponte de pie con los pies separados a la altura de los hombros y los brazos extendidos hacia abajo a los lados.",
+        "Manteniendo la espalda recta y el core activado, flexiona lentamente el torso hacia un lado, bajando la mano hacia la rodilla.",
+        "Haz una pausa por un momento en la parte inferior, luego regresa lentamente a la posición inicial.",
+        "Repite del otro lado.",
+        "Continúa alternando lados durante el número de repeticiones deseado."
+      ]
+    },
+    "attribution": "© Gym visual — https://gymvisual.com/"
   }
 ]

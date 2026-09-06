@@ -1,0 +1,32 @@
+:root {
+  --color-surface: 255 255 255;
+  --color-surface-alt: 245 245 244;
+  --color-text: 23 23 23;
+  --color-text-muted: 115 115 115;
+  --color-border: 229 229 229;
+  --color-accent: 23 23 23;
+  --color-accent-fg: 255 255 255;
+  --color-danger: 220 38 38;
+
+  --color-region-chest: 220 38 38;
+  --color-region-back: 37 99 235;
+  --color-region-shoulders: 217 119 6;
+  --color-region-upper-arms: 124 58 237;
+  --color-region-lower-arms: 168 85 247;
+  --color-region-waist: 5 150 105;
+  --color-region-upper-legs: 8 145 178;
+  --color-region-lower-legs: 13 148 136;
+  --color-region-cardio: 219 39 119;
+  --color-region-neck: 120 113 108;
+}
+
+.dark {
+  --color-surface: 23 23 23;
+  --color-surface-alt: 38 38 38;
+  --color-text: 245 245 244;
+  --color-text-muted: 163 163 163;
+  --color-border: 64 64 64;
+  --color-accent: 245 245 244;
+  --color-accent-fg: 23 23 23;
+  --color-danger: 248 113 113;
+}

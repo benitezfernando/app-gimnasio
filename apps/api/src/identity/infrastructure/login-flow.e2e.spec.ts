@@ -16,7 +16,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { GymScopeGuard } from './guards/gym-scope.guard';
 import { LoginRateLimitGuard } from './guards/login-rate-limit.guard';
-import { DomainExceptionFilter } from './filters/domain-exception.filter';
+import { DomainExceptionFilter } from '../../shared-kernel/domain-exception.filter';
 
 describe('POST /auth/login (e2e)', () => {
   let app: INestApplication;

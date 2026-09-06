@@ -25,8 +25,9 @@ async function forward(
   method: string,
   accessToken: string | null,
   body: string | undefined,
+  search: string,
 ): Promise<Response> {
-  return fetch(`${API_BASE_URL}/${path.join('/')}`, {
+  return fetch(`${API_BASE_URL}/${path.join('/')}${search}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -46,14 +47,15 @@ async function handler(
     return NextResponse.json({ message: 'No hay sesión activa' }, { status: 401 });
   }
 
+  const search = request.nextUrl.search;
   const body = METODOS_CON_BODY.has(request.method) ? await request.text() : undefined;
 
-  let upstream = await forward(params.path, request.method, session.accessToken, body);
+  let upstream = await forward(params.path, request.method, session.accessToken, body, search);
 
   if (upstream.status === 401) {
     const refreshed = await refreshSession(session.refreshToken);
     if (refreshed) {
-      upstream = await forward(params.path, request.method, refreshed.accessToken, body);
+      upstream = await forward(params.path, request.method, refreshed.accessToken, body, search);
     }
   }
 
