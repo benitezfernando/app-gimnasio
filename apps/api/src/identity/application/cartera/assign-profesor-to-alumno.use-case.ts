@@ -7,8 +7,8 @@ import {
   CarteraRepositoryPort,
 } from '../ports/cartera-repository.port';
 import { USER_REPOSITORY, UserRepositoryPort } from '../ports/user-repository.port';
+import { resolveUserInGym } from '../resolve-user-in-gym';
 import { InsufficientRoleError } from '../errors/insufficient-role.error';
-import { UserNotFoundError } from '../errors/user-not-found.error';
 import { InvalidCarteraRoleError } from '../errors/invalid-cartera-role.error';
 import { InactiveUserError } from '../errors/inactive-user.error';
 import { CarteraLinkAlreadyExistsError } from '../errors/cartera-link-already-exists.error';
@@ -38,10 +38,11 @@ export class AssignProfesorToAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_GESTIONAR_CARTERA);
     }
 
-    const profesor = await this.userRepository.findById(input.profesorId);
-    if (!profesor || profesor.gymId !== input.invocadoPor.gymId) {
-      throw new UserNotFoundError(input.profesorId);
-    }
+    const profesor = await resolveUserInGym(
+      this.userRepository,
+      input.profesorId,
+      input.invocadoPor.gymId,
+    );
     if (profesor.role !== Role.PROFESOR) {
       throw new InvalidCarteraRoleError(input.profesorId, Role.PROFESOR);
     }
@@ -49,10 +50,11 @@ export class AssignProfesorToAlumnoUseCase {
       throw new InactiveUserError(input.profesorId);
     }
 
-    const alumno = await this.userRepository.findById(input.alumnoId);
-    if (!alumno || alumno.gymId !== input.invocadoPor.gymId) {
-      throw new UserNotFoundError(input.alumnoId);
-    }
+    const alumno = await resolveUserInGym(
+      this.userRepository,
+      input.alumnoId,
+      input.invocadoPor.gymId,
+    );
     if (alumno.role !== Role.ALUMNO) {
       throw new InvalidCarteraRoleError(input.alumnoId, Role.ALUMNO);
     }

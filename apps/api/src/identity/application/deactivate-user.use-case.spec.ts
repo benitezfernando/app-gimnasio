@@ -3,6 +3,7 @@ import { DeactivateUserUseCase } from './deactivate-user.use-case';
 import { UserRepositoryPort, UserRecord } from './ports/user-repository.port';
 import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { UserNotFoundError } from './errors/user-not-found.error';
+import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
 
 describe('DeactivateUserUseCase', () => {
   let userRepository: jest.Mocked<UserRepositoryPort>;
@@ -52,6 +53,16 @@ describe('DeactivateUserUseCase', () => {
     userRepository.findById.mockResolvedValue({ ...usuarioObjetivo, gymId: 'gym-OTRO' });
     await expect(useCase.execute({ invocadoPor: admin, userId: 'target-1' })).rejects.toThrow(
       UserNotFoundError,
+    );
+    expect(userRepository.deactivate).not.toHaveBeenCalled();
+  });
+
+  it('rechaza con CannotTargetAdminError si el objetivo es ADMIN (incluso a sí mismo)', async () => {
+    const otroAdmin: UserRecord = { ...usuarioObjetivo, id: 'admin-2', role: Role.ADMIN };
+    userRepository.findById.mockResolvedValue(otroAdmin);
+
+    await expect(useCase.execute({ invocadoPor: admin, userId: 'admin-2' })).rejects.toThrow(
+      CannotTargetAdminError,
     );
     expect(userRepository.deactivate).not.toHaveBeenCalled();
   });

@@ -115,3 +115,20 @@ export async function removeProfesorAction(
   revalidatePath('/admin');
   return { error: null };
 }
+
+export async function deletePermanentlyAction(
+  userId: string,
+): Promise<{ error: string | null; advertencia?: string }> {
+  try {
+    const resultado = await apiFetch<{ advertencia?: string }>(`/users/${userId}/permanent`, {
+      method: 'DELETE',
+    });
+    revalidatePath('/admin');
+    return { error: null, advertencia: resultado.advertencia };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado eliminando el usuario.' };
+  }
+}

@@ -38,4 +38,10 @@ export interface ListExercisesResult {
 export interface ExerciseRepositoryPort {
   findMany(filter: ListExercisesFilter): Promise<ListExercisesResult>;
   findById(id: string): Promise<ExerciseDetail | null>;
+  /**
+   * Resuelve varios ejercicios en un solo query — lo usa Routines para
+   * enriquecer una rutina completa (nombre/imageUrl/gifUrl por ejercicio)
+   * sin hacer un query por cada línea de la rutina.
+   */
+  findByIds(ids: string[]): Promise<ExerciseSummary[]>;
 }

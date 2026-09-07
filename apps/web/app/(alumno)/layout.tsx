@@ -2,21 +2,26 @@ import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { apiFetch, ApiError } from '../../lib/api-client';
 
-/**
- * Valida server-side que hay una sesión autenticada — mismo patrón que
- * (profesor)/layout.tsx (Bloque 2, Task 9): usa /users/me (no /users, que
- * es ADMIN-only) porque cualquier rol autenticado puede acceder a esta
- * sección. Faltaba este guard desde el scaffold de Fase 0 — quedaba
- * abierto sin sesión.
- */
+interface MeResponse {
+  id: string;
+  gymId: string;
+  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
+}
+
+/** Exige rol ALUMNO real — mismo criterio que (profesor)/layout.tsx. */
 export default async function AlumnoLayout({ children }: { children: ReactNode }) {
+  let me: MeResponse;
   try {
-    await apiFetch('/users/me');
+    me = await apiFetch<MeResponse>('/users/me');
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
       redirect('/login');
     }
     throw error;
+  }
+
+  if (me.role !== 'ALUMNO') {
+    redirect('/login');
   }
 
   return <>{children}</>;

@@ -42,5 +42,9 @@ export async function browserApiFetch<T>(path: string, init: RequestInit = {}): 
     return undefined as T;
   }
 
-  return response.json() as Promise<T>;
+  const texto = await response.text();
+  if (!texto) {
+    return null as T;
+  }
+  return JSON.parse(texto) as T;
 }

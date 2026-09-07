@@ -8,6 +8,8 @@ import { LoginUseCase } from './application/login.use-case';
 import { RefreshSessionUseCase } from './application/refresh-session.use-case';
 import { ListUsersUseCase } from './application/list-users.use-case';
 import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
+import { GetUserDeletionImpactUseCase } from './application/get-user-deletion-impact.use-case';
+import { DeleteUserPermanentlyUseCase } from './application/delete-user-permanently.use-case';
 import { AssignProfesorToAlumnoUseCase } from './application/cartera/assign-profesor-to-alumno.use-case';
 import { RemoveProfesorFromAlumnoUseCase } from './application/cartera/remove-profesor-from-alumno.use-case';
 import { ListCarteraUseCase } from './application/cartera/list-cartera.use-case';
@@ -22,9 +24,10 @@ import { JwtAuthGuard } from './infrastructure/guards/jwt-auth.guard';
 import { RolesGuard } from './infrastructure/guards/roles.guard';
 import { GymScopeGuard } from './infrastructure/guards/gym-scope.guard';
 import { LoginRateLimitGuard } from './infrastructure/guards/login-rate-limit.guard';
+import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
 
 @Module({
-  imports: [],
+  imports: [RoutinesCleanupModule],
   controllers: [UsersController, AuthController, CarteraController],
   providers: [
     { provide: USER_REPOSITORY, useClass: PrismaUserRepository },
@@ -35,6 +38,8 @@ import { LoginRateLimitGuard } from './infrastructure/guards/login-rate-limit.gu
     RefreshSessionUseCase,
     ListUsersUseCase,
     DeactivateUserUseCase,
+    GetUserDeletionImpactUseCase,
+    DeleteUserPermanentlyUseCase,
     AssignProfesorToAlumnoUseCase,
     RemoveProfesorFromAlumnoUseCase,
     ListCarteraUseCase,

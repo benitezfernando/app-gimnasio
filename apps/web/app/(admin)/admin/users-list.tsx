@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { deactivateUserAction } from './actions';
 import { CarteraPanel } from './cartera-panel';
+import { DeletePermanentlyDialog } from './delete-permanently-dialog';
 
 interface UserRow {
   id: string;
@@ -24,6 +25,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
   const [filtroRol, setFiltroRol] = useState<FiltroRol>('TODOS');
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState<UserRow | null>(null);
 
   const usuariosFiltrados = usuariosIniciales.filter(
     (u) => filtroRol === 'TODOS' || u.role === filtroRol,
@@ -46,13 +48,35 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
   }
 
   function BotonDesactivar({ u, className = '' }: { u: UserRow; className?: string }) {
+    const esAdmin = u.role === 'ADMIN';
     return (
       <button
         onClick={() => handleDeactivate(u.id, u.nombre)}
-        disabled={!u.activo || isPending}
+        disabled={esAdmin || !u.activo || isPending}
+        title={esAdmin ? 'Un ADMIN no se puede desactivar ni eliminar por esta vía' : undefined}
         className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger active:bg-danger/10 disabled:border-border disabled:text-text-muted ${className}`}
       >
         Desactivar
+      </button>
+    );
+  }
+
+  function BotonEliminar({ u, className = '' }: { u: UserRow; className?: string }) {
+    const esAdmin = u.role === 'ADMIN';
+    return (
+      <button
+        onClick={() => setUsuarioAEliminar(u)}
+        disabled={esAdmin || u.activo}
+        title={
+          esAdmin
+            ? 'Un ADMIN no se puede desactivar ni eliminar por esta vía'
+            : u.activo
+              ? 'Desactivalo primero'
+              : undefined
+        }
+        className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40 ${className}`}
+      >
+        Eliminar
       </button>
     );
   }
@@ -107,7 +131,10 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
             </div>
             <p className="mt-2 text-sm text-text-muted">{ETIQUETA_ROL[u.role]}</p>
             {u.role === 'ALUMNO' && <CarteraPanel alumno={u} profesoresDelGym={profesoresDelGym} />}
-            <BotonDesactivar u={u} className="mt-3 w-full" />
+            <div className="mt-3 flex gap-2">
+              <BotonDesactivar u={u} className="flex-1" />
+              <BotonEliminar u={u} className="flex-1" />
+            </div>
           </li>
         ))}
       </ul>
@@ -141,12 +168,23 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
                 )}
               </td>
               <td className="py-3">
-                <BotonDesactivar u={u} />
+                <div className="flex gap-2">
+                  <BotonDesactivar u={u} />
+                  <BotonEliminar u={u} />
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {usuarioAEliminar && (
+        <DeletePermanentlyDialog
+          userId={usuarioAEliminar.id}
+          nombre={usuarioAEliminar.nombre}
+          onCerrado={() => setUsuarioAEliminar(null)}
+        />
+      )}
     </section>
   );
 }

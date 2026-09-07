@@ -3,8 +3,8 @@ import { Role } from '../../domain/role';
 import { AuthenticatedUser } from '../../domain/authenticated-user';
 import { CARTERA_REPOSITORY, CarteraRepositoryPort } from '../ports/cartera-repository.port';
 import { USER_REPOSITORY, UserRepositoryPort } from '../ports/user-repository.port';
+import { resolveUserInGym } from '../resolve-user-in-gym';
 import { InsufficientRoleError } from '../errors/insufficient-role.error';
-import { UserNotFoundError } from '../errors/user-not-found.error';
 import { CarteraLinkNotFoundError } from '../errors/cartera-link-not-found.error';
 
 export interface RemoveProfesorFromAlumnoInput {
@@ -35,15 +35,8 @@ export class RemoveProfesorFromAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_GESTIONAR_CARTERA);
     }
 
-    const alumno = await this.userRepository.findById(input.alumnoId);
-    if (!alumno || alumno.gymId !== input.invocadoPor.gymId) {
-      throw new UserNotFoundError(input.alumnoId);
-    }
-
-    const profesor = await this.userRepository.findById(input.profesorId);
-    if (!profesor || profesor.gymId !== input.invocadoPor.gymId) {
-      throw new UserNotFoundError(input.profesorId);
-    }
+    await resolveUserInGym(this.userRepository, input.alumnoId, input.invocadoPor.gymId);
+    await resolveUserInGym(this.userRepository, input.profesorId, input.invocadoPor.gymId);
 
     const existe = await this.carteraRepository.existe(input.profesorId, input.alumnoId);
     if (!existe) {

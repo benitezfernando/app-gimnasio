@@ -59,4 +59,15 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
     });
     return exercise as ExerciseDetail | null;
   }
+
+  async findByIds(ids: string[]): Promise<ExerciseSummary[]> {
+    if (ids.length === 0) {
+      return [];
+    }
+    const exercises = await this.prisma.exercise.findMany({
+      where: { id: { in: ids } },
+      select: SELECT_SUMMARY,
+    });
+    return exercises as ExerciseSummary[];
+  }
 }

@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -16,6 +18,8 @@ import { AuthenticatedUser } from '../../domain/authenticated-user';
 import { CreateUserUseCase } from '../../application/create-user.use-case';
 import { ListUsersUseCase } from '../../application/list-users.use-case';
 import { DeactivateUserUseCase } from '../../application/deactivate-user.use-case';
+import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
+import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
 import { CreateAlumnoDto } from './dto/create-alumno.dto';
 import { toUserResponse } from './user-response.mapper';
@@ -30,6 +34,8 @@ export class UsersController {
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly listUsersUseCase: ListUsersUseCase,
     private readonly deactivateUserUseCase: DeactivateUserUseCase,
+    private readonly getUserDeletionImpactUseCase: GetUserDeletionImpactUseCase,
+    private readonly deleteUserPermanentlyUseCase: DeleteUserPermanentlyUseCase,
   ) {}
 
   @Post('profesor')
@@ -77,6 +83,19 @@ export class UsersController {
   async deactivate(@Param('id') id: string, @Req() req: RequestWithUser) {
     const user = await this.deactivateUserUseCase.execute({ invocadoPor: req.user, userId: id });
     return toUserResponse(user);
+  }
+
+  @Get(':id/deletion-impact')
+  @Roles(Role.ADMIN)
+  async deletionImpact(@Param('id') id: string, @Req() req: RequestWithUser) {
+    return this.getUserDeletionImpactUseCase.execute({ invocadoPor: req.user, userId: id });
+  }
+
+  @Delete(':id/permanent')
+  @Roles(Role.ADMIN)
+  @HttpCode(200)
+  async deletePermanently(@Param('id') id: string, @Req() req: RequestWithUser) {
+    return this.deleteUserPermanentlyUseCase.execute({ invocadoPor: req.user, userId: id });
   }
 
   private parsearRoleFiltro(role: string | undefined): Role | undefined {

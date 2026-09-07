@@ -108,12 +108,13 @@ model RoutineTemplate {
 }
 
 model RoutineTemplateExercise {
-  id           String  @id @default(uuid())
+  id           String   @id @default(uuid())
   templateId   String
   exerciseId   String
   orden        Int
   series       Int
   repeticiones Int
+  peso         Decimal? @db.Decimal(5, 2)
   descanso     Int
   notas        String?
 
@@ -127,7 +128,7 @@ model RoutineTemplateExercise {
 model RoutineInstance {
   id               String    @id @default(uuid())
   gymId            String
-  profesorId       String
+  profesorId       String?
   alumnoId         String
   nombre           String
   origenTemplateId String?
@@ -137,9 +138,9 @@ model RoutineInstance {
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 
-  profesor       User                      @relation("ProfesorInstances", fields: [profesorId], references: [id])
+  profesor       User?                     @relation("ProfesorInstances", fields: [profesorId], references: [id], onDelete: SetNull)
   alumno         User                      @relation("AlumnoInstances", fields: [alumnoId], references: [id])
-  origenTemplate RoutineTemplate?          @relation("OrigenTemplate", fields: [origenTemplateId], references: [id])
+  origenTemplate RoutineTemplate?          @relation("OrigenTemplate", fields: [origenTemplateId], references: [id], onDelete: SetNull)
   ejercicios     RoutineInstanceExercise[]
 
   @@index([gymId])
@@ -148,12 +149,13 @@ model RoutineInstance {
 }
 
 model RoutineInstanceExercise {
-  id           String  @id @default(uuid())
+  id           String   @id @default(uuid())
   instanceId   String
   exerciseId   String
   orden        Int
   series       Int
   repeticiones Int
+  peso         Decimal? @db.Decimal(5, 2)
   descanso     Int
   notas        String?
 

@@ -3,8 +3,8 @@ import { Role } from '../../domain/role';
 import { AuthenticatedUser } from '../../domain/authenticated-user';
 import { CARTERA_REPOSITORY, CarteraRepositoryPort } from '../ports/cartera-repository.port';
 import { USER_REPOSITORY, UserRepositoryPort, UserRecord } from '../ports/user-repository.port';
+import { resolveUserInGym } from '../resolve-user-in-gym';
 import { InsufficientRoleError } from '../errors/insufficient-role.error';
-import { UserNotFoundError } from '../errors/user-not-found.error';
 
 export interface ListProfesoresDeAlumnoInput {
   invocadoPor: AuthenticatedUser;
@@ -25,10 +25,7 @@ export class ListProfesoresDeAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_VER_CARTERA_AJENA);
     }
 
-    const alumno = await this.userRepository.findById(input.alumnoId);
-    if (!alumno || alumno.gymId !== input.invocadoPor.gymId) {
-      throw new UserNotFoundError(input.alumnoId);
-    }
+    await resolveUserInGym(this.userRepository, input.alumnoId, input.invocadoPor.gymId);
 
     return this.carteraRepository.findProfesoresDeAlumno(input.alumnoId);
   }

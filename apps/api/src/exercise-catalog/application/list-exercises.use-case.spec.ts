@@ -16,7 +16,7 @@ describe('ListExercisesUseCase', () => {
   };
 
   beforeEach(() => {
-    repo = { findMany: jest.fn(), findById: jest.fn() };
+    repo = { findMany: jest.fn(), findById: jest.fn(), findByIds: jest.fn() };
     useCase = new ListExercisesUseCase(repo);
   });
 

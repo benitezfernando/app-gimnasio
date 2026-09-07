@@ -13,5 +13,6 @@ import { ExercisesController } from './infrastructure/http/exercises.controller'
     ListExercisesUseCase,
     GetExerciseUseCase,
   ],
+  exports: [EXERCISE_REPOSITORY],
 })
 export class ExerciseCatalogModule {}

@@ -65,6 +65,7 @@ describe('/exercises (e2e)', () => {
           }
         : null,
     ),
+    findByIds: jest.fn(async (ids: string[]) => (ids.includes('ex-1') ? [ejercicioResumen] : [])),
   };
 
   const usuarioAlumno: UserRecord = {
