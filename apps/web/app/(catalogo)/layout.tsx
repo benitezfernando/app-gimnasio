@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { apiFetch, ApiError } from '../../lib/api-client';
+import { LogoutButton } from '../../components/logout-button';
 
 /**
  * Solo valida sesión — el catálogo es legible por ADMIN/PROFESOR/ALUMNO
@@ -18,5 +19,12 @@ export default async function CatalogoLayout({ children }: { children: ReactNode
     throw error;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <div className="flex justify-end p-3">
+        <LogoutButton />
+      </div>
+      {children}
+    </>
+  );
 }

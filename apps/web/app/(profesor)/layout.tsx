@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { apiFetch, ApiError } from '../../lib/api-client';
+import { LogoutButton } from '../../components/logout-button';
 
 interface MeResponse {
   id: string;
@@ -31,5 +32,12 @@ export default async function ProfesorLayout({ children }: { children: ReactNode
     redirect('/login');
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <div className="flex justify-end p-3">
+        <LogoutButton />
+      </div>
+      {children}
+    </>
+  );
 }

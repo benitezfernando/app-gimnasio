@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { apiFetch, ApiError } from '../../lib/api-client';
+import { LogoutButton } from '../../components/logout-button';
 
 /**
  * Valida server-side que la sesión actual pertenece a un ADMIN — sin
@@ -18,5 +19,12 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     throw error;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <div className="flex justify-end p-3">
+        <LogoutButton />
+      </div>
+      {children}
+    </>
+  );
 }
