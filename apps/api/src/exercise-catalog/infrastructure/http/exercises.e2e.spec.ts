@@ -5,6 +5,7 @@ import request = require('supertest');
 import { ExercisesController } from './exercises.controller';
 import { ListExercisesUseCase } from '../../application/list-exercises.use-case';
 import { GetExerciseUseCase } from '../../application/get-exercise.use-case';
+import { GetExercisesByIdsUseCase } from '../../application/get-exercises-by-ids.use-case';
 import {
   EXERCISE_REPOSITORY,
   ExerciseRepositoryPort,
@@ -52,6 +53,8 @@ describe('/exercises (e2e)', () => {
     equipamiento: 'body weight',
   };
 
+  const ejercicioResumen2 = { ...ejercicioResumen, id: 'ex-2', nombre: 'Push-Up' };
+
   const fakeExerciseRepository: ExerciseRepositoryPort = {
     findMany: jest.fn(async () => ({ items: [ejercicioResumen], total: 1 })),
     findById: jest.fn(async (id: string) =>
@@ -65,7 +68,9 @@ describe('/exercises (e2e)', () => {
           }
         : null,
     ),
-    findByIds: jest.fn(async (ids: string[]) => (ids.includes('ex-1') ? [ejercicioResumen] : [])),
+    findByIds: jest.fn(async (ids: string[]) =>
+      [ejercicioResumen, ejercicioResumen2].filter((e) => ids.includes(e.id)),
+    ),
   };
 
   const usuarioAlumno: UserRecord = {
@@ -100,6 +105,7 @@ describe('/exercises (e2e)', () => {
       providers: [
         ListExercisesUseCase,
         GetExerciseUseCase,
+        GetExercisesByIdsUseCase,
         { provide: EXERCISE_REPOSITORY, useValue: fakeExerciseRepository },
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
         { provide: APP_GUARD, useClass: JwtAuthGuard },
@@ -173,5 +179,33 @@ describe('/exercises (e2e)', () => {
       .set('Authorization', `Bearer ${token}`)
       .expect(404);
     expect(res.body.error).toBe('ExerciseNotFoundError');
+  });
+
+  it('by-ids resuelve varios en un solo llamado, comma-separated', async () => {
+    const token = await firmarToken();
+    const res = await request(app.getHttpServer())
+      .get('/exercises/by-ids?ids=ex-1,ex-2')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+
+    expect(res.body).toEqual([ejercicioResumen, ejercicioResumen2]);
+    expect(fakeExerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1', 'ex-2']);
+  });
+
+  it('by-ids sin query param ids devuelve 400 (ArrayNotEmpty)', async () => {
+    const token = await firmarToken();
+    await request(app.getHttpServer())
+      .get('/exercises/by-ids')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(400);
+  });
+
+  it('by-ids con más de 50 ids devuelve 400 (ArrayMaxSize)', async () => {
+    const token = await firmarToken();
+    const idsDeMas = Array.from({ length: 51 }, (_, i) => `ex-${i}`).join(',');
+    await request(app.getHttpServer())
+      .get(`/exercises/by-ids?ids=${idsDeMas}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(400);
   });
 });

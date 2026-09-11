@@ -1,18 +1,13 @@
-import { apiFetch } from '../../../lib/api-client';
+import { getUsersList } from '../../../lib/get-users-list';
 import { CreateProfesorForm } from './create-profesor-form';
 import { CreateAlumnoForm } from './create-alumno-form';
 import { UsersList } from './users-list';
 
-interface UserRow {
-  id: string;
-  username: string;
-  nombre: string;
-  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
-  activo: boolean;
-}
-
 export default async function AdminPage() {
-  const usuarios = await apiFetch<UserRow[]>('/users');
+  // Memoizada por request (ver get-users-list.ts) — AdminLayout ya pidió
+  // esta misma lista para el auth gate; esto reusa esa respuesta en vez
+  // de pegarle a /users de nuevo.
+  const usuarios = await getUsersList();
 
   return (
     <main className="min-h-dvh bg-surface-alt px-4 py-6 sm:px-6 lg:px-8">
