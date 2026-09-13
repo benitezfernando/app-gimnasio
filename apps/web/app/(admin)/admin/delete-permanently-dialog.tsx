@@ -109,7 +109,7 @@ export function DeletePermanentlyDialog({
             type="button"
             onClick={confirmar}
             disabled={cargando || eliminando || !impacto}
-            className="min-h-11 flex-1 rounded-lg bg-danger px-4 text-sm font-medium text-white disabled:opacity-50"
+            className="min-h-11 flex-1 rounded-lg bg-danger px-4 text-sm font-medium text-surface disabled:opacity-50"
           >
             {eliminando ? 'Eliminando...' : 'Eliminar definitivamente'}
           </button>

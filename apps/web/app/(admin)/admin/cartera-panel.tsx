@@ -85,7 +85,7 @@ export function CarteraPanel({
     <div className="mt-2">
       <button
         onClick={toggle}
-        className="text-sm font-medium text-accent underline-offset-2 hover:underline"
+        className="text-sm font-medium text-accent-text underline-offset-2 hover:underline"
       >
         Profesores {abierto ? '▲' : '▼'}
       </button>

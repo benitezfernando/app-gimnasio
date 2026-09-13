@@ -12,6 +12,7 @@ const config: Config = {
         border: 'rgb(var(--color-border) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         'accent-fg': 'rgb(var(--color-accent-fg) / <alpha-value>)',
+        'accent-text': 'rgb(var(--color-accent-text) / <alpha-value>)',
         danger: 'rgb(var(--color-danger) / <alpha-value>)',
         success: 'rgb(var(--color-success) / <alpha-value>)',
       },

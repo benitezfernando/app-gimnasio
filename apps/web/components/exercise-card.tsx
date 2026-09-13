@@ -22,7 +22,7 @@ export interface ExerciseCardData {
  */
 export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
   return (
-    <Card className="flex flex-col gap-3 overflow-visible p-3">
+    <Card className="flex flex-col gap-3">
       <div className="relative aspect-square w-full overflow-hidden rounded-full bg-surface">
         {ejercicio.imageUrl ? (
           <Image
@@ -37,20 +37,20 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
             <GradientIcon icon={Dumbbell} size={32} />
           </div>
         )}
-        <span
-          className="absolute left-1 top-1 rounded-full px-2 py-1 text-xs font-medium text-white"
-          style={{ backgroundColor: regionColorVar(ejercicio.parteCuerpo) }}
-        >
-          {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
-        </span>
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="line-clamp-2 text-sm font-medium text-text">{ejercicio.nombre}</h3>
-        {ejercicio.equipamiento && (
-          <Pill className="self-start">
-            {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
-          </Pill>
-        )}
+        <div className="flex flex-wrap gap-1.5">
+          <span
+            className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium text-white"
+            style={{ backgroundColor: regionColorVar(ejercicio.parteCuerpo) }}
+          >
+            {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
+          </span>
+          {ejercicio.equipamiento && (
+            <Pill>{ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}</Pill>
+          )}
+        </div>
       </div>
     </Card>
   );

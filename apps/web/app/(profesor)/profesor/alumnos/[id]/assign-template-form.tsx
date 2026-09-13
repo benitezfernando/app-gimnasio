@@ -46,7 +46,7 @@ export function AssignTemplateForm({
     return (
       <p className="text-sm text-text-muted">
         No tenés plantillas activas — armá una en{' '}
-        <a href="/profesor/plantillas" className="text-accent underline">
+        <a href="/profesor/plantillas" className="text-accent-text underline">
           Mis plantillas
         </a>{' '}
         primero, o armá la rutina desde cero más abajo.

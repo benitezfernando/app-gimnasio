@@ -15,7 +15,7 @@ export default async function ProfesorDashboardPage() {
     <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold text-text">Mi cartera</h1>
-        <Link href="/profesor/plantillas" className="text-sm font-medium text-accent">
+        <Link href="/profesor/plantillas" className="text-sm font-medium text-accent-text">
           Ver plantillas
         </Link>
       </div>
