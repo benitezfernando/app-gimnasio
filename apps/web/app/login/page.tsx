@@ -14,7 +14,7 @@ function BotonIngresar() {
     <button
       type="submit"
       disabled={pending}
-      className="min-h-11 rounded-lg bg-neutral-900 px-4 text-base font-medium text-white active:bg-neutral-700 disabled:opacity-50"
+      className="min-h-11 rounded-lg bg-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50"
     >
       {pending ? 'Ingresando...' : 'Ingresar'}
     </button>
@@ -33,7 +33,10 @@ function AvisoSesionExpirada() {
   }
 
   return (
-    <p role="alert" className="mb-4 rounded-lg bg-amber-50 px-4 py-3 text-sm text-amber-800">
+    <p
+      role="alert"
+      className="mb-4 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text"
+    >
       Tu sesión expiró. Ingresá de nuevo.
     </p>
   );
@@ -43,9 +46,9 @@ export default function LoginPage() {
   const [estado, formAction] = useFormState(loginAction, ESTADO_INICIAL);
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-neutral-50 px-4 py-8">
-      <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-sm">
-        <h1 className="mb-6 text-2xl font-semibold text-neutral-900">Ingresar</h1>
+    <main className="flex min-h-dvh items-center justify-center bg-surface px-4 py-8">
+      <div className="w-full max-w-sm rounded-2xl bg-surface-alt p-6">
+        <h1 className="mb-6 text-2xl font-semibold text-text">Ingresar</h1>
         <Suspense fallback={null}>
           <AvisoSesionExpirada />
         </Suspense>
@@ -55,17 +58,17 @@ export default function LoginPage() {
             name="username"
             placeholder="Usuario"
             required
-            className="min-h-11 rounded-lg border border-neutral-300 px-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none"
+            className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
           />
           <input
             name="password"
             type="password"
             placeholder="Contraseña (dejalo vacío si sos alumno)"
-            className="min-h-11 rounded-lg border border-neutral-300 px-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none"
+            className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
           />
           <BotonIngresar />
           {estado.error && (
-            <p role="alert" className="text-sm text-red-600">
+            <p role="alert" className="text-sm text-danger">
               {estado.error}
             </p>
           )}
