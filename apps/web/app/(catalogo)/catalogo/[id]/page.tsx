@@ -7,6 +7,7 @@ import { ArrowLeft, Dumbbell } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
 import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
+import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -109,7 +110,9 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
             {ejercicio.equipamiento && (
               <div>
                 <dt className="text-text-muted">Equipamiento</dt>
-                <dd className="capitalize text-text">{ejercicio.equipamiento}</dd>
+                <dd className="text-text">
+                  {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
+                </dd>
               </div>
             )}
             {ejercicio.gruposMuscularesSecundarios.length > 0 && (
