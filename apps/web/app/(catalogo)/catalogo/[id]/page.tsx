@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowLeft, Dumbbell } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
 
@@ -21,6 +21,7 @@ interface ExerciseDetailResponse {
 }
 
 export default function DetalleEjercicioPage({ params }: { params: { id: string } }) {
+  const router = useRouter();
   const [ejercicio, setEjercicio] = useState<ExerciseDetailResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -46,13 +47,21 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
 
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
-      <Link
-        href="/catalogo"
+      {/*
+        router.back() en vez de un href fijo a /catalogo — esta pantalla
+        se llega tanto desde /catalogo (browse general) como desde
+        /alumno (ejercicio dentro de la rutina vigente); un destino fijo
+        sacaba al alumno de su rutina hacia el catálogo general en vez de
+        devolverlo a donde estaba.
+      */}
+      <button
+        type="button"
+        onClick={() => router.back()}
         className="flex min-h-11 w-fit items-center gap-2 text-sm text-text-muted"
       >
         <ArrowLeft size={18} aria-hidden />
-        Volver al catálogo
-      </Link>
+        Volver
+      </button>
 
       {cargando && <p className="text-sm text-text-muted">Cargando...</p>}
       {error && (
