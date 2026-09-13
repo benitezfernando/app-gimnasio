@@ -79,6 +79,7 @@ model Exercise {
   atribucionMedia             String?
   createdAt                   DateTime       @default(now())
   updatedAt                   DateTime       @updatedAt
+  activo                      Boolean        @default(true)
 
   ejerciciosDeTemplate RoutineTemplateExercise[]
   ejerciciosDeInstance RoutineInstanceExercise[]
@@ -86,6 +87,7 @@ model Exercise {
   @@index([gymId])
   @@index([parteCuerpo])
   @@index([equipamiento])
+  @@index([activo])
 }
 
 // Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)
