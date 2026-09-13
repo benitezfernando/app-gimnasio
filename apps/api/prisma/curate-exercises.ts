@@ -8,7 +8,7 @@
  *   npx tsx prisma/curate-exercises.ts             (aplica de verdad)
  */
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { ExerciseSource, PrismaClient } from '@prisma/client';
 import curados from './exercise-curation.json';
 
 const prisma = new PrismaClient();
@@ -17,6 +17,11 @@ async function main() {
   const dryRun = process.argv.includes('--dry-run');
 
   const idsAConservar = curados.map((c) => c.id);
+  if (new Set(idsAConservar).size !== idsAConservar.length) {
+    console.error('ERROR: hay IDs duplicados en exercise-curation.json');
+    process.exit(1);
+  }
+
   const totalAntes = await prisma.exercise.count();
   const activosAntes = await prisma.exercise.count({ where: { activo: true } });
 
@@ -54,17 +59,23 @@ async function main() {
         data: { activo: true, nombre: c.nombreEs },
       }),
     ),
+    // Acotado a fuente CATALOG: si en el futuro existen ejercicios CUSTOM
+    // (creados por un profesor), este script no debe apagarlos en silencio
+    // al re-correrse contra la curación del catálogo original.
     prisma.exercise.updateMany({
-      where: { id: { notIn: idsAConservar } },
+      where: { id: { notIn: idsAConservar }, fuente: ExerciseSource.CATALOG },
       data: { activo: false },
     }),
   ];
   await prisma.$transaction(operaciones);
 
   const activosDespues = await prisma.exercise.count({ where: { activo: true } });
-  console.log(
-    `\nListo. Ejercicios activos ahora: ${activosDespues} (esperado: ${idsAConservar.length}).`,
-  );
+  if (activosDespues !== idsAConservar.length) {
+    console.error(`ERROR: se esperaban ${idsAConservar.length} activos, hay ${activosDespues}.`);
+    await prisma.$disconnect();
+    process.exit(1);
+  }
+  console.log(`\nListo. Ejercicios activos ahora: ${activosDespues}.`);
   await prisma.$disconnect();
 }
 

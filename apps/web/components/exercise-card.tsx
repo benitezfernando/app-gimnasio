@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Dumbbell } from 'lucide-react';
-import { regionColorVar } from '../lib/region-colors';
+import { ETIQUETA_PARTE_CUERPO, regionColorVar } from '../lib/region-colors';
+import { ETIQUETA_EQUIPAMIENTO } from '../lib/equipment-options';
 
 export interface ExerciseCardData {
   id: string;
@@ -34,16 +35,18 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
           </div>
         )}
         <span
-          className="absolute left-2 top-2 rounded-full px-2 py-1 text-xs font-medium capitalize text-white"
+          className="absolute left-2 top-2 rounded-full px-2 py-1 text-xs font-medium text-white"
           style={{ backgroundColor: regionColorVar(ejercicio.parteCuerpo) }}
         >
-          {ejercicio.parteCuerpo}
+          {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
         </span>
       </div>
       <div className="flex flex-col gap-1 p-3">
         <h3 className="line-clamp-2 text-sm font-medium text-text">{ejercicio.nombre}</h3>
         {ejercicio.equipamiento && (
-          <p className="text-xs capitalize text-text-muted">{ejercicio.equipamiento}</p>
+          <p className="text-xs text-text-muted">
+            {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
+          </p>
         )}
       </div>
     </div>

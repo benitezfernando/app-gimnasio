@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../lib/browser-api-client';
+import { ETIQUETA_PARTE_CUERPO } from '../lib/region-colors';
 import { ExerciseCardData } from './exercise-card';
 
 interface ListExercisesResponse {
@@ -81,7 +82,9 @@ export function ExercisePicker({
                 className="flex min-h-11 w-full items-center gap-3 rounded-lg px-2 text-left hover:bg-surface-alt"
               >
                 <span className="text-sm text-text">{ejercicio.nombre}</span>
-                <span className="text-xs capitalize text-text-muted">{ejercicio.parteCuerpo}</span>
+                <span className="text-xs text-text-muted">
+                  {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
+                </span>
               </button>
             </li>
           ))}
