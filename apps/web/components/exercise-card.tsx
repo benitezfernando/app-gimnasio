@@ -2,6 +2,9 @@ import Image from 'next/image';
 import { Dumbbell } from 'lucide-react';
 import { ETIQUETA_PARTE_CUERPO, regionColorVar } from '../lib/region-colors';
 import { ETIQUETA_EQUIPAMIENTO } from '../lib/equipment-options';
+import { Card } from './ui/card';
+import { Pill } from './ui/pill';
+import { GradientIcon } from './ui/gradient-icon';
 
 export interface ExerciseCardData {
   id: string;
@@ -19,8 +22,8 @@ export interface ExerciseCardData {
  */
 export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
-      <div className="relative aspect-square w-full bg-surface-alt">
+    <Card className="flex flex-col gap-3 overflow-visible p-3">
+      <div className="relative aspect-square w-full overflow-hidden rounded-full bg-surface">
         {ejercicio.imageUrl ? (
           <Image
             src={ejercicio.imageUrl}
@@ -31,24 +34,24 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <Dumbbell className="text-text-muted" size={40} aria-hidden />
+            <GradientIcon icon={Dumbbell} size={32} />
           </div>
         )}
         <span
-          className="absolute left-2 top-2 rounded-full px-2 py-1 text-xs font-medium text-white"
+          className="absolute left-1 top-1 rounded-full px-2 py-1 text-xs font-medium text-white"
           style={{ backgroundColor: regionColorVar(ejercicio.parteCuerpo) }}
         >
           {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
         </span>
       </div>
-      <div className="flex flex-col gap-1 p-3">
+      <div className="flex flex-col gap-2">
         <h3 className="line-clamp-2 text-sm font-medium text-text">{ejercicio.nombre}</h3>
         {ejercicio.equipamiento && (
-          <p className="text-xs text-text-muted">
+          <Pill className="self-start">
             {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
-          </p>
+          </Pill>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
