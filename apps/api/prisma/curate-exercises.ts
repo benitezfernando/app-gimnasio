@@ -47,13 +47,19 @@ async function main() {
     return;
   }
 
-  await prisma.exercise.updateMany({ data: { activo: false } });
-  for (const c of curados) {
-    await prisma.exercise.update({
-      where: { id: c.id },
-      data: { activo: true, nombre: c.nombreEs },
-    });
-  }
+  const operaciones = [
+    ...curados.map((c) =>
+      prisma.exercise.update({
+        where: { id: c.id },
+        data: { activo: true, nombre: c.nombreEs },
+      }),
+    ),
+    prisma.exercise.updateMany({
+      where: { id: { notIn: idsAConservar } },
+      data: { activo: false },
+    }),
+  ];
+  await prisma.$transaction(operaciones);
 
   const activosDespues = await prisma.exercise.count({ where: { activo: true } });
   console.log(
