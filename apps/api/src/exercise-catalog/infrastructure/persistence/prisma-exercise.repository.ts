@@ -33,6 +33,7 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
 
   async findMany(filter: ListExercisesFilter): Promise<ListExercisesResult> {
     const where: Prisma.ExerciseWhereInput = {
+      activo: true,
       ...(filter.search ? { nombre: { contains: filter.search, mode: 'insensitive' } } : {}),
       ...(filter.parteCuerpo ? { parteCuerpo: filter.parteCuerpo } : {}),
       ...(filter.equipamiento ? { equipamiento: filter.equipamiento } : {}),
