@@ -1,7 +1,7 @@
 process.env.API_BASE_URL = 'http://localhost:3001';
 
 import { NextRequest } from 'next/server';
-import { GET } from './route';
+import { GET, PUT } from './route';
 import { getStoredSession } from '../../../../lib/session';
 import { refreshSession } from '../../../../lib/refresh-session';
 
@@ -109,5 +109,44 @@ describe('/api/proxy/[...path] (integración)', () => {
 
     expect(response.status).toBe(401);
     expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
+  // Regresión: el route handler no exportaba PUT — Next.js exige un export
+  // nombrado por cada método HTTP, así que sin este export cualquier PUT a
+  // /api/proxy/* devolvía 405 automáticamente SIN ejecutar nada del código
+  // de acá (ni siquiera el mock de fetch se llamaba). Rompía en silencio
+  // el ajuste de rutinas/plantillas existentes (browser-api-client PUT),
+  // nunca detectado porque este archivo solo probaba GET. La importación
+  // de PUT arriba ya es, por sí sola, un test de compilación: si el
+  // export desaparece de nuevo, TypeScript no compila este archivo.
+  it('PUT reenvía la request con el body al backend', async () => {
+    mockGetStoredSession.mockResolvedValue({
+      accessToken: 'valid-token',
+      refreshToken: 'refresh-token',
+    });
+    (global.fetch as jest.Mock).mockResolvedValueOnce(
+      new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    );
+
+    const request = new NextRequest(
+      'http://localhost:3000/api/proxy/routine-instances/inst-1/exercises',
+      { method: 'PUT', body: JSON.stringify({ ejercicios: [] }) },
+    );
+    const response = await PUT(request, {
+      params: { path: ['routine-instances', 'inst-1', 'exercises'] },
+    });
+
+    expect(response.status).toBe(200);
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://localhost:3001/routine-instances/inst-1/exercises',
+      expect.objectContaining({
+        method: 'PUT',
+        body: JSON.stringify({ ejercicios: [] }),
+        headers: expect.objectContaining({ Authorization: 'Bearer valid-token' }),
+      }),
+    );
   });
 });
