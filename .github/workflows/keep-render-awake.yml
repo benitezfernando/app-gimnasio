@@ -25,6 +25,14 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - name: Ping /health
-        run: curl -sf --max-time 20 https://app-gimnasio.onrender.com/health
+        # --max-time 20 (el valor original) le fallaba con exit 28
+        # (timeout) al pegarle a un Render recién dormido — Render puede
+        # tardar hasta ~1 min en levantar el proceso desde cero, no 20s.
+        # --retry porque durante el arranque puede devolver 502/503 antes
+        # de terminar de bindear el puerto, no solo tardar.
+        run: >
+          curl -sf --max-time 90 --retry 3 --retry-delay 10 --retry-all-errors
+          https://app-gimnasio.onrender.com/health
