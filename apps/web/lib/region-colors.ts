@@ -24,3 +24,16 @@ export function regionColorVar(parteCuerpo: string): string {
   const slug = REGION_A_SLUG[parteCuerpo] ?? 'waist';
   return `rgb(var(--color-region-${slug}) / 1)`;
 }
+
+export const ETIQUETA_PARTE_CUERPO: Record<string, string> = {
+  chest: 'Pecho',
+  back: 'Espalda',
+  shoulders: 'Hombros',
+  'upper arms': 'Brazos (superior)',
+  'lower arms': 'Antebrazos',
+  waist: 'Core / abdomen',
+  'upper legs': 'Piernas (superior)',
+  'lower legs': 'Piernas (inferior)',
+  cardio: 'Cardio',
+  neck: 'Cuello',
+};
