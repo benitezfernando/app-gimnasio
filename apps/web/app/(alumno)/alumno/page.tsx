@@ -1,6 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { Dumbbell } from 'lucide-react';
 import { apiFetch, ApiError } from '../../../lib/api-client';
-import { ExerciseCard } from '../../../components/exercise-card';
+import { PageHeader } from '../../../components/ui/page-header';
+import { Card } from '../../../components/ui/card';
+import { Pill } from '../../../components/ui/pill';
+import { GradientIcon } from '../../../components/ui/gradient-icon';
 
 interface RutinaVigenteResponse {
   id: string;
@@ -39,33 +44,40 @@ export default async function AlumnoPage() {
 
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
-      <h1 className="text-xl font-semibold text-text">{rutina.nombre}</h1>
+      <PageHeader title={rutina.nombre} />
 
       <ul className="flex flex-col gap-3">
         {rutina.ejercicios
           .sort((a, b) => a.orden - b.orden)
           .map((ejercicio) => (
             <li key={ejercicio.exerciseId}>
-              <Link href={`/catalogo/${ejercicio.exerciseId}`} className="flex gap-3">
-                <div className="w-24 shrink-0">
-                  <ExerciseCard
-                    ejercicio={{
-                      id: ejercicio.exerciseId,
-                      nombre: ejercicio.nombre,
-                      imageUrl: ejercicio.imageUrl,
-                      parteCuerpo: '',
-                      equipamiento: null,
-                    }}
-                  />
-                </div>
-                <div className="flex flex-col justify-center gap-1">
-                  <p className="text-sm font-medium text-text">{ejercicio.nombre}</p>
-                  <p className="text-xs text-text-muted">
-                    {ejercicio.series} series × {ejercicio.repeticiones} reps
-                    {ejercicio.peso !== null && ` — ${ejercicio.peso}kg`} — {ejercicio.descanso}s
-                    descanso
-                  </p>
-                </div>
+              <Link href={`/catalogo/${ejercicio.exerciseId}`}>
+                <Card className="flex items-center gap-3">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-surface">
+                    {ejercicio.imageUrl ? (
+                      <Image
+                        src={ejercicio.imageUrl}
+                        alt={ejercicio.nombre}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <GradientIcon icon={Dumbbell} size={20} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1.5">
+                    <p className="text-sm font-medium text-text">{ejercicio.nombre}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      <Pill>{ejercicio.series} series</Pill>
+                      <Pill>{ejercicio.repeticiones} reps</Pill>
+                      {ejercicio.peso !== null && <Pill>{ejercicio.peso}kg</Pill>}
+                      <Pill>{ejercicio.descanso}s descanso</Pill>
+                    </div>
+                  </div>
+                </Card>
               </Link>
             </li>
           ))}
