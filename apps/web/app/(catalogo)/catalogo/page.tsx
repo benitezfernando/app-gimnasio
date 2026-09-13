@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { ExerciseCard, ExerciseCardData } from '../../../components/exercise-card';
-import { PARTES_CUERPO } from '../../../lib/region-colors';
-import { EQUIPAMIENTOS } from '../../../lib/equipment-options';
+import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors';
+import { EQUIPAMIENTOS, ETIQUETA_EQUIPAMIENTO } from '../../../lib/equipment-options';
 
 interface ListExercisesResponse {
   items: ExerciseCardData[];
@@ -95,13 +95,13 @@ export default function CatalogoPage() {
             key={parte}
             type="button"
             onClick={() => setParteCuerpo(parte)}
-            className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium capitalize ${
+            className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${
               parteCuerpo === parte
                 ? 'border-accent bg-accent text-accent-fg'
                 : 'border-border bg-surface text-text'
             }`}
           >
-            {parte}
+            {ETIQUETA_PARTE_CUERPO[parte]}
           </button>
         ))}
       </div>
@@ -109,12 +109,12 @@ export default function CatalogoPage() {
       <select
         value={equipamiento}
         onChange={(e) => setEquipamiento(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base capitalize text-text"
+        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text"
       >
         <option value="">Cualquier equipamiento</option>
         {EQUIPAMIENTOS.map((eq) => (
-          <option key={eq} value={eq} className="capitalize">
-            {eq}
+          <option key={eq} value={eq}>
+            {ETIQUETA_EQUIPAMIENTO[eq]}
           </option>
         ))}
       </select>

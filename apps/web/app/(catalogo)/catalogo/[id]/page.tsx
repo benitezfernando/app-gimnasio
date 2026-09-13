@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Dumbbell } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
+import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
+import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -94,11 +96,15 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
           <dl className="grid grid-cols-2 gap-2 text-sm">
             <div>
               <dt className="text-text-muted">Región</dt>
-              <dd className="capitalize text-text">{ejercicio.parteCuerpo}</dd>
+              <dd className="text-text">
+                {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
+              </dd>
             </div>
             <div>
               <dt className="text-text-muted">Músculo</dt>
-              <dd className="capitalize text-text">{ejercicio.grupoMuscular}</dd>
+              <dd className="text-text">
+                {ETIQUETA_GRUPO_MUSCULAR[ejercicio.grupoMuscular] ?? ejercicio.grupoMuscular}
+              </dd>
             </div>
             {ejercicio.equipamiento && (
               <div>
@@ -109,8 +115,10 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
             {ejercicio.gruposMuscularesSecundarios.length > 0 && (
               <div>
                 <dt className="text-text-muted">Músculos secundarios</dt>
-                <dd className="capitalize text-text">
-                  {ejercicio.gruposMuscularesSecundarios.join(', ')}
+                <dd className="text-text">
+                  {ejercicio.gruposMuscularesSecundarios
+                    .map((g) => ETIQUETA_GRUPO_MUSCULAR[g] ?? g)
+                    .join(', ')}
                 </dd>
               </div>
             )}
