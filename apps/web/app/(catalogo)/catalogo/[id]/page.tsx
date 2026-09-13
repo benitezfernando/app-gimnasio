@@ -3,11 +3,13 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Dumbbell } from 'lucide-react';
+import { Dumbbell } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
 import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
+import { PageHeader } from '../../../../components/ui/page-header';
+import { Pill } from '../../../../components/ui/pill';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -57,14 +59,7 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
         sacaba al alumno de su rutina hacia el catálogo general en vez de
         devolverlo a donde estaba.
       */}
-      <button
-        type="button"
-        onClick={() => router.back()}
-        className="flex min-h-11 w-fit items-center gap-2 text-sm text-text-muted"
-      >
-        <ArrowLeft size={18} aria-hidden />
-        Volver
-      </button>
+      <PageHeader title={ejercicio?.nombre ?? 'Ejercicio'} onBack={() => router.back()} />
 
       {cargando && <p className="text-sm text-text-muted">Cargando...</p>}
       {error && (
@@ -92,40 +87,18 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
             )}
           </div>
 
-          <h1 className="text-xl font-semibold text-text">{ejercicio.nombre}</h1>
-
-          <dl className="grid grid-cols-2 gap-2 text-sm">
-            <div>
-              <dt className="text-text-muted">Región</dt>
-              <dd className="text-text">
-                {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-text-muted">Músculo</dt>
-              <dd className="text-text">
-                {ETIQUETA_GRUPO_MUSCULAR[ejercicio.grupoMuscular] ?? ejercicio.grupoMuscular}
-              </dd>
-            </div>
+          <div className="flex flex-wrap gap-2">
+            <Pill>{ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}</Pill>
+            <Pill>
+              {ETIQUETA_GRUPO_MUSCULAR[ejercicio.grupoMuscular] ?? ejercicio.grupoMuscular}
+            </Pill>
             {ejercicio.equipamiento && (
-              <div>
-                <dt className="text-text-muted">Equipamiento</dt>
-                <dd className="text-text">
-                  {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
-                </dd>
-              </div>
+              <Pill>{ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}</Pill>
             )}
-            {ejercicio.gruposMuscularesSecundarios.length > 0 && (
-              <div>
-                <dt className="text-text-muted">Músculos secundarios</dt>
-                <dd className="text-text">
-                  {ejercicio.gruposMuscularesSecundarios
-                    .map((g) => ETIQUETA_GRUPO_MUSCULAR[g] ?? g)
-                    .join(', ')}
-                </dd>
-              </div>
-            )}
-          </dl>
+            {ejercicio.gruposMuscularesSecundarios.map((g) => (
+              <Pill key={g}>{ETIQUETA_GRUPO_MUSCULAR[g] ?? g}</Pill>
+            ))}
+          </div>
 
           {ejercicio.pasos.length > 0 ? (
             <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm text-text">
