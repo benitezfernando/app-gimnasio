@@ -11,7 +11,7 @@ function BotonCrear() {
     <button
       type="submit"
       disabled={pending}
-      className="min-h-11 w-full rounded-lg bg-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50 sm:w-auto"
+      className="min-h-11 w-full rounded-lg bg-gradient-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50 sm:w-auto"
     >
       {pending ? 'Creando...' : 'Crear profesor'}
     </button>

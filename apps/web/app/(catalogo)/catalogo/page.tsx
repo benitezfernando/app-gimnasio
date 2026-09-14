@@ -84,7 +84,7 @@ export default function CatalogoPage() {
           onClick={() => setParteCuerpo(null)}
           className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${
             parteCuerpo === null
-              ? 'border-accent bg-accent text-accent-fg'
+              ? 'border-accent bg-gradient-accent text-accent-fg'
               : 'border-border bg-surface text-text'
           }`}
         >
@@ -97,7 +97,7 @@ export default function CatalogoPage() {
             onClick={() => setParteCuerpo(parte)}
             className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${
               parteCuerpo === parte
-                ? 'border-accent bg-accent text-accent-fg'
+                ? 'border-accent bg-gradient-accent text-accent-fg'
                 : 'border-border bg-surface text-text'
             }`}
           >

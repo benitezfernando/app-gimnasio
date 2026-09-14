@@ -222,7 +222,7 @@ export function RoutineExercisesEditor({
         type="button"
         onClick={() => onGuardar(ejercicios)}
         disabled={guardando || ejercicios.length === 0}
-        className="min-h-11 self-start rounded-lg bg-accent px-6 text-sm font-medium text-accent-fg disabled:opacity-50"
+        className="min-h-11 self-start rounded-lg bg-gradient-accent px-6 text-sm font-medium text-accent-fg disabled:opacity-50"
       >
         {guardando ? 'Guardando...' : 'Guardar ejercicios'}
       </button>

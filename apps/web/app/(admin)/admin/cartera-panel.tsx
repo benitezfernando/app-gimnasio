@@ -136,7 +136,7 @@ export function CarteraPanel({
               <button
                 onClick={asignar}
                 disabled={!profesorSeleccionado}
-                className="min-h-11 rounded-lg bg-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
+                className="min-h-11 rounded-lg bg-gradient-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
               >
                 Asignar
               </button>

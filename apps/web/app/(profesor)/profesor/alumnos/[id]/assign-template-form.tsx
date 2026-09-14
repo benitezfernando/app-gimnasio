@@ -78,7 +78,7 @@ export function AssignTemplateForm({
         type="button"
         onClick={asignar}
         disabled={asignando || !templateId || !nombre.trim()}
-        className="min-h-11 rounded-lg bg-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
+        className="min-h-11 rounded-lg bg-gradient-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
       >
         {asignando ? 'Asignando...' : 'Asignar plantilla'}
       </button>
