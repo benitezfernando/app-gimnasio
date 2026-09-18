@@ -120,16 +120,24 @@ function FilaEjercicio({
  * — arma/reordena/edita la lista de ejercicios en memoria, y delega el
  * guardado (siempre replace-all) a `onGuardar`. Reordenar con dnd-kit
  * (drag táctil/mouse + flechas de teclado nativas de la librería).
+ *
+ * `permiteGuardarVacio`: el backend (`PUT .../exercises`) no exige un
+ * mínimo de ejercicios — reemplaza con lo que se le mande, incluido un
+ * array vacío. La única excepción real es crear una rutina NUEVA desde
+ * cero (`POST /routine-instances` sin `origenTemplateId`), que sí exige
+ * al menos uno. El caller decide cuál de los dos casos es el suyo.
  */
 export function RoutineExercisesEditor({
   ejerciciosIniciales,
   onGuardar,
   guardando,
   error,
+  permiteGuardarVacio = true,
 }: {
   ejerciciosIniciales: EjercicioEnEdicion[];
   onGuardar: (ejercicios: EjercicioEnEdicion[]) => Promise<void>;
   guardando: boolean;
+  permiteGuardarVacio?: boolean;
   error: string | null;
 }) {
   const [ejercicios, setEjercicios] = useState<EjercicioEnEdicion[]>(ejerciciosIniciales);
@@ -222,7 +230,7 @@ export function RoutineExercisesEditor({
       <PrimaryButton
         type="button"
         onClick={() => onGuardar(ejercicios)}
-        disabled={guardando || ejercicios.length === 0}
+        disabled={guardando || (ejercicios.length === 0 && !permiteGuardarVacio)}
         size="sm-wide"
         className="self-start"
       >

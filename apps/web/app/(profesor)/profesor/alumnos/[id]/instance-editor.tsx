@@ -72,6 +72,7 @@ export function InstanceEditor({
         onGuardar={guardar}
         guardando={guardando}
         error={error}
+        permiteGuardarVacio={Boolean(instanciaVigente)}
       />
     </div>
   );
