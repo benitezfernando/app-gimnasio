@@ -23,6 +23,7 @@ export function AssignTemplateForm({
   const router = useRouter();
   const [templateId, setTemplateId] = useState('');
   const [nombre, setNombre] = useState('');
+  const [vincular, setVincular] = useState(false);
   const [asignando, setAsignando] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +44,7 @@ export function AssignTemplateForm({
     try {
       await browserApiFetch('routine-instances', {
         method: 'POST',
-        body: JSON.stringify({ alumnoId, nombre, origenTemplateId: templateId }),
+        body: JSON.stringify({ alumnoId, nombre, origenTemplateId: templateId, vincular }),
       });
       router.refresh();
     } catch (err) {
@@ -85,6 +86,15 @@ export function AssignTemplateForm({
         placeholder="Nombre de esta rutina para el alumno"
         className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
       />
+      <label className="flex items-center gap-2 text-sm text-text-muted">
+        <input
+          type="checkbox"
+          checked={vincular}
+          onChange={(e) => setVincular(e.target.checked)}
+          className="h-4 w-4"
+        />
+        Vincular a la plantilla (se actualiza sola si edito la plantilla después)
+      </label>
       <PrimaryButton
         type="button"
         onClick={asignar}
