@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api-client';
+import { PrimaryButton } from '../../../../../components/ui/primary-button';
 
 interface TemplateOption {
   id: string;
@@ -74,14 +75,14 @@ export function AssignTemplateForm({
         placeholder="Nombre de esta rutina para el alumno"
         className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted"
       />
-      <button
+      <PrimaryButton
         type="button"
         onClick={asignar}
         disabled={asignando || !templateId || !nombre.trim()}
-        className="min-h-11 rounded-lg bg-gradient-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
+        size="sm"
       >
         {asignando ? 'Asignando...' : 'Asignar plantilla'}
-      </button>
+      </PrimaryButton>
       {error && (
         <p role="alert" className="text-sm text-danger">
           {error}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { assignProfesorAction, removeProfesorAction } from './actions';
+import { PrimaryButton } from '../../../components/ui/primary-button';
 
 interface UserRow {
   id: string;
@@ -133,13 +134,14 @@ export function CarteraPanel({
                   </option>
                 ))}
               </select>
-              <button
+              <PrimaryButton
+                type="button"
                 onClick={asignar}
                 disabled={!profesorSeleccionado}
-                className="min-h-11 rounded-lg bg-gradient-accent px-4 text-sm font-medium text-accent-fg disabled:opacity-50"
+                size="sm"
               >
                 Asignar
-              </button>
+              </PrimaryButton>
             </div>
           )}
         </div>

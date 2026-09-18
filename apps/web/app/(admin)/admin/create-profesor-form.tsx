@@ -2,19 +2,16 @@
 
 import { useFormState, useFormStatus } from 'react-dom';
 import { createProfesorAction, CreateProfesorActionState } from './actions';
+import { PrimaryButton } from '../../../components/ui/primary-button';
 
 const ESTADO_INICIAL: CreateProfesorActionState = { error: null, success: false };
 
 function BotonCrear() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="min-h-11 w-full rounded-lg bg-gradient-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50 sm:w-auto"
-    >
+    <PrimaryButton type="submit" disabled={pending} className="w-full active:opacity-90 sm:w-auto">
       {pending ? 'Creando...' : 'Crear profesor'}
-    </button>
+    </PrimaryButton>
   );
 }
 

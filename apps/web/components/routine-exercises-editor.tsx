@@ -23,6 +23,7 @@ import { Card } from './ui/card';
 import { ExercisePicker } from './exercise-picker';
 import { EjercicioEnEdicion } from '../lib/routine-types';
 import { ExerciseCardData } from './exercise-card';
+import { PrimaryButton } from './ui/primary-button';
 
 function FilaEjercicio({
   ejercicio,
@@ -218,14 +219,15 @@ export function RoutineExercisesEditor({
         </p>
       )}
 
-      <button
+      <PrimaryButton
         type="button"
         onClick={() => onGuardar(ejercicios)}
         disabled={guardando || ejercicios.length === 0}
-        className="min-h-11 self-start rounded-lg bg-gradient-accent px-6 text-sm font-medium text-accent-fg disabled:opacity-50"
+        size="sm-wide"
+        className="self-start"
       >
         {guardando ? 'Guardando...' : 'Guardar ejercicios'}
-      </button>
+      </PrimaryButton>
     </div>
   );
 }

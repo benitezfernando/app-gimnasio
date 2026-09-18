@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import { loginAction, LoginActionState } from './actions';
+import { PrimaryButton } from '../../components/ui/primary-button';
 
 const ESTADO_INICIAL: LoginActionState = { error: null };
 const GYM_ID = process.env.NEXT_PUBLIC_GYM_ID ?? '';
@@ -11,13 +12,9 @@ const GYM_ID = process.env.NEXT_PUBLIC_GYM_ID ?? '';
 function BotonIngresar() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="min-h-11 rounded-lg bg-gradient-accent px-4 text-base font-medium text-accent-fg active:opacity-90 disabled:opacity-50"
-    >
+    <PrimaryButton type="submit" disabled={pending} className="active:opacity-90">
       {pending ? 'Ingresando...' : 'Ingresar'}
-    </button>
+    </PrimaryButton>
   );
 }
 

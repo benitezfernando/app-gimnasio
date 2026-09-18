@@ -2,19 +2,16 @@
 
 import { useFormState, useFormStatus } from 'react-dom';
 import { createTemplateAction, CreateTemplateActionState } from './actions';
+import { PrimaryButton } from '../../../../components/ui/primary-button';
 
 const ESTADO_INICIAL: CreateTemplateActionState = { error: null };
 
 function BotonCrear() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="min-h-11 w-full rounded-lg bg-gradient-accent px-4 text-base font-medium text-accent-fg disabled:opacity-50 sm:w-auto"
-    >
+    <PrimaryButton type="submit" disabled={pending} className="w-full sm:w-auto">
       {pending ? 'Creando...' : 'Crear plantilla'}
-    </button>
+    </PrimaryButton>
   );
 }
 
