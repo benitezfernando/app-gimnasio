@@ -14,9 +14,11 @@ interface TemplateOption {
 export function AssignTemplateForm({
   alumnoId,
   plantillas,
+  reemplazaRutinaVigente = false,
 }: {
   alumnoId: string;
   plantillas: TemplateOption[];
+  reemplazaRutinaVigente?: boolean;
 }) {
   const router = useRouter();
   const [templateId, setTemplateId] = useState('');
@@ -28,6 +30,14 @@ export function AssignTemplateForm({
 
   async function asignar() {
     if (!templateId || !nombre.trim()) return;
+    if (
+      reemplazaRutinaVigente &&
+      !window.confirm(
+        'Esto reemplaza la rutina actual del alumno por la plantilla elegida. ¿Continuar?',
+      )
+    ) {
+      return;
+    }
     setAsignando(true);
     setError(null);
     try {
@@ -81,7 +91,11 @@ export function AssignTemplateForm({
         disabled={asignando || !templateId || !nombre.trim()}
         size="sm"
       >
-        {asignando ? 'Asignando...' : 'Asignar plantilla'}
+        {asignando
+          ? 'Asignando...'
+          : reemplazaRutinaVigente
+            ? 'Reemplazar rutina'
+            : 'Asignar plantilla'}
       </PrimaryButton>
       {error && (
         <p role="alert" className="text-sm text-danger">

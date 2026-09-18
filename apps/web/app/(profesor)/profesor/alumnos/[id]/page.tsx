@@ -45,12 +45,16 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
         {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
       </h1>
 
-      {!rutinaVigente && (
-        <section className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium text-text-muted">Asignar plantilla existente</h2>
-          <AssignTemplateForm alumnoId={params.id} plantillas={plantillas} />
-        </section>
-      )}
+      <section className="flex flex-col gap-3">
+        <h2 className="text-sm font-medium text-text-muted">
+          {rutinaVigente ? 'Reemplazar con una plantilla' : 'Asignar plantilla existente'}
+        </h2>
+        <AssignTemplateForm
+          alumnoId={params.id}
+          plantillas={plantillas}
+          reemplazaRutinaVigente={Boolean(rutinaVigente)}
+        />
+      </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-text-muted">
