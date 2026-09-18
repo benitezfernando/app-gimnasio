@@ -84,7 +84,7 @@ export default function CatalogoPage() {
         <button
           type="button"
           onClick={() => setParteCuerpo(null)}
-          className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${
+          className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
             parteCuerpo === null
               ? 'border-accent bg-gradient-accent text-accent-fg'
               : 'border-border bg-surface text-text'
@@ -97,7 +97,7 @@ export default function CatalogoPage() {
             key={parte}
             type="button"
             onClick={() => setParteCuerpo(parte)}
-            className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium ${
+            className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
               parteCuerpo === parte
                 ? 'border-accent bg-gradient-accent text-accent-fg'
                 : 'border-border bg-surface text-text'
@@ -146,7 +146,7 @@ export default function CatalogoPage() {
           type="button"
           onClick={() => cargar(pagina + 1, false)}
           disabled={cargando}
-          className="min-h-11 self-center rounded-lg border border-border px-6 text-sm font-medium text-text disabled:opacity-50"
+          className="min-h-11 self-center rounded-lg border border-border px-6 text-sm font-medium text-text disabled:opacity-50 lg:min-h-9"
         >
           {cargando ? 'Cargando...' : 'Cargar más'}
         </button>

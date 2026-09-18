@@ -64,7 +64,7 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
           <button
             type="button"
             onClick={alternarActiva}
-            className="min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-text"
+            className="min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-text lg:min-h-9"
           >
             {plantilla.activa ? 'Desactivar' : 'Reactivar'}
           </button>
@@ -73,7 +73,7 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
             onClick={eliminar}
             disabled={plantilla.activa}
             title={plantilla.activa ? 'Desactivala primero para poder eliminarla' : undefined}
-            className="min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40"
+            className="min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40 lg:min-h-9"
           >
             Eliminar definitivamente
           </button>

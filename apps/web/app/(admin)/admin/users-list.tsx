@@ -54,7 +54,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
         onClick={() => handleDeactivate(u.id, u.nombre)}
         disabled={esAdmin || !u.activo || isPending}
         title={esAdmin ? 'Un ADMIN no se puede desactivar ni eliminar por esta vía' : undefined}
-        className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger active:bg-danger/10 disabled:border-border disabled:text-text-muted ${className}`}
+        className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger active:bg-danger/10 disabled:border-border disabled:text-text-muted lg:min-h-9 ${className}`}
       >
         Desactivar
       </button>
@@ -74,7 +74,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
               ? 'Desactivalo primero'
               : undefined
         }
-        className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40 ${className}`}
+        className={`min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40 lg:min-h-9 ${className}`}
       >
         Eliminar
       </button>

@@ -50,7 +50,7 @@ function FilaEjercicio({
           {...attributes}
           {...listeners}
           aria-label={`Reordenar ${ejercicio.nombre}`}
-          className="flex min-h-11 min-w-11 items-center justify-center text-text-muted"
+          className="flex min-h-11 min-w-11 items-center justify-center text-text-muted lg:min-h-9 lg:min-w-9"
         >
           <GripVertical size={20} aria-hidden />
         </button>
@@ -65,7 +65,7 @@ function FilaEjercicio({
               min={1}
               value={ejercicio.series}
               onChange={(e) => onCambiar('series', e.target.value)}
-              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text"
+              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
             />
           </label>
           <label className="flex flex-col text-xs text-text-muted">
@@ -75,7 +75,7 @@ function FilaEjercicio({
               min={1}
               value={ejercicio.repeticiones}
               onChange={(e) => onCambiar('repeticiones', e.target.value)}
-              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text"
+              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
             />
           </label>
           <label className="flex flex-col text-xs text-text-muted">
@@ -87,7 +87,7 @@ function FilaEjercicio({
               value={ejercicio.peso ?? ''}
               placeholder="—"
               onChange={(e) => onCambiar('peso', e.target.value)}
-              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text"
+              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
             />
           </label>
           <label className="flex flex-col text-xs text-text-muted">
@@ -97,7 +97,7 @@ function FilaEjercicio({
               min={0}
               value={ejercicio.descanso}
               onChange={(e) => onCambiar('descanso', e.target.value)}
-              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text"
+              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
             />
           </label>
         </div>
@@ -106,7 +106,7 @@ function FilaEjercicio({
           type="button"
           onClick={onQuitar}
           aria-label={`Quitar ${ejercicio.nombre}`}
-          className="min-h-11 min-w-11 text-danger"
+          className="min-h-11 min-w-11 text-danger lg:min-h-9 lg:min-w-9"
         >
           <X size={18} aria-hidden />
         </button>
