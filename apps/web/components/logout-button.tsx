@@ -11,10 +11,9 @@ export function LogoutButton() {
       <button
         type="submit"
         aria-label="Cerrar sesión"
-        className="flex h-11 items-center gap-2 rounded-lg border border-border px-4 text-sm font-medium text-text active:bg-surface-alt"
+        className="flex h-11 w-11 items-center justify-center rounded-full text-text active:bg-surface-alt"
       >
-        <LogOut size={18} />
-        Cerrar sesión
+        <LogOut size={20} aria-hidden />
       </button>
     </form>
   );
