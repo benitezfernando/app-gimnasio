@@ -46,34 +46,32 @@ export default function LoginPage() {
   const [estado, formAction] = useFormState(loginAction, ESTADO_INICIAL);
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-surface px-4 py-8">
-      <div className="w-full max-w-sm rounded-2xl bg-surface-alt p-6">
-        <h1 className="mb-6 text-2xl font-semibold text-text">Ingresar</h1>
-        <Suspense fallback={null}>
-          <AvisoSesionExpirada />
-        </Suspense>
-        <form action={formAction} className="flex flex-col gap-4">
-          <input type="hidden" name="gymId" value={GYM_ID} />
-          <input
-            name="username"
-            placeholder="Usuario"
-            required
-            className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Contraseña (dejalo vacío si sos alumno)"
-            className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
-          />
-          <BotonIngresar />
-          {estado.error && (
-            <p role="alert" className="text-sm text-danger">
-              {estado.error}
-            </p>
-          )}
-        </form>
-      </div>
+    <main className="flex min-h-dvh flex-col justify-end bg-surface px-6 pb-10 pt-8">
+      <h1 className="mb-6 text-2xl font-semibold text-text">Ingresar</h1>
+      <Suspense fallback={null}>
+        <AvisoSesionExpirada />
+      </Suspense>
+      <form action={formAction} className="flex flex-col gap-4">
+        <input type="hidden" name="gymId" value={GYM_ID} />
+        <input
+          name="username"
+          placeholder="Usuario"
+          required
+          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Contraseña (dejalo vacío si sos alumno)"
+          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
+        />
+        <BotonIngresar />
+        {estado.error && (
+          <p role="alert" className="text-sm text-danger">
+            {estado.error}
+          </p>
+        )}
+      </form>
     </main>
   );
 }
