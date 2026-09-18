@@ -12,7 +12,7 @@ export function PageHeader({
 }) {
   return (
     <div className="sticky top-0 z-10 flex w-full items-center justify-between gap-3 bg-surface py-2 lg:top-12">
-      <div className="min-w-11">
+      <div className="min-w-11 lg:min-w-9">
         {onBack && (
           <button
             type="button"
@@ -25,7 +25,7 @@ export function PageHeader({
         )}
       </div>
       <h1 className="flex-1 text-center text-base font-semibold text-text lg:text-sm">{title}</h1>
-      <div className="min-w-11">{right}</div>
+      <div className="min-w-11 lg:min-w-9">{right}</div>
     </div>
   );
 }
