@@ -96,6 +96,7 @@ describe('/routine-instances (e2e)', () => {
     update: jest.fn(async (id, data) => ({ ...instanciaBase, id, ...data })),
     replaceExercises: jest.fn(async () => undefined),
     marcarDesvinculada: jest.fn(async () => undefined),
+    replaceExercisesYDesvincular: jest.fn(async () => undefined),
   };
 
   const fakeTemplateRepository: Pick<RoutineTemplateRepositoryPort, 'findById'> = {

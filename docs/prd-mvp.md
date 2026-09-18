@@ -95,9 +95,9 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 
 **HU-04 — Crear plantilla de rutina**
 
-> Como Profesor, quiero armar una plantilla de rutina con una lista ordenada de ejercicios (series, repeticiones, peso sugerido, descanso), para reutilizarla como base al asignar a distintos alumnos.
+> Como Profesor, quiero armar una plantilla de rutina con una lista ordenada de ejercicios (series, repeticiones, peso sugerido), para reutilizarla como base al asignar a distintos alumnos.
 
-- Dado que agrego un ejercicio del catálogo a la plantilla, cuando completo series/repeticiones/peso/descanso, entonces queda guardado en el orden que definí.
+- Dado que agrego un ejercicio del catálogo a la plantilla, cuando completo series/repeticiones/peso, entonces queda guardado en el orden que definí.
 - El peso es opcional: hay ejercicios de peso corporal (plancha, fondos, dominadas) donde no aplica cargar un valor.
 - Una plantilla sin ejercicios no puede asignarse (validación). Máximo 50 ejercicios por plantilla.
 
@@ -106,7 +106,7 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 > Como Profesor, quiero asignar una plantilla (o armar una rutina desde cero) a un alumno específico, para que la vea en su dashboard.
 
 - Dado un alumno con una rutina vigente, cuando le asigno una nueva, entonces la anterior pasa a histórica (`activa: false`) y la nueva queda vigente.
-- Dado que asigno una plantilla, cuando se crea la instancia, entonces se clonan sus ejercicios y a partir de ahí son independientes de la plantilla.
+- Dado que asigno una plantilla, cuando se crea la instancia, entonces se clonan sus ejercicios y a partir de ahí son independientes de la plantilla — salvo que elija vincularla (`vinculada: true`), en cuyo caso una futura edición de la plantilla se propaga a esa instancia hasta que diverja (ver HLD §Routines).
 - **Solo puedo asignar rutina a alumnos de mi cartera** (regla de negocio 9) — no a cualquier alumno de mi gym. Si intento asignar a un alumno que no es mío, la operación se rechaza (403), sin importar que pertenezca a mi mismo gym.
 
 **HU-06 — Ajustar rutina de un alumno puntual**

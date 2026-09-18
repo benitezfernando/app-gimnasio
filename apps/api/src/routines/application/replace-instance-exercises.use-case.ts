@@ -57,10 +57,13 @@ export class ReplaceInstanceExercisesUseCase {
       input.ejercicios.map((e) => e.exerciseId),
     );
 
-    await this.instanceRepository.replaceExercises(input.instanceId, input.ejercicios);
-
     if (instance.vinculada && divergioDeLaPlantilla) {
-      await this.instanceRepository.marcarDesvinculada(input.instanceId);
+      await this.instanceRepository.replaceExercisesYDesvincular(
+        input.instanceId,
+        input.ejercicios,
+      );
+    } else {
+      await this.instanceRepository.replaceExercises(input.instanceId, input.ejercicios);
     }
   }
 

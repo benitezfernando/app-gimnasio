@@ -86,6 +86,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       update: jest.fn(),
       replaceExercises: jest.fn(),
       marcarDesvinculada: jest.fn(),
+      replaceExercisesYDesvincular: jest.fn(),
     };
     templateRepository = {
       findByProfesor: jest.fn(),
@@ -332,6 +333,24 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       alumnoId: 'alum-1',
       nombre: 'Full body',
       origenTemplateId: 'tpl-1',
+    });
+
+    expect(instanceRepository.crear).toHaveBeenCalledWith(
+      expect.objectContaining({ vinculada: false }),
+    );
+  });
+
+  it('ignora vincular=true si arma desde cero (sin origenTemplateId) — no hay plantilla a la cual vincular', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.crear.mockResolvedValue({ ...instanciaCreada, origenTemplateId: null });
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      nombre: 'Custom',
+      ejercicios: [unEjercicio],
+      vincular: true,
     });
 
     expect(instanceRepository.crear).toHaveBeenCalledWith(

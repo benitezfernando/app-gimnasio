@@ -112,7 +112,7 @@ export class AssignRoutineToAlumnoUseCase {
       alumnoId: input.alumnoId,
       nombre: input.nombre,
       origenTemplateId: input.origenTemplateId ?? null,
-      vinculada: input.vincular ?? false,
+      vinculada: Boolean(input.origenTemplateId) && (input.vincular ?? false),
       ejercicios,
     });
   }

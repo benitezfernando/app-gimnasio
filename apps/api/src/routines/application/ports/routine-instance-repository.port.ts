@@ -57,4 +57,14 @@ export interface RoutineInstanceRepositoryPort {
    * `ReplaceInstanceExercisesUseCase`.
    */
   marcarDesvinculada(instanceId: string): Promise<void>;
+  /**
+   * Igual que `replaceExercises` + `marcarDesvinculada`, pero atómico:
+   * ambas escrituras van en la misma `$transaction`. Usado por
+   * `ReplaceInstanceExercisesUseCase` cuando el reemplazo diverge de la
+   * plantilla de origen — evita la ventana en la que un reemplazo exitoso
+   * quedaría con `vinculada: true` si la desvinculación fallara aparte
+   * (ver hallazgo de revisión: `findVinculadasActivasPorTemplate`
+   * sobreescribiría esos ejercicios en la próxima edición de plantilla).
+   */
+  replaceExercisesYDesvincular(instanceId: string, ejercicios: EjercicioItem[]): Promise<void>;
 }

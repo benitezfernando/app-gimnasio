@@ -39,6 +39,7 @@ describe('UpdateRoutineInstanceUseCase', () => {
       update: jest.fn(),
       replaceExercises: jest.fn(),
       marcarDesvinculada: jest.fn(),
+      replaceExercisesYDesvincular: jest.fn(),
     };
     carteraRepository = {
       existe: jest.fn(),

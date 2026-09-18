@@ -92,6 +92,7 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       update: jest.fn(),
       replaceExercises: jest.fn(),
       marcarDesvinculada: jest.fn(),
+      replaceExercisesYDesvincular: jest.fn(),
     };
     templateRepository = {
       findByProfesor: jest.fn(),

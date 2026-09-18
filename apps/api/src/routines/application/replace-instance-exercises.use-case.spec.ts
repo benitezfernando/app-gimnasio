@@ -51,6 +51,7 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       update: jest.fn(),
       replaceExercises: jest.fn(),
       marcarDesvinculada: jest.fn(),
+      replaceExercisesYDesvincular: jest.fn(),
     };
     carteraRepository = {
       existe: jest.fn(),
@@ -119,6 +120,7 @@ describe('ReplaceInstanceExercisesUseCase', () => {
     });
 
     expect(instanceRepository.replaceExercises).toHaveBeenCalledWith('inst-1', [unEjercicio]);
+    expect(instanceRepository.replaceExercisesYDesvincular).not.toHaveBeenCalled();
   });
 
   it('lanza InvalidExerciseIdError si algún exerciseId no existe en el catálogo', async () => {
@@ -147,7 +149,10 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       ejercicios: [ejercicioDistinto],
     });
 
-    expect(instanceRepository.marcarDesvinculada).toHaveBeenCalledWith('inst-1');
+    expect(instanceRepository.replaceExercisesYDesvincular).toHaveBeenCalledWith('inst-1', [
+      ejercicioDistinto,
+    ]);
+    expect(instanceRepository.replaceExercises).not.toHaveBeenCalled();
   });
 
   it('NO desvincula si la instancia estaba vinculada pero el set de exerciseId es el mismo (solo cambiaron valores)', async () => {
@@ -165,7 +170,10 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       ejercicios: [mismoEjercicioOtrosValores],
     });
 
-    expect(instanceRepository.marcarDesvinculada).not.toHaveBeenCalled();
+    expect(instanceRepository.replaceExercisesYDesvincular).not.toHaveBeenCalled();
+    expect(instanceRepository.replaceExercises).toHaveBeenCalledWith('inst-1', [
+      mismoEjercicioOtrosValores,
+    ]);
   });
 
   it('NO desvincula si la instancia no estaba vinculada, aunque el set cambie', async () => {
@@ -183,7 +191,8 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       ejercicios: [ejercicioDistinto],
     });
 
-    expect(instanceRepository.marcarDesvinculada).not.toHaveBeenCalled();
+    expect(instanceRepository.replaceExercisesYDesvincular).not.toHaveBeenCalled();
+    expect(instanceRepository.replaceExercises).toHaveBeenCalledWith('inst-1', [ejercicioDistinto]);
   });
 
   it('desvincula si cambia SOLO la cantidad de ejercicios (mismo primer id, uno de más)', async () => {
@@ -221,6 +230,10 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       ejercicios: dosEjercicios,
     });
 
-    expect(instanceRepository.marcarDesvinculada).toHaveBeenCalledWith('inst-1');
+    expect(instanceRepository.replaceExercisesYDesvincular).toHaveBeenCalledWith(
+      'inst-1',
+      dosEjercicios,
+    );
+    expect(instanceRepository.replaceExercises).not.toHaveBeenCalled();
   });
 });

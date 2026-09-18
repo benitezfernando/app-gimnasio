@@ -112,6 +112,30 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     });
   }
 
+  async replaceExercisesYDesvincular(
+    instanceId: string,
+    ejercicios: EjercicioItem[],
+  ): Promise<void> {
+    await this.prisma.$transaction([
+      this.prisma.routineInstanceExercise.deleteMany({ where: { instanceId } }),
+      this.prisma.routineInstanceExercise.createMany({
+        data: ejercicios.map((e) => ({
+          instanceId,
+          exerciseId: e.exerciseId,
+          orden: e.orden,
+          series: e.series,
+          repeticiones: e.repeticiones,
+          peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
+          notas: e.notas,
+        })),
+      }),
+      this.prisma.routineInstance.update({
+        where: { id: instanceId },
+        data: { vinculada: false },
+      }),
+    ]);
+  }
+
   private toDetail(instance: {
     id: string;
     gymId: string;
