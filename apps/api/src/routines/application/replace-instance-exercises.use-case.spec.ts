@@ -50,6 +50,7 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       crear: jest.fn(),
       update: jest.fn(),
       replaceExercises: jest.fn(),
+      marcarDesvinculada: jest.fn(),
     };
     carteraRepository = {
       existe: jest.fn(),
@@ -129,5 +130,97 @@ describe('ReplaceInstanceExercisesUseCase', () => {
       useCase.execute({ invocadoPor: profesor, instanceId: 'inst-1', ejercicios: [unEjercicio] }),
     ).rejects.toThrow(InvalidExerciseIdError);
     expect(instanceRepository.replaceExercises).not.toHaveBeenCalled();
+  });
+
+  it('desvincula si la instancia estaba vinculada y el set de exerciseId cambió', async () => {
+    instanceRepository.findById.mockResolvedValue({
+      ...instancia,
+      vinculada: true,
+      ejercicios: [unEjercicio],
+    });
+    carteraRepository.existe.mockResolvedValue(true);
+    const ejercicioDistinto = { ...unEjercicio, exerciseId: 'ex-2' };
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      instanceId: 'inst-1',
+      ejercicios: [ejercicioDistinto],
+    });
+
+    expect(instanceRepository.marcarDesvinculada).toHaveBeenCalledWith('inst-1');
+  });
+
+  it('NO desvincula si la instancia estaba vinculada pero el set de exerciseId es el mismo (solo cambiaron valores)', async () => {
+    instanceRepository.findById.mockResolvedValue({
+      ...instancia,
+      vinculada: true,
+      ejercicios: [unEjercicio],
+    });
+    carteraRepository.existe.mockResolvedValue(true);
+    const mismoEjercicioOtrosValores = { ...unEjercicio, series: 5, peso: 999 };
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      instanceId: 'inst-1',
+      ejercicios: [mismoEjercicioOtrosValores],
+    });
+
+    expect(instanceRepository.marcarDesvinculada).not.toHaveBeenCalled();
+  });
+
+  it('NO desvincula si la instancia no estaba vinculada, aunque el set cambie', async () => {
+    instanceRepository.findById.mockResolvedValue({
+      ...instancia,
+      vinculada: false,
+      ejercicios: [unEjercicio],
+    });
+    carteraRepository.existe.mockResolvedValue(true);
+    const ejercicioDistinto = { ...unEjercicio, exerciseId: 'ex-2' };
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      instanceId: 'inst-1',
+      ejercicios: [ejercicioDistinto],
+    });
+
+    expect(instanceRepository.marcarDesvinculada).not.toHaveBeenCalled();
+  });
+
+  it('desvincula si cambia SOLO la cantidad de ejercicios (mismo primer id, uno de más)', async () => {
+    instanceRepository.findById.mockResolvedValue({
+      ...instancia,
+      vinculada: true,
+      ejercicios: [unEjercicio],
+    });
+    carteraRepository.existe.mockResolvedValue(true);
+    exerciseRepository.findByIds.mockResolvedValue([
+      {
+        id: 'ex-1',
+        nombre: 'Ejercicio 1',
+        imageUrl: null,
+        gifUrl: null,
+        parteCuerpo: 'pecho',
+        grupoMuscular: 'pectorales',
+        equipamiento: null,
+      },
+      {
+        id: 'ex-2',
+        nombre: 'Ejercicio 2',
+        imageUrl: null,
+        gifUrl: null,
+        parteCuerpo: 'espalda',
+        grupoMuscular: 'dorsales',
+        equipamiento: null,
+      },
+    ]);
+    const dosEjercicios = [unEjercicio, { ...unEjercicio, exerciseId: 'ex-2', orden: 2 }];
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      instanceId: 'inst-1',
+      ejercicios: dosEjercicios,
+    });
+
+    expect(instanceRepository.marcarDesvinculada).toHaveBeenCalledWith('inst-1');
   });
 });

@@ -52,7 +52,29 @@ export class ReplaceInstanceExercisesUseCase {
 
     await this.validarExerciseIdsEnCatalogo(input.ejercicios);
 
+    const divergioDeLaPlantilla = !this.mismoConjuntoDeExerciseIds(
+      instance.ejercicios.map((e) => e.exerciseId),
+      input.ejercicios.map((e) => e.exerciseId),
+    );
+
     await this.instanceRepository.replaceExercises(input.instanceId, input.ejercicios);
+
+    if (instance.vinculada && divergioDeLaPlantilla) {
+      await this.instanceRepository.marcarDesvinculada(input.instanceId);
+    }
+  }
+
+  /**
+   * Comparación de CONJUNTOS, no de arrays — dos instancias con la misma
+   * cantidad de ejercicios pero uno distinto deben contar como
+   * "divergió" (ver diseño §B, Riesgo/verificación). Solo mirar
+   * `length` sería un bug: {ex-1, ex-2} y {ex-1, ex-3} tienen el mismo
+   * largo pero son conjuntos distintos.
+   */
+  private mismoConjuntoDeExerciseIds(anteriores: string[], nuevos: string[]): boolean {
+    if (anteriores.length !== nuevos.length) return false;
+    const nuevosSet = new Set(nuevos);
+    return anteriores.every((id) => nuevosSet.has(id));
   }
 
   private async validarExerciseIdsEnCatalogo(ejercicios: EjercicioItem[]): Promise<void> {

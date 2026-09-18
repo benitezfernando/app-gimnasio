@@ -85,6 +85,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       crear: jest.fn(),
       update: jest.fn(),
       replaceExercises: jest.fn(),
+      marcarDesvinculada: jest.fn(),
     };
     templateRepository = {
       findByProfesor: jest.fn(),

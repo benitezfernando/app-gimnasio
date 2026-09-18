@@ -105,6 +105,13 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     ]);
   }
 
+  async marcarDesvinculada(instanceId: string): Promise<void> {
+    await this.prisma.routineInstance.update({
+      where: { id: instanceId },
+      data: { vinculada: false },
+    });
+  }
+
   private toDetail(instance: {
     id: string;
     gymId: string;

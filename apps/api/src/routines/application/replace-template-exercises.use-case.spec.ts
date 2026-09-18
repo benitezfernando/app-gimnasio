@@ -72,6 +72,7 @@ describe('ReplaceTemplateExercisesUseCase', () => {
       crear: jest.fn(),
       update: jest.fn(),
       replaceExercises: jest.fn(),
+      marcarDesvinculada: jest.fn(),
     };
     exerciseRepository = {
       findMany: jest.fn(),

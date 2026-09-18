@@ -50,4 +50,11 @@ export interface RoutineInstanceRepositoryPort {
   update(id: string, data: { nombre?: string }): Promise<RoutineInstanceDetail>;
   /** Replace-all transaccional — igual criterio que `RoutineTemplateRepositoryPort`. */
   replaceExercises(instanceId: string, ejercicios: EjercicioItem[]): Promise<void>;
+  /**
+   * Marca la instancia como no vinculada — se llama cuando el profesor
+   * cambia el CONJUNTO de ejercicios de un alumno puntual (agregó/sacó
+   * alguno), divergiendo de la plantilla de origen. Ver
+   * `ReplaceInstanceExercisesUseCase`.
+   */
+  marcarDesvinculada(instanceId: string): Promise<void>;
 }

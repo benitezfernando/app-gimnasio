@@ -76,6 +76,7 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       crear: jest.fn(),
       update: jest.fn(),
       replaceExercises: jest.fn(),
+      marcarDesvinculada: jest.fn(),
     };
     carteraRepository = {
       existe: jest.fn(),
