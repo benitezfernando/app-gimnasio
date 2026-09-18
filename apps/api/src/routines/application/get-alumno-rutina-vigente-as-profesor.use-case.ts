@@ -18,6 +18,10 @@ import {
   ROUTINE_INSTANCE_REPOSITORY,
   RoutineInstanceRepositoryPort,
 } from './ports/routine-instance-repository.port';
+import {
+  ROUTINE_TEMPLATE_REPOSITORY,
+  RoutineTemplateRepositoryPort,
+} from './ports/routine-template-repository.port';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 
 export interface GetAlumnoRutinaVigenteAsProfesorInput {
@@ -43,17 +47,33 @@ export interface RutinaVigenteOutput {
   ejercicios: RutinaVigenteEjercicioResuelto[];
 }
 
+/**
+ * Salida exclusiva de la vista PROFESOR — `GetMiRutinaVigenteUseCase`
+ * (vista del ALUMNO) sigue devolviendo `RutinaVigenteOutput` sin estos
+ * campos, a propósito (ver diseño §B: "esto es información solo para el
+ * profesor").
+ */
+export interface RutinaVigenteConVinculacionOutput extends RutinaVigenteOutput {
+  vinculada: boolean;
+  origenTemplateId: string | null;
+  origenTemplateNombre: string | null;
+}
+
 @Injectable()
 export class GetAlumnoRutinaVigenteAsProfesorUseCase {
   constructor(
     @Inject(ROUTINE_INSTANCE_REPOSITORY)
     private readonly instanceRepository: RoutineInstanceRepositoryPort,
+    @Inject(ROUTINE_TEMPLATE_REPOSITORY)
+    private readonly templateRepository: RoutineTemplateRepositoryPort,
     @Inject(CARTERA_REPOSITORY) private readonly carteraRepository: CarteraRepositoryPort,
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepositoryPort,
     @Inject(EXERCISE_REPOSITORY) private readonly exerciseRepository: ExerciseRepositoryPort,
   ) {}
 
-  async execute(input: GetAlumnoRutinaVigenteAsProfesorInput): Promise<RutinaVigenteOutput | null> {
+  async execute(
+    input: GetAlumnoRutinaVigenteAsProfesorInput,
+  ): Promise<RutinaVigenteConVinculacionOutput | null> {
     const alumno = await resolveUserInGym(
       this.userRepository,
       input.alumnoId,
@@ -73,7 +93,20 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
       return null;
     }
 
-    return this.resolverRutina(instancia.id, instancia.nombre, instancia.ejercicios);
+    const rutina = await this.resolverRutina(instancia.id, instancia.nombre, instancia.ejercicios);
+
+    let origenTemplateNombre: string | null = null;
+    if (instancia.vinculada && instancia.origenTemplateId) {
+      const template = await this.templateRepository.findById(instancia.origenTemplateId);
+      origenTemplateNombre = template?.nombre ?? null;
+    }
+
+    return {
+      ...rutina,
+      vinculada: instancia.vinculada,
+      origenTemplateId: instancia.origenTemplateId,
+      origenTemplateNombre,
+    };
   }
 
   private async resolverRutina(

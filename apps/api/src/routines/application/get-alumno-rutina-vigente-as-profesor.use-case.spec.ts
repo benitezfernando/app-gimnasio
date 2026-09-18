@@ -4,6 +4,10 @@ import {
   RoutineInstanceRepositoryPort,
   RoutineInstanceDetail,
 } from './ports/routine-instance-repository.port';
+import {
+  RoutineTemplateRepositoryPort,
+  RoutineTemplateDetail,
+} from './ports/routine-template-repository.port';
 import { CarteraRepositoryPort } from '../../identity/application/ports/cartera-repository.port';
 import {
   UserRepositoryPort,
@@ -18,6 +22,7 @@ import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 
 describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
   let instanceRepository: jest.Mocked<RoutineInstanceRepositoryPort>;
+  let templateRepository: jest.Mocked<RoutineTemplateRepositoryPort>;
   let carteraRepository: jest.Mocked<CarteraRepositoryPort>;
   let userRepository: jest.Mocked<UserRepositoryPort>;
   let exerciseRepository: jest.Mocked<ExerciseRepositoryPort>;
@@ -58,6 +63,16 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
     ],
   };
 
+  const template: RoutineTemplateDetail = {
+    id: 'tpl-1',
+    gymId: 'gym-1',
+    profesorId: 'prof-1',
+    nombre: 'Full body plantilla',
+    descripcion: null,
+    activa: true,
+    ejercicios: [],
+  };
+
   const ejercicioResuelto: ExerciseSummary = {
     id: 'ex-1',
     nombre: 'Sentadilla',
@@ -78,6 +93,14 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       replaceExercises: jest.fn(),
       marcarDesvinculada: jest.fn(),
     };
+    templateRepository = {
+      findByProfesor: jest.fn(),
+      findById: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+      replaceExercises: jest.fn(),
+    };
     carteraRepository = {
       existe: jest.fn(),
       crear: jest.fn(),
@@ -96,6 +119,7 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
     exerciseRepository = { findMany: jest.fn(), findById: jest.fn(), findByIds: jest.fn() };
     useCase = new GetAlumnoRutinaVigenteAsProfesorUseCase(
       instanceRepository,
+      templateRepository,
       carteraRepository,
       userRepository,
       exerciseRepository,
@@ -143,5 +167,53 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       series: 3,
       peso: 20,
     });
+  });
+
+  it('vinculada=false y origenTemplateNombre=null cuando la instancia no está vinculada', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.findVigentePorAlumno.mockResolvedValue(instancia);
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+
+    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+
+    expect(resultado!.vinculada).toBe(false);
+    expect(resultado!.origenTemplateNombre).toBeNull();
+    expect(templateRepository.findById).not.toHaveBeenCalled();
+  });
+
+  it('resuelve origenTemplateNombre cuando la instancia está vinculada', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({
+      ...instancia,
+      vinculada: true,
+      origenTemplateId: 'tpl-1',
+    });
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+    templateRepository.findById.mockResolvedValue(template);
+
+    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+
+    expect(templateRepository.findById).toHaveBeenCalledWith('tpl-1');
+    expect(resultado!.vinculada).toBe(true);
+    expect(resultado!.origenTemplateId).toBe('tpl-1');
+    expect(resultado!.origenTemplateNombre).toBe('Full body plantilla');
+  });
+
+  it('origenTemplateNombre es null si la plantilla vinculada ya no existe (borrada)', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({
+      ...instancia,
+      vinculada: true,
+      origenTemplateId: 'tpl-borrada',
+    });
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+    templateRepository.findById.mockResolvedValue(null);
+
+    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+
+    expect(resultado!.origenTemplateNombre).toBeNull();
   });
 });
