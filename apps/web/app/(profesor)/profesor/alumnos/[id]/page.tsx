@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import { apiFetch, ApiError } from '../../../../../lib/api-client';
 import { AssignTemplateForm } from './assign-template-form';
 import { InstanceEditor } from './instance-editor';
+import { Pill } from '../../../../../components/ui/pill';
 
 interface TemplateOption {
   id: string;
@@ -11,6 +13,9 @@ interface TemplateOption {
 interface RutinaVigenteResponse {
   id: string;
   nombre: string;
+  vinculada: boolean;
+  origenTemplateId: string | null;
+  origenTemplateNombre: string | null;
   ejercicios: Array<{
     exerciseId: string;
     nombre: string;
@@ -40,9 +45,16 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
 
   return (
     <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
-      <h1 className="text-xl font-semibold text-text">
-        {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
-      </h1>
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl font-semibold text-text">
+          {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
+        </h1>
+        {rutinaVigente?.vinculada && rutinaVigente.origenTemplateNombre && (
+          <Link href={`/profesor/plantillas/${rutinaVigente.origenTemplateId}`}>
+            <Pill>Vinculada a «{rutinaVigente.origenTemplateNombre}»</Pill>
+          </Link>
+        )}
+      </div>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-text-muted">
