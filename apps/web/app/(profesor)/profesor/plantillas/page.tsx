@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { apiFetch } from '../../../../lib/api-client';
+import { PageHeader } from '../../../../components/ui/page-header';
+import { LogoutButton } from '../../../../components/logout-button';
 import { CreateTemplateForm } from './create-template-form';
 
 interface TemplateSummary {
@@ -14,7 +16,7 @@ export default async function PlantillasPage() {
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
-      <h1 className="text-xl font-semibold text-text">Mis plantillas</h1>
+      <PageHeader title="Mis plantillas" right={<LogoutButton />} />
 
       <CreateTemplateForm />
 

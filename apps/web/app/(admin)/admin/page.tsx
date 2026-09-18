@@ -12,7 +12,7 @@ export default async function AdminPage() {
   const usuarios = await getUsersList();
 
   return (
-    <main className="min-h-dvh bg-surface-alt px-4 pb-28 pt-6 sm:px-6 lg:px-8">
+    <main className="min-h-dvh bg-surface px-4 pb-28 pt-6 sm:px-6 lg:px-8">
       <div className="flex w-full flex-col gap-6 sm:mx-auto sm:max-w-3xl">
         <PageHeader title="Panel Admin" right={<LogoutButton />} />
         <div className="flex flex-col gap-6 sm:grid sm:grid-cols-2">

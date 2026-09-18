@@ -36,7 +36,7 @@ export default async function AlumnoPage() {
     return (
       <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl">
         <PageHeader title="Rutina" right={<LogoutButton />} />
-        <h1 className="text-xl font-semibold text-text">Todavía no tenés una rutina asignada</h1>
+        <p className="text-xl font-semibold text-text">Todavía no tenés una rutina asignada</p>
         <p className="text-sm text-text-muted">
           Tu profesor te va a asignar una pronto — volvé a revisar más tarde.
         </p>

@@ -44,7 +44,7 @@ export default async function CatalogoLayout({ children }: { children: ReactNode
   return (
     <>
       {children}
-      <BottomNav items={NAV_ITEMS_POR_ROL[me.role]} />
+      <BottomNav items={NAV_ITEMS_POR_ROL[me.role] ?? ALUMNO_NAV_ITEMS} />
     </>
   );
 }
