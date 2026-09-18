@@ -25,6 +25,14 @@ export interface RoutineInstanceRepositoryPort {
   findVigentePorAlumno(alumnoId: string): Promise<RoutineInstanceDetail | null>;
   findById(id: string): Promise<RoutineInstanceDetail | null>;
   /**
+   * Instancias vigentes vinculadas a esta plantilla — usado por
+   * `ReplaceTemplateExercisesUseCase` para propagar una edición de
+   * plantilla a cada alumno vinculado a ella. Solo trae `activa: true`:
+   * no tiene sentido sincronizar instancias históricas que ya no se
+   * muestran a nadie.
+   */
+  findVinculadasActivasPorTemplate(templateId: string): Promise<RoutineInstanceDetail[]>;
+  /**
    * Transaccional: si el alumno ya tiene una instancia vigente, la archiva
    * (`activa: false`, `vigenteHasta: now`) y crea la nueva en la misma
    * `$transaction` — nunca deja al alumno con dos vigentes ni sin ninguna

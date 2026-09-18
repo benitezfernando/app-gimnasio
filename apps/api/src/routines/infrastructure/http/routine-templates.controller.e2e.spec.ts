@@ -15,6 +15,10 @@ import {
   RoutineTemplateDetail,
 } from '../../application/ports/routine-template-repository.port';
 import {
+  ROUTINE_INSTANCE_REPOSITORY,
+  RoutineInstanceRepositoryPort,
+} from '../../application/ports/routine-instance-repository.port';
+import {
   USER_REPOSITORY,
   UserRepositoryPort,
   UserRecord,
@@ -88,6 +92,14 @@ describe('/routine-templates (e2e)', () => {
     replaceExercises: jest.fn(async () => undefined),
   };
 
+  const fakeInstanceRepository: Pick<
+    RoutineInstanceRepositoryPort,
+    'findVinculadasActivasPorTemplate' | 'replaceExercises'
+  > = {
+    findVinculadasActivasPorTemplate: jest.fn(async () => []),
+    replaceExercises: jest.fn(async () => undefined),
+  };
+
   const fakeUserRepository: Pick<UserRepositoryPort, 'findByAuthUserId'> = {
     findByAuthUserId: async (authUserId: string) => {
       if (authUserId === 'auth-prof') return profesor;
@@ -131,6 +143,7 @@ describe('/routine-templates (e2e)', () => {
         ReplaceTemplateExercisesUseCase,
         DeleteRoutineTemplateUseCase,
         { provide: ROUTINE_TEMPLATE_REPOSITORY, useValue: fakeTemplateRepository },
+        { provide: ROUTINE_INSTANCE_REPOSITORY, useValue: fakeInstanceRepository },
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
         { provide: EXERCISE_REPOSITORY, useValue: fakeExerciseRepository },
         { provide: APP_GUARD, useClass: JwtAuthGuard },

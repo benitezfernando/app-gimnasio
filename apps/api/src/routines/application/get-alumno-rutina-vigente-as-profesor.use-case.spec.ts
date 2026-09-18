@@ -72,6 +72,7 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
     instanceRepository = {
       findVigentePorAlumno: jest.fn(),
       findById: jest.fn(),
+      findVinculadasActivasPorTemplate: jest.fn(),
       crear: jest.fn(),
       update: jest.fn(),
       replaceExercises: jest.fn(),

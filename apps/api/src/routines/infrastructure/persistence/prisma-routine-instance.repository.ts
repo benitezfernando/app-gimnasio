@@ -28,6 +28,14 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     return instance ? this.toDetail(instance) : null;
   }
 
+  async findVinculadasActivasPorTemplate(templateId: string): Promise<RoutineInstanceDetail[]> {
+    const instances = await this.prisma.routineInstance.findMany({
+      where: { origenTemplateId: templateId, vinculada: true, activa: true },
+      include: { ejercicios: { orderBy: { orden: 'asc' } } },
+    });
+    return instances.map((instance) => this.toDetail(instance));
+  }
+
   async crear(data: {
     gymId: string;
     profesorId: string;

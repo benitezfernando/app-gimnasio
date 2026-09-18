@@ -91,6 +91,7 @@ describe('/routine-instances (e2e)', () => {
   const fakeInstanceRepository: RoutineInstanceRepositoryPort = {
     findVigentePorAlumno: jest.fn(async () => instanciaBase),
     findById: jest.fn(async (id: string) => (id === 'inst-1' ? instanciaBase : null)),
+    findVinculadasActivasPorTemplate: jest.fn(async () => []),
     crear: jest.fn(async (data) => ({ ...instanciaBase, ...data })),
     update: jest.fn(async (id, data) => ({ ...instanciaBase, id, ...data })),
     replaceExercises: jest.fn(async () => undefined),
