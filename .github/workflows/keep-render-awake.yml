@@ -3,17 +3,27 @@ name: Keep Render awake
 # Render Hobby (plan free de apps/api) duerme el servicio tras 15 min sin
 # tráfico y tarda ~1 min en despertar en el próximo request — confirmado
 # en producción (login lento tras inactividad, rápido en el segundo
-# intento inmediato). Este ping evita el sleep, pero SOLO en el horario
-# real de uso del gym (8am-11pm hora Argentina) — mantenerlo despierto
-# 24/7 consumiría ~720-744 de las 750 hs/mes gratis del plan, sin margen
-# para nada más en el workspace de Render (ver docs/hld-mvp.md §5).
+# intento inmediato).
 #
-# Cálculo del cron: 8am-11pm ART (UTC-3) = 11:00-02:00 UTC (cruza
-# medianoche) → hora UTC 11-23 más 0-2. Cada 10 min — Render duerme a los
-# 15, esto deja margen contra el delay que GitHub documenta en schedules
-# durante picos de carga (github.com/actions, "high load" a horas en
-# punto). Consumo estimado: ~16 hs/día de Render (~486 hs/mes, dentro del
-# cupo) y unos pocos minutos/día de Actions (lejísimos del límite gratis).
+# ESTE WORKFLOW SOLO ES BACKUP — NO ES LA DEFENSA PRINCIPAL (sesión
+# 2026-09-18). Medido con `gh run list`: pese al cron de */10 min, GitHub
+# ejecutó este schedule con un gap PROMEDIO de 253 min (máx. 715 min ≈
+# 12hs) en 30 corridas reales — GitHub throttlea/coalesce schedules de
+# alta frecuencia sin SLA, documentado como posible pero no esperábamos
+# que fuera la norma y no la excepción. Con huecos de hasta 12hs, Render
+# se duerme igual la gran mayoría del tiempo — este workflow por sí solo
+# NO resolvía el cold start reportado por el usuario.
+#
+# La defensa real es un monitor externo (UptimeRobot/cron-job.org)
+# pegándole a /health cada 5 min — esos servicios sí cumplen el intervalo.
+# Se deja este workflow corriendo igual como backup gratuito de costo
+# marginal (algunas corridas SÍ caen en la ventana correcta), pero no
+# asumas que alcanza solo con esto.
+#
+# Solo corre en el horario real de uso del gym (8am-11pm hora Argentina)
+# para no gastar de más las 750 hs/mes gratis del plan de Render (ver
+# docs/hld-mvp.md §5). Cálculo del cron: 8am-11pm ART (UTC-3) =
+# 11:00-02:00 UTC (cruza medianoche) → hora UTC 11-23 más 0-2.
 #
 # workflow_dispatch permite dispararlo a mano para probar sin esperar el
 # cron.
