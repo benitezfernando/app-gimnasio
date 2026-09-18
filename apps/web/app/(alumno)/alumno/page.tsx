@@ -6,6 +6,7 @@ import { PageHeader } from '../../../components/ui/page-header';
 import { Card } from '../../../components/ui/card';
 import { Pill } from '../../../components/ui/pill';
 import { GradientIcon } from '../../../components/ui/gradient-icon';
+import { LogoutButton } from '../../../components/logout-button';
 
 interface RutinaVigenteResponse {
   id: string;
@@ -33,7 +34,8 @@ export default async function AlumnoPage() {
 
   if (!rutina) {
     return (
-      <main className="mx-auto flex max-w-2xl flex-col items-center gap-2 p-8 text-center">
+      <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl">
+        <PageHeader title="Rutina" right={<LogoutButton />} />
         <h1 className="text-xl font-semibold text-text">Todavía no tenés una rutina asignada</h1>
         <p className="text-sm text-text-muted">
           Tu profesor te va a asignar una pronto — volvé a revisar más tarde.
@@ -43,8 +45,8 @@ export default async function AlumnoPage() {
   }
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
-      <PageHeader title={rutina.nombre} />
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
+      <PageHeader title={rutina.nombre} right={<LogoutButton />} />
 
       <ul className="flex flex-col gap-3">
         {rutina.ejercicios

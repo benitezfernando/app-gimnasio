@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { apiFetch, ApiError } from '../../lib/api-client';
-import { LogoutButton } from '../../components/logout-button';
+import { BottomNav, ALUMNO_NAV_ITEMS } from '../../components/ui/bottom-nav';
 
 interface MeResponse {
   id: string;
@@ -27,10 +27,8 @@ export default async function AlumnoLayout({ children }: { children: ReactNode }
 
   return (
     <>
-      <div className="flex justify-end p-3">
-        <LogoutButton />
-      </div>
       {children}
+      <BottomNav items={ALUMNO_NAV_ITEMS} />
     </>
   );
 }
