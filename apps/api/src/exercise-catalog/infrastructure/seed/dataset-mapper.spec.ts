@@ -29,6 +29,7 @@ describe('mapExerciseFields', () => {
 
     expect(resultado).toEqual({
       nombre: '3/4 sit-up',
+      nombreNormalizado: '3/4 sit-up',
       parteCuerpo: 'waist',
       grupoMuscular: 'abs',
       gruposMuscularesSecundarios: ['hip flexors', 'lower back'],
@@ -40,6 +41,12 @@ describe('mapExerciseFields', () => {
       licenciaMedia: LICENCIA_MEDIA,
       atribucionMedia: '© Gym visual — https://gymvisual.com/',
     });
+  });
+
+  it('nombreNormalizado saca acentos y pasa a minúsculas', () => {
+    const itemConAcento: DatasetExercise = { ...itemCompleto, name: 'Press Francés' };
+    const resultado = mapExerciseFields(itemConAcento, () => null);
+    expect(resultado.nombreNormalizado).toBe('press frances');
   });
 
   it('usa el español de instructions/instruction_steps, no otro idioma', () => {

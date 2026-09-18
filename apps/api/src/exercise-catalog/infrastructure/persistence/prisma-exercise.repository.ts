@@ -8,6 +8,7 @@ import {
   ListExercisesFilter,
   ListExercisesResult,
 } from '../../application/ports/exercise-repository.port';
+import { normalizarNombre } from '../../normalizar-nombre';
 
 const SELECT_SUMMARY = {
   id: true,
@@ -34,7 +35,9 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
   async findMany(filter: ListExercisesFilter): Promise<ListExercisesResult> {
     const where: Prisma.ExerciseWhereInput = {
       activo: true,
-      ...(filter.search ? { nombre: { contains: filter.search, mode: 'insensitive' } } : {}),
+      ...(filter.search
+        ? { nombreNormalizado: { contains: normalizarNombre(filter.search) } }
+        : {}),
       ...(filter.parteCuerpo ? { parteCuerpo: filter.parteCuerpo } : {}),
       ...(filter.equipamiento ? { equipamiento: filter.equipamiento } : {}),
     };

@@ -1,3 +1,5 @@
+import { normalizarNombre } from '../../normalizar-nombre';
+
 /**
  * Forma real del dataset (verificada contra un checkout de
  * https://github.com/hasaneyldrm/exercises-dataset, rama main, 1.324
@@ -45,6 +47,7 @@ export function validarDatasetExercise(item: DatasetExercise, index: number): vo
 
 export interface ExerciseFields {
   nombre: string;
+  nombreNormalizado: string;
   parteCuerpo: string;
   grupoMuscular: string;
   gruposMuscularesSecundarios: string[];
@@ -69,6 +72,7 @@ export function mapExerciseFields(
 ): ExerciseFields {
   return {
     nombre: item.name,
+    nombreNormalizado: normalizarNombre(item.name),
     parteCuerpo: item.body_part,
     grupoMuscular: item.target,
     gruposMuscularesSecundarios: item.secondary_muscles ?? [],

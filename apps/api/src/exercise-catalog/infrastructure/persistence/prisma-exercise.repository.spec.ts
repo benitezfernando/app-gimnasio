@@ -57,4 +57,14 @@ describe('PrismaExerciseRepository', () => {
     expect(result).toEqual([]);
     expect(prisma.exercise.findMany).not.toHaveBeenCalled();
   });
+
+  it('findMany con search filtra por nombreNormalizado normalizado, no por nombre', async () => {
+    await repo.findMany({ search: 'Frances', page: 1, limit: 24 });
+
+    const args = prisma.exercise.findMany.mock.calls[0][0];
+    expect(args.where).toEqual(
+      expect.objectContaining({ nombreNormalizado: { contains: 'frances' } }),
+    );
+    expect(args.where).not.toHaveProperty('nombre');
+  });
 });
