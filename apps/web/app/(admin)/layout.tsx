@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { ApiError } from '../../lib/api-client';
 import { getUsersList } from '../../lib/get-users-list';
-import { LogoutButton } from '../../components/logout-button';
+import { BottomNav, ADMIN_NAV_ITEMS } from '../../components/ui/bottom-nav';
 
 /**
  * Valida server-side que la sesión actual pertenece a un ADMIN — sin
@@ -25,10 +25,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   return (
     <>
-      <div className="flex justify-end p-3">
-        <LogoutButton />
-      </div>
       {children}
+      <BottomNav items={ADMIN_NAV_ITEMS} />
     </>
   );
 }
