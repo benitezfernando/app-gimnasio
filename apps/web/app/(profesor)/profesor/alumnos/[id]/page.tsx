@@ -40,7 +40,7 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
   }
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-6 p-4">
+    <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
       <h1 className="text-xl font-semibold text-text">
         {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
       </h1>

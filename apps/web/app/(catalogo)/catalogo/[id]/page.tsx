@@ -51,7 +51,7 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
   }, [params.id]);
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
       {/*
         router.back() en vez de un href fijo a /catalogo — esta pantalla
         se llega tanto desde /catalogo (browse general) como desde

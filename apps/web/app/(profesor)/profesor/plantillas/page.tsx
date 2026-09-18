@@ -13,7 +13,7 @@ export default async function PlantillasPage() {
   const plantillas = await apiFetch<TemplateSummary[]>('/routine-templates');
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
       <h1 className="text-xl font-semibold text-text">Mis plantillas</h1>
 
       <CreateTemplateForm />
