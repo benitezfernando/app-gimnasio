@@ -23,10 +23,6 @@ export class EjercicioDto {
   @Max(999.99)
   peso?: number;
 
-  @IsInt()
-  @Min(0)
-  descanso!: number;
-
   @IsOptional()
   @IsString()
   notas?: string;

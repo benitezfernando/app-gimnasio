@@ -201,7 +201,6 @@ describe('/routine-templates (e2e)', () => {
       orden: i + 1,
       series: 3,
       repeticiones: 10,
-      descanso: 60,
     }));
     await request(app.getHttpServer())
       .put('/routine-templates/tpl-1/exercises')

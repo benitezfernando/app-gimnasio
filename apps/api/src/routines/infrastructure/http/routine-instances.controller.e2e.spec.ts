@@ -173,7 +173,7 @@ describe('/routine-instances (e2e)', () => {
       .send({
         alumnoId: 'alum-1',
         nombre: 'Custom',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, descanso: 60 }],
+        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
       })
       .expect(201);
 
@@ -189,7 +189,7 @@ describe('/routine-instances (e2e)', () => {
         alumnoId: 'alum-1',
         nombre: 'Custom',
         origenTemplateId: 'tpl-1',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, descanso: 60 }],
+        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
       })
       .expect(400);
 
@@ -205,7 +205,7 @@ describe('/routine-instances (e2e)', () => {
       .send({
         alumnoId: 'alum-1',
         nombre: 'Custom',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, descanso: 60 }],
+        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
       })
       .expect(403);
 

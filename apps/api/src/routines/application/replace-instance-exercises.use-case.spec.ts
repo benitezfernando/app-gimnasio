@@ -38,7 +38,6 @@ describe('ReplaceInstanceExercisesUseCase', () => {
     series: 3,
     repeticiones: 10,
     peso: 20,
-    descanso: 60,
     notas: null,
   };
 

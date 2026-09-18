@@ -97,7 +97,6 @@ export class PrismaRoutineTemplateRepository implements RoutineTemplateRepositor
           series: e.series,
           repeticiones: e.repeticiones,
           peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-          descanso: e.descanso,
           notas: e.notas,
         })),
       }),
@@ -110,7 +109,6 @@ export class PrismaRoutineTemplateRepository implements RoutineTemplateRepositor
     series: number;
     repeticiones: number;
     peso: Prisma.Decimal | null;
-    descanso: number;
     notas: string | null;
   }): EjercicioItem {
     return {
@@ -119,7 +117,6 @@ export class PrismaRoutineTemplateRepository implements RoutineTemplateRepositor
       series: row.series,
       repeticiones: row.repeticiones,
       peso: row.peso === null ? null : row.peso.toNumber(),
-      descanso: row.descanso,
       notas: row.notas,
     };
   }

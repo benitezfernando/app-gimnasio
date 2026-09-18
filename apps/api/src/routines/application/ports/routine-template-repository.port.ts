@@ -11,7 +11,6 @@ export interface EjercicioItem {
   series: number;
   repeticiones: number;
   peso: number | null;
-  descanso: number;
   notas: string | null;
 }
 

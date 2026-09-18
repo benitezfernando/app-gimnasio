@@ -56,7 +56,6 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
               series: e.series,
               repeticiones: e.repeticiones,
               peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-              descanso: e.descanso,
               notas: e.notas,
             })),
           },
@@ -90,7 +89,6 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
           series: e.series,
           repeticiones: e.repeticiones,
           peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-          descanso: e.descanso,
           notas: e.notas,
         })),
       }),
@@ -113,7 +111,6 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
       series: number;
       repeticiones: number;
       peso: Prisma.Decimal | null;
-      descanso: number;
       notas: string | null;
     }>;
   }): RoutineInstanceDetail {
@@ -133,7 +130,6 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
         series: e.series,
         repeticiones: e.repeticiones,
         peso: e.peso === null ? null : e.peso.toNumber(),
-        descanso: e.descanso,
         notas: e.notas,
       })),
     };

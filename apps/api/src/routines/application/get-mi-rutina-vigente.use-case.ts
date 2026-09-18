@@ -48,7 +48,6 @@ export class GetMiRutinaVigenteUseCase {
           series: e.series,
           repeticiones: e.repeticiones,
           peso: e.peso,
-          descanso: e.descanso,
           notas: e.notas,
         };
       }),

@@ -32,7 +32,6 @@ describe('ReplaceTemplateExercisesUseCase', () => {
     series: 3,
     repeticiones: 10,
     peso: null,
-    descanso: 60,
     notas: null,
   };
 

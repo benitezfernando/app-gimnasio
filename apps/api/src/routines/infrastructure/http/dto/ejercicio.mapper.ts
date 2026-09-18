@@ -14,7 +14,6 @@ export function toEjercicioItems(dtos: EjercicioDto[]): EjercicioItem[] {
     series: dto.series,
     repeticiones: dto.repeticiones,
     peso: dto.peso ?? null,
-    descanso: dto.descanso,
     notas: dto.notas ?? null,
   }));
 }

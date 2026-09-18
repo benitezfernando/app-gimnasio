@@ -34,7 +34,6 @@ export interface RutinaVigenteEjercicioResuelto {
   series: number;
   repeticiones: number;
   peso: number | null;
-  descanso: number;
   notas: string | null;
 }
 
@@ -86,7 +85,6 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
       series: number;
       repeticiones: number;
       peso: number | null;
-      descanso: number;
       notas: string | null;
     }>,
   ): Promise<RutinaVigenteOutput> {
@@ -109,7 +107,6 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
           series: e.series,
           repeticiones: e.repeticiones,
           peso: e.peso,
-          descanso: e.descanso,
           notas: e.notas,
         };
       }),
