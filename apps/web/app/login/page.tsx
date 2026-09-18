@@ -54,13 +54,13 @@ export default function LoginPage() {
           name="username"
           placeholder="Usuario"
           required
-          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
+          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm"
         />
         <input
           name="password"
           type="password"
           placeholder="Contraseña (dejalo vacío si sos alumno)"
-          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none"
+          className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm"
         />
         <BotonIngresar />
         {estado.error && (

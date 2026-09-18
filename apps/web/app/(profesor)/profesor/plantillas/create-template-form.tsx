@@ -26,12 +26,12 @@ export function CreateTemplateForm() {
         placeholder="Nombre (ej. Full body)"
         required
         minLength={2}
-        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted"
+        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted lg:min-h-9 lg:text-sm"
       />
       <input
         name="descripcion"
         placeholder="Descripción (opcional)"
-        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted"
+        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted lg:min-h-9 lg:text-sm"
       />
       <BotonCrear />
       {estado.error && <p className="text-sm text-text">{estado.error}</p>}

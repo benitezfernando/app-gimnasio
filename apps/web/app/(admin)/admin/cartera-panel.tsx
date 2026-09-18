@@ -125,7 +125,7 @@ export function CarteraPanel({
               <select
                 value={profesorSeleccionado}
                 onChange={(e) => setProfesorSeleccionado(e.target.value)}
-                className="min-h-11 flex-1 rounded-lg border border-border bg-surface px-3 text-base text-text"
+                className="min-h-11 flex-1 rounded-lg border border-border bg-surface px-3 text-base text-text lg:min-h-9 lg:text-sm"
               >
                 <option value="">Elegir profesor...</option>
                 {disponibles.map((p) => (

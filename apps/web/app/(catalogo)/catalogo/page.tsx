@@ -76,7 +76,7 @@ export default function CatalogoPage() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar ejercicio..."
-          className="min-h-11 w-full bg-transparent text-base text-text outline-none placeholder:text-text-muted"
+          className="min-h-11 w-full bg-transparent text-base text-text outline-none placeholder:text-text-muted lg:min-h-9 lg:text-sm"
         />
       </div>
 
@@ -111,7 +111,7 @@ export default function CatalogoPage() {
       <select
         value={equipamiento}
         onChange={(e) => setEquipamiento(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text"
+        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text lg:min-h-9 lg:text-sm"
       >
         <option value="">Cualquier equipamiento</option>
         {EQUIPAMIENTOS.map((eq) => (

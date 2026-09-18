@@ -102,7 +102,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
           <select
             value={filtroRol}
             onChange={(e) => setFiltroRol(e.target.value as FiltroRol)}
-            className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text"
+            className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text lg:min-h-9 lg:text-sm"
           >
             <option value="TODOS">Todos</option>
             <option value="ADMIN">Admin</option>

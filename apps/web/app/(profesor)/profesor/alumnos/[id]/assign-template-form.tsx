@@ -60,7 +60,7 @@ export function AssignTemplateForm({
       <select
         value={templateId}
         onChange={(e) => setTemplateId(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text"
+        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text lg:min-h-9"
       >
         <option value="">Elegir plantilla...</option>
         {plantillasActivas.map((p) => (
@@ -73,7 +73,7 @@ export function AssignTemplateForm({
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
         placeholder="Nombre de esta rutina para el alumno"
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted"
+        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
       />
       <PrimaryButton
         type="button"

@@ -63,7 +63,7 @@ export function InstanceEditor({
           value={nombreNueva}
           onChange={(e) => setNombreNueva(e.target.value)}
           placeholder="Nombre de la rutina"
-          className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted"
+          className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
         />
       )}
       <RoutineExercisesEditor
