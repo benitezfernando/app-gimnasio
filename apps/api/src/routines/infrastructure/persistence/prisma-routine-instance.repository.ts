@@ -34,6 +34,7 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     alumnoId: string;
     nombre: string;
     origenTemplateId: string | null;
+    vinculada: boolean;
     ejercicios: EjercicioItem[];
   }): Promise<RoutineInstanceDetail> {
     const creada = await this.prisma.$transaction(async (tx) => {
@@ -49,6 +50,7 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
           alumnoId: data.alumnoId,
           nombre: data.nombre,
           origenTemplateId: data.origenTemplateId,
+          vinculada: data.vinculada,
           ejercicios: {
             create: data.ejercicios.map((e) => ({
               exerciseId: e.exerciseId,
@@ -102,6 +104,7 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     alumnoId: string;
     nombre: string;
     origenTemplateId: string | null;
+    vinculada: boolean;
     vigenteDesde: Date;
     vigenteHasta: Date | null;
     activa: boolean;
@@ -121,6 +124,7 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
       alumnoId: instance.alumnoId,
       nombre: instance.nombre,
       origenTemplateId: instance.origenTemplateId,
+      vinculada: instance.vinculada,
       vigenteDesde: instance.vigenteDesde,
       vigenteHasta: instance.vigenteHasta,
       activa: instance.activa,

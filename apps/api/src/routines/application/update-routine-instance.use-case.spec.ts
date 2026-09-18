@@ -23,6 +23,7 @@ describe('UpdateRoutineInstanceUseCase', () => {
     alumnoId: 'alum-1',
     nombre: 'Full body',
     origenTemplateId: null,
+    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,

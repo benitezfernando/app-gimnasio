@@ -40,6 +40,7 @@ export interface AssignRoutineToAlumnoInput {
   nombre: string;
   origenTemplateId?: string;
   ejercicios?: EjercicioItem[];
+  vincular?: boolean;
 }
 
 const ROLES_QUE_PUEDEN_ASIGNAR: Role[] = [Role.PROFESOR];
@@ -111,6 +112,7 @@ export class AssignRoutineToAlumnoUseCase {
       alumnoId: input.alumnoId,
       nombre: input.nombre,
       origenTemplateId: input.origenTemplateId ?? null,
+      vinculada: input.vincular ?? false,
       ejercicios,
     });
   }

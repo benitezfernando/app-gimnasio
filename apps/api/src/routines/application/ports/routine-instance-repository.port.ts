@@ -9,6 +9,7 @@ export interface RoutineInstanceDetail {
   alumnoId: string;
   nombre: string;
   origenTemplateId: string | null;
+  vinculada: boolean;
   vigenteDesde: Date;
   vigenteHasta: Date | null;
   activa: boolean;
@@ -35,6 +36,7 @@ export interface RoutineInstanceRepositoryPort {
     alumnoId: string;
     nombre: string;
     origenTemplateId: string | null;
+    vinculada: boolean;
     ejercicios: EjercicioItem[];
   }): Promise<RoutineInstanceDetail>;
   update(id: string, data: { nombre?: string }): Promise<RoutineInstanceDetail>;

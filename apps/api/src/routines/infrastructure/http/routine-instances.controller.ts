@@ -31,6 +31,7 @@ export class RoutineInstancesController {
       alumnoId: dto.alumnoId,
       nombre: dto.nombre,
       origenTemplateId: dto.origenTemplateId,
+      vincular: dto.vincular,
       ejercicios: dto.ejercicios ? toEjercicioItems(dto.ejercicios) : undefined,
     });
   }

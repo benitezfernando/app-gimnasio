@@ -70,6 +70,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
     alumnoId: 'alum-1',
     nombre: 'Full body',
     origenTemplateId: 'tpl-1',
+    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,
@@ -237,6 +238,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       alumnoId: 'alum-1',
       nombre: 'Full body',
       origenTemplateId: 'tpl-1',
+      vinculada: false,
       ejercicios: [unEjercicio],
     });
     expect(resultado).toEqual(instanciaCreada);
@@ -261,6 +263,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       alumnoId: 'alum-1',
       nombre: 'Custom',
       origenTemplateId: null,
+      vinculada: false,
       ejercicios: [unEjercicio],
     });
   });
@@ -295,5 +298,42 @@ describe('AssignRoutineToAlumnoUseCase', () => {
     });
 
     expect(exerciseRepository.findByIds).not.toHaveBeenCalled();
+  });
+
+  it('pasa vincular=true a crear() como vinculada cuando el profesor lo pide', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    templateRepository.findById.mockResolvedValue(template);
+    instanceRepository.crear.mockResolvedValue({ ...instanciaCreada, vinculada: true });
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      nombre: 'Full body',
+      origenTemplateId: 'tpl-1',
+      vincular: true,
+    });
+
+    expect(instanceRepository.crear).toHaveBeenCalledWith(
+      expect.objectContaining({ vinculada: true }),
+    );
+  });
+
+  it('vinculada es false por defecto si no se pide vincular', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    templateRepository.findById.mockResolvedValue(template);
+    instanceRepository.crear.mockResolvedValue(instanciaCreada);
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      nombre: 'Full body',
+      origenTemplateId: 'tpl-1',
+    });
+
+    expect(instanceRepository.crear).toHaveBeenCalledWith(
+      expect.objectContaining({ vinculada: false }),
+    );
   });
 });
