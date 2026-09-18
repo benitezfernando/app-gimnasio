@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { apiFetch } from '../../../lib/api-client';
+import { PageHeader } from '../../../components/ui/page-header';
+import { LogoutButton } from '../../../components/logout-button';
 
 interface AlumnoRow {
   id: string;
@@ -12,13 +14,8 @@ export default async function ProfesorDashboardPage() {
   const alumnos = await apiFetch<AlumnoRow[]>('/users/me/alumnos');
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-4 p-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-text">Mi cartera</h1>
-        <Link href="/profesor/plantillas" className="text-sm font-medium text-accent-text">
-          Ver plantillas
-        </Link>
-      </div>
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
+      <PageHeader title="Mi cartera" right={<LogoutButton />} />
 
       <ul className="flex flex-col gap-2">
         {alumnos.map((alumno) => (
