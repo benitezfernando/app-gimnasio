@@ -7,6 +7,8 @@ import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-clien
 import { ExerciseCard, ExerciseCardData } from '../../../components/exercise-card';
 import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors';
 import { EQUIPAMIENTOS, ETIQUETA_EQUIPAMIENTO } from '../../../lib/equipment-options';
+import { PageHeader } from '../../../components/ui/page-header';
+import { LogoutButton } from '../../../components/logout-button';
 
 interface ListExercisesResponse {
   items: ExerciseCardData[];
@@ -65,8 +67,8 @@ export default function CatalogoPage() {
   }, [busqueda, parteCuerpo, equipamiento]);
 
   return (
-    <main className="mx-auto flex max-w-5xl flex-col gap-4 p-4">
-      <h1 className="text-xl font-semibold text-text">Catálogo de ejercicios</h1>
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl">
+      <PageHeader title="Catálogo de ejercicios" right={<LogoutButton />} />
 
       <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3">
         <Search size={18} className="text-text-muted" aria-hidden />
