@@ -19,7 +19,6 @@ interface RutinaVigenteResponse {
     series: number;
     repeticiones: number;
     peso: number | null;
-    descanso: number;
     notas: string | null;
   }>;
 }
@@ -75,7 +74,6 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
                     series: e.series,
                     repeticiones: e.repeticiones,
                     peso: e.peso,
-                    descanso: e.descanso,
                     notas: e.notas,
                   })),
                 }

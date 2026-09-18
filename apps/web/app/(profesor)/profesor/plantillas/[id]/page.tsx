@@ -14,7 +14,6 @@ interface TemplateDetailResponse {
     series: number;
     repeticiones: number;
     peso: number | null;
-    descanso: number;
     notas: string | null;
   }>;
 }
@@ -50,7 +49,6 @@ export default async function PlantillaDetailPage({ params }: { params: { id: st
       series: e.series,
       repeticiones: e.repeticiones,
       peso: e.peso,
-      descanso: e.descanso,
       notas: e.notas,
     };
   });

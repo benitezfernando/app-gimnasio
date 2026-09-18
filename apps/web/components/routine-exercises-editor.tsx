@@ -31,10 +31,7 @@ function FilaEjercicio({
   onQuitar,
 }: {
   ejercicio: EjercicioEnEdicion;
-  onCambiar: (
-    campo: 'series' | 'repeticiones' | 'peso' | 'descanso' | 'notas',
-    valor: string,
-  ) => void;
+  onCambiar: (campo: 'series' | 'repeticiones' | 'peso' | 'notas', valor: string) => void;
   onQuitar: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
@@ -57,7 +54,7 @@ function FilaEjercicio({
 
         <span className="flex-1 text-sm font-medium text-text">{ejercicio.nombre}</span>
 
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <label className="flex flex-col text-xs text-text-muted">
             Series
             <input
@@ -87,16 +84,6 @@ function FilaEjercicio({
               value={ejercicio.peso ?? ''}
               placeholder="—"
               onChange={(e) => onCambiar('peso', e.target.value)}
-              className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
-            />
-          </label>
-          <label className="flex flex-col text-xs text-text-muted">
-            Descanso (s)
-            <input
-              type="number"
-              min={0}
-              value={ejercicio.descanso}
-              onChange={(e) => onCambiar('descanso', e.target.value)}
               className="min-h-11 w-16 rounded-lg border border-border bg-surface px-2 text-text lg:min-h-9"
             />
           </label>
@@ -158,7 +145,6 @@ export function RoutineExercisesEditor({
         series: 3,
         repeticiones: 10,
         peso: null,
-        descanso: 60,
         notas: null,
       },
     ]);
@@ -170,7 +156,7 @@ export function RoutineExercisesEditor({
 
   function cambiarCampo(
     exerciseId: string,
-    campo: 'series' | 'repeticiones' | 'peso' | 'descanso' | 'notas',
+    campo: 'series' | 'repeticiones' | 'peso' | 'notas',
     valor: string,
   ) {
     setEjercicios((actuales) =>

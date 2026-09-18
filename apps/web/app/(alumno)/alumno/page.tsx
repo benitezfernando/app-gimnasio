@@ -19,7 +19,6 @@ interface RutinaVigenteResponse {
     series: number;
     repeticiones: number;
     peso: number | null;
-    descanso: number;
   }>;
 }
 
@@ -76,7 +75,6 @@ export default async function AlumnoPage() {
                       <Pill>{ejercicio.series} series</Pill>
                       <Pill>{ejercicio.repeticiones} reps</Pill>
                       {ejercicio.peso !== null && <Pill>{ejercicio.peso}kg</Pill>}
-                      <Pill>{ejercicio.descanso}s descanso</Pill>
                     </div>
                   </div>
                 </Card>
