@@ -67,7 +67,7 @@ export default function CatalogoPage() {
   }, [busqueda, parteCuerpo, equipamiento]);
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl lg:pb-6 lg:pt-16">
       <PageHeader title="Catálogo de ejercicios" right={<LogoutButton />} />
 
       <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3">

@@ -56,7 +56,7 @@ export default async function PlantillaDetailPage({ params }: { params: { id: st
   });
 
   return (
-    <main className="w-full px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
+    <main className="w-full px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
       <TemplateEditor
         plantilla={{
           id: plantilla.id,

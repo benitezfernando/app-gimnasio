@@ -34,7 +34,7 @@ export default async function AlumnoPage() {
 
   if (!rutina) {
     return (
-      <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl">
+      <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
         <PageHeader title="Rutina" right={<LogoutButton />} />
         <p className="text-xl font-semibold text-text">Todavía no tenés una rutina asignada</p>
         <p className="text-sm text-text-muted">
@@ -45,7 +45,7 @@ export default async function AlumnoPage() {
   }
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
       <PageHeader title={rutina.nombre} right={<LogoutButton />} />
 
       <ul className="flex flex-col gap-3">

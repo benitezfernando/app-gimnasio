@@ -14,7 +14,7 @@ export default async function ProfesorDashboardPage() {
   const alumnos = await apiFetch<AlumnoRow[]>('/users/me/alumnos');
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
       <PageHeader title="Mi cartera" right={<LogoutButton />} />
 
       <ul className="flex flex-col gap-2">
