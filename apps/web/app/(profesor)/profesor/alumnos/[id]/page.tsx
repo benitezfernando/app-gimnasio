@@ -56,43 +56,53 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
         )}
       </div>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-text-muted">
-          {rutinaVigente ? 'Reemplazar con una plantilla' : 'Asignar plantilla existente'}
-        </h2>
-        <AssignTemplateForm
-          alumnoId={params.id}
-          plantillas={plantillas}
-          reemplazaRutinaVigente={Boolean(rutinaVigente)}
-        />
-      </section>
+      {(() => {
+        const seccionAsignarPlantilla = (
+          <section key="asignar-plantilla" className="flex flex-col gap-3">
+            <h2 className="text-sm font-medium text-text-muted">
+              {rutinaVigente ? 'Reemplazar con una plantilla' : 'Asignar plantilla existente'}
+            </h2>
+            <AssignTemplateForm
+              alumnoId={params.id}
+              plantillas={plantillas}
+              reemplazaRutinaVigente={Boolean(rutinaVigente)}
+            />
+          </section>
+        );
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-text-muted">
-          {rutinaVigente ? 'Ajustar ejercicios' : 'O armar rutina desde cero'}
-        </h2>
-        <InstanceEditor
-          alumnoId={params.id}
-          instanciaVigente={
-            rutinaVigente
-              ? {
-                  id: rutinaVigente.id,
-                  nombre: rutinaVigente.nombre,
-                  ejercicios: rutinaVigente.ejercicios.map((e) => ({
-                    exerciseId: e.exerciseId,
-                    nombre: e.nombre,
-                    imageUrl: e.imageUrl,
-                    orden: e.orden,
-                    series: e.series,
-                    repeticiones: e.repeticiones,
-                    peso: e.peso,
-                    notas: e.notas,
-                  })),
-                }
-              : null
-          }
-        />
-      </section>
+        const seccionEjercicios = (
+          <section key="ejercicios" className="flex flex-col gap-3">
+            <h2 className="text-sm font-medium text-text-muted">
+              {rutinaVigente ? 'Ajustar ejercicios' : 'O armar rutina desde cero'}
+            </h2>
+            <InstanceEditor
+              alumnoId={params.id}
+              instanciaVigente={
+                rutinaVigente
+                  ? {
+                      id: rutinaVigente.id,
+                      nombre: rutinaVigente.nombre,
+                      ejercicios: rutinaVigente.ejercicios.map((e) => ({
+                        exerciseId: e.exerciseId,
+                        nombre: e.nombre,
+                        imageUrl: e.imageUrl,
+                        orden: e.orden,
+                        series: e.series,
+                        repeticiones: e.repeticiones,
+                        peso: e.peso,
+                        notas: e.notas,
+                      })),
+                    }
+                  : null
+              }
+            />
+          </section>
+        );
+
+        return rutinaVigente
+          ? [seccionEjercicios, seccionAsignarPlantilla]
+          : [seccionAsignarPlantilla, seccionEjercicios];
+      })()}
     </main>
   );
 }
