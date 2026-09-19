@@ -10,6 +10,7 @@
 import 'dotenv/config';
 import { ExerciseSource, PrismaClient } from '@prisma/client';
 import curados from './exercise-curation.json';
+import { normalizarNombre } from '../src/exercise-catalog/normalizar-nombre';
 
 const prisma = new PrismaClient();
 
@@ -56,7 +57,11 @@ async function main() {
     ...curados.map((c) =>
       prisma.exercise.update({
         where: { id: c.id },
-        data: { activo: true, nombre: c.nombreEs },
+        data: {
+          activo: true,
+          nombre: c.nombreEs,
+          nombreNormalizado: normalizarNombre(c.nombreEs),
+        },
       }),
     ),
     // Acotado a fuente CATALOG: si en el futuro existen ejercicios CUSTOM
