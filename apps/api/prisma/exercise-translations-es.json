@@ -1,0 +1,5298 @@
+[
+  {
+    "externalId": "0001",
+    "nombreEs": "3/4 abdominal"
+  },
+  {
+    "externalId": "0002",
+    "nombreEs": "45° flexión lateral de tronco"
+  },
+  {
+    "externalId": "0003",
+    "nombreEs": "Aire bicicleta"
+  },
+  {
+    "externalId": "0006",
+    "nombreEs": "Toque de talón alterno"
+  },
+  {
+    "externalId": "0007",
+    "nombreEs": "Alterno jalón lateral"
+  },
+  {
+    "externalId": "0009",
+    "nombreEs": "Asistido fondo de pecho de rodillas"
+  },
+  {
+    "externalId": "0010",
+    "nombreEs": "Asistido elevación de rodillas colgado con lanzamiento abajo"
+  },
+  {
+    "externalId": "0011",
+    "nombreEs": "Asistido elevación de rodillas colgado"
+  },
+  {
+    "externalId": "0012",
+    "nombreEs": "Asistido acostado elevación de piernas con lateral lanzamiento abajo"
+  },
+  {
+    "externalId": "0013",
+    "nombreEs": "Asistido acostado elevación de piernas con lanzamiento abajo"
+  },
+  {
+    "externalId": "0014",
+    "nombreEs": "Asistido movimiento giro ruso"
+  },
+  {
+    "externalId": "0015",
+    "nombreEs": "Asistido paralelo agarre cerrado dominada"
+  },
+  {
+    "externalId": "0016",
+    "nombreEs": "Asistido boca abajo isquiotibial"
+  },
+  {
+    "externalId": "0017",
+    "nombreEs": "Asistido dominada"
+  },
+  {
+    "externalId": "0018",
+    "nombreEs": "Asistido de pie extensión de tríceps con toalla"
+  },
+  {
+    "externalId": "0019",
+    "nombreEs": "Asistido fondo de tríceps de rodillas"
+  },
+  {
+    "externalId": "0020",
+    "nombreEs": "Equilibrio tabla"
+  },
+  {
+    "externalId": "0022",
+    "nombreEs": "Barra pullover a press"
+  },
+  {
+    "externalId": "0023",
+    "nombreEs": "Barra alterno curl de bíceps"
+  },
+  {
+    "externalId": "0024",
+    "nombreEs": "Barra sentadilla frontal en banco"
+  },
+  {
+    "externalId": "0025",
+    "nombreEs": "Barra press de banca"
+  },
+  {
+    "externalId": "0026",
+    "nombreEs": "Barra sentadilla en banco"
+  },
+  {
+    "externalId": "0027",
+    "nombreEs": "Barra remo inclinado"
+  },
+  {
+    "externalId": "0028",
+    "nombreEs": "Barra cargada y press"
+  },
+  {
+    "externalId": "0029",
+    "nombreEs": "Barra agarre de cargada sentadilla frontal"
+  },
+  {
+    "externalId": "0030",
+    "nombreEs": "Barra agarre cerrado press de banca"
+  },
+  {
+    "externalId": "0031",
+    "nombreEs": "Barra curl"
+  },
+  {
+    "externalId": "0032",
+    "nombreEs": "Barra peso muerto"
+  },
+  {
+    "externalId": "0033",
+    "nombreEs": "Barra declinado press de banca"
+  },
+  {
+    "externalId": "0034",
+    "nombreEs": "Barra declinado inclinado brazo pullover"
+  },
+  {
+    "externalId": "0035",
+    "nombreEs": "Barra declinado agarre cerrado a cráneo press"
+  },
+  {
+    "externalId": "0036",
+    "nombreEs": "Barra declinado agarre ancho press"
+  },
+  {
+    "externalId": "0037",
+    "nombreEs": "Barra declinado agarre ancho pullover"
+  },
+  {
+    "externalId": "0038",
+    "nombreEs": "Barra curl drag"
+  },
+  {
+    "externalId": "0039",
+    "nombreEs": "Barra frontal pecho sentadilla"
+  },
+  {
+    "externalId": "0040",
+    "nombreEs": "Barra elevación frontal y pullover"
+  },
+  {
+    "externalId": "0041",
+    "nombreEs": "Barra elevación frontal"
+  },
+  {
+    "externalId": "0042",
+    "nombreEs": "Barra sentadilla frontal"
+  },
+  {
+    "externalId": "0043",
+    "nombreEs": "Barra completo sentadilla"
+  },
+  {
+    "externalId": "0044",
+    "nombreEs": "Barra buenos días"
+  },
+  {
+    "externalId": "0045",
+    "nombreEs": "Barra guillotina press de banca"
+  },
+  {
+    "externalId": "0046",
+    "nombreEs": "Barra sentadilla hack"
+  },
+  {
+    "externalId": "0047",
+    "nombreEs": "Barra inclinado press de banca"
+  },
+  {
+    "externalId": "0048",
+    "nombreEs": "Barra inclinado agarre inverso press"
+  },
+  {
+    "externalId": "0049",
+    "nombreEs": "Barra inclinado remo"
+  },
+  {
+    "externalId": "0050",
+    "nombreEs": "Barra inclinado hombro elevación"
+  },
+  {
+    "externalId": "0051",
+    "nombreEs": "Barra jefferson sentadilla"
+  },
+  {
+    "externalId": "0052",
+    "nombreEs": "Barra jm press de banca"
+  },
+  {
+    "externalId": "0053",
+    "nombreEs": "Barra sentadilla con salto"
+  },
+  {
+    "externalId": "0054",
+    "nombreEs": "Barra zancada"
+  },
+  {
+    "externalId": "0055",
+    "nombreEs": "Barra acostado agarre cerrado press"
+  },
+  {
+    "externalId": "0056",
+    "nombreEs": "Barra acostado agarre cerrado extensión de tríceps"
+  },
+  {
+    "externalId": "0057",
+    "nombreEs": "Barra acostado extensión"
+  },
+  {
+    "externalId": "0058",
+    "nombreEs": "Barra acostado levantamiento sobre cadera"
+  },
+  {
+    "externalId": "0059",
+    "nombreEs": "Barra acostado curl predicador"
+  },
+  {
+    "externalId": "0060",
+    "nombreEs": "Barra acostado extensión de tríceps press francés"
+  },
+  {
+    "externalId": "0061",
+    "nombreEs": "Barra acostado extensión de tríceps"
+  },
+  {
+    "externalId": "0063",
+    "nombreEs": "Barra estrecho postura sentadilla"
+  },
+  {
+    "externalId": "0064",
+    "nombreEs": "Barra a un brazo remo inclinado"
+  },
+  {
+    "externalId": "0065",
+    "nombreEs": "Barra a un brazo suelo press"
+  },
+  {
+    "externalId": "0066",
+    "nombreEs": "Barra a un brazo lateral peso muerto"
+  },
+  {
+    "externalId": "0067",
+    "nombreEs": "Barra a un brazo arrancada"
+  },
+  {
+    "externalId": "0068",
+    "nombreEs": "Barra a una pierna sentadilla"
+  },
+  {
+    "externalId": "0069",
+    "nombreEs": "Barra sentadilla overhead"
+  },
+  {
+    "externalId": "0070",
+    "nombreEs": "Barra curl predicador"
+  },
+  {
+    "externalId": "0071",
+    "nombreEs": "Barra press abdominal"
+  },
+  {
+    "externalId": "0072",
+    "nombreEs": "Barra boca abajo inclinado curl"
+  },
+  {
+    "externalId": "0073",
+    "nombreEs": "Barra pullover"
+  },
+  {
+    "externalId": "0074",
+    "nombreEs": "Barra rack jalón"
+  },
+  {
+    "externalId": "0075",
+    "nombreEs": "Barra elevación posterior de hombro"
+  },
+  {
+    "externalId": "0076",
+    "nombreEs": "Barra posterior deltoides remo"
+  },
+  {
+    "externalId": "0077",
+    "nombreEs": "Barra posterior zancada v 2"
+  },
+  {
+    "externalId": "0078",
+    "nombreEs": "Barra posterior zancada"
+  },
+  {
+    "externalId": "0079",
+    "nombreEs": "Barra inverso curl de muñeca v 2"
+  },
+  {
+    "externalId": "0080",
+    "nombreEs": "Barra curl inverso"
+  },
+  {
+    "externalId": "0081",
+    "nombreEs": "Barra inverso curl predicador"
+  },
+  {
+    "externalId": "0082",
+    "nombreEs": "Barra curl de muñeca inverso"
+  },
+  {
+    "externalId": "0083",
+    "nombreEs": "Barra rollout abdominal desde banco"
+  },
+  {
+    "externalId": "0084",
+    "nombreEs": "Barra rollout abdominal"
+  },
+  {
+    "externalId": "0085",
+    "nombreEs": "Barra peso muerto rumano"
+  },
+  {
+    "externalId": "0086",
+    "nombreEs": "Barra sentado detrás cabeza press militar"
+  },
+  {
+    "externalId": "0087",
+    "nombreEs": "Barra sentado bradford rocky press"
+  },
+  {
+    "externalId": "0088",
+    "nombreEs": "Barra elevación de talones sentado"
+  },
+  {
+    "externalId": "0089",
+    "nombreEs": "Barra sentado agarre cerrado curl concentrado"
+  },
+  {
+    "externalId": "0090",
+    "nombreEs": "Barra sentado buenos días"
+  },
+  {
+    "externalId": "0091",
+    "nombreEs": "Barra sentado press por encima de la cabeza"
+  },
+  {
+    "externalId": "0092",
+    "nombreEs": "Barra sentado sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "0094",
+    "nombreEs": "Barra sentado giro"
+  },
+  {
+    "externalId": "0095",
+    "nombreEs": "Barra encogimiento"
+  },
+  {
+    "externalId": "0096",
+    "nombreEs": "Barra lateral inclinado v 2"
+  },
+  {
+    "externalId": "0097",
+    "nombreEs": "Barra lateral sentadilla búlgara v 2"
+  },
+  {
+    "externalId": "0098",
+    "nombreEs": "Barra lateral sentadilla búlgara"
+  },
+  {
+    "externalId": "0099",
+    "nombreEs": "Barra a una pierna sentadilla búlgara"
+  },
+  {
+    "externalId": "0100",
+    "nombreEs": "Barra esquiador"
+  },
+  {
+    "externalId": "0101",
+    "nombreEs": "Barra velocidad sentadilla"
+  },
+  {
+    "externalId": "0102",
+    "nombreEs": "Barra sentadilla sobre rodillas"
+  },
+  {
+    "externalId": "0103",
+    "nombreEs": "Barra de pie abdominal rollout abdominal"
+  },
+  {
+    "externalId": "0104",
+    "nombreEs": "Barra de pie espalda curl de muñeca"
+  },
+  {
+    "externalId": "0105",
+    "nombreEs": "Barra de pie bradford press"
+  },
+  {
+    "externalId": "0106",
+    "nombreEs": "Barra de pie agarre cerrado curl"
+  },
+  {
+    "externalId": "0107",
+    "nombreEs": "Barra de pie elevación frontal sobre cabeza"
+  },
+  {
+    "externalId": "0108",
+    "nombreEs": "Barra de pie pierna elevación de talones"
+  },
+  {
+    "externalId": "0109",
+    "nombreEs": "Barra de pie sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "0110",
+    "nombreEs": "Barra de pie agarre inverso curl"
+  },
+  {
+    "externalId": "0111",
+    "nombreEs": "Barra de pie balanceo pierna elevación de talones"
+  },
+  {
+    "externalId": "0112",
+    "nombreEs": "Barra de pie giro"
+  },
+  {
+    "externalId": "0113",
+    "nombreEs": "Barra de pie agarre ancho curl"
+  },
+  {
+    "externalId": "0114",
+    "nombreEs": "Barra subida al cajón"
+  },
+  {
+    "externalId": "0115",
+    "nombreEs": "Barra rígido pierna buenos días"
+  },
+  {
+    "externalId": "0116",
+    "nombreEs": "Barra recto pierna peso muerto"
+  },
+  {
+    "externalId": "0117",
+    "nombreEs": "Barra peso muerto sumo"
+  },
+  {
+    "externalId": "0118",
+    "nombreEs": "Barra agarre inverso remo inclinado"
+  },
+  {
+    "externalId": "0119",
+    "nombreEs": "Barra remo al mentón v 2"
+  },
+  {
+    "externalId": "0120",
+    "nombreEs": "Barra remo al mentón"
+  },
+  {
+    "externalId": "0121",
+    "nombreEs": "Barra remo al mentón v 3"
+  },
+  {
+    "externalId": "0122",
+    "nombreEs": "Barra ancho press de banca"
+  },
+  {
+    "externalId": "0123",
+    "nombreEs": "Barra agarre ancho remo al mentón"
+  },
+  {
+    "externalId": "0124",
+    "nombreEs": "Barra ancho sentadilla"
+  },
+  {
+    "externalId": "0125",
+    "nombreEs": "Barra curl de muñeca v 2"
+  },
+  {
+    "externalId": "0126",
+    "nombreEs": "Barra curl de muñeca"
+  },
+  {
+    "externalId": "0127",
+    "nombreEs": "Barra sentadilla zercher"
+  },
+  {
+    "externalId": "0128",
+    "nombreEs": "Batalla cuerdas"
+  },
+  {
+    "externalId": "0129",
+    "nombreEs": "Banco fondo rodillas inclinado"
+  },
+  {
+    "externalId": "0130",
+    "nombreEs": "Banco cadera extensión"
+  },
+  {
+    "externalId": "0137",
+    "nombreEs": "Flexión de brazos"
+  },
+  {
+    "externalId": "0138",
+    "nombreEs": "Invertido arriba"
+  },
+  {
+    "externalId": "0139",
+    "nombreEs": "Bíceps estrecho dominadas"
+  },
+  {
+    "externalId": "0140",
+    "nombreEs": "Bíceps dominada"
+  },
+  {
+    "externalId": "0148",
+    "nombreEs": "Polea alterno press de hombros"
+  },
+  {
+    "externalId": "0149",
+    "nombreEs": "Polea alterno extensión de tríceps"
+  },
+  {
+    "externalId": "0150",
+    "nombreEs": "Polea barra jalón lateral"
+  },
+  {
+    "externalId": "0151",
+    "nombreEs": "Polea press de banca"
+  },
+  {
+    "externalId": "0152",
+    "nombreEs": "Polea concentrado extensión sobre rodilla"
+  },
+  {
+    "externalId": "0153",
+    "nombreEs": "Polea cruce jalón lateral"
+  },
+  {
+    "externalId": "0154",
+    "nombreEs": "Polea cruce inverso apertura"
+  },
+  {
+    "externalId": "0155",
+    "nombreEs": "Polea cruce variación"
+  },
+  {
+    "externalId": "0157",
+    "nombreEs": "Polea peso muerto"
+  },
+  {
+    "externalId": "0158",
+    "nombreEs": "Polea declinado apertura"
+  },
+  {
+    "externalId": "0159",
+    "nombreEs": "Polea declinado sentado agarre ancho remo"
+  },
+  {
+    "externalId": "0160",
+    "nombreEs": "Polea suelo sentado agarre ancho remo"
+  },
+  {
+    "externalId": "0161",
+    "nombreEs": "Polea hacia adelante elevación"
+  },
+  {
+    "externalId": "0162",
+    "nombreEs": "Polea elevación frontal"
+  },
+  {
+    "externalId": "0164",
+    "nombreEs": "Polea frontal hombro elevación"
+  },
+  {
+    "externalId": "0165",
+    "nombreEs": "Polea curl martillo con cuerda"
+  },
+  {
+    "externalId": "0167",
+    "nombreEs": "Polea alto remo de rodillas"
+  },
+  {
+    "externalId": "0168",
+    "nombreEs": "Polea cadera aducción"
+  },
+  {
+    "externalId": "0169",
+    "nombreEs": "Polea inclinado press de banca"
+  },
+  {
+    "externalId": "0170",
+    "nombreEs": "Polea inclinado apertura sobre balón suizo"
+  },
+  {
+    "externalId": "0171",
+    "nombreEs": "Polea inclinado apertura"
+  },
+  {
+    "externalId": "0172",
+    "nombreEs": "Polea inclinado extensión en polea"
+  },
+  {
+    "externalId": "0173",
+    "nombreEs": "Polea inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "0174",
+    "nombreEs": "Polea judo volteo"
+  },
+  {
+    "externalId": "0175",
+    "nombreEs": "Polea de rodillas crunch"
+  },
+  {
+    "externalId": "0176",
+    "nombreEs": "Polea de rodillas extensión de tríceps"
+  },
+  {
+    "externalId": "0177",
+    "nombreEs": "Polea jalón lateral con cuerda accesorio"
+  },
+  {
+    "externalId": "0178",
+    "nombreEs": "Polea elevación lateral"
+  },
+  {
+    "externalId": "0179",
+    "nombreEs": "Polea bajo apertura"
+  },
+  {
+    "externalId": "0180",
+    "nombreEs": "Polea bajo remo sentado"
+  },
+  {
+    "externalId": "0182",
+    "nombreEs": "Polea acostado agarre cerrado curl"
+  },
+  {
+    "externalId": "0184",
+    "nombreEs": "Polea acostado extensión pullover con cuerda accesorio"
+  },
+  {
+    "externalId": "0185",
+    "nombreEs": "Polea acostado apertura"
+  },
+  {
+    "externalId": "0186",
+    "nombreEs": "Polea acostado extensión de tríceps v 2"
+  },
+  {
+    "externalId": "0188",
+    "nombreEs": "Polea medio apertura"
+  },
+  {
+    "externalId": "0189",
+    "nombreEs": "Polea a un brazo remo inclinado"
+  },
+  {
+    "externalId": "0190",
+    "nombreEs": "Polea a un brazo curl"
+  },
+  {
+    "externalId": "0191",
+    "nombreEs": "Polea a un brazo lateral inclinado"
+  },
+  {
+    "externalId": "0192",
+    "nombreEs": "Polea a un brazo elevación lateral"
+  },
+  {
+    "externalId": "0193",
+    "nombreEs": "Polea a un brazo recto espalda alto remo de rodillas"
+  },
+  {
+    "externalId": "0194",
+    "nombreEs": "Polea sobre la cabeza extensión de tríceps cuerda accesorio"
+  },
+  {
+    "externalId": "0195",
+    "nombreEs": "Polea curl predicador"
+  },
+  {
+    "externalId": "0196",
+    "nombreEs": "Polea jalón a través con cuerda"
+  },
+  {
+    "externalId": "0197",
+    "nombreEs": "Polea jalón profesional dorsal barra"
+  },
+  {
+    "externalId": "0198",
+    "nombreEs": "Polea jalón"
+  },
+  {
+    "externalId": "0199",
+    "nombreEs": "Polea extensión en polea brazos rectos v 2"
+  },
+  {
+    "externalId": "0200",
+    "nombreEs": "Polea extensión en polea con cuerda accesorio"
+  },
+  {
+    "externalId": "0201",
+    "nombreEs": "Polea extensión en polea"
+  },
+  {
+    "externalId": "0202",
+    "nombreEs": "Polea posterior deltoides remo estribos"
+  },
+  {
+    "externalId": "0203",
+    "nombreEs": "Polea posterior deltoides remo con cuerda"
+  },
+  {
+    "externalId": "0204",
+    "nombreEs": "Polea posterior impulso"
+  },
+  {
+    "externalId": "0205",
+    "nombreEs": "Polea posterior jalón"
+  },
+  {
+    "externalId": "0206",
+    "nombreEs": "Polea curl inverso"
+  },
+  {
+    "externalId": "0207",
+    "nombreEs": "Polea agarre inverso extensión en polea"
+  },
+  {
+    "externalId": "0208",
+    "nombreEs": "Polea agarre inverso recto espalda sentado alto remo"
+  },
+  {
+    "externalId": "0209",
+    "nombreEs": "Polea inverso curl predicador"
+  },
+  {
+    "externalId": "0210",
+    "nombreEs": "Polea curl de muñeca inverso"
+  },
+  {
+    "externalId": "0211",
+    "nombreEs": "Polea ruso giros sobre balón suizo"
+  },
+  {
+    "externalId": "0212",
+    "nombreEs": "Polea sentado crunch"
+  },
+  {
+    "externalId": "0213",
+    "nombreEs": "Polea sentado alto remo barra v"
+  },
+  {
+    "externalId": "0214",
+    "nombreEs": "Polea sentado a un brazo alterno remo"
+  },
+  {
+    "externalId": "0215",
+    "nombreEs": "Polea sentado posterior elevación lateral"
+  },
+  {
+    "externalId": "0216",
+    "nombreEs": "Polea sentado hombro interno rotación"
+  },
+  {
+    "externalId": "0218",
+    "nombreEs": "Polea sentado agarre ancho remo"
+  },
+  {
+    "externalId": "0219",
+    "nombreEs": "Polea press de hombros"
+  },
+  {
+    "externalId": "0220",
+    "nombreEs": "Polea encogimiento"
+  },
+  {
+    "externalId": "0221",
+    "nombreEs": "Polea flexión lateral de tronco crunch bosu"
+  },
+  {
+    "externalId": "0222",
+    "nombreEs": "Polea flexión lateral de tronco"
+  },
+  {
+    "externalId": "0223",
+    "nombreEs": "Polea lateral crunch"
+  },
+  {
+    "externalId": "0224",
+    "nombreEs": "Polea de pie espalda curl de muñeca"
+  },
+  {
+    "externalId": "0225",
+    "nombreEs": "Polea de pie cruce alto aperturas inversas"
+  },
+  {
+    "externalId": "0226",
+    "nombreEs": "Polea de pie crunch"
+  },
+  {
+    "externalId": "0227",
+    "nombreEs": "Polea de pie apertura"
+  },
+  {
+    "externalId": "0228",
+    "nombreEs": "Polea de pie cadera extensión"
+  },
+  {
+    "externalId": "0229",
+    "nombreEs": "Polea de pie interno curl"
+  },
+  {
+    "externalId": "0230",
+    "nombreEs": "Polea de pie levantamiento"
+  },
+  {
+    "externalId": "0231",
+    "nombreEs": "Polea de pie a un brazo extensión de tríceps"
+  },
+  {
+    "externalId": "0232",
+    "nombreEs": "Polea de pie jalón con cuerda"
+  },
+  {
+    "externalId": "0233",
+    "nombreEs": "Polea de pie posterior deltoides remo con cuerda"
+  },
+  {
+    "externalId": "0234",
+    "nombreEs": "Polea de pie remo barra v"
+  },
+  {
+    "externalId": "0235",
+    "nombreEs": "Polea de pie hombro externo rotación"
+  },
+  {
+    "externalId": "0236",
+    "nombreEs": "Polea de pie giro remo barra v"
+  },
+  {
+    "externalId": "0237",
+    "nombreEs": "Polea jalón de brazos rectos con cuerda"
+  },
+  {
+    "externalId": "0238",
+    "nombreEs": "Polea jalón de brazos rectos"
+  },
+  {
+    "externalId": "0239",
+    "nombreEs": "Polea recto espalda remo sentado"
+  },
+  {
+    "externalId": "0240",
+    "nombreEs": "Polea boca arriba aperturas inversas"
+  },
+  {
+    "externalId": "0241",
+    "nombreEs": "Polea extensión de tríceps en polea barra v"
+  },
+  {
+    "externalId": "0242",
+    "nombreEs": "Polea tuck crunch inverso"
+  },
+  {
+    "externalId": "0243",
+    "nombreEs": "Polea giro"
+  },
+  {
+    "externalId": "0244",
+    "nombreEs": "Polea girando jalón"
+  },
+  {
+    "externalId": "0245",
+    "nombreEs": "Polea agarre supino jalón"
+  },
+  {
+    "externalId": "0246",
+    "nombreEs": "Polea remo al mentón"
+  },
+  {
+    "externalId": "0247",
+    "nombreEs": "Polea curl de muñeca"
+  },
+  {
+    "externalId": "0248",
+    "nombreEs": "Curva barra acostado remo"
+  },
+  {
+    "externalId": "0251",
+    "nombreEs": "Fondo de pecho"
+  },
+  {
+    "externalId": "0253",
+    "nombreEs": "Dominadas agarre supino estrecho paralelo agarre"
+  },
+  {
+    "externalId": "0257",
+    "nombreEs": "Círculos rodilla estiramiento"
+  },
+  {
+    "externalId": "0258",
+    "nombreEs": "Reloj flexión de brazos"
+  },
+  {
+    "externalId": "0259",
+    "nombreEs": "Agarre cerrado flexión de brazos"
+  },
+  {
+    "externalId": "0260",
+    "nombreEs": "Capullo"
+  },
+  {
+    "externalId": "0262",
+    "nombreEs": "Cruzado cuerpo crunch"
+  },
+  {
+    "externalId": "0267",
+    "nombreEs": "Crunch manos sobre la cabeza"
+  },
+  {
+    "externalId": "0271",
+    "nombreEs": "Crunch sobre balón suizo"
+  },
+  {
+    "externalId": "0272",
+    "nombreEs": "Crunch sobre balón suizo brazos recto"
+  },
+  {
+    "externalId": "0274",
+    "nombreEs": "Crunch suelo"
+  },
+  {
+    "externalId": "0276",
+    "nombreEs": "Bicho muerto"
+  },
+  {
+    "externalId": "0277",
+    "nombreEs": "Declinado crunch"
+  },
+  {
+    "externalId": "0279",
+    "nombreEs": "Declinado flexión de brazos"
+  },
+  {
+    "externalId": "0282",
+    "nombreEs": "Declinado abdominal"
+  },
+  {
+    "externalId": "0283",
+    "nombreEs": "Diamante flexión de brazos"
+  },
+  {
+    "externalId": "0284",
+    "nombreEs": "Elevación de talones burro"
+  },
+  {
+    "externalId": "0285",
+    "nombreEs": "Mancuerna alterno curl de bíceps"
+  },
+  {
+    "externalId": "0286",
+    "nombreEs": "Mancuerna alterno lateral press"
+  },
+  {
+    "externalId": "0287",
+    "nombreEs": "Mancuerna arnold press v 2"
+  },
+  {
+    "externalId": "0288",
+    "nombreEs": "Mancuerna alrededor pullover"
+  },
+  {
+    "externalId": "0289",
+    "nombreEs": "Mancuerna press de banca"
+  },
+  {
+    "externalId": "0290",
+    "nombreEs": "Mancuerna banco sentado press"
+  },
+  {
+    "externalId": "0291",
+    "nombreEs": "Mancuerna sentadilla en banco"
+  },
+  {
+    "externalId": "0292",
+    "nombreEs": "Mancuerna a un brazo remo inclinado"
+  },
+  {
+    "externalId": "0293",
+    "nombreEs": "Mancuerna remo inclinado"
+  },
+  {
+    "externalId": "0294",
+    "nombreEs": "Mancuerna curl de bíceps"
+  },
+  {
+    "externalId": "0295",
+    "nombreEs": "Mancuerna cargada"
+  },
+  {
+    "externalId": "0296",
+    "nombreEs": "Mancuerna agarre cerrado press"
+  },
+  {
+    "externalId": "0297",
+    "nombreEs": "Mancuerna curl concentrado"
+  },
+  {
+    "externalId": "0298",
+    "nombreEs": "Mancuerna cruzado cuerpo curl martillo"
+  },
+  {
+    "externalId": "0299",
+    "nombreEs": "Mancuerna cubano press"
+  },
+  {
+    "externalId": "0300",
+    "nombreEs": "Mancuerna peso muerto"
+  },
+  {
+    "externalId": "0301",
+    "nombreEs": "Mancuerna declinado press de banca"
+  },
+  {
+    "externalId": "0302",
+    "nombreEs": "Mancuerna declinado apertura"
+  },
+  {
+    "externalId": "0303",
+    "nombreEs": "Mancuerna declinado martillo press"
+  },
+  {
+    "externalId": "0304",
+    "nombreEs": "Mancuerna declinado encogimiento v 2"
+  },
+  {
+    "externalId": "0305",
+    "nombreEs": "Mancuerna declinado encogimiento"
+  },
+  {
+    "externalId": "0306",
+    "nombreEs": "Mancuerna declinado extensión de tríceps"
+  },
+  {
+    "externalId": "0307",
+    "nombreEs": "Mancuerna declinado giro apertura"
+  },
+  {
+    "externalId": "0308",
+    "nombreEs": "Mancuerna apertura"
+  },
+  {
+    "externalId": "0309",
+    "nombreEs": "Mancuerna elevación frontal v 2"
+  },
+  {
+    "externalId": "0310",
+    "nombreEs": "Mancuerna elevación frontal"
+  },
+  {
+    "externalId": "0311",
+    "nombreEs": "Mancuerna completo elevación lateral"
+  },
+  {
+    "externalId": "0312",
+    "nombreEs": "Mancuerna curl martillo v 2"
+  },
+  {
+    "externalId": "0313",
+    "nombreEs": "Mancuerna curl martillo"
+  },
+  {
+    "externalId": "0314",
+    "nombreEs": "Mancuerna inclinado press de banca"
+  },
+  {
+    "externalId": "0315",
+    "nombreEs": "Mancuerna inclinado curl de bíceps"
+  },
+  {
+    "externalId": "0316",
+    "nombreEs": "Mancuerna inclinado breeding"
+  },
+  {
+    "externalId": "0317",
+    "nombreEs": "Mancuerna inclinado curl v 2"
+  },
+  {
+    "externalId": "0318",
+    "nombreEs": "Mancuerna inclinado curl"
+  },
+  {
+    "externalId": "0319",
+    "nombreEs": "Mancuerna inclinado apertura"
+  },
+  {
+    "externalId": "0320",
+    "nombreEs": "Mancuerna inclinado curl martillo"
+  },
+  {
+    "externalId": "0321",
+    "nombreEs": "Mancuerna inclinado martillo press"
+  },
+  {
+    "externalId": "0322",
+    "nombreEs": "Mancuerna inclinado interno curl de bíceps"
+  },
+  {
+    "externalId": "0323",
+    "nombreEs": "Mancuerna inclinado a un brazo elevación lateral"
+  },
+  {
+    "externalId": "0324",
+    "nombreEs": "Mancuerna inclinado palma hacia adentro press"
+  },
+  {
+    "externalId": "0325",
+    "nombreEs": "Mancuerna inclinado elevación"
+  },
+  {
+    "externalId": "0326",
+    "nombreEs": "Mancuerna inclinado posterior elevación lateral"
+  },
+  {
+    "externalId": "0327",
+    "nombreEs": "Mancuerna inclinado remo"
+  },
+  {
+    "externalId": "0328",
+    "nombreEs": "Mancuerna inclinado hombro elevación"
+  },
+  {
+    "externalId": "0329",
+    "nombreEs": "Mancuerna inclinado encogimiento"
+  },
+  {
+    "externalId": "0330",
+    "nombreEs": "Mancuerna inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "0331",
+    "nombreEs": "Mancuerna inclinado girado aperturas"
+  },
+  {
+    "externalId": "0332",
+    "nombreEs": "Mancuerna hierro cruzado"
+  },
+  {
+    "externalId": "0333",
+    "nombreEs": "Mancuerna patada"
+  },
+  {
+    "externalId": "0334",
+    "nombreEs": "Mancuerna elevación lateral"
+  },
+  {
+    "externalId": "0335",
+    "nombreEs": "Mancuerna lateral a elevación frontal"
+  },
+  {
+    "externalId": "0336",
+    "nombreEs": "Mancuerna zancada"
+  },
+  {
+    "externalId": "0337",
+    "nombreEs": "Mancuerna acostado extensión a través frente"
+  },
+  {
+    "externalId": "0338",
+    "nombreEs": "Mancuerna acostado codo press"
+  },
+  {
+    "externalId": "0339",
+    "nombreEs": "Mancuerna acostado femoral"
+  },
+  {
+    "externalId": "0340",
+    "nombreEs": "Mancuerna acostado martillo press"
+  },
+  {
+    "externalId": "0341",
+    "nombreEs": "Mancuerna acostado a un brazo deltoides posterior"
+  },
+  {
+    "externalId": "0342",
+    "nombreEs": "Mancuerna acostado a un brazo press v 2"
+  },
+  {
+    "externalId": "0343",
+    "nombreEs": "Mancuerna acostado a un brazo press"
+  },
+  {
+    "externalId": "0344",
+    "nombreEs": "Mancuerna acostado a un brazo prono extensión de tríceps"
+  },
+  {
+    "externalId": "0345",
+    "nombreEs": "Mancuerna acostado a un brazo posterior elevación lateral"
+  },
+  {
+    "externalId": "0346",
+    "nombreEs": "Mancuerna acostado a un brazo supino extensión de tríceps"
+  },
+  {
+    "externalId": "0347",
+    "nombreEs": "Mancuerna acostado pronación"
+  },
+  {
+    "externalId": "0348",
+    "nombreEs": "Mancuerna acostado posterior elevación lateral"
+  },
+  {
+    "externalId": "0349",
+    "nombreEs": "Mancuerna acostado supinación"
+  },
+  {
+    "externalId": "0350",
+    "nombreEs": "Mancuerna acostado boca arriba curl"
+  },
+  {
+    "externalId": "0351",
+    "nombreEs": "Mancuerna acostado extensión de tríceps"
+  },
+  {
+    "externalId": "0352",
+    "nombreEs": "Mancuerna agarre neutro press de banca"
+  },
+  {
+    "externalId": "0353",
+    "nombreEs": "Mancuerna a un brazo curl concentrado sobre balón suizo"
+  },
+  {
+    "externalId": "0354",
+    "nombreEs": "Mancuerna a un brazo patada"
+  },
+  {
+    "externalId": "0355",
+    "nombreEs": "Mancuerna a un brazo elevación lateral"
+  },
+  {
+    "externalId": "0356",
+    "nombreEs": "Mancuerna a un brazo elevación lateral con soporte"
+  },
+  {
+    "externalId": "0358",
+    "nombreEs": "Mancuerna a un brazo curl de muñeca inverso"
+  },
+  {
+    "externalId": "0359",
+    "nombreEs": "Mancuerna a un brazo aperturas inversas con soporte"
+  },
+  {
+    "externalId": "0360",
+    "nombreEs": "Mancuerna a un brazo press de hombros v 2"
+  },
+  {
+    "externalId": "0361",
+    "nombreEs": "Mancuerna a un brazo press de hombros"
+  },
+  {
+    "externalId": "0362",
+    "nombreEs": "Mancuerna a un brazo extensión de tríceps sobre banco"
+  },
+  {
+    "externalId": "0363",
+    "nombreEs": "Mancuerna a un brazo remo al mentón"
+  },
+  {
+    "externalId": "0364",
+    "nombreEs": "Mancuerna a un brazo curl de muñeca"
+  },
+  {
+    "externalId": "0365",
+    "nombreEs": "Mancuerna sobre banco neutro curl de muñeca"
+  },
+  {
+    "externalId": "0366",
+    "nombreEs": "Mancuerna sobre banco a un brazo neutro curl de muñeca"
+  },
+  {
+    "externalId": "0367",
+    "nombreEs": "Mancuerna sobre banco a un brazo curl de muñeca"
+  },
+  {
+    "externalId": "0368",
+    "nombreEs": "Mancuerna sobre banco inverso curl de muñeca"
+  },
+  {
+    "externalId": "0369",
+    "nombreEs": "Mancuerna sobre banco curl de muñeca"
+  },
+  {
+    "externalId": "0370",
+    "nombreEs": "Mancuerna predicador curl martillo"
+  },
+  {
+    "externalId": "0371",
+    "nombreEs": "Mancuerna pliométrico sentadilla"
+  },
+  {
+    "externalId": "0372",
+    "nombreEs": "Mancuerna curl predicador"
+  },
+  {
+    "externalId": "0373",
+    "nombreEs": "Mancuerna agarre prono extensión de tríceps"
+  },
+  {
+    "externalId": "0374",
+    "nombreEs": "Mancuerna boca abajo inclinado curl"
+  },
+  {
+    "externalId": "0375",
+    "nombreEs": "Mancuerna pullover"
+  },
+  {
+    "externalId": "0376",
+    "nombreEs": "Mancuerna elevación"
+  },
+  {
+    "externalId": "0377",
+    "nombreEs": "Mancuerna posterior deltoides remo hombro"
+  },
+  {
+    "externalId": "0378",
+    "nombreEs": "Mancuerna posterior apertura"
+  },
+  {
+    "externalId": "0379",
+    "nombreEs": "Mancuerna posterior elevación lateral soporte cabeza"
+  },
+  {
+    "externalId": "0380",
+    "nombreEs": "Mancuerna posterior elevación lateral"
+  },
+  {
+    "externalId": "0381",
+    "nombreEs": "Mancuerna posterior zancada"
+  },
+  {
+    "externalId": "0382",
+    "nombreEs": "Mancuerna inverso agarre curl de bíceps"
+  },
+  {
+    "externalId": "0383",
+    "nombreEs": "Mancuerna aperturas inversas"
+  },
+  {
+    "externalId": "0384",
+    "nombreEs": "Mancuerna inverso curl predicador"
+  },
+  {
+    "externalId": "0385",
+    "nombreEs": "Mancuerna curl de muñeca inverso"
+  },
+  {
+    "externalId": "0386",
+    "nombreEs": "Mancuerna rotación aperturas inversas"
+  },
+  {
+    "externalId": "0387",
+    "nombreEs": "Mancuerna sentado alterno elevación frontal"
+  },
+  {
+    "externalId": "0388",
+    "nombreEs": "Mancuerna sentado alterno press"
+  },
+  {
+    "externalId": "0389",
+    "nombreEs": "Mancuerna sentado banco extensión"
+  },
+  {
+    "externalId": "0390",
+    "nombreEs": "Mancuerna sentado curl de bíceps sobre balón suizo"
+  },
+  {
+    "externalId": "0391",
+    "nombreEs": "Mancuerna sentado curl"
+  },
+  {
+    "externalId": "0392",
+    "nombreEs": "Mancuerna sentado elevación frontal"
+  },
+  {
+    "externalId": "0393",
+    "nombreEs": "Mancuerna sentado interno curl de bíceps"
+  },
+  {
+    "externalId": "0394",
+    "nombreEs": "Mancuerna sentado patada"
+  },
+  {
+    "externalId": "0395",
+    "nombreEs": "Mancuerna sentado elevación lateral v 2"
+  },
+  {
+    "externalId": "0396",
+    "nombreEs": "Mancuerna sentado elevación lateral"
+  },
+  {
+    "externalId": "0397",
+    "nombreEs": "Mancuerna sentado neutro curl de muñeca"
+  },
+  {
+    "externalId": "0398",
+    "nombreEs": "Mancuerna sentado a un brazo patada"
+  },
+  {
+    "externalId": "0399",
+    "nombreEs": "Mancuerna sentado a un brazo rotar"
+  },
+  {
+    "externalId": "0400",
+    "nombreEs": "Mancuerna sentado a una pierna elevación de talones"
+  },
+  {
+    "externalId": "0401",
+    "nombreEs": "Mancuerna sentado palmas arriba curl de muñeca"
+  },
+  {
+    "externalId": "0402",
+    "nombreEs": "Mancuerna sentado curl predicador"
+  },
+  {
+    "externalId": "0403",
+    "nombreEs": "Mancuerna sentado inverso agarre curl concentrado"
+  },
+  {
+    "externalId": "0404",
+    "nombreEs": "Mancuerna sentado press de hombros paralelo agarre"
+  },
+  {
+    "externalId": "0405",
+    "nombreEs": "Mancuerna sentado press de hombros"
+  },
+  {
+    "externalId": "0406",
+    "nombreEs": "Mancuerna encogimiento"
+  },
+  {
+    "externalId": "0407",
+    "nombreEs": "Mancuerna flexión lateral de tronco"
+  },
+  {
+    "externalId": "0408",
+    "nombreEs": "Mancuerna lateral acostado a una mano elevación"
+  },
+  {
+    "externalId": "0409",
+    "nombreEs": "Mancuerna a una pierna elevación de talones"
+  },
+  {
+    "externalId": "0410",
+    "nombreEs": "Mancuerna a una pierna sentadilla búlgara"
+  },
+  {
+    "externalId": "0411",
+    "nombreEs": "Mancuerna a una pierna sentadilla"
+  },
+  {
+    "externalId": "0413",
+    "nombreEs": "Mancuerna sentadilla"
+  },
+  {
+    "externalId": "0414",
+    "nombreEs": "Mancuerna de pie alterno press por encima de la cabeza"
+  },
+  {
+    "externalId": "0415",
+    "nombreEs": "Mancuerna de pie alterno elevación"
+  },
+  {
+    "externalId": "0416",
+    "nombreEs": "Mancuerna de pie curl de bíceps"
+  },
+  {
+    "externalId": "0417",
+    "nombreEs": "Mancuerna elevación de talones de pie"
+  },
+  {
+    "externalId": "0418",
+    "nombreEs": "Mancuerna de pie curl concentrado"
+  },
+  {
+    "externalId": "0419",
+    "nombreEs": "Mancuerna de pie elevación frontal arriba cabeza"
+  },
+  {
+    "externalId": "0420",
+    "nombreEs": "Mancuerna de pie patada"
+  },
+  {
+    "externalId": "0421",
+    "nombreEs": "Mancuerna de pie a un brazo curl concentrado"
+  },
+  {
+    "externalId": "0422",
+    "nombreEs": "Mancuerna de pie a un brazo curl sobre inclinado banco"
+  },
+  {
+    "externalId": "0423",
+    "nombreEs": "Mancuerna de pie a un brazo extensión"
+  },
+  {
+    "externalId": "0424",
+    "nombreEs": "Mancuerna de pie a un brazo palma hacia adentro press"
+  },
+  {
+    "externalId": "0425",
+    "nombreEs": "Mancuerna de pie a un brazo curl inverso"
+  },
+  {
+    "externalId": "0426",
+    "nombreEs": "Mancuerna de pie press por encima de la cabeza"
+  },
+  {
+    "externalId": "0427",
+    "nombreEs": "Mancuerna de pie palmas adentro press"
+  },
+  {
+    "externalId": "0428",
+    "nombreEs": "Mancuerna de pie curl predicador"
+  },
+  {
+    "externalId": "0429",
+    "nombreEs": "Mancuerna de pie curl inverso"
+  },
+  {
+    "externalId": "0430",
+    "nombreEs": "Mancuerna de pie extensión de tríceps"
+  },
+  {
+    "externalId": "0431",
+    "nombreEs": "Mancuerna subida al cajón"
+  },
+  {
+    "externalId": "0432",
+    "nombreEs": "Mancuerna peso muerto piernas rígidas"
+  },
+  {
+    "externalId": "0433",
+    "nombreEs": "Mancuerna brazos rectos pullover"
+  },
+  {
+    "externalId": "0434",
+    "nombreEs": "Mancuerna recto pierna peso muerto"
+  },
+  {
+    "externalId": "0436",
+    "nombreEs": "Mancuerna tate press"
+  },
+  {
+    "externalId": "0437",
+    "nombreEs": "Mancuerna remo al mentón"
+  },
+  {
+    "externalId": "0438",
+    "nombreEs": "Mancuerna press en w"
+  },
+  {
+    "externalId": "0439",
+    "nombreEs": "Mancuerna curl zottman"
+  },
+  {
+    "externalId": "0443",
+    "nombreEs": "Codo a rodilla"
+  },
+  {
+    "externalId": "0445",
+    "nombreEs": "Barra z anti gravedad press"
+  },
+  {
+    "externalId": "0446",
+    "nombreEs": "Barra z agarre cerrado curl"
+  },
+  {
+    "externalId": "0447",
+    "nombreEs": "Barra z curl"
+  },
+  {
+    "externalId": "0448",
+    "nombreEs": "Barra z declinado agarre cerrado frente press"
+  },
+  {
+    "externalId": "0449",
+    "nombreEs": "Barra z inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "0450",
+    "nombreEs": "Barra z jm press de banca"
+  },
+  {
+    "externalId": "0451",
+    "nombreEs": "Barra z agarre inverso curl"
+  },
+  {
+    "externalId": "0452",
+    "nombreEs": "Barra z agarre inverso curl predicador"
+  },
+  {
+    "externalId": "0453",
+    "nombreEs": "Barra z sentado extensión de tríceps"
+  },
+  {
+    "externalId": "0454",
+    "nombreEs": "Barra z curl spider"
+  },
+  {
+    "externalId": "0455",
+    "nombreEs": "Dedo curls"
+  },
+  {
+    "externalId": "0456",
+    "nombreEs": "Flexión pierna abdominal inclinado rodilla"
+  },
+  {
+    "externalId": "0457",
+    "nombreEs": "Flexión pierna abdominal brazos rectos"
+  },
+  {
+    "externalId": "0458",
+    "nombreEs": "Suelo apertura con barra"
+  },
+  {
+    "externalId": "0459",
+    "nombreEs": "Aleteo patadas"
+  },
+  {
+    "externalId": "0464",
+    "nombreEs": "Frontal plancha con giro"
+  },
+  {
+    "externalId": "0466",
+    "nombreEs": "Gironda esternón barbilla"
+  },
+  {
+    "externalId": "0467",
+    "nombreEs": "Gorila barbilla"
+  },
+  {
+    "externalId": "0469",
+    "nombreEs": "Ingle crunch"
+  },
+  {
+    "externalId": "0471",
+    "nombreEs": "Parada de manos flexión de brazos"
+  },
+  {
+    "externalId": "0472",
+    "nombreEs": "Elevación de piernas colgado"
+  },
+  {
+    "externalId": "0473",
+    "nombreEs": "Colgado pica"
+  },
+  {
+    "externalId": "0474",
+    "nombreEs": "Colgado recto pierna cadera elevación"
+  },
+  {
+    "externalId": "0475",
+    "nombreEs": "Colgado recto elevación de piernas"
+  },
+  {
+    "externalId": "0476",
+    "nombreEs": "Colgado recto girando pierna cadera elevación"
+  },
+  {
+    "externalId": "0484",
+    "nombreEs": "Elevación de cadera inclinado rodilla"
+  },
+  {
+    "externalId": "0488",
+    "nombreEs": "Hiperextensión sobre banco"
+  },
+  {
+    "externalId": "0489",
+    "nombreEs": "Hiperextensión"
+  },
+  {
+    "externalId": "0490",
+    "nombreEs": "Inclinado agarre cerrado flexión de brazos"
+  },
+  {
+    "externalId": "0491",
+    "nombreEs": "Inclinado pierna cadera elevación pierna recto"
+  },
+  {
+    "externalId": "0492",
+    "nombreEs": "Inclinado flexión de brazos profundidad salto"
+  },
+  {
+    "externalId": "0493",
+    "nombreEs": "Inclinado flexión de brazos"
+  },
+  {
+    "externalId": "0494",
+    "nombreEs": "Inclinado agarre inverso flexión de brazos"
+  },
+  {
+    "externalId": "0495",
+    "nombreEs": "Inclinado girando abdominal"
+  },
+  {
+    "externalId": "0496",
+    "nombreEs": "Inverso curl femoral banco soporte"
+  },
+  {
+    "externalId": "0497",
+    "nombreEs": "Remo invertido v 2"
+  },
+  {
+    "externalId": "0498",
+    "nombreEs": "Remo invertido con correas"
+  },
+  {
+    "externalId": "0499",
+    "nombreEs": "Remo invertido"
+  },
+  {
+    "externalId": "0500",
+    "nombreEs": "Isométrico limpiaparabrisas"
+  },
+  {
+    "externalId": "0501",
+    "nombreEs": "Jack burpee"
+  },
+  {
+    "externalId": "0507",
+    "nombreEs": "Navaja abdominal"
+  },
+  {
+    "externalId": "0508",
+    "nombreEs": "Janda abdominal"
+  },
+  {
+    "externalId": "0513",
+    "nombreEs": "Sentadilla con salto v 2"
+  },
+  {
+    "externalId": "0514",
+    "nombreEs": "Sentadilla con salto"
+  },
+  {
+    "externalId": "0517",
+    "nombreEs": "Kettlebell avanzado molino"
+  },
+  {
+    "externalId": "0518",
+    "nombreEs": "Kettlebell alterno cargada colgante"
+  },
+  {
+    "externalId": "0519",
+    "nombreEs": "Kettlebell alterno press en el suelo"
+  },
+  {
+    "externalId": "0520",
+    "nombreEs": "Kettlebell alterno press"
+  },
+  {
+    "externalId": "0521",
+    "nombreEs": "Kettlebell alterno renegade remo"
+  },
+  {
+    "externalId": "0522",
+    "nombreEs": "Kettlebell alterno remo"
+  },
+  {
+    "externalId": "0523",
+    "nombreEs": "Kettlebell arnold press"
+  },
+  {
+    "externalId": "0524",
+    "nombreEs": "Kettlebell inclinado press"
+  },
+  {
+    "externalId": "0525",
+    "nombreEs": "Kettlebell invertido arriba cargada desde colgado posición"
+  },
+  {
+    "externalId": "0526",
+    "nombreEs": "Kettlebell doble alterno cargada colgante"
+  },
+  {
+    "externalId": "0527",
+    "nombreEs": "Kettlebell doble envión"
+  },
+  {
+    "externalId": "0528",
+    "nombreEs": "Kettlebell doble push press"
+  },
+  {
+    "externalId": "0529",
+    "nombreEs": "Kettlebell doble arrancada"
+  },
+  {
+    "externalId": "0530",
+    "nombreEs": "Kettlebell doble molino"
+  },
+  {
+    "externalId": "0531",
+    "nombreEs": "Kettlebell extendido rango a un brazo press en el suelo"
+  },
+  {
+    "externalId": "0532",
+    "nombreEs": "Kettlebell figura 8"
+  },
+  {
+    "externalId": "0533",
+    "nombreEs": "Kettlebell sentadilla frontal"
+  },
+  {
+    "externalId": "0534",
+    "nombreEs": "Kettlebell sentadilla goblet"
+  },
+  {
+    "externalId": "0535",
+    "nombreEs": "Kettlebell cargada colgante"
+  },
+  {
+    "externalId": "0536",
+    "nombreEs": "Kettlebell zancada pase a través"
+  },
+  {
+    "externalId": "0537",
+    "nombreEs": "Kettlebell a un brazo cargada y envión"
+  },
+  {
+    "externalId": "0538",
+    "nombreEs": "Kettlebell a un brazo envión"
+  },
+  {
+    "externalId": "0539",
+    "nombreEs": "Kettlebell a un brazo press militar a lateral"
+  },
+  {
+    "externalId": "0540",
+    "nombreEs": "Kettlebell a un brazo push press"
+  },
+  {
+    "externalId": "0541",
+    "nombreEs": "Kettlebell a un brazo remo"
+  },
+  {
+    "externalId": "0542",
+    "nombreEs": "Kettlebell a un brazo arrancada"
+  },
+  {
+    "externalId": "0543",
+    "nombreEs": "Kettlebell pirata apoyo piernas"
+  },
+  {
+    "externalId": "0544",
+    "nombreEs": "Kettlebell sentadilla pistol"
+  },
+  {
+    "externalId": "0545",
+    "nombreEs": "Kettlebell pliométrico flexión de brazos"
+  },
+  {
+    "externalId": "0546",
+    "nombreEs": "Kettlebell sentado press"
+  },
+  {
+    "externalId": "0547",
+    "nombreEs": "Kettlebell sube y baja press"
+  },
+  {
+    "externalId": "0548",
+    "nombreEs": "Kettlebell sumo alto jalón"
+  },
+  {
+    "externalId": "0549",
+    "nombreEs": "Balanceo con kettlebell"
+  },
+  {
+    "externalId": "0550",
+    "nombreEs": "Kettlebell thruster"
+  },
+  {
+    "externalId": "0551",
+    "nombreEs": "Kettlebell turkish get up sentadilla estilo"
+  },
+  {
+    "externalId": "0552",
+    "nombreEs": "Kettlebell a dos brazos cargada"
+  },
+  {
+    "externalId": "0553",
+    "nombreEs": "Kettlebell a dos brazos press militar"
+  },
+  {
+    "externalId": "0554",
+    "nombreEs": "Kettlebell molino"
+  },
+  {
+    "externalId": "0555",
+    "nombreEs": "Patada afuera sentado"
+  },
+  {
+    "externalId": "0558",
+    "nombreEs": "Kipping muscle up"
+  },
+  {
+    "externalId": "0562",
+    "nombreEs": "Landmine 180"
+  },
+  {
+    "externalId": "0570",
+    "nombreEs": "Pierna jalón adentro plano banco"
+  },
+  {
+    "externalId": "0571",
+    "nombreEs": "Palanca alterno estrecho agarre remo sentado"
+  },
+  {
+    "externalId": "0572",
+    "nombreEs": "Palanca asistido dominada agarre supino"
+  },
+  {
+    "externalId": "0573",
+    "nombreEs": "Palanca espalda extensión"
+  },
+  {
+    "externalId": "0574",
+    "nombreEs": "Palanca remo inclinado"
+  },
+  {
+    "externalId": "0575",
+    "nombreEs": "Palanca curl de bíceps"
+  },
+  {
+    "externalId": "0576",
+    "nombreEs": "Palanca press de pecho"
+  },
+  {
+    "externalId": "0577",
+    "nombreEs": "Palanca press de pecho"
+  },
+  {
+    "externalId": "0578",
+    "nombreEs": "Palanca peso muerto"
+  },
+  {
+    "externalId": "0579",
+    "nombreEs": "Palanca frontal jalón"
+  },
+  {
+    "externalId": "0580",
+    "nombreEs": "Palanca sin agarre encogimiento"
+  },
+  {
+    "externalId": "0581",
+    "nombreEs": "Palanca alto remo"
+  },
+  {
+    "externalId": "0582",
+    "nombreEs": "Palanca de rodillas curl femoral"
+  },
+  {
+    "externalId": "0583",
+    "nombreEs": "Palanca de rodillas giro"
+  },
+  {
+    "externalId": "0584",
+    "nombreEs": "Palanca elevación lateral"
+  },
+  {
+    "externalId": "0585",
+    "nombreEs": "Palanca extensión de piernas"
+  },
+  {
+    "externalId": "0586",
+    "nombreEs": "Palanca curl femoral acostado"
+  },
+  {
+    "externalId": "0587",
+    "nombreEs": "Palanca press militar"
+  },
+  {
+    "externalId": "0588",
+    "nombreEs": "Palanca estrecho agarre remo sentado"
+  },
+  {
+    "externalId": "0589",
+    "nombreEs": "Palanca a un brazo remo inclinado"
+  },
+  {
+    "externalId": "0590",
+    "nombreEs": "Palanca a un brazo press de hombros"
+  },
+  {
+    "externalId": "0591",
+    "nombreEs": "Palanca agarre prono fondo de tríceps"
+  },
+  {
+    "externalId": "0592",
+    "nombreEs": "Palanca curl predicador"
+  },
+  {
+    "externalId": "0593",
+    "nombreEs": "Palanca inverso hiperextensión"
+  },
+  {
+    "externalId": "0594",
+    "nombreEs": "Palanca elevación de talones sentado"
+  },
+  {
+    "externalId": "0595",
+    "nombreEs": "Palanca sentado crunch pecho almohadilla"
+  },
+  {
+    "externalId": "0596",
+    "nombreEs": "Palanca sentado apertura"
+  },
+  {
+    "externalId": "0597",
+    "nombreEs": "Palanca sentado cadera abducción"
+  },
+  {
+    "externalId": "0598",
+    "nombreEs": "Palanca sentado cadera aducción"
+  },
+  {
+    "externalId": "0599",
+    "nombreEs": "Palanca curl femoral sentado"
+  },
+  {
+    "externalId": "0600",
+    "nombreEs": "Palanca sentado elevación de piernas crunch"
+  },
+  {
+    "externalId": "0601",
+    "nombreEs": "Palanca sentado aperturas inversas paralelo agarre"
+  },
+  {
+    "externalId": "0602",
+    "nombreEs": "Palanca sentado aperturas inversas"
+  },
+  {
+    "externalId": "0603",
+    "nombreEs": "Palanca press de hombros"
+  },
+  {
+    "externalId": "0604",
+    "nombreEs": "Palanca encogimiento"
+  },
+  {
+    "externalId": "0605",
+    "nombreEs": "Palanca elevación de talones de pie"
+  },
+  {
+    "externalId": "0606",
+    "nombreEs": "Palanca barra t remo"
+  },
+  {
+    "externalId": "0607",
+    "nombreEs": "Palanca extensión de tríceps"
+  },
+  {
+    "externalId": "0609",
+    "nombreEs": "Londres puente"
+  },
+  {
+    "externalId": "0613",
+    "nombreEs": "Acostado lateral cuádriceps estiramiento"
+  },
+  {
+    "externalId": "0620",
+    "nombreEs": "Acostado elevación de piernas plano banco"
+  },
+  {
+    "externalId": "0624",
+    "nombreEs": "Marcha sentado en pared"
+  },
+  {
+    "externalId": "0627",
+    "nombreEs": "Mixto agarre dominada agarre supino"
+  },
+  {
+    "externalId": "0628",
+    "nombreEs": "Monstruo caminata"
+  },
+  {
+    "externalId": "0630",
+    "nombreEs": "Escalador"
+  },
+  {
+    "externalId": "0631",
+    "nombreEs": "Muscle up"
+  },
+  {
+    "externalId": "0634",
+    "nombreEs": "Negativo crunch"
+  },
+  {
+    "externalId": "0635",
+    "nombreEs": "Oblicuo crunches suelo"
+  },
+  {
+    "externalId": "0636",
+    "nombreEs": "Olímpico barra curl martillo"
+  },
+  {
+    "externalId": "0637",
+    "nombreEs": "Olímpico barra extensión de tríceps"
+  },
+  {
+    "externalId": "0638",
+    "nombreEs": "A un brazo dominada agarre supino"
+  },
+  {
+    "externalId": "0639",
+    "nombreEs": "A un brazo fondo"
+  },
+  {
+    "externalId": "0640",
+    "nombreEs": "A un brazo golpe con balón medicinal"
+  },
+  {
+    "externalId": "0641",
+    "nombreEs": "Otis arriba"
+  },
+  {
+    "externalId": "0642",
+    "nombreEs": "Afuera pierna patada flexión de brazos"
+  },
+  {
+    "externalId": "0643",
+    "nombreEs": "Sobre la cabeza tríceps estiramiento"
+  },
+  {
+    "externalId": "0648",
+    "nombreEs": "Cargada de potencia"
+  },
+  {
+    "externalId": "0650",
+    "nombreEs": "Jalón adentro sobre balón suizo"
+  },
+  {
+    "externalId": "0651",
+    "nombreEs": "Dominada agarre neutro"
+  },
+  {
+    "externalId": "0652",
+    "nombreEs": "Dominada"
+  },
+  {
+    "externalId": "0653",
+    "nombreEs": "Flexión de brazos bosu"
+  },
+  {
+    "externalId": "0655",
+    "nombreEs": "Flexión de brazos sobre balón suizo"
+  },
+  {
+    "externalId": "0656",
+    "nombreEs": "Flexión de brazos sobre balón suizo"
+  },
+  {
+    "externalId": "0658",
+    "nombreEs": "Flexión de brazos en pared v 2"
+  },
+  {
+    "externalId": "0659",
+    "nombreEs": "Flexión de brazos en pared"
+  },
+  {
+    "externalId": "0660",
+    "nombreEs": "Flexión de brazos agarre cerrado fuera mancuerna"
+  },
+  {
+    "externalId": "0661",
+    "nombreEs": "Flexión de brazos adentro pierna patada"
+  },
+  {
+    "externalId": "0662",
+    "nombreEs": "Flexión de brazos"
+  },
+  {
+    "externalId": "0663",
+    "nombreEs": "Flexión de brazos balón medicinal"
+  },
+  {
+    "externalId": "0664",
+    "nombreEs": "Flexión de brazos a plancha lateral"
+  },
+  {
+    "externalId": "0666",
+    "nombreEs": "Elevación a un brazo flexión de brazos"
+  },
+  {
+    "externalId": "0668",
+    "nombreEs": "Posterior declinado puente"
+  },
+  {
+    "externalId": "0669",
+    "nombreEs": "Posterior deltoides estiramiento"
+  },
+  {
+    "externalId": "0670",
+    "nombreEs": "Posterior dominada"
+  },
+  {
+    "externalId": "0672",
+    "nombreEs": "Inverso fondo"
+  },
+  {
+    "externalId": "0673",
+    "nombreEs": "Agarre inverso máquina jalón al pecho"
+  },
+  {
+    "externalId": "0674",
+    "nombreEs": "Agarre inverso dominada"
+  },
+  {
+    "externalId": "0675",
+    "nombreEs": "Inverso hiperextensión extensión sobre balón suizo"
+  },
+  {
+    "externalId": "0677",
+    "nombreEs": "Anilla fondos"
+  },
+  {
+    "externalId": "0678",
+    "nombreEs": "Rocky dominada jalón"
+  },
+  {
+    "externalId": "0680",
+    "nombreEs": "Cuerda escalada"
+  },
+  {
+    "externalId": "0684",
+    "nombreEs": "Carrera equipo"
+  },
+  {
+    "externalId": "0685",
+    "nombreEs": "Carrera"
+  },
+  {
+    "externalId": "0687",
+    "nombreEs": "Giro ruso"
+  },
+  {
+    "externalId": "0688",
+    "nombreEs": "Escapular dominada"
+  },
+  {
+    "externalId": "0689",
+    "nombreEs": "Sentado elevación de piernas"
+  },
+  {
+    "externalId": "0690",
+    "nombreEs": "Sentado inferior espalda estiramiento"
+  },
+  {
+    "externalId": "0691",
+    "nombreEs": "Sentado lateral crunch en pared"
+  },
+  {
+    "externalId": "0696",
+    "nombreEs": "Propio asistido inverso curl femoral en el suelo"
+  },
+  {
+    "externalId": "0697",
+    "nombreEs": "Propio asistido inverso curl femoral"
+  },
+  {
+    "externalId": "0699",
+    "nombreEs": "Hombro toque flexión de brazos"
+  },
+  {
+    "externalId": "0705",
+    "nombreEs": "Lateral puente v 2"
+  },
+  {
+    "externalId": "0709",
+    "nombreEs": "Lateral cadera sobre paralelo barras"
+  },
+  {
+    "externalId": "0710",
+    "nombreEs": "Lateral cadera abducción"
+  },
+  {
+    "externalId": "0716",
+    "nombreEs": "Lateral empuje cuello estiramiento"
+  },
+  {
+    "externalId": "0717",
+    "nombreEs": "Lateral flexión de brazos"
+  },
+  {
+    "externalId": "0720",
+    "nombreEs": "Lado a lado barbilla"
+  },
+  {
+    "externalId": "0721",
+    "nombreEs": "Lateral muñeca jalón estiramiento"
+  },
+  {
+    "externalId": "0725",
+    "nombreEs": "A un brazo flexión de brazos"
+  },
+  {
+    "externalId": "0727",
+    "nombreEs": "A una pierna elevación de talones sobre mancuerna"
+  },
+  {
+    "externalId": "0730",
+    "nombreEs": "A una pierna plataforma deslizamiento"
+  },
+  {
+    "externalId": "0735",
+    "nombreEs": "Abdominal v 2"
+  },
+  {
+    "externalId": "0738",
+    "nombreEs": "Trineo 45° prensa de pantorrillas"
+  },
+  {
+    "externalId": "0739",
+    "nombreEs": "Trineo 45° prensa de piernas"
+  },
+  {
+    "externalId": "0740",
+    "nombreEs": "Trineo 45° pierna ancho press"
+  },
+  {
+    "externalId": "0741",
+    "nombreEs": "Trineo cerrado sentadilla hack"
+  },
+  {
+    "externalId": "0742",
+    "nombreEs": "Trineo hacia adelante angulado elevación de talones"
+  },
+  {
+    "externalId": "0743",
+    "nombreEs": "Trineo sentadilla hack"
+  },
+  {
+    "externalId": "0744",
+    "nombreEs": "Trineo acostado sentadilla"
+  },
+  {
+    "externalId": "0746",
+    "nombreEs": "Smith espalda encogimiento"
+  },
+  {
+    "externalId": "0747",
+    "nombreEs": "Smith detrás cuello press"
+  },
+  {
+    "externalId": "0748",
+    "nombreEs": "Smith press de banca"
+  },
+  {
+    "externalId": "0749",
+    "nombreEs": "Smith inclinado rodilla buenos días"
+  },
+  {
+    "externalId": "0750",
+    "nombreEs": "Smith silla sentadilla"
+  },
+  {
+    "externalId": "0751",
+    "nombreEs": "Smith agarre cerrado press de banca"
+  },
+  {
+    "externalId": "0752",
+    "nombreEs": "Smith peso muerto"
+  },
+  {
+    "externalId": "0753",
+    "nombreEs": "Smith declinado press de banca"
+  },
+  {
+    "externalId": "0754",
+    "nombreEs": "Smith declinado agarre inverso press"
+  },
+  {
+    "externalId": "0755",
+    "nombreEs": "Smith sentadilla hack"
+  },
+  {
+    "externalId": "0756",
+    "nombreEs": "Smith elevación de cadera"
+  },
+  {
+    "externalId": "0757",
+    "nombreEs": "Smith inclinado press de banca"
+  },
+  {
+    "externalId": "0758",
+    "nombreEs": "Smith inclinado agarre inverso press"
+  },
+  {
+    "externalId": "0759",
+    "nombreEs": "Smith inclinado hombro elevaciones"
+  },
+  {
+    "externalId": "0760",
+    "nombreEs": "Smith prensa de piernas"
+  },
+  {
+    "externalId": "0761",
+    "nombreEs": "Smith estrecho remo"
+  },
+  {
+    "externalId": "0762",
+    "nombreEs": "Smith posterior deltoides remo"
+  },
+  {
+    "externalId": "0763",
+    "nombreEs": "Smith inverso pantorrilla elevaciones"
+  },
+  {
+    "externalId": "0764",
+    "nombreEs": "Smith agarre inverso press"
+  },
+  {
+    "externalId": "0765",
+    "nombreEs": "Smith sentado press de hombros"
+  },
+  {
+    "externalId": "0766",
+    "nombreEs": "Smith press de hombros"
+  },
+  {
+    "externalId": "0767",
+    "nombreEs": "Smith encogimiento"
+  },
+  {
+    "externalId": "0768",
+    "nombreEs": "Smith a una pierna sentadilla búlgara"
+  },
+  {
+    "externalId": "0769",
+    "nombreEs": "Smith sprint zancada"
+  },
+  {
+    "externalId": "0770",
+    "nombreEs": "Smith sentadilla"
+  },
+  {
+    "externalId": "0771",
+    "nombreEs": "Smith de pie espalda curl de muñeca"
+  },
+  {
+    "externalId": "0772",
+    "nombreEs": "Smith de pie detrás cabeza press militar"
+  },
+  {
+    "externalId": "0773",
+    "nombreEs": "Smith de pie pierna elevación de talones"
+  },
+  {
+    "externalId": "0774",
+    "nombreEs": "Smith de pie press militar"
+  },
+  {
+    "externalId": "0775",
+    "nombreEs": "Smith remo al mentón"
+  },
+  {
+    "externalId": "0776",
+    "nombreEs": "Arrancada jalón"
+  },
+  {
+    "externalId": "0777",
+    "nombreEs": "Spell caster"
+  },
+  {
+    "externalId": "0778",
+    "nombreEs": "Spider gateo flexión de brazos"
+  },
+  {
+    "externalId": "0786",
+    "nombreEs": "Sentadilla envión"
+  },
+  {
+    "externalId": "0788",
+    "nombreEs": "De pie detrás cuello press"
+  },
+  {
+    "externalId": "0794",
+    "nombreEs": "De pie lateral estiramiento"
+  },
+  {
+    "externalId": "0795",
+    "nombreEs": "De pie a una pierna curl"
+  },
+  {
+    "externalId": "0796",
+    "nombreEs": "De pie rueda rollout abdominal"
+  },
+  {
+    "externalId": "0798",
+    "nombreEs": "Estacionario bicicleta caminata"
+  },
+  {
+    "externalId": "0803",
+    "nombreEs": "Superman flexión de brazos"
+  },
+  {
+    "externalId": "0805",
+    "nombreEs": "Suspendido abdominal fallout"
+  },
+  {
+    "externalId": "0806",
+    "nombreEs": "Suspendido flexión de brazos"
+  },
+  {
+    "externalId": "0807",
+    "nombreEs": "Suspendido crunch inverso"
+  },
+  {
+    "externalId": "0808",
+    "nombreEs": "Suspendido remo"
+  },
+  {
+    "externalId": "0809",
+    "nombreEs": "Suspendido sentadilla búlgara"
+  },
+  {
+    "externalId": "0811",
+    "nombreEs": "Trapecio barra peso muerto"
+  },
+  {
+    "externalId": "0812",
+    "nombreEs": "Fondo de tríceps banco pierna"
+  },
+  {
+    "externalId": "0813",
+    "nombreEs": "Fondo de tríceps entre bancos"
+  },
+  {
+    "externalId": "0814",
+    "nombreEs": "Fondo de tríceps"
+  },
+  {
+    "externalId": "0815",
+    "nombreEs": "Tríceps fondos suelo"
+  },
+  {
+    "externalId": "0816",
+    "nombreEs": "Tríceps press"
+  },
+  {
+    "externalId": "0817",
+    "nombreEs": "Tríceps estiramiento"
+  },
+  {
+    "externalId": "0818",
+    "nombreEs": "Gemelo agarradera paralelo agarre jalón al pecho"
+  },
+  {
+    "externalId": "0826",
+    "nombreEs": "Vertical elevación de piernas sobre paralelo barras"
+  },
+  {
+    "externalId": "0830",
+    "nombreEs": "Con peso banco fondo"
+  },
+  {
+    "externalId": "0832",
+    "nombreEs": "Con peso crunch"
+  },
+  {
+    "externalId": "0833",
+    "nombreEs": "Con peso elevación de talones burro"
+  },
+  {
+    "externalId": "0834",
+    "nombreEs": "Con peso elevación frontal"
+  },
+  {
+    "externalId": "0835",
+    "nombreEs": "Con peso hiperextensión sobre balón suizo"
+  },
+  {
+    "externalId": "0840",
+    "nombreEs": "Con peso sobre la cabeza crunch sobre balón suizo"
+  },
+  {
+    "externalId": "0841",
+    "nombreEs": "Con peso dominada"
+  },
+  {
+    "externalId": "0844",
+    "nombreEs": "Con peso redondo brazo"
+  },
+  {
+    "externalId": "0845",
+    "nombreEs": "Con peso giro ruso piernas arriba"
+  },
+  {
+    "externalId": "0846",
+    "nombreEs": "Con peso giro ruso"
+  },
+  {
+    "externalId": "0847",
+    "nombreEs": "Con peso sentado curl de bíceps sobre balón suizo"
+  },
+  {
+    "externalId": "0849",
+    "nombreEs": "Con peso sentado giro sobre balón suizo"
+  },
+  {
+    "externalId": "0850",
+    "nombreEs": "Con peso flexión lateral de tronco sobre balón suizo"
+  },
+  {
+    "externalId": "0851",
+    "nombreEs": "Con peso sentadilla sissy"
+  },
+  {
+    "externalId": "0852",
+    "nombreEs": "Con peso sentadilla"
+  },
+  {
+    "externalId": "0853",
+    "nombreEs": "Con peso de pie curl"
+  },
+  {
+    "externalId": "0854",
+    "nombreEs": "Con peso de pie mano apretón"
+  },
+  {
+    "externalId": "0856",
+    "nombreEs": "Con peso svend press"
+  },
+  {
+    "externalId": "0857",
+    "nombreEs": "Rueda rollout abdominal"
+  },
+  {
+    "externalId": "0858",
+    "nombreEs": "Viento sprints"
+  },
+  {
+    "externalId": "0859",
+    "nombreEs": "Muñeca rodillo"
+  },
+  {
+    "externalId": "0860",
+    "nombreEs": "Polea patada"
+  },
+  {
+    "externalId": "0861",
+    "nombreEs": "Polea remo sentado"
+  },
+  {
+    "externalId": "0862",
+    "nombreEs": "Polea giro arriba abajo"
+  },
+  {
+    "externalId": "0863",
+    "nombreEs": "Mancuerna acostado externo hombro rotación"
+  },
+  {
+    "externalId": "0864",
+    "nombreEs": "Mancuerna vertical hombro externo rotación"
+  },
+  {
+    "externalId": "0865",
+    "nombreEs": "Acostado pierna cadera elevación"
+  },
+  {
+    "externalId": "0866",
+    "nombreEs": "Con peso colgado pierna cadera elevación"
+  },
+  {
+    "externalId": "0868",
+    "nombreEs": "Curl en polea"
+  },
+  {
+    "externalId": "0869",
+    "nombreEs": "Palanca press de hombros v 2"
+  },
+  {
+    "externalId": "0870",
+    "nombreEs": "Elevación de glúteos"
+  },
+  {
+    "externalId": "0871",
+    "nombreEs": "Tuck crunch"
+  },
+  {
+    "externalId": "0872",
+    "nombreEs": "Crunch inverso"
+  },
+  {
+    "externalId": "0873",
+    "nombreEs": "Polea crunch inverso"
+  },
+  {
+    "externalId": "0874",
+    "nombreEs": "Polea de pie crunch con cuerda accesorio"
+  },
+  {
+    "externalId": "0968",
+    "nombreEs": "Banda alterno curl de bíceps"
+  },
+  {
+    "externalId": "0969",
+    "nombreEs": "Banda alterno abdominal en v"
+  },
+  {
+    "externalId": "0970",
+    "nombreEs": "Banda asistido dominada"
+  },
+  {
+    "externalId": "0971",
+    "nombreEs": "Banda asistido rueda rollout abdominal"
+  },
+  {
+    "externalId": "0972",
+    "nombreEs": "Banda crunch bicicleta"
+  },
+  {
+    "externalId": "0974",
+    "nombreEs": "Banda agarre cerrado jalón"
+  },
+  {
+    "externalId": "0975",
+    "nombreEs": "Banda agarre cerrado flexión de brazos"
+  },
+  {
+    "externalId": "0976",
+    "nombreEs": "Banda curl concentrado"
+  },
+  {
+    "externalId": "0977",
+    "nombreEs": "Banda frontal elevación lateral"
+  },
+  {
+    "externalId": "0978",
+    "nombreEs": "Banda elevación frontal"
+  },
+  {
+    "externalId": "0979",
+    "nombreEs": "Banda horizontal pallof press"
+  },
+  {
+    "externalId": "0980",
+    "nombreEs": "Banda inclinado cadera extensión"
+  },
+  {
+    "externalId": "0981",
+    "nombreEs": "Banda jack cuchillo abdominal"
+  },
+  {
+    "externalId": "0983",
+    "nombreEs": "Banda de rodillas a un brazo jalón"
+  },
+  {
+    "externalId": "0984",
+    "nombreEs": "Banda acostado cadera interno rotación"
+  },
+  {
+    "externalId": "0985",
+    "nombreEs": "Banda de rodillas girando crunch"
+  },
+  {
+    "externalId": "0986",
+    "nombreEs": "Banda a un brazo sobre la cabeza curl de bíceps"
+  },
+  {
+    "externalId": "0987",
+    "nombreEs": "Banda a un brazo a una pierna sentadilla búlgara"
+  },
+  {
+    "externalId": "0988",
+    "nombreEs": "Banda a un brazo de pie bajo remo"
+  },
+  {
+    "externalId": "0989",
+    "nombreEs": "Banda a un brazo girando press de pecho"
+  },
+  {
+    "externalId": "0990",
+    "nombreEs": "Banda a un brazo girando remo sentado"
+  },
+  {
+    "externalId": "0991",
+    "nombreEs": "Banda jalón a través"
+  },
+  {
+    "externalId": "0992",
+    "nombreEs": "Banda empuje abdominal"
+  },
+  {
+    "externalId": "0993",
+    "nombreEs": "Banda aperturas inversas"
+  },
+  {
+    "externalId": "0994",
+    "nombreEs": "Banda curl de muñeca inverso"
+  },
+  {
+    "externalId": "0996",
+    "nombreEs": "Banda sentado cadera interno rotación"
+  },
+  {
+    "externalId": "0997",
+    "nombreEs": "Banda press de hombros"
+  },
+  {
+    "externalId": "0998",
+    "nombreEs": "Banda lateral extensión de tríceps"
+  },
+  {
+    "externalId": "0999",
+    "nombreEs": "Banda a una pierna elevación de talones"
+  },
+  {
+    "externalId": "1000",
+    "nombreEs": "Banda a una pierna inverso elevación de talones"
+  },
+  {
+    "externalId": "1001",
+    "nombreEs": "Banda a una pierna sentadilla búlgara"
+  },
+  {
+    "externalId": "1002",
+    "nombreEs": "Banda acostado recto elevación de piernas"
+  },
+  {
+    "externalId": "1003",
+    "nombreEs": "Banda sentadilla remo"
+  },
+  {
+    "externalId": "1004",
+    "nombreEs": "Banda sentadilla"
+  },
+  {
+    "externalId": "1005",
+    "nombreEs": "Banda de pie crunch"
+  },
+  {
+    "externalId": "1007",
+    "nombreEs": "Banda de pie girando crunch"
+  },
+  {
+    "externalId": "1008",
+    "nombreEs": "Banda subida al cajón"
+  },
+  {
+    "externalId": "1009",
+    "nombreEs": "Banda peso muerto piernas rígidas"
+  },
+  {
+    "externalId": "1010",
+    "nombreEs": "Banda recto pierna peso muerto"
+  },
+  {
+    "externalId": "1011",
+    "nombreEs": "Banda sentado giro"
+  },
+  {
+    "externalId": "1012",
+    "nombreEs": "Banda girando press por encima de la cabeza"
+  },
+  {
+    "externalId": "1013",
+    "nombreEs": "Banda agarre supino jalón"
+  },
+  {
+    "externalId": "1014",
+    "nombreEs": "Banda abdominal en v"
+  },
+  {
+    "externalId": "1015",
+    "nombreEs": "Banda vertical pallof press"
+  },
+  {
+    "externalId": "1016",
+    "nombreEs": "Banda curl de muñeca"
+  },
+  {
+    "externalId": "1017",
+    "nombreEs": "Banda elevación en y"
+  },
+  {
+    "externalId": "1018",
+    "nombreEs": "Banda encogimiento"
+  },
+  {
+    "externalId": "1022",
+    "nombreEs": "Banda de pie posterior deltoides remo"
+  },
+  {
+    "externalId": "1023",
+    "nombreEs": "Banda recto espalda peso muerto piernas rígidas"
+  },
+  {
+    "externalId": "1160",
+    "nombreEs": "Burpee"
+  },
+  {
+    "externalId": "1167",
+    "nombreEs": "Dinámico pecho estiramiento"
+  },
+  {
+    "externalId": "1201",
+    "nombreEs": "Mancuerna burpee"
+  },
+  {
+    "externalId": "1253",
+    "nombreEs": "Palanca elevación de talones burro"
+  },
+  {
+    "externalId": "1254",
+    "nombreEs": "Banda press de banca"
+  },
+  {
+    "externalId": "1255",
+    "nombreEs": "Barra declinado pullover"
+  },
+  {
+    "externalId": "1256",
+    "nombreEs": "Barra agarre inverso declinado press de banca"
+  },
+  {
+    "externalId": "1257",
+    "nombreEs": "Barra agarre inverso inclinado press de banca"
+  },
+  {
+    "externalId": "1258",
+    "nombreEs": "Barra ancho agarre inverso press de banca"
+  },
+  {
+    "externalId": "1259",
+    "nombreEs": "Detrás cabeza pecho estiramiento"
+  },
+  {
+    "externalId": "1260",
+    "nombreEs": "Polea declinado a un brazo press"
+  },
+  {
+    "externalId": "1261",
+    "nombreEs": "Polea declinado press"
+  },
+  {
+    "externalId": "1262",
+    "nombreEs": "Polea a un brazo declinado aperturas de pecho"
+  },
+  {
+    "externalId": "1263",
+    "nombreEs": "Polea a un brazo apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1264",
+    "nombreEs": "Polea a un brazo inclinado apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1265",
+    "nombreEs": "Polea a un brazo inclinado press"
+  },
+  {
+    "externalId": "1266",
+    "nombreEs": "Polea a un brazo inclinado press sobre balón suizo"
+  },
+  {
+    "externalId": "1267",
+    "nombreEs": "Polea a un brazo press sobre balón suizo"
+  },
+  {
+    "externalId": "1268",
+    "nombreEs": "Polea press sobre balón suizo"
+  },
+  {
+    "externalId": "1269",
+    "nombreEs": "Polea de pie arriba recto cruces"
+  },
+  {
+    "externalId": "1270",
+    "nombreEs": "Polea superior pecho cruces"
+  },
+  {
+    "externalId": "1271",
+    "nombreEs": "Pecho y frontal de hombro estiramiento"
+  },
+  {
+    "externalId": "1272",
+    "nombreEs": "Pecho estiramiento con balón suizo"
+  },
+  {
+    "externalId": "1273",
+    "nombreEs": "Palmada flexión de brazos"
+  },
+  {
+    "externalId": "1274",
+    "nombreEs": "Profundo flexión de brazos"
+  },
+  {
+    "externalId": "1275",
+    "nombreEs": "Caída flexión de brazos"
+  },
+  {
+    "externalId": "1276",
+    "nombreEs": "Mancuerna declinado a un brazo apertura"
+  },
+  {
+    "externalId": "1277",
+    "nombreEs": "Mancuerna apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1278",
+    "nombreEs": "Mancuerna inclinado apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1279",
+    "nombreEs": "Mancuerna inclinado a un brazo apertura"
+  },
+  {
+    "externalId": "1280",
+    "nombreEs": "Mancuerna inclinado a un brazo apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1281",
+    "nombreEs": "Mancuerna inclinado a un brazo press"
+  },
+  {
+    "externalId": "1282",
+    "nombreEs": "Mancuerna inclinado a un brazo press sobre balón suizo"
+  },
+  {
+    "externalId": "1283",
+    "nombreEs": "Mancuerna inclinado press sobre balón suizo"
+  },
+  {
+    "externalId": "1284",
+    "nombreEs": "Mancuerna acostado pullover sobre balón suizo"
+  },
+  {
+    "externalId": "1285",
+    "nombreEs": "Mancuerna a un brazo banco apertura"
+  },
+  {
+    "externalId": "1286",
+    "nombreEs": "Mancuerna a un brazo aperturas de pecho sobre balón suizo"
+  },
+  {
+    "externalId": "1287",
+    "nombreEs": "Mancuerna a un brazo declinado press de pecho"
+  },
+  {
+    "externalId": "1288",
+    "nombreEs": "Mancuerna a un brazo apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1289",
+    "nombreEs": "Mancuerna a un brazo inclinado press de pecho"
+  },
+  {
+    "externalId": "1290",
+    "nombreEs": "Mancuerna a un brazo press sobre balón suizo"
+  },
+  {
+    "externalId": "1291",
+    "nombreEs": "Mancuerna a un brazo pullover sobre balón suizo"
+  },
+  {
+    "externalId": "1292",
+    "nombreEs": "Mancuerna a una pierna apertura sobre balón suizo"
+  },
+  {
+    "externalId": "1293",
+    "nombreEs": "Mancuerna press sobre balón suizo"
+  },
+  {
+    "externalId": "1294",
+    "nombreEs": "Mancuerna pullover cadera extensión sobre balón suizo"
+  },
+  {
+    "externalId": "1295",
+    "nombreEs": "Mancuerna pullover sobre balón suizo"
+  },
+  {
+    "externalId": "1296",
+    "nombreEs": "Balón suizo pica flexión de brazos"
+  },
+  {
+    "externalId": "1297",
+    "nombreEs": "Isométrico pecho apretón"
+  },
+  {
+    "externalId": "1298",
+    "nombreEs": "Kettlebell a un brazo suelo press"
+  },
+  {
+    "externalId": "1299",
+    "nombreEs": "Palanca inclinado press de pecho"
+  },
+  {
+    "externalId": "1300",
+    "nombreEs": "Palanca declinado press de pecho"
+  },
+  {
+    "externalId": "1301",
+    "nombreEs": "Máquina interno press de pecho"
+  },
+  {
+    "externalId": "1302",
+    "nombreEs": "Balón medicinal pecho pase"
+  },
+  {
+    "externalId": "1303",
+    "nombreEs": "Balón medicinal pecho empuje desde 3 punto postura"
+  },
+  {
+    "externalId": "1304",
+    "nombreEs": "Balón medicinal pecho empuje múltiple respuesta"
+  },
+  {
+    "externalId": "1305",
+    "nombreEs": "Balón medicinal pecho empuje individual respuesta"
+  },
+  {
+    "externalId": "1306",
+    "nombreEs": "Pliométrico flexión de brazos"
+  },
+  {
+    "externalId": "1307",
+    "nombreEs": "Flexión de brazos sobre bosu"
+  },
+  {
+    "externalId": "1308",
+    "nombreEs": "Smith agarre ancho press de banca"
+  },
+  {
+    "externalId": "1309",
+    "nombreEs": "Smith agarre ancho declinado press de banca"
+  },
+  {
+    "externalId": "1310",
+    "nombreEs": "Con peso caída flexión de brazos"
+  },
+  {
+    "externalId": "1311",
+    "nombreEs": "Ancho mano flexión de brazos"
+  },
+  {
+    "externalId": "1312",
+    "nombreEs": "Balón medicinal pecho empuje con carrera liberación"
+  },
+  {
+    "externalId": "1313",
+    "nombreEs": "Palanca unilateral remo"
+  },
+  {
+    "externalId": "1314",
+    "nombreEs": "Espalda extensión sobre balón suizo"
+  },
+  {
+    "externalId": "1316",
+    "nombreEs": "Barra inclinado brazo pullover"
+  },
+  {
+    "externalId": "1317",
+    "nombreEs": "Barra agarre inverso inclinado banco remo"
+  },
+  {
+    "externalId": "1318",
+    "nombreEs": "Polea inclinado banco remo"
+  },
+  {
+    "externalId": "1319",
+    "nombreEs": "Polea palma rotacional remo"
+  },
+  {
+    "externalId": "1320",
+    "nombreEs": "Polea cuerda cruce remo sentado"
+  },
+  {
+    "externalId": "1321",
+    "nombreEs": "Polea cuerda elevado remo sentado"
+  },
+  {
+    "externalId": "1322",
+    "nombreEs": "Polea cuerda extensión inclinado banco remo"
+  },
+  {
+    "externalId": "1323",
+    "nombreEs": "Polea cuerda remo sentado"
+  },
+  {
+    "externalId": "1324",
+    "nombreEs": "Polea superior remo"
+  },
+  {
+    "externalId": "1325",
+    "nombreEs": "Polea agarre ancho posterior jalón detrás cuello"
+  },
+  {
+    "externalId": "1326",
+    "nombreEs": "Dominada agarre supino"
+  },
+  {
+    "externalId": "1327",
+    "nombreEs": "Agarre cerrado dominada agarre supino"
+  },
+  {
+    "externalId": "1328",
+    "nombreEs": "Mancuerna acostado posterior deltoides remo"
+  },
+  {
+    "externalId": "1329",
+    "nombreEs": "Mancuerna palma rotacional remo inclinado"
+  },
+  {
+    "externalId": "1330",
+    "nombreEs": "Mancuerna agarre inverso inclinado banco a un brazo remo"
+  },
+  {
+    "externalId": "1331",
+    "nombreEs": "Mancuerna agarre inverso inclinado banco a dos brazos remo"
+  },
+  {
+    "externalId": "1332",
+    "nombreEs": "Balón suizo alterno brazo hacia arriba"
+  },
+  {
+    "externalId": "1333",
+    "nombreEs": "Balón suizo espalda extensión con brazos extendido"
+  },
+  {
+    "externalId": "1334",
+    "nombreEs": "Balón suizo espalda extensión con manos detrás cabeza"
+  },
+  {
+    "externalId": "1335",
+    "nombreEs": "Balón suizo espalda extensión con rodillas fuera suelo"
+  },
+  {
+    "externalId": "1336",
+    "nombreEs": "Balón suizo espalda extensión con rotación"
+  },
+  {
+    "externalId": "1338",
+    "nombreEs": "Balón suizo abrazo"
+  },
+  {
+    "externalId": "1339",
+    "nombreEs": "Balón suizo dorsal estiramiento"
+  },
+  {
+    "externalId": "1341",
+    "nombreEs": "Balón suizo inferior espalda estiramiento pirámide"
+  },
+  {
+    "externalId": "1342",
+    "nombreEs": "Balón suizo acostado lateral dorsal estiramiento"
+  },
+  {
+    "externalId": "1343",
+    "nombreEs": "Balón suizo boca abajo elevación de piernas"
+  },
+  {
+    "externalId": "1344",
+    "nombreEs": "Barra z agarre inverso remo inclinado"
+  },
+  {
+    "externalId": "1345",
+    "nombreEs": "Kettlebell a dos brazos remo"
+  },
+  {
+    "externalId": "1346",
+    "nombreEs": "De rodillas dorsal estiramiento"
+  },
+  {
+    "externalId": "1347",
+    "nombreEs": "Palanca a un brazo lateral ancho jalón"
+  },
+  {
+    "externalId": "1348",
+    "nombreEs": "Palanca agarre inverso vertical remo"
+  },
+  {
+    "externalId": "1349",
+    "nombreEs": "Palanca inverso barra t remo"
+  },
+  {
+    "externalId": "1350",
+    "nombreEs": "Palanca remo sentado"
+  },
+  {
+    "externalId": "1351",
+    "nombreEs": "Palanca barra t agarre inverso remo"
+  },
+  {
+    "externalId": "1352",
+    "nombreEs": "Inferior espalda curl"
+  },
+  {
+    "externalId": "1353",
+    "nombreEs": "Balón medicinal recepción y sobre la cabeza lanzamiento"
+  },
+  {
+    "externalId": "1354",
+    "nombreEs": "Balón medicinal sobre la cabeza golpe"
+  },
+  {
+    "externalId": "1355",
+    "nombreEs": "A un brazo contra en pared"
+  },
+  {
+    "externalId": "1356",
+    "nombreEs": "Palanca a un brazo lateral alto remo"
+  },
+  {
+    "externalId": "1358",
+    "nombreEs": "Lateral acostado suelo estiramiento"
+  },
+  {
+    "externalId": "1359",
+    "nombreEs": "Smith remo inclinado"
+  },
+  {
+    "externalId": "1360",
+    "nombreEs": "Smith a un brazo remo"
+  },
+  {
+    "externalId": "1361",
+    "nombreEs": "Smith agarre inverso remo inclinado"
+  },
+  {
+    "externalId": "1362",
+    "nombreEs": "Esfinge"
+  },
+  {
+    "externalId": "1363",
+    "nombreEs": "Columna estiramiento"
+  },
+  {
+    "externalId": "1364",
+    "nombreEs": "De pie pélvico inclinación"
+  },
+  {
+    "externalId": "1365",
+    "nombreEs": "Superior espalda estiramiento"
+  },
+  {
+    "externalId": "1366",
+    "nombreEs": "Hacia arriba mirando perro"
+  },
+  {
+    "externalId": "1367",
+    "nombreEs": "Agarre ancho posterior dominada"
+  },
+  {
+    "externalId": "1368",
+    "nombreEs": "Tobillo círculos"
+  },
+  {
+    "externalId": "1369",
+    "nombreEs": "Banda dos piernas elevación de talones banda debajo ambos piernas v 2"
+  },
+  {
+    "externalId": "1370",
+    "nombreEs": "Barra suelo elevación de talones"
+  },
+  {
+    "externalId": "1371",
+    "nombreEs": "Barra elevación de talones sentado"
+  },
+  {
+    "externalId": "1372",
+    "nombreEs": "Barra elevación de talones de pie"
+  },
+  {
+    "externalId": "1373",
+    "nombreEs": "Peso corporal elevación de talones de pie"
+  },
+  {
+    "externalId": "1374",
+    "nombreEs": "Salto al cajón abajo con a una pierna estabilización"
+  },
+  {
+    "externalId": "1375",
+    "nombreEs": "Polea elevación de talones de pie"
+  },
+  {
+    "externalId": "1376",
+    "nombreEs": "Polea de pie a una pierna elevación de talones"
+  },
+  {
+    "externalId": "1377",
+    "nombreEs": "Pantorrilla estiramiento con manos contra en pared"
+  },
+  {
+    "externalId": "1378",
+    "nombreEs": "Pantorrilla estiramiento con cuerda"
+  },
+  {
+    "externalId": "1379",
+    "nombreEs": "Mancuerna elevación de talones sentado"
+  },
+  {
+    "externalId": "1380",
+    "nombreEs": "Mancuerna sentado a una pierna elevación de talones martillo agarre"
+  },
+  {
+    "externalId": "1381",
+    "nombreEs": "Mancuerna sentado a una pierna elevación de talones palma arriba"
+  },
+  {
+    "externalId": "1382",
+    "nombreEs": "Balón suizo sobre en pared elevación de talones"
+  },
+  {
+    "externalId": "1383",
+    "nombreEs": "Hack elevación de talones"
+  },
+  {
+    "externalId": "1384",
+    "nombreEs": "Hack a una pierna elevación de talones"
+  },
+  {
+    "externalId": "1385",
+    "nombreEs": "Palanca sentado sentadilla elevación de talones sobre prensa de piernas máquina"
+  },
+  {
+    "externalId": "1386",
+    "nombreEs": "A una pierna elevación de talones burro"
+  },
+  {
+    "externalId": "1387",
+    "nombreEs": "A una pierna suelo elevación de talones"
+  },
+  {
+    "externalId": "1388",
+    "nombreEs": "Peroneos estiramiento"
+  },
+  {
+    "externalId": "1389",
+    "nombreEs": "Posterior tibial estiramiento"
+  },
+  {
+    "externalId": "1390",
+    "nombreEs": "Sentado pantorrilla estiramiento"
+  },
+  {
+    "externalId": "1391",
+    "nombreEs": "Trineo prensa de pantorrillas sobre prensa de piernas"
+  },
+  {
+    "externalId": "1392",
+    "nombreEs": "Trineo a una pierna prensa de pantorrillas sobre prensa de piernas"
+  },
+  {
+    "externalId": "1393",
+    "nombreEs": "Smith a una pierna suelo elevación de talones"
+  },
+  {
+    "externalId": "1394",
+    "nombreEs": "Smith inverso pantorrilla elevaciones"
+  },
+  {
+    "externalId": "1395",
+    "nombreEs": "Smith sentado a una pierna elevación de talones"
+  },
+  {
+    "externalId": "1396",
+    "nombreEs": "Smith punta del pie elevación"
+  },
+  {
+    "externalId": "1397",
+    "nombreEs": "De pie pantorrillas"
+  },
+  {
+    "externalId": "1398",
+    "nombreEs": "De pie pantorrillas pantorrilla estiramiento"
+  },
+  {
+    "externalId": "1399",
+    "nombreEs": "Banco fondo en el suelo"
+  },
+  {
+    "externalId": "1401",
+    "nombreEs": "Muscle up sobre vertical barra"
+  },
+  {
+    "externalId": "1403",
+    "nombreEs": "Cuello lateral estiramiento"
+  },
+  {
+    "externalId": "1405",
+    "nombreEs": "Espalda pectoral estiramiento"
+  },
+  {
+    "externalId": "1407",
+    "nombreEs": "Pantorrilla empuje estiramiento con manos contra en pared"
+  },
+  {
+    "externalId": "1408",
+    "nombreEs": "Banda cadera levantamiento"
+  },
+  {
+    "externalId": "1409",
+    "nombreEs": "Barra puente de glúteos"
+  },
+  {
+    "externalId": "1410",
+    "nombreEs": "Barra lateral zancada"
+  },
+  {
+    "externalId": "1411",
+    "nombreEs": "Barra palmas abajo curl de muñeca sobre banco"
+  },
+  {
+    "externalId": "1412",
+    "nombreEs": "Barra palmas arriba curl de muñeca sobre banco"
+  },
+  {
+    "externalId": "1413",
+    "nombreEs": "Polea inverso a un brazo curl"
+  },
+  {
+    "externalId": "1414",
+    "nombreEs": "Mancuerna a un brazo inverso curl predicador"
+  },
+  {
+    "externalId": "1415",
+    "nombreEs": "Mancuerna a un brazo sentado neutro curl de muñeca"
+  },
+  {
+    "externalId": "1416",
+    "nombreEs": "Balón suizo a una pierna boca abajo inferior cuerpo rotación"
+  },
+  {
+    "externalId": "1417",
+    "nombreEs": "Balón suizo a una pierna diagonal patada isquiotibial curl"
+  },
+  {
+    "externalId": "1418",
+    "nombreEs": "Abrazo rodillas a pecho"
+  },
+  {
+    "externalId": "1419",
+    "nombreEs": "Hierro cruzado estiramiento"
+  },
+  {
+    "externalId": "1420",
+    "nombreEs": "De rodillas sentadilla con salto"
+  },
+  {
+    "externalId": "1421",
+    "nombreEs": "Modificado flexión de brazos a inferior brazos"
+  },
+  {
+    "externalId": "1422",
+    "nombreEs": "Pélvico inclinación hacia puente"
+  },
+  {
+    "externalId": "1423",
+    "nombreEs": "Inverso hiperextensión sobre plano banco"
+  },
+  {
+    "externalId": "1424",
+    "nombreEs": "Sentado glúteo estiramiento"
+  },
+  {
+    "externalId": "1425",
+    "nombreEs": "Trineo 45 grados a una pierna press"
+  },
+  {
+    "externalId": "1426",
+    "nombreEs": "Smith sentado curl de muñeca"
+  },
+  {
+    "externalId": "1427",
+    "nombreEs": "Recto pierna externo cadera abductor"
+  },
+  {
+    "externalId": "1428",
+    "nombreEs": "Muñeca círculos"
+  },
+  {
+    "externalId": "1429",
+    "nombreEs": "Agarre ancho dominada"
+  },
+  {
+    "externalId": "1430",
+    "nombreEs": "Fondo de pecho sobre fondo y dominada jaula"
+  },
+  {
+    "externalId": "1431",
+    "nombreEs": "Asistido de pie dominada agarre supino"
+  },
+  {
+    "externalId": "1432",
+    "nombreEs": "Asistido de pie dominada"
+  },
+  {
+    "externalId": "1433",
+    "nombreEs": "Smith sentadilla frontal agarre de cargada"
+  },
+  {
+    "externalId": "1434",
+    "nombreEs": "Smith bajo barra sentadilla"
+  },
+  {
+    "externalId": "1435",
+    "nombreEs": "Barra bajo barra sentadilla"
+  },
+  {
+    "externalId": "1436",
+    "nombreEs": "Barra alto barra sentadilla"
+  },
+  {
+    "externalId": "1437",
+    "nombreEs": "Mancuerna dedo curls"
+  },
+  {
+    "externalId": "1438",
+    "nombreEs": "Kettlebell sentado a dos brazos press militar"
+  },
+  {
+    "externalId": "1439",
+    "nombreEs": "Palanca sin agarre encogimiento v 2"
+  },
+  {
+    "externalId": "1441",
+    "nombreEs": "Mancuerna sobre banco a un brazo curl de muñeca inverso"
+  },
+  {
+    "externalId": "1451",
+    "nombreEs": "Palanca sentado fondo"
+  },
+  {
+    "externalId": "1452",
+    "nombreEs": "Palanca sentado crunch"
+  },
+  {
+    "externalId": "1456",
+    "nombreEs": "Barra de pie agarre cerrado press militar"
+  },
+  {
+    "externalId": "1457",
+    "nombreEs": "Barra de pie ancho press militar"
+  },
+  {
+    "externalId": "1458",
+    "nombreEs": "Barra z sentado curls"
+  },
+  {
+    "externalId": "1459",
+    "nombreEs": "Mancuerna peso muerto rumano"
+  },
+  {
+    "externalId": "1460",
+    "nombreEs": "Zancada caminando"
+  },
+  {
+    "externalId": "1461",
+    "nombreEs": "Barra completo sentadilla espalda pov"
+  },
+  {
+    "externalId": "1462",
+    "nombreEs": "Barra completo sentadilla lateral pov"
+  },
+  {
+    "externalId": "1463",
+    "nombreEs": "Trineo 45° prensa de piernas lateral pov"
+  },
+  {
+    "externalId": "1464",
+    "nombreEs": "Trineo 45° prensa de piernas espalda pov"
+  },
+  {
+    "externalId": "1466",
+    "nombreEs": "Giro cadera levantamiento"
+  },
+  {
+    "externalId": "1467",
+    "nombreEs": "Flexión de brazos sobre inferior brazos"
+  },
+  {
+    "externalId": "1468",
+    "nombreEs": "Cangrejo giro toque de punta de pie"
+  },
+  {
+    "externalId": "1471",
+    "nombreEs": "Gusano"
+  },
+  {
+    "externalId": "1472",
+    "nombreEs": "Hacia adelante salto"
+  },
+  {
+    "externalId": "1473",
+    "nombreEs": "Hacia atrás salto"
+  },
+  {
+    "externalId": "1476",
+    "nombreEs": "A una pierna sentadilla"
+  },
+  {
+    "externalId": "1479",
+    "nombreEs": "Palanca inclinado press de pecho v 2"
+  },
+  {
+    "externalId": "1489",
+    "nombreEs": "Sentadilla sissy"
+  },
+  {
+    "externalId": "1490",
+    "nombreEs": "Elevación de talones de pie sobre escalera"
+  },
+  {
+    "externalId": "1494",
+    "nombreEs": "Mariposa yoga postura"
+  },
+  {
+    "externalId": "1495",
+    "nombreEs": "Crunch oblicuo v 2"
+  },
+  {
+    "externalId": "1496",
+    "nombreEs": "Mazo martillo"
+  },
+  {
+    "externalId": "1511",
+    "nombreEs": "Isquiotibial estiramiento"
+  },
+  {
+    "externalId": "1512",
+    "nombreEs": "Cuatro apoyos sentadilla estiramiento"
+  },
+  {
+    "externalId": "1545",
+    "nombreEs": "Barra completo sentadilla zercher"
+  },
+  {
+    "externalId": "1548",
+    "nombreEs": "Silla pierna extendido estiramiento"
+  },
+  {
+    "externalId": "1559",
+    "nombreEs": "Balón suizo cadera flexor estiramiento"
+  },
+  {
+    "externalId": "1560",
+    "nombreEs": "Balón suizo sentado isquiotibial estiramiento"
+  },
+  {
+    "externalId": "1564",
+    "nombreEs": "Intermedio cadera flexor y cuádriceps estiramiento"
+  },
+  {
+    "externalId": "1576",
+    "nombreEs": "Pierna arriba isquiotibial estiramiento"
+  },
+  {
+    "externalId": "1582",
+    "nombreEs": "Reclinado grande punta del pie postura con cuerda"
+  },
+  {
+    "externalId": "1585",
+    "nombreEs": "Corredores estiramiento"
+  },
+  {
+    "externalId": "1587",
+    "nombreEs": "Sentado ancho ángulo postura secuencia"
+  },
+  {
+    "externalId": "1599",
+    "nombreEs": "De pie isquiotibial y pantorrilla estiramiento con correa"
+  },
+  {
+    "externalId": "1604",
+    "nombreEs": "Mundo mayor estiramiento"
+  },
+  {
+    "externalId": "1614",
+    "nombreEs": "Palanca curl predicador v 2"
+  },
+  {
+    "externalId": "1615",
+    "nombreEs": "Palanca martillo agarre curl predicador"
+  },
+  {
+    "externalId": "1616",
+    "nombreEs": "Palanca agarre inverso curl predicador"
+  },
+  {
+    "externalId": "1617",
+    "nombreEs": "Mancuerna declinado a un brazo martillo press"
+  },
+  {
+    "externalId": "1618",
+    "nombreEs": "Mancuerna inclinado martillo press sobre balón suizo"
+  },
+  {
+    "externalId": "1619",
+    "nombreEs": "Mancuerna inclinado a un brazo martillo press"
+  },
+  {
+    "externalId": "1620",
+    "nombreEs": "Mancuerna inclinado a un brazo martillo press sobre balón suizo"
+  },
+  {
+    "externalId": "1621",
+    "nombreEs": "Mancuerna a un brazo martillo press sobre balón suizo"
+  },
+  {
+    "externalId": "1622",
+    "nombreEs": "Mancuerna a un brazo agarre inverso press"
+  },
+  {
+    "externalId": "1623",
+    "nombreEs": "Mancuerna palmas adentro inclinado press de banca"
+  },
+  {
+    "externalId": "1624",
+    "nombreEs": "Mancuerna inverso press de banca"
+  },
+  {
+    "externalId": "1625",
+    "nombreEs": "Máquina smith declinado agarre cerrado press de banca"
+  },
+  {
+    "externalId": "1626",
+    "nombreEs": "Máquina smith inverso declinado agarre cerrado press de banca"
+  },
+  {
+    "externalId": "1627",
+    "nombreEs": "Barra z agarre cerrado curl predicador"
+  },
+  {
+    "externalId": "1628",
+    "nombreEs": "Barra z curl spider"
+  },
+  {
+    "externalId": "1629",
+    "nombreEs": "Barra de pie agarre ancho curl de bíceps"
+  },
+  {
+    "externalId": "1630",
+    "nombreEs": "Polea agarre cerrado curl"
+  },
+  {
+    "externalId": "1631",
+    "nombreEs": "Polea curl concentrado"
+  },
+  {
+    "externalId": "1632",
+    "nombreEs": "Polea curl drag"
+  },
+  {
+    "externalId": "1633",
+    "nombreEs": "Polea a un brazo curl predicador"
+  },
+  {
+    "externalId": "1634",
+    "nombreEs": "Polea acostado curl de bíceps"
+  },
+  {
+    "externalId": "1635",
+    "nombreEs": "Polea a un brazo inverso curl predicador"
+  },
+  {
+    "externalId": "1636",
+    "nombreEs": "Polea sobre la cabeza curl"
+  },
+  {
+    "externalId": "1637",
+    "nombreEs": "Polea sobre la cabeza curl sobre balón suizo"
+  },
+  {
+    "externalId": "1638",
+    "nombreEs": "Polea jalón curl de bíceps"
+  },
+  {
+    "externalId": "1639",
+    "nombreEs": "Polea cuerda martillo curl predicador"
+  },
+  {
+    "externalId": "1640",
+    "nombreEs": "Polea cuerda a un brazo martillo curl predicador"
+  },
+  {
+    "externalId": "1641",
+    "nombreEs": "Polea sentado curl"
+  },
+  {
+    "externalId": "1642",
+    "nombreEs": "Polea sentado a un brazo curl concentrado"
+  },
+  {
+    "externalId": "1643",
+    "nombreEs": "Polea sentado sobre la cabeza curl"
+  },
+  {
+    "externalId": "1644",
+    "nombreEs": "Polea sentadilla curl"
+  },
+  {
+    "externalId": "1645",
+    "nombreEs": "Polea a dos brazos curl sobre inclinado banco"
+  },
+  {
+    "externalId": "1646",
+    "nombreEs": "Mancuerna alterno martillo curl predicador"
+  },
+  {
+    "externalId": "1647",
+    "nombreEs": "Mancuerna alterno curl predicador"
+  },
+  {
+    "externalId": "1648",
+    "nombreEs": "Mancuerna alterno sentado curl martillo"
+  },
+  {
+    "externalId": "1649",
+    "nombreEs": "Mancuerna alterno curl de bíceps con pierna elevado sobre balón suizo"
+  },
+  {
+    "externalId": "1650",
+    "nombreEs": "Mancuerna alterno sentado curl de bíceps sobre balón suizo"
+  },
+  {
+    "externalId": "1651",
+    "nombreEs": "Mancuerna curl de bíceps zancada con bowling movimiento"
+  },
+  {
+    "externalId": "1652",
+    "nombreEs": "Mancuerna curl de bíceps sobre balón suizo con pierna elevado"
+  },
+  {
+    "externalId": "1653",
+    "nombreEs": "Mancuerna curl de bíceps con cigüeña postura"
+  },
+  {
+    "externalId": "1654",
+    "nombreEs": "Mancuerna curl de bíceps inverso"
+  },
+  {
+    "externalId": "1655",
+    "nombreEs": "Mancuerna curl de bíceps sentadilla"
+  },
+  {
+    "externalId": "1656",
+    "nombreEs": "Mancuerna curl de bíceps v sit sobre bosu"
+  },
+  {
+    "externalId": "1657",
+    "nombreEs": "Mancuerna cruzado cuerpo curl martillo v 2"
+  },
+  {
+    "externalId": "1658",
+    "nombreEs": "Mancuerna zancada con curl de bíceps"
+  },
+  {
+    "externalId": "1659",
+    "nombreEs": "Mancuerna curl martillo sobre balón suizo"
+  },
+  {
+    "externalId": "1660",
+    "nombreEs": "Mancuerna de rodillas curl de bíceps balón suizo"
+  },
+  {
+    "externalId": "1661",
+    "nombreEs": "Mancuerna acostado boca arriba curl de bíceps"
+  },
+  {
+    "externalId": "1662",
+    "nombreEs": "Mancuerna acostado ancho curl"
+  },
+  {
+    "externalId": "1663",
+    "nombreEs": "Mancuerna a un brazo martillo curl predicador"
+  },
+  {
+    "externalId": "1664",
+    "nombreEs": "Mancuerna alto curl"
+  },
+  {
+    "externalId": "1665",
+    "nombreEs": "Mancuerna a un brazo boca abajo curl"
+  },
+  {
+    "externalId": "1666",
+    "nombreEs": "Mancuerna a un brazo boca abajo curl martillo"
+  },
+  {
+    "externalId": "1667",
+    "nombreEs": "Mancuerna a un brazo inverso curl spider"
+  },
+  {
+    "externalId": "1668",
+    "nombreEs": "Mancuerna a un brazo sentado curl de bíceps sobre balón suizo"
+  },
+  {
+    "externalId": "1669",
+    "nombreEs": "Mancuerna a un brazo sentado curl martillo"
+  },
+  {
+    "externalId": "1670",
+    "nombreEs": "Mancuerna a un brazo de pie curl"
+  },
+  {
+    "externalId": "1671",
+    "nombreEs": "Mancuerna a un brazo de pie curl martillo"
+  },
+  {
+    "externalId": "1672",
+    "nombreEs": "Mancuerna a un brazo zottman curl predicador"
+  },
+  {
+    "externalId": "1673",
+    "nombreEs": "Mancuerna curl predicador sobre balón suizo"
+  },
+  {
+    "externalId": "1674",
+    "nombreEs": "Mancuerna boca abajo inclinado curl martillo"
+  },
+  {
+    "externalId": "1675",
+    "nombreEs": "Mancuerna inverso curl spider"
+  },
+  {
+    "externalId": "1676",
+    "nombreEs": "Mancuerna sentado alterno curl martillo sobre balón suizo"
+  },
+  {
+    "externalId": "1677",
+    "nombreEs": "Mancuerna sentado curl de bíceps"
+  },
+  {
+    "externalId": "1678",
+    "nombreEs": "Mancuerna sentado curl martillo"
+  },
+  {
+    "externalId": "1679",
+    "nombreEs": "Mancuerna sentado a un brazo curl de bíceps sobre balón suizo con pierna elevado"
+  },
+  {
+    "externalId": "1680",
+    "nombreEs": "Mancuerna de pie a un brazo curl sobre inclinado banco"
+  },
+  {
+    "externalId": "1682",
+    "nombreEs": "Barra z sentado agarre cerrado curl concentrado"
+  },
+  {
+    "externalId": "1683",
+    "nombreEs": "Máquina smith curl de bíceps"
+  },
+  {
+    "externalId": "1684",
+    "nombreEs": "Mancuerna subida al cajón a una pierna equilibrio con curl de bíceps"
+  },
+  {
+    "externalId": "1685",
+    "nombreEs": "Sentadilla a sobre la cabeza alcance"
+  },
+  {
+    "externalId": "1686",
+    "nombreEs": "Sentadilla a sobre la cabeza alcance con giro"
+  },
+  {
+    "externalId": "1687",
+    "nombreEs": "Posterior paso a sobre la cabeza alcance"
+  },
+  {
+    "externalId": "1688",
+    "nombreEs": "Zancada con giro"
+  },
+  {
+    "externalId": "1689",
+    "nombreEs": "Empuje y jalón peso corporal"
+  },
+  {
+    "externalId": "1700",
+    "nombreEs": "Mancuerna push press"
+  },
+  {
+    "externalId": "1701",
+    "nombreEs": "Balón medicinal agarre cerrado flexión de brazos"
+  },
+  {
+    "externalId": "1705",
+    "nombreEs": "Sentadilla sobre bosu"
+  },
+  {
+    "externalId": "1707",
+    "nombreEs": "Boca abajo giro sobre balón suizo"
+  },
+  {
+    "externalId": "1708",
+    "nombreEs": "Asistido acostado pantorrillas estiramiento"
+  },
+  {
+    "externalId": "1709",
+    "nombreEs": "Asistido acostado glúteos estiramiento"
+  },
+  {
+    "externalId": "1710",
+    "nombreEs": "Asistido acostado glúteo y piriforme estiramiento"
+  },
+  {
+    "externalId": "1712",
+    "nombreEs": "Asistido lateral acostado aductor estiramiento"
+  },
+  {
+    "externalId": "1713",
+    "nombreEs": "Asistido boca abajo acostado cuádriceps estiramiento"
+  },
+  {
+    "externalId": "1714",
+    "nombreEs": "Asistido boca abajo recto femoral estiramiento"
+  },
+  {
+    "externalId": "1716",
+    "nombreEs": "Asistido sentado pectoral mayor estiramiento con balón suizo"
+  },
+  {
+    "externalId": "1717",
+    "nombreEs": "Polea sentadilla remo con cuerda accesorio"
+  },
+  {
+    "externalId": "1718",
+    "nombreEs": "Barra sentado agarre cerrado detrás cuello extensión de tríceps"
+  },
+  {
+    "externalId": "1719",
+    "nombreEs": "Barra inclinado agarre cerrado press de banca"
+  },
+  {
+    "externalId": "1720",
+    "nombreEs": "Barra acostado espalda de cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "1721",
+    "nombreEs": "Barra agarre inverso press francés"
+  },
+  {
+    "externalId": "1722",
+    "nombreEs": "Polea alto polea sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "1723",
+    "nombreEs": "Polea a un brazo extensión de tríceps en polea"
+  },
+  {
+    "externalId": "1724",
+    "nombreEs": "Polea cuerda alto polea sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "1725",
+    "nombreEs": "Polea cuerda inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "1726",
+    "nombreEs": "Polea cuerda acostado en el suelo extensión de tríceps"
+  },
+  {
+    "externalId": "1727",
+    "nombreEs": "Polea de pie agarre inverso a un brazo sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "1728",
+    "nombreEs": "Polea a dos brazos patada de tríceps"
+  },
+  {
+    "externalId": "1729",
+    "nombreEs": "Mancuerna acostado alterno extensión"
+  },
+  {
+    "externalId": "1730",
+    "nombreEs": "Mancuerna sentado inclinado alterno patada"
+  },
+  {
+    "externalId": "1731",
+    "nombreEs": "Mancuerna agarre cerrado press"
+  },
+  {
+    "externalId": "1732",
+    "nombreEs": "Mancuerna hacia adelante zancada extensión de tríceps"
+  },
+  {
+    "externalId": "1733",
+    "nombreEs": "Mancuerna inclinado a dos brazos extensión"
+  },
+  {
+    "externalId": "1734",
+    "nombreEs": "Mancuerna patadas sobre balón suizo"
+  },
+  {
+    "externalId": "1735",
+    "nombreEs": "Mancuerna acostado individual extensión"
+  },
+  {
+    "externalId": "1736",
+    "nombreEs": "Mancuerna a un brazo press francés sobre balón suizo"
+  },
+  {
+    "externalId": "1737",
+    "nombreEs": "Mancuerna sentado inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "1738",
+    "nombreEs": "Mancuerna sentado agarre inverso a un brazo sobre la cabeza extensión de tríceps"
+  },
+  {
+    "externalId": "1739",
+    "nombreEs": "Mancuerna de pie alterno patada de tríceps"
+  },
+  {
+    "externalId": "1740",
+    "nombreEs": "Mancuerna de pie inclinado a un brazo extensión de tríceps"
+  },
+  {
+    "externalId": "1741",
+    "nombreEs": "Mancuerna de pie inclinado a dos brazos extensión de tríceps"
+  },
+  {
+    "externalId": "1742",
+    "nombreEs": "Mancuerna patada de tríceps con cigüeña postura"
+  },
+  {
+    "externalId": "1743",
+    "nombreEs": "Mancuerna girando press de banca"
+  },
+  {
+    "externalId": "1744",
+    "nombreEs": "Balón suizo fondo"
+  },
+  {
+    "externalId": "1745",
+    "nombreEs": "Balón suizo sentado tríceps estiramiento"
+  },
+  {
+    "externalId": "1746",
+    "nombreEs": "Balón suizo boca arriba extensión de tríceps"
+  },
+  {
+    "externalId": "1747",
+    "nombreEs": "Barra z press francés sobre balón suizo"
+  },
+  {
+    "externalId": "1748",
+    "nombreEs": "Barra z acostado agarre cerrado extensión de tríceps detrás cabeza"
+  },
+  {
+    "externalId": "1749",
+    "nombreEs": "Barra z de pie press francés"
+  },
+  {
+    "externalId": "1750",
+    "nombreEs": "Balón medicinal boca arriba pecho lanzamiento"
+  },
+  {
+    "externalId": "1751",
+    "nombreEs": "Barra pin press"
+  },
+  {
+    "externalId": "1752",
+    "nombreEs": "Máquina smith inclinado extensión de tríceps"
+  },
+  {
+    "externalId": "1753",
+    "nombreEs": "Tres banco fondo"
+  },
+  {
+    "externalId": "1754",
+    "nombreEs": "Con peso tres banco fondos"
+  },
+  {
+    "externalId": "1755",
+    "nombreEs": "Con peso tríceps fondos"
+  },
+  {
+    "externalId": "1756",
+    "nombreEs": "Barra peso muerto a una pierna"
+  },
+  {
+    "externalId": "1757",
+    "nombreEs": "Mancuerna peso muerto a una pierna"
+  },
+  {
+    "externalId": "1758",
+    "nombreEs": "Asistido abdominal"
+  },
+  {
+    "externalId": "1759",
+    "nombreEs": "A una pierna sentadilla pistol"
+  },
+  {
+    "externalId": "1760",
+    "nombreEs": "Mancuerna sentadilla goblet"
+  },
+  {
+    "externalId": "1761",
+    "nombreEs": "Colgado oblicuo elevación de rodillas"
+  },
+  {
+    "externalId": "1763",
+    "nombreEs": "Hombro agarre dominada"
+  },
+  {
+    "externalId": "1764",
+    "nombreEs": "Colgado pierna cadera elevación"
+  },
+  {
+    "externalId": "1765",
+    "nombreEs": "Mancuerna remo al mentón espalda pov"
+  },
+  {
+    "externalId": "1766",
+    "nombreEs": "Propio asistido inverso curl femoral"
+  },
+  {
+    "externalId": "1767",
+    "nombreEs": "Con peso fondo de tríceps sobre alto paralelo barras"
+  },
+  {
+    "externalId": "1769",
+    "nombreEs": "Peso corporal lateral acostado curl de bíceps"
+  },
+  {
+    "externalId": "1770",
+    "nombreEs": "Bíceps pierna curl concentrado"
+  },
+  {
+    "externalId": "1771",
+    "nombreEs": "Peso corporal de rodillas extensión de tríceps"
+  },
+  {
+    "externalId": "1772",
+    "nombreEs": "Codo levantamiento inverso flexión de brazos"
+  },
+  {
+    "externalId": "1773",
+    "nombreEs": "A un brazo toalla remo"
+  },
+  {
+    "externalId": "1774",
+    "nombreEs": "Lateral puente cadera abducción"
+  },
+  {
+    "externalId": "1775",
+    "nombreEs": "Plancha lateral cadera aducción"
+  },
+  {
+    "externalId": "2133",
+    "nombreEs": "Caminata del granjero"
+  },
+  {
+    "externalId": "2135",
+    "nombreEs": "Con peso frontal plancha"
+  },
+  {
+    "externalId": "2136",
+    "nombreEs": "Mancuerna cubano press v 2"
+  },
+  {
+    "externalId": "2137",
+    "nombreEs": "Mancuerna arnold press"
+  },
+  {
+    "externalId": "2138",
+    "nombreEs": "Estacionario bicicleta carrera v 3"
+  },
+  {
+    "externalId": "2139",
+    "nombreEs": "Manos bicicleta"
+  },
+  {
+    "externalId": "2141",
+    "nombreEs": "Caminata elíptica cruzado entrenador"
+  },
+  {
+    "externalId": "2142",
+    "nombreEs": "Esquí ergómetro"
+  },
+  {
+    "externalId": "2143",
+    "nombreEs": "Mancuerna de pie alrededor mundo"
+  },
+  {
+    "externalId": "2144",
+    "nombreEs": "Polea sentado press de pecho"
+  },
+  {
+    "externalId": "2186",
+    "nombreEs": "Barra z declinado extensión de tríceps"
+  },
+  {
+    "externalId": "2187",
+    "nombreEs": "Barra inverso agarre cerrado press de banca"
+  },
+  {
+    "externalId": "2188",
+    "nombreEs": "Mancuerna sentado extensión de tríceps"
+  },
+  {
+    "externalId": "2189",
+    "nombreEs": "Mancuernas sentado extensión de tríceps"
+  },
+  {
+    "externalId": "2202",
+    "nombreEs": "Rodillo cadera estiramiento"
+  },
+  {
+    "externalId": "2203",
+    "nombreEs": "Rodillo sentado hombro flexor depresor retractor"
+  },
+  {
+    "externalId": "2204",
+    "nombreEs": "Rodillo cuerpo sierra"
+  },
+  {
+    "externalId": "2205",
+    "nombreEs": "Rodillo cadera dorsal estiramiento"
+  },
+  {
+    "externalId": "2206",
+    "nombreEs": "Rodillo crunch inverso"
+  },
+  {
+    "externalId": "2207",
+    "nombreEs": "Rodillo lateral dorsal estiramiento"
+  },
+  {
+    "externalId": "2208",
+    "nombreEs": "Rodillo espalda estiramiento"
+  },
+  {
+    "externalId": "2209",
+    "nombreEs": "Rodillo sentado a una pierna hombro flexor depresor retractor"
+  },
+  {
+    "externalId": "2271",
+    "nombreEs": "Izquierdo gancho boxeo"
+  },
+  {
+    "externalId": "2285",
+    "nombreEs": "Palanca pullover"
+  },
+  {
+    "externalId": "2286",
+    "nombreEs": "Palanca cadera extensión v 2"
+  },
+  {
+    "externalId": "2287",
+    "nombreEs": "Palanca alterno prensa de piernas"
+  },
+  {
+    "externalId": "2288",
+    "nombreEs": "Palanca agarrador manos"
+  },
+  {
+    "externalId": "2289",
+    "nombreEs": "Palanca prensa de pantorrillas"
+  },
+  {
+    "externalId": "2292",
+    "nombreEs": "Mancuerna elevación posterior de hombro"
+  },
+  {
+    "externalId": "2293",
+    "nombreEs": "Mancuerna de pie zottman curl predicador"
+  },
+  {
+    "externalId": "2294",
+    "nombreEs": "Mancuerna zottman curl predicador"
+  },
+  {
+    "externalId": "2297",
+    "nombreEs": "Balón suizo crunch completo rango manos detrás cabeza"
+  },
+  {
+    "externalId": "2298",
+    "nombreEs": "Remo invertido sobre banco"
+  },
+  {
+    "externalId": "2300",
+    "nombreEs": "Remo invertido inclinado rodillas"
+  },
+  {
+    "externalId": "2311",
+    "nombreEs": "Caminando sobre escalera"
+  },
+  {
+    "externalId": "2312",
+    "nombreEs": "Acostado codo a rodilla"
+  },
+  {
+    "externalId": "2315",
+    "nombreEs": "Palanca rotatorio pantorrilla"
+  },
+  {
+    "externalId": "2317",
+    "nombreEs": "Mancuerna sentado inclinado brazo elevación lateral"
+  },
+  {
+    "externalId": "2318",
+    "nombreEs": "Palanca press de hombros v 3"
+  },
+  {
+    "externalId": "2321",
+    "nombreEs": "Mancuerna de pie interno curl de bíceps v 2"
+  },
+  {
+    "externalId": "2327",
+    "nombreEs": "Mancuerna agarre inverso remo"
+  },
+  {
+    "externalId": "2328",
+    "nombreEs": "Estrecho flexión de brazos sobre balón suizo"
+  },
+  {
+    "externalId": "2329",
+    "nombreEs": "Columna giro"
+  },
+  {
+    "externalId": "2330",
+    "nombreEs": "Polea jalón al pecho completo rango de movimiento"
+  },
+  {
+    "externalId": "2331",
+    "nombreEs": "Ciclo cruzado entrenador"
+  },
+  {
+    "externalId": "2333",
+    "nombreEs": "Brazo slingers colgado recto piernas"
+  },
+  {
+    "externalId": "2334",
+    "nombreEs": "Trineo acostado prensa de pantorrillas"
+  },
+  {
+    "externalId": "2335",
+    "nombreEs": "Palanca sentado prensa de pantorrillas"
+  },
+  {
+    "externalId": "2355",
+    "nombreEs": "Brazo slingers colgado inclinado rodilla piernas"
+  },
+  {
+    "externalId": "2363",
+    "nombreEs": "Agarre ancho fondo de pecho sobre alto paralelo barras"
+  },
+  {
+    "externalId": "2364",
+    "nombreEs": "Asistido agarre ancho fondo de pecho de rodillas"
+  },
+  {
+    "externalId": "2368",
+    "nombreEs": "Dividido sentadillas"
+  },
+  {
+    "externalId": "2371",
+    "nombreEs": "Con peso giro ruso v 2"
+  },
+  {
+    "externalId": "2397",
+    "nombreEs": "Mancuerna scott press"
+  },
+  {
+    "externalId": "2398",
+    "nombreEs": "Agarre cerrado flexión de brazos sobre rodillas"
+  },
+  {
+    "externalId": "2399",
+    "nombreEs": "Polea sentado giro"
+  },
+  {
+    "externalId": "2400",
+    "nombreEs": "Inverso curl femoral sobre dominada polea máquina"
+  },
+  {
+    "externalId": "2401",
+    "nombreEs": "Mancuerna curl de bíceps con brazo blaster"
+  },
+  {
+    "externalId": "2402",
+    "nombreEs": "Mancuerna martillo curls con brazo blaster"
+  },
+  {
+    "externalId": "2403",
+    "nombreEs": "Mancuerna alterno curl de bíceps con brazo blaster"
+  },
+  {
+    "externalId": "2404",
+    "nombreEs": "Barra z curl de bíceps con brazo blaster"
+  },
+  {
+    "externalId": "2405",
+    "nombreEs": "Polea extensión de tríceps en polea barra v con brazo blaster"
+  },
+  {
+    "externalId": "2406",
+    "nombreEs": "Polea agarre inverso extensión de tríceps en polea barra sz con brazo blaster"
+  },
+  {
+    "externalId": "2407",
+    "nombreEs": "Barra curl de bíceps con brazo blaster"
+  },
+  {
+    "externalId": "2414",
+    "nombreEs": "Barra de pie curl concentrado"
+  },
+  {
+    "externalId": "2429",
+    "nombreEs": "Rana crunch"
+  },
+  {
+    "externalId": "2432",
+    "nombreEs": "Barra z agarre cerrado press de banca"
+  },
+  {
+    "externalId": "2459",
+    "nombreEs": "Neumático volteo"
+  },
+  {
+    "externalId": "2462",
+    "nombreEs": "Fondo de pecho sobre recto barra"
+  },
+  {
+    "externalId": "2464",
+    "nombreEs": "Polea thibaudeau kayak remo"
+  },
+  {
+    "externalId": "2466",
+    "nombreEs": "Puente escalador cruzado cuerpo"
+  },
+  {
+    "externalId": "2470",
+    "nombreEs": "Mancuerna acostado en el suelo elevación posterior de hombro"
+  },
+  {
+    "externalId": "2567",
+    "nombreEs": "Sentado piriforme estiramiento"
+  },
+  {
+    "externalId": "2571",
+    "nombreEs": "Balanceo rana estiramiento"
+  },
+  {
+    "externalId": "2611",
+    "nombreEs": "Palanca horizontal a una pierna press"
+  },
+  {
+    "externalId": "2612",
+    "nombreEs": "Salto cuerda"
+  },
+  {
+    "externalId": "2616",
+    "nombreEs": "Polea jalón lateral con barra v"
+  },
+  {
+    "externalId": "2705",
+    "nombreEs": "Mancuerna acostado pronación en el suelo"
+  },
+  {
+    "externalId": "2706",
+    "nombreEs": "Mancuerna acostado supinación en el suelo"
+  },
+  {
+    "externalId": "2736",
+    "nombreEs": "Palanca agarre inverso jalón lateral"
+  },
+  {
+    "externalId": "2741",
+    "nombreEs": "Barra z de pie agarre ancho curl de bíceps"
+  },
+  {
+    "externalId": "2796",
+    "nombreEs": "Mancuerna subida al cajón zancada"
+  },
+  {
+    "externalId": "2798",
+    "nombreEs": "Barra sentadilla salto paso posterior zancada"
+  },
+  {
+    "externalId": "2799",
+    "nombreEs": "Barra sentado alterno elevación de piernas"
+  },
+  {
+    "externalId": "2800",
+    "nombreEs": "Barra sentado alterno elevación de piernas"
+  },
+  {
+    "externalId": "2801",
+    "nombreEs": "Girado elevación de piernas"
+  },
+  {
+    "externalId": "2802",
+    "nombreEs": "Girado elevación de piernas"
+  },
+  {
+    "externalId": "2803",
+    "nombreEs": "Mancuerna con soporte sentadilla"
+  },
+  {
+    "externalId": "2805",
+    "nombreEs": "Mancuerna peso muerto a una pierna con cajón soporte"
+  },
+  {
+    "externalId": "2808",
+    "nombreEs": "Mancuerna sumo jalón a través"
+  },
+  {
+    "externalId": "2810",
+    "nombreEs": "Barra sentadilla búlgara v 2"
+  },
+  {
+    "externalId": "2812",
+    "nombreEs": "Mancuerna subida al cajón sentadilla búlgara"
+  },
+  {
+    "externalId": "2963",
+    "nombreEs": "Silla del capitán recto elevación de piernas"
+  },
+  {
+    "externalId": "2987",
+    "nombreEs": "Con peso agarre cerrado dominada agarre supino sobre fondo jaula"
+  },
+  {
+    "externalId": "3006",
+    "nombreEs": "Resistencia banda sentado cadera abducción"
+  },
+  {
+    "externalId": "3007",
+    "nombreEs": "Resistencia banda extensión de piernas"
+  },
+  {
+    "externalId": "3010",
+    "nombreEs": "Barra z acostado inclinado brazos pullover"
+  },
+  {
+    "externalId": "3011",
+    "nombreEs": "Inclinado escápula flexión de brazos"
+  },
+  {
+    "externalId": "3012",
+    "nombreEs": "Escápula fondos"
+  },
+  {
+    "externalId": "3013",
+    "nombreEs": "Bajo puente de glúteos en el suelo"
+  },
+  {
+    "externalId": "3016",
+    "nombreEs": "Curl"
+  },
+  {
+    "externalId": "3017",
+    "nombreEs": "Barra pendlay remo"
+  },
+  {
+    "externalId": "3019",
+    "nombreEs": "Banco dominadas"
+  },
+  {
+    "externalId": "3021",
+    "nombreEs": "Escápula flexión de brazos"
+  },
+  {
+    "externalId": "3116",
+    "nombreEs": "Banda fijo espalda agarre supino jalón"
+  },
+  {
+    "externalId": "3117",
+    "nombreEs": "Banda fijo espalda agarre cerrado jalón"
+  },
+  {
+    "externalId": "3119",
+    "nombreEs": "Sentadilla profunda"
+  },
+  {
+    "externalId": "3122",
+    "nombreEs": "Resistencia banda sentado press de hombros"
+  },
+  {
+    "externalId": "3123",
+    "nombreEs": "Resistencia banda sentado curl de bíceps"
+  },
+  {
+    "externalId": "3124",
+    "nombreEs": "Resistencia banda sentado press de pecho"
+  },
+  {
+    "externalId": "3132",
+    "nombreEs": "Sentadilla profunda con soporte"
+  },
+  {
+    "externalId": "3142",
+    "nombreEs": "Smith sentadilla sumo"
+  },
+  {
+    "externalId": "3144",
+    "nombreEs": "Resistencia banda sentado recto espalda remo"
+  },
+  {
+    "externalId": "3145",
+    "nombreEs": "Flexión de brazos más"
+  },
+  {
+    "externalId": "3147",
+    "nombreEs": "Pélvico inclinación"
+  },
+  {
+    "externalId": "3156",
+    "nombreEs": "Peso corporal de pie agarre cerrado a un brazo remo"
+  },
+  {
+    "externalId": "3158",
+    "nombreEs": "Peso corporal de pie agarre cerrado remo"
+  },
+  {
+    "externalId": "3161",
+    "nombreEs": "Peso corporal de pie a un brazo remo con toalla"
+  },
+  {
+    "externalId": "3162",
+    "nombreEs": "Peso corporal de pie a un brazo remo"
+  },
+  {
+    "externalId": "3165",
+    "nombreEs": "Peso corporal de pie remo con toalla"
+  },
+  {
+    "externalId": "3166",
+    "nombreEs": "Peso corporal de pie remo"
+  },
+  {
+    "externalId": "3167",
+    "nombreEs": "Peso corporal sentadilla remo con toalla"
+  },
+  {
+    "externalId": "3168",
+    "nombreEs": "Peso corporal sentadilla remo"
+  },
+  {
+    "externalId": "3193",
+    "nombreEs": "Elevación glúteo femoral"
+  },
+  {
+    "externalId": "3194",
+    "nombreEs": "Frankenstein sentadilla"
+  },
+  {
+    "externalId": "3195",
+    "nombreEs": "Palanca acostado dos uno curl femoral"
+  },
+  {
+    "externalId": "3200",
+    "nombreEs": "Palanca remo inclinado con barra v"
+  },
+  {
+    "externalId": "3201",
+    "nombreEs": "Cuarto abdominal"
+  },
+  {
+    "externalId": "3202",
+    "nombreEs": "Medio abdominal"
+  },
+  {
+    "externalId": "3203",
+    "nombreEs": "Prisionero medio abdominal"
+  },
+  {
+    "externalId": "3204",
+    "nombreEs": "Brazos sobre la cabeza completo abdominal"
+  },
+  {
+    "externalId": "3211",
+    "nombreEs": "De rodillas flexión de brazos"
+  },
+  {
+    "externalId": "3212",
+    "nombreEs": "Básico toque de punta de pie"
+  },
+  {
+    "externalId": "3213",
+    "nombreEs": "Lado a lado toque de punta de pie"
+  },
+  {
+    "externalId": "3214",
+    "nombreEs": "Brazos separado circular toque de punta de pie"
+  },
+  {
+    "externalId": "3215",
+    "nombreEs": "Manos inverso entrelazadas circular toque de punta de pie"
+  },
+  {
+    "externalId": "3216",
+    "nombreEs": "Pecho toque flexión de brazos"
+  },
+  {
+    "externalId": "3217",
+    "nombreEs": "Modificado hindú flexión de brazos"
+  },
+  {
+    "externalId": "3218",
+    "nombreEs": "Manos entrelazadas circular toque de punta de pie"
+  },
+  {
+    "externalId": "3219",
+    "nombreEs": "Tijera saltos"
+  },
+  {
+    "externalId": "3220",
+    "nombreEs": "A horcajadas saltos"
+  },
+  {
+    "externalId": "3221",
+    "nombreEs": "Medio rodilla flexiones"
+  },
+  {
+    "externalId": "3222",
+    "nombreEs": "Semi sentadilla salto"
+  },
+  {
+    "externalId": "3223",
+    "nombreEs": "Estrella salto"
+  },
+  {
+    "externalId": "3224",
+    "nombreEs": "Jack salto"
+  },
+  {
+    "externalId": "3231",
+    "nombreEs": "Dos toque de punta de pie"
+  },
+  {
+    "externalId": "3234",
+    "nombreEs": "Altura mancuerna apertura"
+  },
+  {
+    "externalId": "3235",
+    "nombreEs": "Polea asistido inverso curl femoral"
+  },
+  {
+    "externalId": "3236",
+    "nombreEs": "Resistencia banda cadera empujes sobre rodillas"
+  },
+  {
+    "externalId": "3237",
+    "nombreEs": "Landmine elevación lateral"
+  },
+  {
+    "externalId": "3239",
+    "nombreEs": "De rodillas plancha toque hombro"
+  },
+  {
+    "externalId": "3240",
+    "nombreEs": "Balón suizo sobre en pared elevación de talones tenis balón entre rodillas"
+  },
+  {
+    "externalId": "3241",
+    "nombreEs": "Balón suizo sobre en pared elevación de talones tenis balón entre tobillos"
+  },
+  {
+    "externalId": "3281",
+    "nombreEs": "Smith completo sentadilla"
+  },
+  {
+    "externalId": "3286",
+    "nombreEs": "Con peso muscle up"
+  },
+  {
+    "externalId": "3287",
+    "nombreEs": "Codo fondos"
+  },
+  {
+    "externalId": "3288",
+    "nombreEs": "Coreano fondos"
+  },
+  {
+    "externalId": "3289",
+    "nombreEs": "Imposible fondos"
+  },
+  {
+    "externalId": "3290",
+    "nombreEs": "Con peso a una mano dominada"
+  },
+  {
+    "externalId": "3291",
+    "nombreEs": "Stalder press"
+  },
+  {
+    "externalId": "3292",
+    "nombreEs": "Elevador"
+  },
+  {
+    "externalId": "3293",
+    "nombreEs": "Arquero dominada"
+  },
+  {
+    "externalId": "3294",
+    "nombreEs": "Arquero flexión de brazos"
+  },
+  {
+    "externalId": "3295",
+    "nombreEs": "Front lever repeticiones"
+  },
+  {
+    "externalId": "3296",
+    "nombreEs": "Front lever"
+  },
+  {
+    "externalId": "3297",
+    "nombreEs": "Back lever"
+  },
+  {
+    "externalId": "3298",
+    "nombreEs": "Piernas abiertas planche"
+  },
+  {
+    "externalId": "3299",
+    "nombreEs": "Completo planche"
+  },
+  {
+    "externalId": "3300",
+    "nombreEs": "Inclinación planche"
+  },
+  {
+    "externalId": "3301",
+    "nombreEs": "Rana planche"
+  },
+  {
+    "externalId": "3302",
+    "nombreEs": "Parada de manos"
+  },
+  {
+    "externalId": "3303",
+    "nombreEs": "Bandera"
+  },
+  {
+    "externalId": "3304",
+    "nombreEs": "Skin the cat"
+  },
+  {
+    "externalId": "3305",
+    "nombreEs": "Barra thruster"
+  },
+  {
+    "externalId": "3312",
+    "nombreEs": "Con peso muscle up sobre barra"
+  },
+  {
+    "externalId": "3313",
+    "nombreEs": "Con peso recto barra fondo"
+  },
+  {
+    "externalId": "3314",
+    "nombreEs": "Piernas abiertas maltés"
+  },
+  {
+    "externalId": "3315",
+    "nombreEs": "Completo maltés"
+  },
+  {
+    "externalId": "3318",
+    "nombreEs": "Balanceo 360"
+  },
+  {
+    "externalId": "3327",
+    "nombreEs": "Completo planche flexión de brazos"
+  },
+  {
+    "externalId": "3360",
+    "nombreEs": "Oso gateo"
+  },
+  {
+    "externalId": "3361",
+    "nombreEs": "Patinador saltos"
+  },
+  {
+    "externalId": "3418",
+    "nombreEs": "Dominada en l"
+  },
+  {
+    "externalId": "3419",
+    "nombreEs": "L sit en el suelo"
+  },
+  {
+    "externalId": "3420",
+    "nombreEs": "V sit en el suelo"
+  },
+  {
+    "externalId": "3433",
+    "nombreEs": "Nadador patadas v 2"
+  },
+  {
+    "externalId": "3470",
+    "nombreEs": "Hacia adelante zancada"
+  },
+  {
+    "externalId": "3523",
+    "nombreEs": "Puente de glúteos dos piernas sobre banco"
+  },
+  {
+    "externalId": "3533",
+    "nombreEs": "Cuádriceps"
+  },
+  {
+    "externalId": "3541",
+    "nombreEs": "Mancuerna inclinado elevación en y"
+  },
+  {
+    "externalId": "3542",
+    "nombreEs": "Mancuerna inclinado elevación en t"
+  },
+  {
+    "externalId": "3543",
+    "nombreEs": "Peso corporal caída sentadilla con salto"
+  },
+  {
+    "externalId": "3544",
+    "nombreEs": "Peso corporal inclinado plancha lateral"
+  },
+  {
+    "externalId": "3545",
+    "nombreEs": "Mancuerna inclinado alterno press"
+  },
+  {
+    "externalId": "3546",
+    "nombreEs": "Mancuerna sentado alterno hombro"
+  },
+  {
+    "externalId": "3547",
+    "nombreEs": "Mancuerna sentado curl de bíceps a press de hombros"
+  },
+  {
+    "externalId": "3548",
+    "nombreEs": "Mancuerna a un brazo sobre la cabeza transporte"
+  },
+  {
+    "externalId": "3552",
+    "nombreEs": "Rápido pies v 2"
+  },
+  {
+    "externalId": "3560",
+    "nombreEs": "Mancuerna de pie alterno curl martillo y press"
+  },
+  {
+    "externalId": "3561",
+    "nombreEs": "Puente de glúteos marcha"
+  },
+  {
+    "externalId": "3562",
+    "nombreEs": "Barra puente de glúteos dos piernas sobre banco"
+  },
+  {
+    "externalId": "3563",
+    "nombreEs": "Polea a un brazo jalón"
+  },
+  {
+    "externalId": "3582",
+    "nombreEs": "Zancada con salto"
+  },
+  {
+    "externalId": "3635",
+    "nombreEs": "Mancuerna contralateral hacia adelante zancada"
+  },
+  {
+    "externalId": "3636",
+    "nombreEs": "Alto rodilla contra en pared"
+  },
+  {
+    "externalId": "3637",
+    "nombreEs": "Rueda carrera"
+  },
+  {
+    "externalId": "3638",
+    "nombreEs": "Empuje a carrera"
+  },
+  {
+    "externalId": "3639",
+    "nombreEs": "Inclinado rodilla acostado giro"
+  },
+  {
+    "externalId": "3640",
+    "nombreEs": "Rodilla toque crunch"
+  },
+  {
+    "externalId": "3641",
+    "nombreEs": "Con peso de rodillas paso con balanceo"
+  },
+  {
+    "externalId": "3642",
+    "nombreEs": "Con peso estiramiento zancada"
+  },
+  {
+    "externalId": "3643",
+    "nombreEs": "Con peso cossack sentadillas"
+  },
+  {
+    "externalId": "3644",
+    "nombreEs": "Con peso zancada con balanceo"
+  },
+  {
+    "externalId": "3645",
+    "nombreEs": "A una pierna puente con extendido pierna"
+  },
+  {
+    "externalId": "3655",
+    "nombreEs": "Caminando alto rodillas zancada"
+  },
+  {
+    "externalId": "3656",
+    "nombreEs": "Corto zancada carrera"
+  },
+  {
+    "externalId": "3662",
+    "nombreEs": "Pica a cobra flexión de brazos"
+  },
+  {
+    "externalId": "3663",
+    "nombreEs": "Inverso plancha con pierna levantamiento"
+  },
+  {
+    "externalId": "3664",
+    "nombreEs": "Mancuerna plancha lateral con posterior apertura"
+  },
+  {
+    "externalId": "3665",
+    "nombreEs": "Potencia punto plancha"
+  },
+  {
+    "externalId": "3666",
+    "nombreEs": "Caminando sobre inclinado cinta"
+  },
+  {
+    "externalId": "3667",
+    "nombreEs": "Lateral acostado cadera aducción"
+  },
+  {
+    "externalId": "3669",
+    "nombreEs": "De pie arquero"
+  },
+  {
+    "externalId": "3670",
+    "nombreEs": "Con peso declinado abdominal"
+  },
+  {
+    "externalId": "3671",
+    "nombreEs": "Esquí paso"
+  },
+  {
+    "externalId": "3672",
+    "nombreEs": "Espalda y adelante paso"
+  },
+  {
+    "externalId": "3679",
+    "nombreEs": "Abdominal con brazos sobre pecho"
+  },
+  {
+    "externalId": "3697",
+    "nombreEs": "Polea de rodillas posterior deltoides remo con cuerda"
+  },
+  {
+    "externalId": "3698",
+    "nombreEs": "Gusano v 2"
+  },
+  {
+    "externalId": "3699",
+    "nombreEs": "Hombro toque"
+  },
+  {
+    "externalId": "3758",
+    "nombreEs": "Palanca de pie press de pecho"
+  },
+  {
+    "externalId": "3759",
+    "nombreEs": "Palanca sentado buenos días"
+  },
+  {
+    "externalId": "3760",
+    "nombreEs": "Palanca sentado crunch v 2"
+  },
+  {
+    "externalId": "3769",
+    "nombreEs": "Curtsy sentadilla"
+  },
+  {
+    "externalId": "3785",
+    "nombreEs": "Inclinado flexión de brazos sobre cajón"
+  },
+  {
+    "externalId": "3888",
+    "nombreEs": "Mancuerna a un brazo arrancada"
+  },
+  {
+    "externalId": "5201",
+    "nombreEs": "Mancuerna mesero curl de bíceps"
+  }
+]
