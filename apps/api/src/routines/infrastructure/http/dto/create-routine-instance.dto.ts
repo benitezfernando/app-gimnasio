@@ -14,9 +14,10 @@ export class CreateRoutineInstanceDto {
   @MinLength(1)
   alumnoId!: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(2)
-  nombre!: string;
+  nombre?: string;
 
   @IsOptional()
   @IsString()

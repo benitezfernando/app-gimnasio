@@ -357,4 +357,53 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       expect.objectContaining({ vinculada: false }),
     );
   });
+
+  it('si no se manda nombre y viene de una plantilla, copia el nombre de la plantilla', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    templateRepository.findById.mockResolvedValue(template);
+    instanceRepository.crear.mockResolvedValue(instanciaCreada);
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      origenTemplateId: 'tpl-1',
+    });
+
+    expect(instanceRepository.crear).toHaveBeenCalledWith(
+      expect.objectContaining({ nombre: template.nombre }),
+    );
+  });
+
+  it('si el nombre viene solo con espacios y hay plantilla, también copia el nombre de la plantilla', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    templateRepository.findById.mockResolvedValue(template);
+    instanceRepository.crear.mockResolvedValue(instanciaCreada);
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      nombre: '   ',
+      origenTemplateId: 'tpl-1',
+    });
+
+    expect(instanceRepository.crear).toHaveBeenCalledWith(
+      expect.objectContaining({ nombre: template.nombre }),
+    );
+  });
+
+  it('rechaza con InvalidRoutineInstanceInputError si arma desde cero sin nombre (no hay de dónde copiarlo)', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+
+    await expect(
+      useCase.execute({
+        invocadoPor: profesor,
+        alumnoId: 'alum-1',
+        ejercicios: [unEjercicio],
+      }),
+    ).rejects.toThrow(InvalidRoutineInstanceInputError);
+    expect(instanceRepository.crear).not.toHaveBeenCalled();
+  });
 });

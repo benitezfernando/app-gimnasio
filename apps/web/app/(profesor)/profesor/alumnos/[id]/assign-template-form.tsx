@@ -30,7 +30,7 @@ export function AssignTemplateForm({
   const plantillasActivas = plantillas.filter((p) => p.activa);
 
   async function asignar() {
-    if (!templateId || !nombre.trim()) return;
+    if (!templateId) return;
     if (
       reemplazaRutinaVigente &&
       !window.confirm(
@@ -44,7 +44,12 @@ export function AssignTemplateForm({
     try {
       await browserApiFetch('routine-instances', {
         method: 'POST',
-        body: JSON.stringify({ alumnoId, nombre, origenTemplateId: templateId, vincular }),
+        body: JSON.stringify({
+          alumnoId,
+          nombre: nombre.trim() || undefined,
+          origenTemplateId: templateId,
+          vincular,
+        }),
       });
       router.refresh();
     } catch (err) {
@@ -83,7 +88,7 @@ export function AssignTemplateForm({
       <input
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
-        placeholder="Nombre de esta rutina para el alumno"
+        placeholder="Nombre de esta rutina para el alumno (opcional — copia el de la plantilla)"
         className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
       />
       <label className="flex items-center gap-2 text-sm text-text-muted">
@@ -95,12 +100,7 @@ export function AssignTemplateForm({
         />
         Vincular a la plantilla (se actualiza sola si edito la plantilla después)
       </label>
-      <PrimaryButton
-        type="button"
-        onClick={asignar}
-        disabled={asignando || !templateId || !nombre.trim()}
-        size="sm"
-      >
+      <PrimaryButton type="button" onClick={asignar} disabled={asignando || !templateId} size="sm">
         {asignando
           ? 'Asignando...'
           : reemplazaRutinaVigente

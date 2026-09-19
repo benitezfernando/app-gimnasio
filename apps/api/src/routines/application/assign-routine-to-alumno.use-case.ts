@@ -37,7 +37,7 @@ const MAX_EJERCICIOS = 50;
 export interface AssignRoutineToAlumnoInput {
   invocadoPor: AuthenticatedUser;
   alumnoId: string;
-  nombre: string;
+  nombre?: string;
   origenTemplateId?: string;
   ejercicios?: EjercicioItem[];
   vincular?: boolean;
@@ -89,6 +89,7 @@ export class AssignRoutineToAlumnoUseCase {
     }
 
     let ejercicios: EjercicioItem[];
+    let nombreDeLaPlantilla: string | undefined;
     if (input.origenTemplateId) {
       const template = await this.templateRepository.findById(input.origenTemplateId);
       if (!template || template.profesorId !== input.invocadoPor.id) {
@@ -98,6 +99,7 @@ export class AssignRoutineToAlumnoUseCase {
         throw new TemplateHasNoExercisesError(template.id);
       }
       ejercicios = template.ejercicios;
+      nombreDeLaPlantilla = template.nombre;
     } else {
       ejercicios = input.ejercicios!;
       if (ejercicios.length > MAX_EJERCICIOS) {
@@ -106,11 +108,20 @@ export class AssignRoutineToAlumnoUseCase {
       await this.validarExerciseIdsEnCatalogo(ejercicios);
     }
 
+    // Si el profesor no le puso nombre a la rutina del alumno y viene de
+    // una plantilla, copia el nombre de la plantilla — nunca queda sin
+    // nombre. Armando desde cero no hay de dónde copiar, así que ahí
+    // `nombre` sigue siendo obligatorio (lo exige el DTO/frontend).
+    const nombre = input.nombre?.trim() || nombreDeLaPlantilla;
+    if (!nombre) {
+      throw new InvalidRoutineInstanceInputError();
+    }
+
     return this.instanceRepository.crear({
       gymId: input.invocadoPor.gymId,
       profesorId: input.invocadoPor.id,
       alumnoId: input.alumnoId,
-      nombre: input.nombre,
+      nombre,
       origenTemplateId: input.origenTemplateId ?? null,
       vinculada: Boolean(input.origenTemplateId) && (input.vincular ?? false),
       ejercicios,
