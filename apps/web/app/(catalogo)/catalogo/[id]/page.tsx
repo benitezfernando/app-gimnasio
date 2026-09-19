@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Dumbbell } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
+import { useRoleHome } from '../../../../lib/use-role-home';
 import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
@@ -27,22 +28,12 @@ interface ExerciseDetailResponse {
   atribucionMedia: string | null;
 }
 
-interface MeResponse {
-  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
-}
-
-const HOME_POR_ROL: Record<MeResponse['role'], string> = {
-  ADMIN: '/admin',
-  PROFESOR: '/profesor',
-  ALUMNO: '/alumno',
-};
-
 export default function DetalleEjercicioPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [ejercicio, setEjercicio] = useState<ExerciseDetailResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
-  const [homeHref, setHomeHref] = useState<string | null>(null);
+  const homeHref = useRoleHome();
 
   useEffect(() => {
     let cancelado = false;
@@ -62,21 +53,6 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
       cancelado = true;
     };
   }, [params.id]);
-
-  // Esta pantalla es compartida por los 3 roles (ver comentario de
-  // CatalogoLayout) — el botón "Home" necesita saber a dónde volver,
-  // así que resuelve el rol client-side una sola vez.
-  useEffect(() => {
-    let cancelado = false;
-    browserApiFetch<MeResponse>('/users/me')
-      .then((me) => {
-        if (!cancelado) setHomeHref(HOME_POR_ROL[me.role]);
-      })
-      .catch(() => {});
-    return () => {
-      cancelado = true;
-    };
-  }, []);
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">

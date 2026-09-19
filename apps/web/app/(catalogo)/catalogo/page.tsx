@@ -9,6 +9,8 @@ import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors
 import { EQUIPAMIENTOS, ETIQUETA_EQUIPAMIENTO } from '../../../lib/equipment-options';
 import { PageHeader } from '../../../components/ui/page-header';
 import { LogoutButton } from '../../../components/logout-button';
+import { HomeLink } from '../../../components/ui/home-link';
+import { useRoleHome } from '../../../lib/use-role-home';
 
 interface ListExercisesResponse {
   items: ExerciseCardData[];
@@ -21,6 +23,7 @@ interface ListExercisesResponse {
 const LIMITE_POR_PAGINA = 24;
 
 export default function CatalogoPage() {
+  const homeHref = useRoleHome();
   const [busqueda, setBusqueda] = useState('');
   const [parteCuerpo, setParteCuerpo] = useState<string | null>(null);
   const [equipamiento, setEquipamiento] = useState('');
@@ -68,7 +71,11 @@ export default function CatalogoPage() {
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl lg:pb-6 lg:pt-16">
-      <PageHeader title="Catálogo de ejercicios" right={<LogoutButton />} />
+      <PageHeader
+        title="Catálogo de ejercicios"
+        left={homeHref && <HomeLink href={homeHref} />}
+        right={<LogoutButton />}
+      />
 
       <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3">
         <Search size={18} className="text-text-muted" aria-hidden />
