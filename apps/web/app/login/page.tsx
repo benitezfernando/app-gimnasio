@@ -1,10 +1,12 @@
 'use client';
 
 import { Suspense } from 'react';
+import Image from 'next/image';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import { loginAction, LoginActionState } from './actions';
 import { PrimaryButton } from '../../components/ui/primary-button';
+import logoGimnasio from '../../../../logo/mix-entrenamiento.png';
 
 const ESTADO_INICIAL: LoginActionState = { error: null };
 const GYM_ID = process.env.NEXT_PUBLIC_GYM_ID ?? '';
@@ -45,6 +47,16 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-dvh flex-col justify-end bg-surface px-6 pb-10 pt-8 lg:items-center lg:justify-center lg:px-4 lg:py-8">
       <div className="lg:w-full lg:max-w-sm lg:rounded-2xl lg:border lg:border-border lg:bg-surface-alt lg:p-8">
+        <div className="mb-6 flex justify-center">
+          <div className="h-24 w-24 overflow-hidden rounded-full bg-surface-alt">
+            <Image
+              src={logoGimnasio}
+              alt="Logo del gimnasio"
+              className="h-full w-full object-cover"
+              priority
+            />
+          </div>
+        </div>
         <h1 className="mb-6 text-2xl font-semibold text-text lg:text-xl">Ingresar</h1>
         <Suspense fallback={null}>
           <AvisoSesionExpirada />
