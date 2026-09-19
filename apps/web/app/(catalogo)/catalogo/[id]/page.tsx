@@ -10,6 +10,7 @@ import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
 import { PageHeader } from '../../../../components/ui/page-header';
 import { Pill } from '../../../../components/ui/pill';
+import { LogoutButton } from '../../../../components/logout-button';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -59,7 +60,11 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
         sacaba al alumno de su rutina hacia el catálogo general en vez de
         devolverlo a donde estaba.
       */}
-      <PageHeader title={ejercicio?.nombre ?? 'Ejercicio'} onBack={() => router.back()} />
+      <PageHeader
+        title={ejercicio?.nombre ?? 'Ejercicio'}
+        onBack={() => router.back()}
+        right={<LogoutButton />}
+      />
 
       {cargando && <p className="text-sm text-text-muted">Cargando...</p>}
       {error && (

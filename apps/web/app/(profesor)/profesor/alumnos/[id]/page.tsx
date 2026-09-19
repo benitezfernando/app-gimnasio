@@ -3,6 +3,7 @@ import { apiFetch, ApiError } from '../../../../../lib/api-client';
 import { AssignTemplateForm } from './assign-template-form';
 import { InstanceEditor } from './instance-editor';
 import { Pill } from '../../../../../components/ui/pill';
+import { LogoutButton } from '../../../../../components/logout-button';
 
 interface TemplateOption {
   id: string;
@@ -45,6 +46,10 @@ export default async function AlumnoDetailPage({ params }: { params: { id: strin
 
   return (
     <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+      <div className="flex justify-end">
+        <LogoutButton />
+      </div>
+
       <div className="flex flex-col gap-2">
         <h1 className="text-xl font-semibold text-text">
           {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
