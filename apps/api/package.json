@@ -11,7 +11,8 @@
     "prisma:validate": "prisma validate",
     "seed:exercises": "tsx prisma/seed-exercises.ts",
     "upload-exercise-media": "tsx prisma/upload-exercise-media.ts",
-    "seed:admin": "tsx prisma/seed-admin.ts"
+    "seed:admin": "tsx prisma/seed-admin.ts",
+    "rename:admin": "tsx prisma/rename-admin-username.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.0",
