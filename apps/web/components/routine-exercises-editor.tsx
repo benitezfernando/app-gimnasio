@@ -41,7 +41,7 @@ function FilaEjercicio({
 
   return (
     <li ref={setNodeRef} style={estilo}>
-      <Card className="flex items-center gap-1.5 sm:gap-2">
+      <Card className="!p-2.5 flex items-center gap-1 sm:!p-3 sm:gap-2">
         <button
           type="button"
           {...attributes}
@@ -52,11 +52,11 @@ function FilaEjercicio({
           <GripVertical size={20} aria-hidden />
         </button>
 
-        <span className="min-w-0 flex-1 truncate text-sm font-medium text-text">
+        <span className="min-w-0 flex-1 break-words text-sm font-medium leading-tight text-text">
           {ejercicio.nombre}
         </span>
 
-        <div className="flex shrink-0 gap-1.5 sm:gap-2">
+        <div className="flex shrink-0 gap-1 sm:gap-2">
           <label className="flex flex-col text-xs text-text-muted">
             Series
             <input
@@ -64,7 +64,7 @@ function FilaEjercicio({
               min={1}
               value={ejercicio.series}
               onChange={(e) => onCambiar('series', e.target.value)}
-              className="min-h-11 w-11 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
           <label className="flex flex-col text-xs text-text-muted">
@@ -74,11 +74,12 @@ function FilaEjercicio({
               min={1}
               value={ejercicio.repeticiones}
               onChange={(e) => onCambiar('repeticiones', e.target.value)}
-              className="min-h-11 w-11 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
           <label className="flex flex-col text-xs text-text-muted">
-            Peso (kg)
+            <span className="sm:hidden">Peso</span>
+            <span className="hidden sm:inline">Peso (kg)</span>
             <input
               type="number"
               min={0}
@@ -86,7 +87,7 @@ function FilaEjercicio({
               value={ejercicio.peso ?? ''}
               placeholder="—"
               onChange={(e) => onCambiar('peso', e.target.value)}
-              className="min-h-11 w-11 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
         </div>
