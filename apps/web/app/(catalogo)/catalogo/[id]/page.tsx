@@ -11,6 +11,7 @@ import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
 import { PageHeader } from '../../../../components/ui/page-header';
 import { Pill } from '../../../../components/ui/pill';
 import { LogoutButton } from '../../../../components/logout-button';
+import { HomeLink } from '../../../../components/ui/home-link';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -26,11 +27,22 @@ interface ExerciseDetailResponse {
   atribucionMedia: string | null;
 }
 
+interface MeResponse {
+  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
+}
+
+const HOME_POR_ROL: Record<MeResponse['role'], string> = {
+  ADMIN: '/admin',
+  PROFESOR: '/profesor',
+  ALUMNO: '/alumno',
+};
+
 export default function DetalleEjercicioPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [ejercicio, setEjercicio] = useState<ExerciseDetailResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
+  const [homeHref, setHomeHref] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelado = false;
@@ -51,6 +63,21 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
     };
   }, [params.id]);
 
+  // Esta pantalla es compartida por los 3 roles (ver comentario de
+  // CatalogoLayout) — el botón "Home" necesita saber a dónde volver,
+  // así que resuelve el rol client-side una sola vez.
+  useEffect(() => {
+    let cancelado = false;
+    browserApiFetch<MeResponse>('/users/me')
+      .then((me) => {
+        if (!cancelado) setHomeHref(HOME_POR_ROL[me.role]);
+      })
+      .catch(() => {});
+    return () => {
+      cancelado = true;
+    };
+  }, []);
+
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
       {/*
@@ -63,6 +90,7 @@ export default function DetalleEjercicioPage({ params }: { params: { id: string 
       <PageHeader
         title={ejercicio?.nombre ?? 'Ejercicio'}
         onBack={() => router.back()}
+        left={homeHref && <HomeLink href={homeHref} />}
         right={<LogoutButton />}
       />
 

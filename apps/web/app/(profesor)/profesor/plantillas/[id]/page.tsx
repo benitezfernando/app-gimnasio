@@ -1,6 +1,7 @@
 import { apiFetch } from '../../../../../lib/api-client';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { BackLink } from '../../../../../components/ui/back-link';
+import { HomeLink } from '../../../../../components/ui/home-link';
 import { TemplateEditor } from './template-editor';
 
 interface TemplateDetailResponse {
@@ -58,7 +59,10 @@ export default async function PlantillaDetailPage({ params }: { params: { id: st
   return (
     <main className="w-full px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
       <div className="mb-2 flex items-center justify-between">
-        <BackLink href="/profesor/plantillas" />
+        <div className="flex items-center">
+          <BackLink href="/profesor/plantillas" />
+          <HomeLink href="/profesor" />
+        </div>
         <LogoutButton />
       </div>
       <TemplateEditor
