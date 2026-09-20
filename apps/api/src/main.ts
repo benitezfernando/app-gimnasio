@@ -2,11 +2,21 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { DomainExceptionFilter } from './shared-kernel/domain-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Render corre detrás de su propio proxy — sin esto, `request.ip` (usado
+  // por LoginRateLimitGuard) ve siempre la IP interna del proxy en vez de
+  // la del cliente real, colapsando el límite "por IP" en un balde
+  // compartido por todos los usuarios. `1` = confiar en un solo hop
+  // (el proxy de Render), no en toda la cadena de X-Forwarded-For.
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
+
+  app.use(helmet());
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }),
   );
