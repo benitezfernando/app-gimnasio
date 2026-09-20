@@ -2,8 +2,12 @@ import './globals.css';
 import type { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'App Gimnasio',
-  description: 'Gestión de rutinas de gimnasio',
+  title: 'Gimnasio Mix',
+  description: 'Gestión de rutinas de Gimnasio Mix',
+};
+
+export const viewport = {
+  themeColor: '#fc6501',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
