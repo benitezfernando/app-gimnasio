@@ -166,6 +166,7 @@ La regla se implementa en los casos de uso, no en los guards: el guard no sabe a
 - Onboarding self-service de gyms nuevos
 - Panel de super-admin (por encima de `ADMIN` de gym) para gestionar tenants
 - Evaluar si en ese punto migra de Supabase free a un plan pago o a infra propia (AWS, alineado a tu stack)
+- **Branding dinámico por gym (decisión tomada, pendiente de implementar):** hoy el logo (`/logo`), el nombre "Gimnasio Mix" y los colores del manifest/favicon están hardcodeados para un solo gym (deploy dedicado, opción 1 evaluada). Para Fase 3 se elige la **opción 2 — multi-tenant real**: un único deploy resuelve el gym por dominio, y logo/nombre/colores salen de una tabla `Gym` en la base (no de archivos estáticos ni env vars) — manifest, favicon, `<title>` y metadata se generan dinámicamente a partir de esos datos. Requiere: (1) modelo `Gym` con campos de branding (logoUrl, nombre, colorPrimario), (2) resolución de gym por dominio/subdominio en middleware o layout raíz, (3) `manifest.ts` y metadata de `layout.tsx` dejan de ser estáticos. Va de la mano del gate de licencia de media (ver regla de negocio 6 del PRD) — no tiene sentido dinamizar branding sin haber resuelto antes con qué media se sirve cada gym.
 
 ## 8. Próximos pasos concretos
 
