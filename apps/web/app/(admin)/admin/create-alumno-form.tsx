@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
 import { createAlumnoAction, CreateAlumnoActionState } from './actions';
 import { PrimaryButton } from '../../../components/ui/primary-button';
 
@@ -19,7 +20,7 @@ const INPUT_CLASSES =
   'min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm';
 
 export function CreateAlumnoForm() {
-  const [estado, formAction] = useFormState(createAlumnoAction, ESTADO_INICIAL);
+  const [estado, formAction] = useActionState(createAlumnoAction, ESTADO_INICIAL);
 
   return (
     <section className="rounded-2xl bg-surface p-4 shadow-sm sm:p-6">

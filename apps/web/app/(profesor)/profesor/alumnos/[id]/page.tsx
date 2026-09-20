@@ -30,7 +30,8 @@ interface RutinaVigenteResponse {
   }>;
 }
 
-export default async function AlumnoDetailPage({ params }: { params: { id: string } }) {
+export default async function AlumnoDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const plantillas = await apiFetch<TemplateOption[]>('/routine-templates');
 
   let rutinaVigente: RutinaVigenteResponse | null = null;

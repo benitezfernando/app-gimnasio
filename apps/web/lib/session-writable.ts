@@ -25,8 +25,8 @@ export const OPCIONES_COOKIE_SEGURA = {
   sameSite: 'lax' as const,
 };
 
-export function createWritableSupabaseServerClient() {
-  const cookieStore = cookies();
+export async function createWritableSupabaseServerClient() {
+  const cookieStore = await cookies();
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

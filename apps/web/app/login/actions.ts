@@ -32,7 +32,7 @@ export async function loginAction(
 
   const { accessToken, refreshToken } = await response.json();
 
-  const supabase = createWritableSupabaseServerClient();
+  const supabase = await createWritableSupabaseServerClient();
   await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
 
   const { role } = await apiFetch<{ role: 'ADMIN' | 'PROFESOR' | 'ALUMNO' }>('/users/me');

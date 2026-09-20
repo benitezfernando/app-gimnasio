@@ -27,7 +27,8 @@ interface ExerciseSummary {
   imageUrl: string | null;
 }
 
-export default async function PlantillaDetailPage({ params }: { params: { id: string } }) {
+export default async function PlantillaDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const plantilla = await apiFetch<TemplateDetailResponse>(`/routine-templates/${params.id}`);
 
   // El detalle de plantilla no trae nombre/imageUrl de cada ejercicio —

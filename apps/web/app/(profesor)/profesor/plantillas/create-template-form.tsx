@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
 import { createTemplateAction, CreateTemplateActionState } from './actions';
 import { PrimaryButton } from '../../../../components/ui/primary-button';
 
@@ -16,7 +17,7 @@ function BotonCrear() {
 }
 
 export function CreateTemplateForm() {
-  const [estado, formAction] = useFormState(createTemplateAction, ESTADO_INICIAL);
+  const [estado, formAction] = useActionState(createTemplateAction, ESTADO_INICIAL);
 
   return (
     <form action={formAction} className="flex flex-col gap-3 rounded-2xl bg-surface p-4 shadow-sm">

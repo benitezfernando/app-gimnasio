@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Dumbbell } from 'lucide-react';
@@ -28,7 +28,8 @@ interface ExerciseDetailResponse {
   atribucionMedia: string | null;
 }
 
-export default function DetalleEjercicioPage({ params }: { params: { id: string } }) {
+export default function DetalleEjercicioPage(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const router = useRouter();
   const [ejercicio, setEjercicio] = useState<ExerciseDetailResponse | null>(null);
   const [error, setError] = useState<string | null>(null);

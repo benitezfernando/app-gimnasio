@@ -9,7 +9,7 @@ import { createWritableSupabaseServerClient } from './session-writable';
  * rol — es la misma acción para ADMIN/PROFESOR/ALUMNO.
  */
 export async function logoutAction(): Promise<void> {
-  const supabase = createWritableSupabaseServerClient();
+  const supabase = await createWritableSupabaseServerClient();
   await supabase.auth.signOut();
   redirect('/login');
 }

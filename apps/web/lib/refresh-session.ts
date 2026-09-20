@@ -33,7 +33,7 @@ export async function refreshSession(refreshToken: string): Promise<RefreshedSes
 
     const { accessToken, refreshToken: nuevoRefreshToken } = await response.json();
 
-    const supabase = createWritableSupabaseServerClient();
+    const supabase = await createWritableSupabaseServerClient();
     await supabase.auth.setSession({
       access_token: accessToken,
       refresh_token: nuevoRefreshToken,

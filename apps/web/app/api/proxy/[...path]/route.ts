@@ -40,22 +40,23 @@ async function forward(
 
 async function handler(
   request: NextRequest,
-  { params }: { params: { path: string[] } },
+  { params }: { params: Promise<{ path: string[] }> },
 ): Promise<NextResponse> {
   const session = await getStoredSession();
   if (!session) {
     return NextResponse.json({ message: 'No hay sesión activa' }, { status: 401 });
   }
 
+  const { path } = await params;
   const search = request.nextUrl.search;
   const body = METODOS_CON_BODY.has(request.method) ? await request.text() : undefined;
 
-  let upstream = await forward(params.path, request.method, session.accessToken, body, search);
+  let upstream = await forward(path, request.method, session.accessToken, body, search);
 
   if (upstream.status === 401) {
     const refreshed = await refreshSession(session.refreshToken);
     if (refreshed) {
-      upstream = await forward(params.path, request.method, refreshed.accessToken, body, search);
+      upstream = await forward(path, request.method, refreshed.accessToken, body, search);
     }
   }
 

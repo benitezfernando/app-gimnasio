@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
 import { createAlumnoAction, CreateAlumnoActionState } from './actions';
 import { PrimaryButton } from '../../../components/ui/primary-button';
 
@@ -16,7 +17,7 @@ function BotonCrear() {
 }
 
 export function CreateAlumnoForm() {
-  const [estado, formAction] = useFormState(createAlumnoAction, ESTADO_INICIAL);
+  const [estado, formAction] = useActionState(createAlumnoAction, ESTADO_INICIAL);
 
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-3">

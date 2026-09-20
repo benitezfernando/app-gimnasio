@@ -2,7 +2,8 @@
 
 import { Suspense } from 'react';
 import Image from 'next/image';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { loginAction, LoginActionState } from './actions';
 import { PrimaryButton } from '../../components/ui/primary-button';
@@ -42,7 +43,7 @@ function AvisoSesionExpirada() {
 }
 
 export default function LoginPage() {
-  const [estado, formAction] = useFormState(loginAction, ESTADO_INICIAL);
+  const [estado, formAction] = useActionState(loginAction, ESTADO_INICIAL);
 
   return (
     <main className="flex min-h-dvh flex-col justify-end bg-surface px-6 pb-10 pt-8 lg:items-center lg:justify-center lg:px-4 lg:py-8">

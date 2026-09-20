@@ -6,8 +6,8 @@ export interface StoredSession {
   refreshToken: string;
 }
 
-function buildReadOnlyClient() {
-  const cookieStore = cookies();
+async function buildReadOnlyClient() {
+  const cookieStore = await cookies();
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -44,7 +44,7 @@ export async function getAccessToken(): Promise<string | null> {
  * `apps/web`'s server-side code hacia el browser.
  */
 export async function getStoredSession(): Promise<StoredSession | null> {
-  const supabase = buildReadOnlyClient();
+  const supabase = await buildReadOnlyClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();
