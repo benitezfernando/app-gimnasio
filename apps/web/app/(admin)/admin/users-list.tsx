@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { deactivateUserAction } from './actions';
+import { deactivateUserAction, editUserAction } from './actions';
 import { CarteraPanel } from './cartera-panel';
 import { DeletePermanentlyDialog } from './delete-permanently-dialog';
+import { EditUserForm } from '../../../components/edit-user-form';
 
 interface UserRow {
   id: string;
@@ -26,6 +27,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [usuarioAEliminar, setUsuarioAEliminar] = useState<UserRow | null>(null);
+  const [usuarioAEditar, setUsuarioAEditar] = useState<UserRow | null>(null);
 
   const usuariosFiltrados = usuariosIniciales.filter(
     (u) => filtroRol === 'TODOS' || u.role === filtroRol,
@@ -81,6 +83,18 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
     );
   }
 
+  function BotonEditar({ u, className = '' }: { u: UserRow; className?: string }) {
+    if (u.role === 'ADMIN') return null;
+    return (
+      <button
+        onClick={() => setUsuarioAEditar(usuarioAEditar?.id === u.id ? null : u)}
+        className={`min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-text lg:min-h-9 ${className}`}
+      >
+        Editar
+      </button>
+    );
+  }
+
   function EstadoBadge({ activo }: { activo: boolean }) {
     return (
       <span
@@ -132,9 +146,18 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
             <p className="mt-2 text-sm text-text-muted">{ETIQUETA_ROL[u.role]}</p>
             {u.role === 'ALUMNO' && <CarteraPanel alumno={u} profesoresDelGym={profesoresDelGym} />}
             <div className="mt-3 flex gap-2">
+              <BotonEditar u={u} className="flex-1" />
               <BotonDesactivar u={u} className="flex-1" />
               <BotonEliminar u={u} className="flex-1" />
             </div>
+            {usuarioAEditar?.id === u.id && (
+              <EditUserForm
+                action={editUserAction.bind(null, u.id)}
+                nombreActual={u.nombre}
+                permitePassword={u.role === 'PROFESOR'}
+                onCerrar={() => setUsuarioAEditar(null)}
+              />
+            )}
           </li>
         ))}
       </ul>
@@ -169,9 +192,18 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
               </td>
               <td className="py-3">
                 <div className="flex gap-2">
+                  <BotonEditar u={u} />
                   <BotonDesactivar u={u} />
                   <BotonEliminar u={u} />
                 </div>
+                {usuarioAEditar?.id === u.id && (
+                  <EditUserForm
+                    action={editUserAction.bind(null, u.id)}
+                    nombreActual={u.nombre}
+                    permitePassword={u.role === 'PROFESOR'}
+                    onCerrar={() => setUsuarioAEditar(null)}
+                  />
+                )}
               </td>
             </tr>
           ))}

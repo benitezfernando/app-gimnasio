@@ -34,3 +34,38 @@ export async function createAlumnoAction(
     return { error: 'Error inesperado creando el alumno.', usernameGenerado: null };
   }
 }
+
+export interface EditUserActionState {
+  error: string | null;
+  success: boolean;
+}
+
+export async function editUserAction(
+  userId: string,
+  _prevState: EditUserActionState,
+  formData: FormData,
+): Promise<EditUserActionState> {
+  const nombreRaw = formData.get('nombre');
+  const passwordRaw = formData.get('password');
+  const nombre = nombreRaw ? String(nombreRaw).trim() : undefined;
+  const password = passwordRaw ? String(passwordRaw) : undefined;
+
+  if (!nombre && !password) {
+    return { error: 'Cambiá el nombre o la contraseña.', success: false };
+  }
+
+  try {
+    await apiFetch(`/users/${userId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ ...(nombre ? { nombre } : {}), ...(password ? { password } : {}) }),
+    });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message, success: false };
+    }
+    return { error: 'Error inesperado editando el usuario.', success: false };
+  }
+
+  revalidatePath('/profesor');
+  return { error: null, success: true };
+}
