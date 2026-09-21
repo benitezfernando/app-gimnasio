@@ -12,6 +12,7 @@
     "seed:exercises": "tsx prisma/seed-exercises.ts",
     "upload-exercise-media": "tsx prisma/upload-exercise-media.ts",
     "seed:admin": "tsx prisma/seed-admin.ts",
+    "seed:super-admin": "tsx prisma/seed-super-admin.ts",
     "rename:admin": "tsx prisma/rename-admin-username.ts"
   },
   "dependencies": {
