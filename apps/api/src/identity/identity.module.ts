@@ -10,6 +10,7 @@ import { ListUsersUseCase } from './application/list-users.use-case';
 import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from './application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from './application/delete-user-permanently.use-case';
+import { EditUserUseCase } from './application/edit-user.use-case';
 import { AssignProfesorToAlumnoUseCase } from './application/cartera/assign-profesor-to-alumno.use-case';
 import { RemoveProfesorFromAlumnoUseCase } from './application/cartera/remove-profesor-from-alumno.use-case';
 import { ListCarteraUseCase } from './application/cartera/list-cartera.use-case';
@@ -40,6 +41,7 @@ import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
     DeactivateUserUseCase,
     GetUserDeletionImpactUseCase,
     DeleteUserPermanentlyUseCase,
+    EditUserUseCase,
     AssignProfesorToAlumnoUseCase,
     RemoveProfesorFromAlumnoUseCase,
     ListCarteraUseCase,
@@ -50,6 +52,6 @@ import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
     { provide: APP_GUARD, useClass: RolesGuard },
     { provide: APP_GUARD, useClass: GymScopeGuard },
   ],
-  exports: [USER_REPOSITORY, CARTERA_REPOSITORY],
+  exports: [USER_REPOSITORY, AUTH_PROVIDER, CARTERA_REPOSITORY],
 })
 export class IdentityModule {}

@@ -20,8 +20,10 @@ import { ListUsersUseCase } from '../../application/list-users.use-case';
 import { DeactivateUserUseCase } from '../../application/deactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
+import { EditUserUseCase } from '../../application/edit-user.use-case';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
 import { CreateAlumnoDto } from './dto/create-alumno.dto';
+import { EditUserDto } from './dto/edit-user.dto';
 import { toUserResponse } from './user-response.mapper';
 
 interface RequestWithUser extends Request {
@@ -36,6 +38,7 @@ export class UsersController {
     private readonly deactivateUserUseCase: DeactivateUserUseCase,
     private readonly getUserDeletionImpactUseCase: GetUserDeletionImpactUseCase,
     private readonly deleteUserPermanentlyUseCase: DeleteUserPermanentlyUseCase,
+    private readonly editUserUseCase: EditUserUseCase,
   ) {}
 
   @Post('profesor')
@@ -82,6 +85,21 @@ export class UsersController {
   @Roles(Role.ADMIN)
   async deactivate(@Param('id') id: string, @Req() req: RequestWithUser) {
     const user = await this.deactivateUserUseCase.execute({ invocadoPor: req.user, userId: id });
+    return toUserResponse(user);
+  }
+
+  @Patch(':id')
+  @Roles(Role.ADMIN, Role.PROFESOR)
+  async edit(@Param('id') id: string, @Body() dto: EditUserDto, @Req() req: RequestWithUser) {
+    if (dto.nombre === undefined && dto.password === undefined) {
+      throw new BadRequestException('Mandá al menos uno de: nombre, password.');
+    }
+    const user = await this.editUserUseCase.execute({
+      invocadoPor: req.user,
+      userId: id,
+      nombre: dto.nombre,
+      password: dto.password,
+    });
     return toUserResponse(user);
   }
 
