@@ -9,6 +9,7 @@ import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
 import { UserNotInactiveError } from './errors/user-not-inactive.error';
 import { PrismaService } from '../../shared-kernel/prisma.service';
+import { requireGymId } from './require-gym-id';
 
 export interface DeleteUserPermanentlyInput {
   invocadoPor: AuthenticatedUser;
@@ -49,7 +50,7 @@ export class DeleteUserPermanentlyUseCase {
     const objetivo = await resolveUserInGym(
       this.userRepository,
       input.userId,
-      input.invocadoPor.gymId,
+      requireGymId(input.invocadoPor),
     );
     if (objetivo.role === Role.ADMIN) {
       throw new CannotTargetAdminError(objetivo.id);

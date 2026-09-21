@@ -6,6 +6,7 @@ import { USER_REPOSITORY, UserRepositoryPort } from '../ports/user-repository.po
 import { resolveUserInGym } from '../resolve-user-in-gym';
 import { InsufficientRoleError } from '../errors/insufficient-role.error';
 import { CarteraLinkNotFoundError } from '../errors/cartera-link-not-found.error';
+import { requireGymId } from '../require-gym-id';
 
 export interface RemoveProfesorFromAlumnoInput {
   invocadoPor: AuthenticatedUser;
@@ -35,8 +36,9 @@ export class RemoveProfesorFromAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_GESTIONAR_CARTERA);
     }
 
-    await resolveUserInGym(this.userRepository, input.alumnoId, input.invocadoPor.gymId);
-    await resolveUserInGym(this.userRepository, input.profesorId, input.invocadoPor.gymId);
+    const gymId = requireGymId(input.invocadoPor);
+    await resolveUserInGym(this.userRepository, input.alumnoId, gymId);
+    await resolveUserInGym(this.userRepository, input.profesorId, gymId);
 
     const existe = await this.carteraRepository.existe(input.profesorId, input.alumnoId);
     if (!existe) {

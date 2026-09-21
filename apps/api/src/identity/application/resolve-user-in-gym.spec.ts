@@ -24,6 +24,7 @@ describe('resolveUserInGym', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
   });
 

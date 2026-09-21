@@ -1,5 +1,6 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { AuthenticatedUser } from '../../domain/authenticated-user';
+import { Role } from '../../domain/role';
 
 interface RequestWithGymScope {
   user?: AuthenticatedUser;
@@ -25,6 +26,13 @@ export class GymScopeGuard implements CanActivate {
     if (!user) {
       // JwtAuthGuard corre antes y ya rechaza si no hay usuario; si por
       // algún motivo este guard corre sin usuario, no hay nada que scopear.
+      return true;
+    }
+
+    // SUPER_ADMIN no tiene gymId propio y opera explícitamente cruzando
+    // gyms (ej. POST /super-admin/admins manda el gymId del ADMIN nuevo
+    // en el body) — el scoping de esta guard no aplica a ese rol.
+    if (user.role === Role.SUPER_ADMIN) {
       return true;
     }
 

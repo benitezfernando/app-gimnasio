@@ -110,6 +110,7 @@ describe('AssignRoutineToAlumnoUseCase', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     exerciseRepository = {
       findMany: jest.fn(),

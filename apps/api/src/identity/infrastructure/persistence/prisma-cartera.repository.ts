@@ -11,7 +11,7 @@ import { Role } from '../../domain/role';
 interface PrismaUserRow {
   id: string;
   authUserId: string;
-  gymId: string;
+  gymId: string | null;
   username: string;
   nombre: string;
   role: PrismaRole;

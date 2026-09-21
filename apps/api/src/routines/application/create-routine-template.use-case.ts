@@ -7,6 +7,7 @@ import {
   RoutineTemplateRepositoryPort,
   RoutineTemplateSummary,
 } from './ports/routine-template-repository.port';
+import { requireGymId } from '../../identity/application/require-gym-id';
 
 export interface CreateRoutineTemplateInput {
   invocadoPor: AuthenticatedUser;
@@ -29,7 +30,7 @@ export class CreateRoutineTemplateUseCase {
     }
 
     return this.templateRepository.create({
-      gymId: input.invocadoPor.gymId,
+      gymId: requireGymId(input.invocadoPor),
       profesorId: input.invocadoPor.id,
       nombre: input.nombre,
       descripcion: input.descripcion ?? null,

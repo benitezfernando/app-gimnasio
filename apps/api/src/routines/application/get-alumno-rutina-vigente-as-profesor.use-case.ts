@@ -23,6 +23,7 @@ import {
   RoutineTemplateRepositoryPort,
 } from './ports/routine-template-repository.port';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
+import { requireGymId } from '../../identity/application/require-gym-id';
 
 export interface GetAlumnoRutinaVigenteAsProfesorInput {
   invocadoPor: AuthenticatedUser;
@@ -77,7 +78,7 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
     const alumno = await resolveUserInGym(
       this.userRepository,
       input.alumnoId,
-      input.invocadoPor.gymId,
+      requireGymId(input.invocadoPor),
     );
     if (alumno.role !== Role.ALUMNO) {
       throw new AlumnoNotInCarteraError(input.alumnoId);

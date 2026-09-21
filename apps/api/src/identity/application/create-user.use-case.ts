@@ -5,6 +5,7 @@ import { USER_REPOSITORY, UserRepositoryPort, UserRecord } from './ports/user-re
 import { AUTH_PROVIDER, AuthProviderPort } from './ports/auth-provider.port';
 import { RoleHierarchyError } from './errors/role-hierarchy.error';
 import { DuplicateUsernameError } from './errors/duplicate-username.error';
+import { requireGymId } from './require-gym-id';
 
 export interface CreateProfesorInput {
   role: Role.PROFESOR;
@@ -27,6 +28,9 @@ const ROLES_QUE_PUEDE_CREAR: Record<Role, Role[]> = {
   [Role.ADMIN]: [Role.PROFESOR, Role.ALUMNO],
   [Role.PROFESOR]: [Role.ALUMNO],
   [Role.ALUMNO]: [],
+  // SUPER_ADMIN no da de alta usuarios gym-scoped por este caso de uso
+  // (ver Task 7 — tiene su propio caso de uso para crear ADMIN de gym).
+  [Role.SUPER_ADMIN]: [],
 };
 
 const MAX_INTENTOS_USERNAME = 1000;
@@ -50,7 +54,7 @@ export class CreateUserUseCase {
       throw new RoleHierarchyError(input.invocadoPor.role, input.role);
     }
 
-    const gymId = input.invocadoPor.gymId;
+    const gymId = requireGymId(input.invocadoPor);
 
     if (input.role === Role.PROFESOR) {
       return this.crearProfesor(gymId, input);

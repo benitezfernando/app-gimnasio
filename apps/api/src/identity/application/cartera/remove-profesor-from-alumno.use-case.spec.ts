@@ -49,6 +49,7 @@ describe('RemoveProfesorFromAlumnoUseCase', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     useCase = new RemoveProfesorFromAlumnoUseCase(carteraRepository, userRepository);
   });

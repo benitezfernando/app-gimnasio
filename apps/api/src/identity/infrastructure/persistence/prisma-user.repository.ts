@@ -8,7 +8,7 @@ import { DuplicateUsernameError } from '../../application/errors/duplicate-usern
 interface PrismaUserRow {
   id: string;
   authUserId: string;
-  gymId: string;
+  gymId: string | null;
   username: string;
   nombre: string;
   role: PrismaRole;
@@ -51,7 +51,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
 
   async create(
     data: {
-      gymId: string;
+      gymId: string | null;
       authUserId: string;
       username: string;
       nombre: string;
@@ -74,9 +74,12 @@ export class PrismaUserRepository implements UserRepositoryPort {
         });
 
         if (vinculoCartera) {
+          // `vinculoCartera` solo se pasa al crear un ALUMNO (ver
+          // CreateUserUseCase), que siempre tiene un gymId real —
+          // `ProfesorAlumno.gymId` no es nullable en el schema.
           await tx.profesorAlumno.create({
             data: {
-              gymId: data.gymId,
+              gymId: data.gymId as string,
               profesorId: vinculoCartera.profesorId,
               alumnoId: creado.id,
             },
@@ -92,6 +95,11 @@ export class PrismaUserRepository implements UserRepositoryPort {
       }
       throw error;
     }
+  }
+
+  async updateNombre(id: string, nombre: string): Promise<UserRecord> {
+    const user = await this.prisma.user.update({ where: { id }, data: { nombre } });
+    return this.toRecord(user);
   }
 
   private toRecord(user: PrismaUserRow): UserRecord {

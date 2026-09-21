@@ -3,6 +3,7 @@ import { Role } from '../domain/role';
 import { AuthenticatedUser } from '../domain/authenticated-user';
 import { USER_REPOSITORY, UserRepositoryPort, UserRecord } from './ports/user-repository.port';
 import { InsufficientRoleError } from './errors/insufficient-role.error';
+import { requireGymId } from './require-gym-id';
 
 export interface ListUsersInput {
   invocadoPor: AuthenticatedUser;
@@ -23,6 +24,6 @@ export class ListUsersUseCase {
     if (!ROLES_QUE_PUEDEN_LISTAR.includes(input.invocadoPor.role)) {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_LISTAR);
     }
-    return this.userRepository.findByGymId(input.invocadoPor.gymId, input.role);
+    return this.userRepository.findByGymId(requireGymId(input.invocadoPor), input.role);
   }
 }

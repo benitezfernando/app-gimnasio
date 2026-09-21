@@ -61,6 +61,7 @@ describe('JwtAuthGuard', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     reflector = { getAllAndOverride: jest.fn().mockReturnValue(false) };
     guard = new JwtAuthGuard(userRepository, reflector);

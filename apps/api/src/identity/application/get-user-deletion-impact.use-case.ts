@@ -7,6 +7,7 @@ import { ROUTINES_CLEANUP, RoutinesCleanupPort } from './ports/routines-cleanup.
 import { resolveUserInGym } from './resolve-user-in-gym';
 import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
+import { requireGymId } from './require-gym-id';
 
 export interface GetUserDeletionImpactInput {
   invocadoPor: AuthenticatedUser;
@@ -39,7 +40,7 @@ export class GetUserDeletionImpactUseCase {
     const objetivo = await resolveUserInGym(
       this.userRepository,
       input.userId,
-      input.invocadoPor.gymId,
+      requireGymId(input.invocadoPor),
     );
     if (objetivo.role === Role.ADMIN) {
       throw new CannotTargetAdminError(objetivo.id);

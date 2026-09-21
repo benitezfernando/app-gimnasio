@@ -5,6 +5,7 @@ import { CARTERA_REPOSITORY, CarteraRepositoryPort } from '../ports/cartera-repo
 import { USER_REPOSITORY, UserRepositoryPort, UserRecord } from '../ports/user-repository.port';
 import { resolveUserInGym } from '../resolve-user-in-gym';
 import { InsufficientRoleError } from '../errors/insufficient-role.error';
+import { requireGymId } from '../require-gym-id';
 
 export interface ListProfesoresDeAlumnoInput {
   invocadoPor: AuthenticatedUser;
@@ -25,7 +26,7 @@ export class ListProfesoresDeAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_VER_CARTERA_AJENA);
     }
 
-    await resolveUserInGym(this.userRepository, input.alumnoId, input.invocadoPor.gymId);
+    await resolveUserInGym(this.userRepository, input.alumnoId, requireGymId(input.invocadoPor));
 
     return this.carteraRepository.findProfesoresDeAlumno(input.alumnoId);
   }

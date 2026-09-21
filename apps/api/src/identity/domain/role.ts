@@ -2,4 +2,5 @@ export enum Role {
   ADMIN = 'ADMIN',
   PROFESOR = 'PROFESOR',
   ALUMNO = 'ALUMNO',
+  SUPER_ADMIN = 'SUPER_ADMIN',
 }

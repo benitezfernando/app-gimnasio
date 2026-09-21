@@ -2,7 +2,7 @@ import { UserRecord } from '../../application/ports/user-repository.port';
 
 export interface UserResponse {
   id: string;
-  gymId: string;
+  gymId: string | null;
   username: string;
   nombre: string;
   role: UserRecord['role'];

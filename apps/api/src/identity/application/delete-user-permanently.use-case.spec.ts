@@ -39,6 +39,7 @@ describe('DeleteUserPermanentlyUseCase', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     routinesCleanup = { contarImpacto: jest.fn(), eliminarDatosDe: jest.fn() };
     authProvider = {

@@ -31,6 +31,7 @@ import { RoutineTemplateNotFoundError } from './errors/routine-template-not-foun
 import { TemplateHasNoExercisesError } from './errors/template-has-no-exercises.error';
 import { TooManyExercisesError } from './errors/too-many-exercises.error';
 import { InvalidExerciseIdError } from './errors/invalid-exercise-id.error';
+import { requireGymId } from '../../identity/application/require-gym-id';
 
 const MAX_EJERCICIOS = 50;
 
@@ -74,11 +75,9 @@ export class AssignRoutineToAlumnoUseCase {
       throw new InvalidRoutineInstanceInputError();
     }
 
-    const alumno = await resolveUserInGym(
-      this.userRepository,
-      input.alumnoId,
-      input.invocadoPor.gymId,
-    );
+    const gymId = requireGymId(input.invocadoPor);
+
+    const alumno = await resolveUserInGym(this.userRepository, input.alumnoId, gymId);
     if (alumno.role !== Role.ALUMNO) {
       throw new AlumnoNotInCarteraError(input.alumnoId);
     }
@@ -118,7 +117,7 @@ export class AssignRoutineToAlumnoUseCase {
     }
 
     return this.instanceRepository.crear({
-      gymId: input.invocadoPor.gymId,
+      gymId,
       profesorId: input.invocadoPor.id,
       alumnoId: input.alumnoId,
       nombre,

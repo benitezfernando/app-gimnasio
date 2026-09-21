@@ -48,7 +48,9 @@ async function main() {
     );
   }
 
-  const nuevoEmail = buildSyntheticEmail(admin.gymId, newUsername);
+  // Este script solo opera sobre ADMIN (ver query de arriba), que siempre
+  // tiene gymId real — el nullable es exclusivo de SUPER_ADMIN.
+  const nuevoEmail = buildSyntheticEmail(admin.gymId as string, newUsername);
 
   console.log(
     `Plan: ADMIN "${oldUsername}" (id=${admin.id}, authUserId=${admin.authUserId}) → username="${newUsername}" (email sintético en Supabase Auth → "${nuevoEmail}")`,
@@ -82,7 +84,9 @@ async function main() {
     // Supabase Auth para no dejar el username y el email desincronizados
     // (el login quedaría roto para ambos usernames).
     await supabase.auth.admin
-      .updateUserById(admin.authUserId, { email: buildSyntheticEmail(admin.gymId, oldUsername) })
+      .updateUserById(admin.authUserId, {
+        email: buildSyntheticEmail(admin.gymId as string, oldUsername),
+      })
       .catch(() => {
         console.error(
           `Además falló la compensación: el email en Supabase Auth quedó en "${nuevoEmail}" pero el username en la base sigue siendo "${oldUsername}" — corregilo a mano.`,

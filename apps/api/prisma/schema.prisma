@@ -12,6 +12,7 @@ enum Role {
   ADMIN
   PROFESOR
   ALUMNO
+  SUPER_ADMIN
 }
 
 enum ExerciseSource {
@@ -23,7 +24,7 @@ enum ExerciseSource {
 model User {
   id         String   @id @default(uuid())
   authUserId String   @unique
-  gymId      String
+  gymId      String?
   username   String
   nombre     String
   role       Role

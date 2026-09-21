@@ -116,6 +116,7 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     exerciseRepository = { findMany: jest.fn(), findById: jest.fn(), findByIds: jest.fn() };
     useCase = new GetAlumnoRutinaVigenteAsProfesorUseCase(

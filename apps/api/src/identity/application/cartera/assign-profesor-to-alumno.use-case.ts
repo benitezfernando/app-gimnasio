@@ -12,6 +12,7 @@ import { InsufficientRoleError } from '../errors/insufficient-role.error';
 import { InvalidCarteraRoleError } from '../errors/invalid-cartera-role.error';
 import { InactiveUserError } from '../errors/inactive-user.error';
 import { CarteraLinkAlreadyExistsError } from '../errors/cartera-link-already-exists.error';
+import { requireGymId } from '../require-gym-id';
 
 export interface AssignProfesorToAlumnoInput {
   invocadoPor: AuthenticatedUser;
@@ -38,11 +39,9 @@ export class AssignProfesorToAlumnoUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_GESTIONAR_CARTERA);
     }
 
-    const profesor = await resolveUserInGym(
-      this.userRepository,
-      input.profesorId,
-      input.invocadoPor.gymId,
-    );
+    const gymId = requireGymId(input.invocadoPor);
+
+    const profesor = await resolveUserInGym(this.userRepository, input.profesorId, gymId);
     if (profesor.role !== Role.PROFESOR) {
       throw new InvalidCarteraRoleError(input.profesorId, Role.PROFESOR);
     }
@@ -50,11 +49,7 @@ export class AssignProfesorToAlumnoUseCase {
       throw new InactiveUserError(input.profesorId);
     }
 
-    const alumno = await resolveUserInGym(
-      this.userRepository,
-      input.alumnoId,
-      input.invocadoPor.gymId,
-    );
+    const alumno = await resolveUserInGym(this.userRepository, input.alumnoId, gymId);
     if (alumno.role !== Role.ALUMNO) {
       throw new InvalidCarteraRoleError(input.alumnoId, Role.ALUMNO);
     }
@@ -68,7 +63,7 @@ export class AssignProfesorToAlumnoUseCase {
     }
 
     return this.carteraRepository.crear({
-      gymId: input.invocadoPor.gymId,
+      gymId,
       profesorId: input.profesorId,
       alumnoId: input.alumnoId,
     });

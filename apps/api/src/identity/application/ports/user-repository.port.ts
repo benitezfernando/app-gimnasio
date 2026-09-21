@@ -3,7 +3,7 @@ import { Role } from '../../domain/role';
 export interface UserRecord {
   id: string;
   authUserId: string;
-  gymId: string;
+  gymId: string | null;
   username: string;
   nombre: string;
   role: Role;
@@ -20,7 +20,7 @@ export interface UserRepositoryPort {
   deactivate(id: string): Promise<UserRecord>;
   create(
     data: {
-      gymId: string;
+      gymId: string | null;
       authUserId: string;
       username: string;
       nombre: string;
@@ -35,4 +35,6 @@ export interface UserRepositoryPort {
      */
     vinculoCartera?: { profesorId: string },
   ): Promise<UserRecord>;
+  /** Actualiza solo `nombre` — usado por EditUserUseCase (Task 4) y EditAdminUseCase (Task 7). */
+  updateNombre(id: string, nombre: string): Promise<UserRecord>;
 }

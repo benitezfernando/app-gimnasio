@@ -33,6 +33,7 @@ describe('GetUserDeletionImpactUseCase', () => {
       findById: jest.fn(),
       deactivate: jest.fn(),
       create: jest.fn(),
+      updateNombre: jest.fn(),
     };
     carteraRepository = {
       existe: jest.fn(),
