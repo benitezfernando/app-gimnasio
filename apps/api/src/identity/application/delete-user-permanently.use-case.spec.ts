@@ -49,6 +49,7 @@ describe('DeleteUserPermanentlyUseCase', () => {
       signInAlumno: jest.fn(),
       refreshSession: jest.fn(),
       deleteAuthUser: jest.fn(),
+      updateStaffPassword: jest.fn(),
     };
     prisma = {
       $transaction: jest.fn(async (cb) => cb(prisma)),

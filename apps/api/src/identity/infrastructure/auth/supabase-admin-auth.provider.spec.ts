@@ -37,7 +37,7 @@ describe('SupabaseAdminAuthProvider', () => {
     expect(() => new SupabaseAdminAuthProvider()).not.toThrow();
   });
 
-  it('expone los 6 métodos del AuthProviderPort', () => {
+  it('expone los 7 métodos del AuthProviderPort', () => {
     const provider = new SupabaseAdminAuthProvider();
     expect(typeof provider.createStaffUser).toBe('function');
     expect(typeof provider.createAlumnoUser).toBe('function');
@@ -45,6 +45,7 @@ describe('SupabaseAdminAuthProvider', () => {
     expect(typeof provider.signInAlumno).toBe('function');
     expect(typeof provider.refreshSession).toBe('function');
     expect(typeof provider.deleteAuthUser).toBe('function');
+    expect(typeof provider.updateStaffPassword).toBe('function');
   });
 
   describe('refreshSession — deduplicación de refresh_token concurrente', () => {

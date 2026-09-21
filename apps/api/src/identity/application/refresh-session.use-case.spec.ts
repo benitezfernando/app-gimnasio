@@ -27,6 +27,7 @@ describe('RefreshSessionUseCase', () => {
       signInAlumno: jest.fn(),
       refreshSession: jest.fn(),
       deleteAuthUser: jest.fn(),
+      updateStaffPassword: jest.fn(),
     };
     userRepository = {
       findByAuthUserId: jest.fn(),

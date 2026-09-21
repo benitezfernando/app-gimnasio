@@ -1,4 +1,8 @@
-import { buildSyntheticEmail, deriveAlumnoPassword } from './synthetic-credentials';
+import {
+  buildSyntheticEmail,
+  deriveAlumnoPassword,
+  PLATFORM_PSEUDO_GYM_ID,
+} from './synthetic-credentials';
 
 describe('buildSyntheticEmail', () => {
   it('genera un email determinístico a partir de gymId + username', () => {
@@ -53,5 +57,17 @@ describe('deriveAlumnoPassword', () => {
     const password = deriveAlumnoPassword('gym-1', 'juan.perez');
     expect(typeof password).toBe('string');
     expect(password.length).toBeGreaterThanOrEqual(32);
+  });
+});
+
+describe('PLATFORM_PSEUDO_GYM_ID', () => {
+  it('es un gymId reservado, distinto de cualquier gymId real posible', () => {
+    expect(PLATFORM_PSEUDO_GYM_ID).toBe('__platform__');
+  });
+
+  it('produce un email sintético válido para SUPER_ADMIN', () => {
+    expect(buildSyntheticEmail(PLATFORM_PSEUDO_GYM_ID, 'fer')).toBe(
+      'fer+__platform__@gym.internal',
+    );
   });
 });

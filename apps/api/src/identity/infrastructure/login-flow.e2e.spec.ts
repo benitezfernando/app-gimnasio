@@ -25,6 +25,7 @@ describe('POST /auth/login (e2e)', () => {
     createStaffUser: jest.fn(),
     createAlumnoUser: jest.fn(),
     deleteAuthUser: jest.fn(),
+    updateStaffPassword: jest.fn(),
     refreshSession: jest.fn(async (refreshToken: string) => {
       if (refreshToken === 'refresh-staff-valido') {
         return {
@@ -181,6 +182,7 @@ describe('POST /auth/refresh (e2e)', () => {
     createStaffUser: jest.fn(),
     createAlumnoUser: jest.fn(),
     deleteAuthUser: jest.fn(),
+    updateStaffPassword: jest.fn(),
     signInStaff: jest.fn(),
     signInAlumno: jest.fn(),
     refreshSession: jest.fn(async (refreshToken: string) => {

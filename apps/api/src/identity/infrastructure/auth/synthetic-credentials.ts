@@ -4,6 +4,15 @@ const DOMINIO_EMAIL_SINTETICO = 'gym.internal';
 const SEPARADOR_EMAIL_SINTETICO = '+';
 
 /**
+ * gymId reservado, exclusivo de cuentas SUPER_ADMIN — nunca se persiste
+ * como gymId real de ningún User (el de un SUPER_ADMIN es `null`, ver
+ * domain/role.ts). Sirve solo para construir/resolver su email sintético
+ * acá adentro. `CreateAdminUseCase` (super-admin/) rechaza explícitamente
+ * que alguien use este valor como gymId de un ADMIN real.
+ */
+export const PLATFORM_PSEUDO_GYM_ID = '__platform__';
+
+/**
  * Supabase Auth exige nativamente email o teléfono como identificador.
  * Este email sintético NUNCA se expone al frontend ni se comunica a
  * nadie — vive exclusivamente acá, con el mismo nivel de encapsulamiento

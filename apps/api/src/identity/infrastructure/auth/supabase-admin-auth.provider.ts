@@ -88,6 +88,13 @@ export class SupabaseAdminAuthProvider implements AuthProviderPort {
     }
   }
 
+  async updateStaffPassword(authUserId: string, password: string): Promise<void> {
+    const { error } = await this.client.auth.admin.updateUserById(authUserId, { password });
+    if (error) {
+      throw new Error(`No se pudo actualizar la password en Supabase Auth: ${error.message}`);
+    }
+  }
+
   private async crearEnSupabase(
     gymId: string,
     username: string,

@@ -30,4 +30,10 @@ export interface AuthProviderPort {
    */
   refreshSession(refreshToken: string): Promise<AuthSession>;
   deleteAuthUser(authUserId: string): Promise<void>;
+  /**
+   * Pisa la password de un usuario existente (PROFESOR o ADMIN — nunca
+   * ALUMNO, que no tiene password real). No pide la actual: quien la
+   * cambia define una nueva directamente, igual que al dar de alta.
+   */
+  updateStaffPassword(authUserId: string, password: string): Promise<void>;
 }
