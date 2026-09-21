@@ -5,6 +5,7 @@ import request = require('supertest');
 import { AuthController } from './http/auth.controller';
 import { LoginUseCase } from '../application/login.use-case';
 import { RefreshSessionUseCase } from '../application/refresh-session.use-case';
+import { SuperAdminLoginUseCase } from '../application/super-admin-login.use-case';
 import { AUTH_PROVIDER, AuthProviderPort } from '../application/ports/auth-provider.port';
 import {
   USER_REPOSITORY,
@@ -114,6 +115,7 @@ describe('POST /auth/login (e2e)', () => {
       providers: [
         LoginUseCase,
         RefreshSessionUseCase,
+        SuperAdminLoginUseCase,
         LoginRateLimitGuard,
         { provide: AUTH_PROVIDER, useValue: fakeAuthProvider },
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
@@ -237,6 +239,7 @@ describe('POST /auth/refresh (e2e)', () => {
       providers: [
         LoginUseCase,
         RefreshSessionUseCase,
+        SuperAdminLoginUseCase,
         LoginRateLimitGuard,
         { provide: AUTH_PROVIDER, useValue: fakeAuthProvider },
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },

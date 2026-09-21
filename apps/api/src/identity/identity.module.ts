@@ -6,6 +6,7 @@ import { CARTERA_REPOSITORY } from './application/ports/cartera-repository.port'
 import { CreateUserUseCase } from './application/create-user.use-case';
 import { LoginUseCase } from './application/login.use-case';
 import { RefreshSessionUseCase } from './application/refresh-session.use-case';
+import { SuperAdminLoginUseCase } from './application/super-admin-login.use-case';
 import { ListUsersUseCase } from './application/list-users.use-case';
 import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from './application/get-user-deletion-impact.use-case';
@@ -37,6 +38,7 @@ import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
     CreateUserUseCase,
     LoginUseCase,
     RefreshSessionUseCase,
+    SuperAdminLoginUseCase,
     ListUsersUseCase,
     DeactivateUserUseCase,
     GetUserDeletionImpactUseCase,

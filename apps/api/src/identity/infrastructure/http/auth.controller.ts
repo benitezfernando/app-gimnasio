@@ -2,8 +2,10 @@ import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs
 import { Public } from '../decorators/public.decorator';
 import { LoginUseCase } from '../../application/login.use-case';
 import { RefreshSessionUseCase } from '../../application/refresh-session.use-case';
+import { SuperAdminLoginUseCase } from '../../application/super-admin-login.use-case';
 import { LoginDto } from './dto/login.dto';
 import { RefreshDto } from './dto/refresh.dto';
+import { SuperAdminLoginDto } from './dto/super-admin-login.dto';
 import { LoginRateLimitGuard } from '../guards/login-rate-limit.guard';
 
 @Controller('auth')
@@ -11,6 +13,7 @@ export class AuthController {
   constructor(
     private readonly loginUseCase: LoginUseCase,
     private readonly refreshSessionUseCase: RefreshSessionUseCase,
+    private readonly superAdminLoginUseCase: SuperAdminLoginUseCase,
   ) {}
 
   @Post('login')
@@ -35,6 +38,17 @@ export class AuthController {
     // no es adivinable por fuerza bruta, así que el riesgo que el rate
     // limit de /auth/login mitiga no aplica acá de la misma forma.
     const { accessToken, refreshToken } = await this.refreshSessionUseCase.execute(dto);
+    return { accessToken, refreshToken };
+  }
+
+  @Post('super-admin/login')
+  @Public()
+  @UseGuards(LoginRateLimitGuard)
+  @HttpCode(HttpStatus.OK)
+  async superAdminLogin(
+    @Body() dto: SuperAdminLoginDto,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
+    const { accessToken, refreshToken } = await this.superAdminLoginUseCase.execute(dto);
     return { accessToken, refreshToken };
   }
 }
