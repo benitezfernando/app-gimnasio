@@ -11,6 +11,7 @@ import {
 } from './ports/routine-instance-repository.port';
 import { RoutineInstanceNotFoundError } from './errors/routine-instance-not-found.error';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
+import { requireGymId } from '../../identity/application/require-gym-id';
 
 export interface UpdateRoutineInstanceInput {
   invocadoPor: AuthenticatedUser;
@@ -33,8 +34,10 @@ export class UpdateRoutineInstanceUseCase {
   ) {}
 
   async execute(input: UpdateRoutineInstanceInput): Promise<RoutineInstanceDetail> {
+    const gymId = requireGymId(input.invocadoPor);
+
     const instance = await this.instanceRepository.findById(input.instanceId);
-    if (!instance || instance.gymId !== input.invocadoPor.gymId) {
+    if (!instance || instance.gymId !== gymId) {
       throw new RoutineInstanceNotFoundError(input.instanceId);
     }
 

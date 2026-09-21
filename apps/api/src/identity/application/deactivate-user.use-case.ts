@@ -5,6 +5,7 @@ import { USER_REPOSITORY, UserRepositoryPort, UserRecord } from './ports/user-re
 import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { UserNotFoundError } from './errors/user-not-found.error';
 import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
+import { requireGymId } from './require-gym-id';
 
 export interface DeactivateUserInput {
   invocadoPor: AuthenticatedUser;
@@ -27,8 +28,10 @@ export class DeactivateUserUseCase {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_DESACTIVAR);
     }
 
+    const gymId = requireGymId(input.invocadoPor);
+
     const objetivo = await this.userRepository.findById(input.userId);
-    if (!objetivo || objetivo.gymId !== input.invocadoPor.gymId) {
+    if (!objetivo || objetivo.gymId !== gymId) {
       throw new UserNotFoundError(input.userId);
     }
     if (objetivo.role === Role.ADMIN) {

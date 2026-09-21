@@ -7,6 +7,7 @@ import {
 } from '../../identity/application/ports/user-repository.port';
 import { ReservedGymIdError } from './errors/reserved-gym-id.error';
 import { PLATFORM_PSEUDO_GYM_ID } from '../../identity/infrastructure/auth/synthetic-credentials';
+import { DuplicateUsernameError } from '../../identity/application/errors/duplicate-username.error';
 
 describe('CreateAdminUseCase', () => {
   let userRepository: jest.Mocked<UserRepositoryPort>;
@@ -79,6 +80,29 @@ describe('CreateAdminUseCase', () => {
         password: 'segura123',
       }),
     ).rejects.toThrow(ReservedGymIdError);
+    expect(authProvider.createStaffUser).not.toHaveBeenCalled();
+  });
+
+  it('rechaza con DuplicateUsernameError si ya existe un usuario con ese username en el gym', async () => {
+    const existente: UserRecord = {
+      id: 'admin-existente',
+      authUserId: 'auth-existente',
+      gymId: 'gym-nuevo',
+      username: 'nuevoadmin',
+      nombre: 'Admin Existente',
+      role: Role.ADMIN,
+      activo: true,
+    };
+    userRepository.findByGymIdAndUsername.mockResolvedValue(existente);
+
+    await expect(
+      useCase.execute({
+        gymId: 'gym-nuevo',
+        username: 'nuevoadmin',
+        nombre: 'Nuevo Admin',
+        password: 'segura123',
+      }),
+    ).rejects.toThrow(DuplicateUsernameError);
     expect(authProvider.createStaffUser).not.toHaveBeenCalled();
   });
 

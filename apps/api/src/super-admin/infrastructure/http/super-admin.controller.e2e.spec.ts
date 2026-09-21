@@ -85,6 +85,7 @@ describe('/super-admin/admins (e2e)', () => {
 
   const fakeUserRepository: Partial<UserRepositoryPort> = {
     findByAuthUserId: async (authUserId: string) => usuariosPorAuthId[authUserId] ?? null,
+    findByGymIdAndUsername: async () => null,
     create: async (data) => ({ id: 'admin-nuevo', activo: true, ...data }),
   };
   const fakeAuthProvider: Partial<AuthProviderPort> = {

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient, Role } from '@prisma/client';
 import { SupabaseAdminAuthProvider } from '../src/identity/infrastructure/auth/supabase-admin-auth.provider';
+import { PLATFORM_PSEUDO_GYM_ID } from '../src/identity/infrastructure/auth/synthetic-credentials';
 
 const prisma = new PrismaClient();
 
@@ -35,6 +36,12 @@ async function main() {
   const username = requireEnv('SEED_ADMIN_USERNAME');
   const nombre = requireEnv('SEED_ADMIN_NOMBRE');
   const password = requireEnv('SEED_ADMIN_PASSWORD');
+
+  if (gymId === PLATFORM_PSEUDO_GYM_ID) {
+    throw new Error(
+      `SEED_ADMIN_GYM_ID no puede ser '${PLATFORM_PSEUDO_GYM_ID}' — ese gymId está reservado para SUPER_ADMIN.`,
+    );
+  }
 
   // Mismas restricciones que CreateProfesorDto — este script bypasea esa
   // capa de validación a propósito (no hay sesión todavía), así que las

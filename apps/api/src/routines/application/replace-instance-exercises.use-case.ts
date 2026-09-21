@@ -17,6 +17,7 @@ import { RoutineInstanceNotFoundError } from './errors/routine-instance-not-foun
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 import { TooManyExercisesError } from './errors/too-many-exercises.error';
 import { InvalidExerciseIdError } from './errors/invalid-exercise-id.error';
+import { requireGymId } from '../../identity/application/require-gym-id';
 
 const MAX_EJERCICIOS = 50;
 
@@ -36,8 +37,10 @@ export class ReplaceInstanceExercisesUseCase {
   ) {}
 
   async execute(input: ReplaceInstanceExercisesInput): Promise<void> {
+    const gymId = requireGymId(input.invocadoPor);
+
     const instance = await this.instanceRepository.findById(input.instanceId);
-    if (!instance || instance.gymId !== input.invocadoPor.gymId) {
+    if (!instance || instance.gymId !== gymId) {
       throw new RoutineInstanceNotFoundError(input.instanceId);
     }
 

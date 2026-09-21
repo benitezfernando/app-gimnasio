@@ -3,14 +3,15 @@ import { apiFetch, ApiError } from '../lib/api-client';
 
 interface MeResponse {
   id: string;
-  gymId: string;
-  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
+  gymId: string | null;
+  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO' | 'SUPER_ADMIN';
 }
 
 const DESTINO_POR_ROLE: Record<MeResponse['role'], string> = {
   ADMIN: '/admin',
   PROFESOR: '/profesor',
   ALUMNO: '/alumno',
+  SUPER_ADMIN: '/super-admin',
 };
 
 /**

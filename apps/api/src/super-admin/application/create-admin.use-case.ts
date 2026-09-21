@@ -11,6 +11,7 @@ import {
 } from '../../identity/application/ports/auth-provider.port';
 import { PLATFORM_PSEUDO_GYM_ID } from '../../identity/infrastructure/auth/synthetic-credentials';
 import { ReservedGymIdError } from './errors/reserved-gym-id.error';
+import { DuplicateUsernameError } from '../../identity/application/errors/duplicate-username.error';
 
 export interface CreateAdminInput {
   gymId: string;
@@ -35,6 +36,11 @@ export class CreateAdminUseCase {
   async execute(input: CreateAdminInput): Promise<UserRecord> {
     if (input.gymId === PLATFORM_PSEUDO_GYM_ID) {
       throw new ReservedGymIdError(input.gymId);
+    }
+
+    const existente = await this.userRepository.findByGymIdAndUsername(input.gymId, input.username);
+    if (existente) {
+      throw new DuplicateUsernameError(input.username, input.gymId);
     }
 
     const { authUserId } = await this.authProvider.createStaffUser(
