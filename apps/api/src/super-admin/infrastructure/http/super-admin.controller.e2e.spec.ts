@@ -6,6 +6,8 @@ import { SuperAdminController } from './super-admin.controller';
 import { CreateAdminUseCase } from '../../application/create-admin.use-case';
 import { ListAdminsUseCase } from '../../application/list-admins.use-case';
 import { EditAdminUseCase } from '../../application/edit-admin.use-case';
+import { DeactivateAdminUseCase } from '../../application/deactivate-admin.use-case';
+import { DeleteAdminPermanentlyUseCase } from '../../application/delete-admin-permanently.use-case';
 import { PrismaService } from '../../../shared-kernel/prisma.service';
 import {
   USER_REPOSITORY,
@@ -78,20 +80,42 @@ describe('/super-admin/admins (e2e)', () => {
     },
   ];
 
+  const adminInactivo: UserRecord = {
+    id: 'admin-inactivo',
+    authUserId: 'auth-admin-inactivo',
+    gymId: 'gym-A',
+    username: 'admin-inactivo',
+    nombre: 'Admin Inactivo',
+    role: Role.ADMIN,
+    activo: false,
+  };
+
   const usuariosPorAuthId: Record<string, UserRecord> = {
     'auth-sa': superAdmin,
     'auth-admin': adminNormal,
+  };
+  const usuariosPorId: Record<string, UserRecord> = {
+    'admin-1': adminNormal,
+    'admin-inactivo': adminInactivo,
   };
 
   const fakeUserRepository: Partial<UserRepositoryPort> = {
     findByAuthUserId: async (authUserId: string) => usuariosPorAuthId[authUserId] ?? null,
     findByGymIdAndUsername: async () => null,
+    findById: async (id: string) => usuariosPorId[id] ?? null,
+    deactivate: async (id: string) => ({ ...usuariosPorId[id], activo: false }),
     create: async (data) => ({ id: 'admin-nuevo', activo: true, ...data }),
   };
   const fakeAuthProvider: Partial<AuthProviderPort> = {
     createStaffUser: async () => ({ authUserId: 'auth-nuevo-admin' }),
+    deleteAuthUser: async () => {},
   };
-  const fakePrisma = { user: { findMany: jest.fn().mockResolvedValue(adminsExistentes) } };
+  const fakePrisma = {
+    user: {
+      findMany: jest.fn().mockResolvedValue(adminsExistentes),
+      delete: jest.fn().mockResolvedValue(adminInactivo),
+    },
+  };
 
   beforeAll(async () => {
     claves = await buildTestJwtKeys();
@@ -104,6 +128,8 @@ describe('/super-admin/admins (e2e)', () => {
         CreateAdminUseCase,
         ListAdminsUseCase,
         EditAdminUseCase,
+        DeactivateAdminUseCase,
+        DeleteAdminPermanentlyUseCase,
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
         { provide: AUTH_PROVIDER, useValue: fakeAuthProvider },
         { provide: PrismaService, useValue: fakePrisma },
@@ -159,5 +185,33 @@ describe('/super-admin/admins (e2e)', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.map((a: { gymId: string }) => a.gymId)).toEqual(['gym-A', 'gym-B']);
+  });
+
+  it('SUPER_ADMIN desactiva un ADMIN', async () => {
+    const token = await tokenPara('auth-sa');
+    const res = await request(app.getHttpServer())
+      .patch('/super-admin/admins/admin-1/deactivate')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body.activo).toBe(false);
+  });
+
+  it('SUPER_ADMIN elimina definitivamente un ADMIN ya desactivado', async () => {
+    const token = await tokenPara('auth-sa');
+    const res = await request(app.getHttpServer())
+      .delete('/super-admin/admins/admin-inactivo/permanent')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.status).toBe(200);
+  });
+
+  it('un ADMIN normal no puede desactivar ni eliminar por esta vía', async () => {
+    const token = await tokenPara('auth-admin');
+    const res = await request(app.getHttpServer())
+      .patch('/super-admin/admins/admin-1/deactivate')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.status).toBe(403);
   });
 });

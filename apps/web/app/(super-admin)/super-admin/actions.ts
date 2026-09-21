@@ -67,3 +67,35 @@ export async function editAdminAction(
   revalidatePath('/super-admin');
   return { error: null, success: true };
 }
+
+export async function deactivateAdminAction(adminId: string): Promise<{ error: string | null }> {
+  try {
+    await apiFetch(`/super-admin/admins/${adminId}/deactivate`, { method: 'PATCH' });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado desactivando al admin.' };
+  }
+
+  revalidatePath('/super-admin');
+  return { error: null };
+}
+
+export async function deleteAdminPermanentlyAction(
+  adminId: string,
+): Promise<{ error: string | null; advertencia?: string }> {
+  try {
+    const resultado = await apiFetch<{ advertencia?: string }>(
+      `/super-admin/admins/${adminId}/permanent`,
+      { method: 'DELETE' },
+    );
+    revalidatePath('/super-admin');
+    return { error: null, advertencia: resultado.advertencia };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado eliminando al admin.' };
+  }
+}

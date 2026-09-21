@@ -1,9 +1,21 @@
-import { BadRequestException, Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { Roles } from '../../../identity/infrastructure/decorators/roles.decorator';
 import { Role } from '../../../identity/domain/role';
 import { CreateAdminUseCase } from '../../application/create-admin.use-case';
 import { ListAdminsUseCase } from '../../application/list-admins.use-case';
 import { EditAdminUseCase } from '../../application/edit-admin.use-case';
+import { DeactivateAdminUseCase } from '../../application/deactivate-admin.use-case';
+import { DeleteAdminPermanentlyUseCase } from '../../application/delete-admin-permanently.use-case';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { EditUserDto } from '../../../identity/infrastructure/http/dto/edit-user.dto';
 import { toUserResponse } from '../../../identity/infrastructure/http/user-response.mapper';
@@ -15,6 +27,8 @@ export class SuperAdminController {
     private readonly createAdminUseCase: CreateAdminUseCase,
     private readonly listAdminsUseCase: ListAdminsUseCase,
     private readonly editAdminUseCase: EditAdminUseCase,
+    private readonly deactivateAdminUseCase: DeactivateAdminUseCase,
+    private readonly deleteAdminPermanentlyUseCase: DeleteAdminPermanentlyUseCase,
   ) {}
 
   @Post()
@@ -40,5 +54,17 @@ export class SuperAdminController {
       password: dto.password,
     });
     return toUserResponse(admin);
+  }
+
+  @Patch(':id/deactivate')
+  async deactivate(@Param('id') id: string) {
+    const admin = await this.deactivateAdminUseCase.execute({ adminId: id });
+    return toUserResponse(admin);
+  }
+
+  @Delete(':id/permanent')
+  @HttpCode(200)
+  async deletePermanently(@Param('id') id: string) {
+    return this.deleteAdminPermanentlyUseCase.execute({ adminId: id });
   }
 }
