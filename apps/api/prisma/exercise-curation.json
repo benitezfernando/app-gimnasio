@@ -1,120 +1,366 @@
 [
-  { "id": "023f84cc-50ab-49f1-b211-326ca3ff79bd", "nombreEs": "Press de banca con barra" },
-  { "id": "7e075eda-1449-4ccf-8063-2debb8347792", "nombreEs": "Press de banca con mancuernas" },
+  {
+    "id": "023f84cc-50ab-49f1-b211-326ca3ff79bd",
+    "nombreEs": "Press de banca con barra"
+  },
+  {
+    "id": "7e075eda-1449-4ccf-8063-2debb8347792",
+    "nombreEs": "Press de banca con mancuernas"
+  },
   {
     "id": "1549d8cf-2a2e-4f3f-9358-16a2c3586b28",
-    "nombreEs": "Press de banca inclinado con barra"
+    "nombreEs": "Press inclinado con barra"
   },
   {
     "id": "ca6ee991-90d5-47f1-8722-71e43a4d7aaa",
-    "nombreEs": "Press de banca inclinado con mancuernas"
-  },
-  { "id": "e8a9dd67-880f-4094-91bd-a0db002fd192", "nombreEs": "Sentadilla con barra" },
-  { "id": "9d5d4b27-c409-4469-a693-e30c64535860", "nombreEs": "Sentadilla con mancuernas" },
-  { "id": "be0c1664-9f14-4c1b-a993-c3ac24026ee9", "nombreEs": "Sentadilla goblet con mancuerna" },
-  { "id": "d78974fb-4802-4a71-9784-7864dfbf4c3c", "nombreEs": "Sentadilla frontal con barra" },
-  { "id": "15465013-d620-400d-979c-6533884ccb1c", "nombreEs": "Peso muerto con barra" },
-  { "id": "7c77f880-812a-4117-ada5-70511b148d50", "nombreEs": "Peso muerto rumano con barra" },
-  { "id": "bf080c73-f3ce-4249-9cc0-1798a2f4fadc", "nombreEs": "Peso muerto rumano con mancuernas" },
-  { "id": "05ad201a-9c06-4326-a947-9f773b4840cb", "nombreEs": "Peso muerto sumo con barra" },
-  { "id": "415f36e5-23dc-4c92-9483-5adb6e20ccdc", "nombreEs": "Dominadas (agarre neutro)" },
-  { "id": "21e6531b-ec04-4690-b978-24e7b8b0a6b8", "nombreEs": "Jalón al pecho en polea" },
-  { "id": "e065e9f2-7b97-4a47-8505-f7114a474254", "nombreEs": "Remo sentado en polea" },
-  { "id": "58f765c7-0459-4f84-a1c6-62098fd61592", "nombreEs": "Remo con barra" },
-  { "id": "787cb75a-1fdb-4e1a-a029-e918781d4dc5", "nombreEs": "Remo con mancuerna" },
-  { "id": "c8157a3c-02ea-402c-8ec3-be13666f5b49", "nombreEs": "Press militar con barra" },
-  {
-    "id": "6a72aabe-2b6d-4d20-b54a-61e06b183cb4",
-    "nombreEs": "Press militar con mancuernas de pie"
+    "nombreEs": "Press inclinado con mancuernas"
   },
   {
-    "id": "9f57d4f0-c4f1-4f26-ae58-8735c5d76d30",
-    "nombreEs": "Press de hombros con mancuernas sentado"
+    "id": "9417f499-d4f2-4723-b91a-e97b297e2b0e",
+    "nombreEs": "Press declinado con barra"
   },
-  { "id": "559e9b1a-1102-4711-a252-3ff75ba5dfe7", "nombreEs": "Press de hombros en máquina" },
   {
-    "id": "1630157d-46a8-4fac-a921-e12e4c653329",
+    "id": "f8b7cf1e-38cf-4ceb-8329-ec57c94e8bd4",
+    "nombreEs": "Aperturas con mancuernas"
+  },
+  {
+    "id": "0918d9fb-279c-42c3-a65a-c63697e8fecd",
+    "nombreEs": "Cruces en polea alta"
+  },
+  {
+    "id": "a75645b7-9ba1-47ad-a65a-670b312f3f28",
+    "nombreEs": "Cruces en polea baja"
+  },
+  {
+    "id": "1481156e-8afd-44cf-bf8b-07679c656634",
+    "nombreEs": "Fondos en paralelas"
+  },
+  {
+    "id": "8936ab67-a565-4c2d-8a24-0b9d3dc85ddb",
+    "nombreEs": "Flexiones de pecho"
+  },
+  {
+    "id": "9def5b23-3a9d-4891-807e-724900aaf52a",
+    "nombreEs": "Press Svend"
+  },
+  {
+    "id": "096196cc-5325-4833-af8e-233b8b68ea14",
+    "nombreEs": "Pull-over con mancuerna"
+  },
+  {
+    "id": "fb2d1927-c552-4445-949f-5987b0d6c59e",
+    "nombreEs": "Flexiones declinadas"
+  },
+  {
+    "id": "395ab7f1-3819-4145-80e7-4df20383f027",
+    "nombreEs": "Dominadas"
+  },
+  {
+    "id": "21e6531b-ec04-4690-b978-24e7b8b0a6b8",
+    "nombreEs": "Jalón al pecho en polea"
+  },
+  {
+    "id": "98a404b3-b7a5-4bed-b127-bfd5b58b3df8",
+    "nombreEs": "Jalón con agarre supino"
+  },
+  {
+    "id": "2776b06b-9680-48f5-b44c-c2aa2b665f30",
+    "nombreEs": "Jalón con agarre cerrado"
+  },
+  {
+    "id": "58f765c7-0459-4f84-a1c6-62098fd61592",
+    "nombreEs": "Remo con barra"
+  },
+  {
+    "id": "c20e631e-ebdf-449e-80f3-95848dec07f0",
+    "nombreEs": "Remo con mancuerna a una mano"
+  },
+  {
+    "id": "1bf3281a-d46b-4de3-b6ce-87c3f59e4c5b",
+    "nombreEs": "Remo en barra T"
+  },
+  {
+    "id": "07608f33-b914-4760-acbf-cfbf2142f69f",
+    "nombreEs": "Remo sentado en polea"
+  },
+  {
+    "id": "fc7325c4-1cc9-405e-80ce-3f0f8cff2d9f",
+    "nombreEs": "Remo invertido"
+  },
+  {
+    "id": "f98842ab-2daa-41ba-b2b1-d995feabac13",
+    "nombreEs": "Pull-over en polea alta"
+  },
+  {
+    "id": "15465013-d620-400d-979c-6533884ccb1c",
+    "nombreEs": "Peso muerto convencional"
+  },
+  {
+    "id": "05ad201a-9c06-4326-a947-9f773b4840cb",
+    "nombreEs": "Peso muerto sumo"
+  },
+  {
+    "id": "92f37ed3-1cf2-4dce-aee3-90863d874650",
+    "nombreEs": "Extensiones lumbares"
+  },
+  {
+    "id": "1e0615bf-ce0e-4fd8-9d84-970d42e58f4e",
+    "nombreEs": "Buenos días con barra"
+  },
+  {
+    "id": "ec84969d-d76d-4de0-aa7e-c9ec2b3d0d60",
+    "nombreEs": "Encogimientos con barra"
+  },
+  {
+    "id": "c44850c8-0f2e-4759-af72-4ac411f893ae",
+    "nombreEs": "Encogimientos con mancuernas"
+  },
+  {
+    "id": "e8a9dd67-880f-4094-91bd-a0db002fd192",
+    "nombreEs": "Sentadilla trasera con barra"
+  },
+  {
+    "id": "d78974fb-4802-4a71-9784-7864dfbf4c3c",
+    "nombreEs": "Sentadilla frontal con barra"
+  },
+  {
+    "id": "df9d5334-dac8-4965-b23c-0b7799d73c2a",
+    "nombreEs": "Prensa de piernas a 45 grados"
+  },
+  {
+    "id": "eaed8c45-e846-46e5-8a3c-c0365632f4f4",
+    "nombreEs": "Prensa horizontal"
+  },
+  {
+    "id": "8eeccb3e-a4c7-498f-8ed8-a73821b5d709",
+    "nombreEs": "Sentadilla Hack"
+  },
+  {
+    "id": "c50e3ce7-27b9-40ab-8109-0550ee7acc52",
+    "nombreEs": "Zancadas con mancuernas"
+  },
+  {
+    "id": "bb26782b-9a72-4379-b89c-28dc42eb53b1",
+    "nombreEs": "Zancadas con barra"
+  },
+  {
+    "id": "bf931732-8e7d-4746-bba7-aba952ef2166",
+    "nombreEs": "Sentadilla búlgara"
+  },
+  {
+    "id": "e3e06cdf-9c95-4795-abcf-16657f175638",
+    "nombreEs": "Extensión de cuádriceps en máquina"
+  },
+  {
+    "id": "644a16ac-408e-40c6-ac44-a8fadae0fd67",
+    "nombreEs": "Curl de piernas acostado"
+  },
+  {
+    "id": "3cd48637-7d30-4091-af52-ed67d4661a62",
+    "nombreEs": "Curl de piernas sentado"
+  },
+  {
+    "id": "82f51522-931b-4d38-b127-091ac83aa931",
+    "nombreEs": "Curl de piernas de pie (unilateral)"
+  },
+  {
+    "id": "7c77f880-812a-4117-ada5-70511b148d50",
+    "nombreEs": "Peso muerto rumano con barra"
+  },
+  {
+    "id": "bf080c73-f3ce-4249-9cc0-1798a2f4fadc",
+    "nombreEs": "Peso muerto rumano con mancuernas"
+  },
+  {
+    "id": "11502b70-2364-4e4f-815a-4d0fdb82a201",
+    "nombreEs": "Hip Thrust con barra"
+  },
+  {
+    "id": "5b9b7b90-b60f-4ea8-a891-a496945c9d8c",
+    "nombreEs": "Puente de glúteos en el suelo"
+  },
+  {
+    "id": "c4ee414a-29b8-4164-811e-718ca6390db9",
+    "nombreEs": "Abducción de cadera en máquina"
+  },
+  {
+    "id": "69a757b3-99f5-42c2-8e8a-30472aa096c8",
+    "nombreEs": "Adducción de cadera en máquina"
+  },
+  {
+    "id": "be0c1664-9f14-4c1b-a993-c3ac24026ee9",
+    "nombreEs": "Sentadilla Goblet"
+  },
+  {
+    "id": "307e5a8a-9c61-4f1a-8f25-5d21f9daa3ff",
+    "nombreEs": "Sentadilla en multipower (Smith)"
+  },
+  {
+    "id": "c1897659-8d36-4ce2-b120-6b5ee5b800b3",
+    "nombreEs": "Elevación de talones de pie en máquina"
+  },
+  {
+    "id": "1caa75a3-0e63-4682-8ecb-004bca672338",
+    "nombreEs": "Elevación de talones sentado en máquina"
+  },
+  {
+    "id": "23fcfc94-2a32-40a0-94b7-ec25c646fe22",
+    "nombreEs": "Elevación de talones en prensa"
+  },
+  {
+    "id": "c8157a3c-02ea-402c-8ec3-be13666f5b49",
+    "nombreEs": "Press militar con barra"
+  },
+  {
+    "id": "16e2d85f-0558-4530-adb7-618232d15cb1",
+    "nombreEs": "Press de hombros con mancuernas"
+  },
+  {
+    "id": "19301243-18de-491b-845e-91ff0aad3268",
+    "nombreEs": "Press Arnold"
+  },
+  {
+    "id": "559e9b1a-1102-4711-a252-3ff75ba5dfe7",
+    "nombreEs": "Press de hombros en máquina"
+  },
+  {
+    "id": "382d0025-838e-4881-a0f7-bfcbbb04dd68",
     "nombreEs": "Elevaciones laterales con mancuernas"
   },
-  { "id": "f2f01cfe-07a5-4c49-92e6-fc2a7e3df221", "nombreEs": "Elevaciones laterales en polea" },
   {
-    "id": "1c613fee-fe84-47f5-a45d-ed1b5ef73d1b",
+    "id": "f710f906-456e-461f-8275-ed9594af7ec6",
+    "nombreEs": "Elevaciones laterales en polea"
+  },
+  {
+    "id": "500f3a70-97a6-4d31-afec-c16a2a43b0ec",
     "nombreEs": "Elevaciones frontales con mancuernas"
   },
   {
     "id": "e7c02129-dd3f-4ab8-9c84-bbeb71472ae7",
-    "nombreEs": "Pájaros (deltoide posterior) con mancuernas"
+    "nombreEs": "Pájaros con mancuernas"
   },
   {
-    "id": "ec84969d-d76d-4de0-aa7e-c9ec2b3d0d60",
-    "nombreEs": "Encogimientos de hombros con barra (trapecio)"
+    "id": "e495c22c-9cd0-437d-8f6c-fa58a27f196c",
+    "nombreEs": "Remo al mentón con barra"
   },
   {
-    "id": "c44850c8-0f2e-4759-af72-4ac411f893ae",
-    "nombreEs": "Encogimientos de hombros con mancuernas (trapecio)"
+    "id": "70cb85a5-e119-493e-9f1c-3b6fb38b454b",
+    "nombreEs": "Remo al mentón con polea"
   },
-  { "id": "426d4d42-9ce2-40ad-8f8e-aa9d3c77782d", "nombreEs": "Curl de bíceps con barra" },
-  { "id": "8666c694-6958-4acc-a022-1bac88e0d43d", "nombreEs": "Curl de bíceps con mancuerna" },
-  { "id": "ec05774d-ae3e-4768-90c9-39c8ceeb788f", "nombreEs": "Curl martillo con mancuerna" },
+  {
+    "id": "f90992b1-c86e-4ec4-92d6-564ce59741b2",
+    "nombreEs": "Elevaciones laterales tumbado en banco"
+  },
+  {
+    "id": "426d4d42-9ce2-40ad-8f8e-aa9d3c77782d",
+    "nombreEs": "Curl de bíceps con barra de pie"
+  },
+  {
+    "id": "c4f1a96d-52ab-464e-a119-60369f0577c8",
+    "nombreEs": "Curl con barra EZ"
+  },
+  {
+    "id": "8666c694-6958-4acc-a022-1bac88e0d43d",
+    "nombreEs": "Curl de bíceps con mancuernas"
+  },
+  {
+    "id": "ec05774d-ae3e-4768-90c9-39c8ceeb788f",
+    "nombreEs": "Curl alterno tipo martillo"
+  },
+  {
+    "id": "71ec7655-0ea6-4ff2-8415-dd76f3d30cec",
+    "nombreEs": "Curl en banco inclinado"
+  },
   {
     "id": "9e010d6e-1a0c-401c-ab1c-c7e30120c831",
-    "nombreEs": "Curl de bíceps en banco Scott (predicador)"
+    "nombreEs": "Curl Predicador (banco Scott)"
   },
-  { "id": "c7efcabe-e22d-4f9e-b9b5-309b01b6eaf6", "nombreEs": "Curl de bíceps en polea" },
+  {
+    "id": "7236d62f-db3f-4dff-b388-82a30c13be8c",
+    "nombreEs": "Curl concentrado con mancuerna"
+  },
+  {
+    "id": "c7efcabe-e22d-4f9e-b9b5-309b01b6eaf6",
+    "nombreEs": "Curl en polea baja con barra"
+  },
   {
     "id": "fb76c76a-b9b0-4932-9db0-86619f604862",
-    "nombreEs": "Extensión de tríceps en polea (jalón)"
+    "nombreEs": "Extensiones de tríceps en polea alta"
   },
   {
     "id": "ccc09b66-37fd-4d12-83b3-d1d364b44ae4",
-    "nombreEs": "Press francés con barra (extensión de tríceps acostado)"
-  },
-  { "id": "a268d1c0-3795-49f8-b2dd-ced4dc4094d0", "nombreEs": "Fondos de pecho (dips)" },
-  { "id": "f8b7cf1e-38cf-4ceb-8329-ec57c94e8bd4", "nombreEs": "Aperturas con mancuerna" },
-  { "id": "c27d1eb7-0cc0-4345-aae6-6670698e127b", "nombreEs": "Aperturas inclinadas en polea" },
-  { "id": "eaed8c45-e846-46e5-8a3c-c0365632f4f4", "nombreEs": "Prensa de piernas" },
-  {
-    "id": "05753dcf-af55-4c74-aaac-4e7edbe0afb3",
-    "nombreEs": "Prensa de piernas en máquina Smith"
+    "nombreEs": "Press francés con barra EZ"
   },
   {
-    "id": "481e27a1-672e-4d4e-bcb7-3e0c753d5186",
-    "nombreEs": "Extensión de cuádriceps en máquina"
-  },
-  { "id": "644a16ac-408e-40c6-ac44-a8fadae0fd67", "nombreEs": "Curl femoral acostado en máquina" },
-  { "id": "3cd48637-7d30-4091-af52-ed67d4661a62", "nombreEs": "Curl femoral sentado en máquina" },
-  { "id": "bb26782b-9a72-4379-b89c-28dc42eb53b1", "nombreEs": "Zancadas con barra" },
-  {
-    "id": "f676dee1-d3b2-44d0-b071-a24a376da4c1",
-    "nombreEs": "Zancada búlgara con barra (pierna dividida)"
+    "id": "4d0cec61-8da3-45eb-8f8f-034e7c4a8820",
+    "nombreEs": "Press de banca con agarre cerrado"
   },
   {
-    "id": "bf931732-8e7d-4746-bba7-aba952ef2166",
-    "nombreEs": "Zancada búlgara con mancuernas (pierna dividida)"
-  },
-  { "id": "73ae39ed-726a-48b0-a3e4-5b1751417cf2", "nombreEs": "Subida al cajón con barra" },
-  { "id": "bdfba980-8efe-4666-a6ac-962c2efbbdfd", "nombreEs": "Subida al cajón con mancuernas" },
-  {
-    "id": "c1897659-8d36-4ce2-b120-6b5ee5b800b3",
-    "nombreEs": "Elevación de talones de pie con barra"
+    "id": "c1620ac3-c976-4796-aa18-9e573b967764",
+    "nombreEs": "Extensión de tríceps tras nuca con mancuerna"
   },
   {
-    "id": "e08ca55c-1003-416e-a207-da4b627f9985",
-    "nombreEs": "Elevación de talones de pie con mancuerna"
+    "id": "b31b9564-4683-474e-aa9a-7ed2db528412",
+    "nombreEs": "Extensión tras nuca en polea"
   },
   {
-    "id": "1caa75a3-0e63-4682-8ecb-004bca672338",
-    "nombreEs": "Elevación de talones sentado con barra"
+    "id": "30d12784-56bf-4bae-a17c-b86058c0f1d0",
+    "nombreEs": "Fondos entre bancos"
   },
   {
-    "id": "11502b70-2364-4e4f-815a-4d0fdb82a201",
-    "nombreEs": "Puente de glúteos con barra (hip thrust)"
+    "id": "4cb8ba3c-627b-4a8a-908c-dd46f312df14",
+    "nombreEs": "Patada de tríceps con mancuerna"
   },
-  { "id": "5b9b7b90-b60f-4ea8-a891-a496945c9d8c", "nombreEs": "Puente de glúteos sin peso" },
-  { "id": "98014829-40c2-4774-8cb1-76321955fd47", "nombreEs": "Abdominales (crunch) en el piso" },
-  { "id": "b4d25d12-e6e7-46f7-82ae-e9f6b7dc331e", "nombreEs": "Elevación de piernas colgado" },
-  { "id": "76e836be-5f8a-4b9c-b8b2-3ebbc31c2221", "nombreEs": "Giro ruso (russian twist)" },
-  { "id": "9d72a5cf-73d0-4bd6-be2a-949d2d7965aa", "nombreEs": "Burpee" },
-  { "id": "4c4fb363-ec60-4ba2-92ab-74580e9e0769", "nombreEs": "Escaladores (mountain climber)" },
-  { "id": "7707788f-8f27-4e87-b612-d011c96cbc0e", "nombreEs": "Thruster con barra" }
+  {
+    "id": "9042ce12-dd14-4f23-8a4c-99afa25c183b",
+    "nombreEs": "Patada de tríceps en polea"
+  },
+  {
+    "id": "146f0cab-c2bd-4dc0-aaef-a2f540edce83",
+    "nombreEs": "Curl de muñeca con barra"
+  },
+  {
+    "id": "b0523185-4605-436f-a96f-acd0c96ebe37",
+    "nombreEs": "Curl de muñeca invertido"
+  },
+  {
+    "id": "98014829-40c2-4774-8cb1-76321955fd47",
+    "nombreEs": "Crunch abdominal clásico"
+  },
+  {
+    "id": "7f5b4bee-f6bc-4ec6-9752-b1d4b6126a24",
+    "nombreEs": "Crunch en polea alta"
+  },
+  {
+    "id": "b4d25d12-e6e7-46f7-82ae-e9f6b7dc331e",
+    "nombreEs": "Elevaciones de piernas colgado"
+  },
+  {
+    "id": "0b49dabc-19ab-4094-825f-ddbb76892cf2",
+    "nombreEs": "Elevaciones de rodillas en silla de capitán"
+  },
+  {
+    "id": "4aee9ccc-bc4d-4c44-9add-2aaa7937a3cd",
+    "nombreEs": "Plancha lateral"
+  },
+  {
+    "id": "76e836be-5f8a-4b9c-b8b2-3ebbc31c2221",
+    "nombreEs": "Giros rusos"
+  },
+  {
+    "id": "0c03bedc-2cc8-4d5d-902d-a7588874afdd",
+    "nombreEs": "Rueda abdominal"
+  },
+  {
+    "id": "323e2860-b694-4396-bfd1-7e9d0fc87a35",
+    "nombreEs": "Crunch invertido"
+  },
+  {
+    "id": "b2284726-d2a0-495a-a8a4-13d2ea172262",
+    "nombreEs": "Bicho muerto"
+  },
+  {
+    "id": "e03a3c6f-57e9-4827-a265-1eeb8b9b54da",
+    "nombreEs": "Paseo del granjero"
+  }
 ]
