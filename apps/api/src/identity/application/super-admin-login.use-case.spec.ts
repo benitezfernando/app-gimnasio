@@ -59,6 +59,23 @@ describe('SuperAdminLoginUseCase', () => {
     );
   });
 
+  it('normaliza el username a minuscula antes de autenticar', async () => {
+    authProvider.signInStaff.mockResolvedValue({
+      accessToken: 'a',
+      refreshToken: 'r',
+      authUserId: 'auth-sa',
+    });
+    userRepository.findByAuthUserId.mockResolvedValue(superAdmin);
+
+    await useCase.execute({ username: '  Root  ', password: 'secreto' });
+
+    expect(authProvider.signInStaff).toHaveBeenCalledWith(
+      PLATFORM_PSEUDO_GYM_ID,
+      'root',
+      'secreto',
+    );
+  });
+
   it('rechaza si el authProvider falla', async () => {
     authProvider.signInStaff.mockRejectedValue(new Error('detalle interno'));
 

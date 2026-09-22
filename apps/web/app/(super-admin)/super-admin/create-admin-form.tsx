@@ -43,6 +43,8 @@ export function CreateAdminForm({ gymIdsExistentes }: { gymIdsExistentes: string
           placeholder="Usuario"
           required
           minLength={3}
+          autoCapitalize="none"
+          autoCorrect="off"
           className={INPUT_CLASSES}
         />
         <input

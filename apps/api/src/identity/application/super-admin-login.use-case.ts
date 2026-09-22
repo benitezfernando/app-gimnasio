@@ -26,11 +26,15 @@ export class SuperAdminLoginUseCase {
   ) {}
 
   async execute(input: SuperAdminLoginInput): Promise<AuthSession> {
+    // Ver LoginUseCase.execute: mismo problema de teclados moviles
+    // autocapitalizando el username.
+    const username = input.username.trim().toLowerCase();
+
     let session: AuthSession;
     try {
       session = await this.authProvider.signInStaff(
         PLATFORM_PSEUDO_GYM_ID,
-        input.username,
+        username,
         input.password,
       );
     } catch {

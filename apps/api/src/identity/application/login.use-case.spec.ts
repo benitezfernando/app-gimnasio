@@ -75,6 +75,32 @@ describe('LoginUseCase', () => {
     expect(resultado).toEqual({ accessToken: 'a2', refreshToken: 'r2', authUserId: 'auth-x' });
   });
 
+  it('normaliza el username a minuscula antes de autenticar (con password)', async () => {
+    authProvider.signInStaff.mockResolvedValue({
+      accessToken: 'a',
+      refreshToken: 'r',
+      authUserId: 'auth-x',
+    });
+    userRepository.findByAuthUserId.mockResolvedValue(usuarioActivo);
+
+    await useCase.execute({ gymId: 'gym-1', username: '  Admin1  ', password: 'secreto' });
+
+    expect(authProvider.signInStaff).toHaveBeenCalledWith('gym-1', 'admin1', 'secreto');
+  });
+
+  it('normaliza el username a minuscula antes de autenticar (sin password)', async () => {
+    authProvider.signInAlumno.mockResolvedValue({
+      accessToken: 'a2',
+      refreshToken: 'r2',
+      authUserId: 'auth-x',
+    });
+    userRepository.findByAuthUserId.mockResolvedValue(usuarioActivo);
+
+    await useCase.execute({ gymId: 'gym-1', username: 'Juan.Perez' });
+
+    expect(authProvider.signInAlumno).toHaveBeenCalledWith('gym-1', 'juan.perez');
+  });
+
   it('cualquier falla del provider se traduce a InvalidCredentialsError genérico (con password)', async () => {
     authProvider.signInStaff.mockRejectedValue(new Error('detalle interno de Supabase'));
 

@@ -32,12 +32,18 @@ export class LoginUseCase {
   ) {}
 
   async execute(input: LoginInput): Promise<AuthSession> {
+    // Los usernames en el sistema son siempre minuscula por construccion
+    // (ver CreateUserUseCase.normalizar y CreateProfesorDto), pero el
+    // teclado de celulares suele autocapitalizar la primera letra al
+    // tipear -- se normaliza acá para que eso no rompa el login.
+    const username = input.username.trim().toLowerCase();
+
     let session: AuthSession;
     try {
       if (input.password !== undefined) {
-        session = await this.authProvider.signInStaff(input.gymId, input.username, input.password);
+        session = await this.authProvider.signInStaff(input.gymId, username, input.password);
       } else {
-        session = await this.authProvider.signInAlumno(input.gymId, input.username);
+        session = await this.authProvider.signInAlumno(input.gymId, username);
       }
     } catch {
       throw new InvalidCredentialsError();
