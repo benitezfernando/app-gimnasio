@@ -13,3 +13,12 @@ out/
 !docs/
 !docs/superpowers/
 !docs/superpowers/plans/
+
+# Android TWA (docs/superpowers/plans/2026-09-22-android-twa-play-store.md)
+android-twa/*.jks
+android-twa/*.keystore
+android-twa/keystore.properties
+android-twa/app/build/
+android-twa/build/
+android-twa/.gradle/
+android-twa/local.properties
