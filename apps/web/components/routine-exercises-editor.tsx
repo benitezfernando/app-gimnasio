@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, X } from 'lucide-react';
-import { Card } from './ui/card';
+import { Card } from '@/components/ui/card';
 import { ExercisePicker } from './exercise-picker';
 import { EjercicioEnEdicion } from '../lib/routine-types';
 import { ExerciseCardData } from './exercise-card';
@@ -41,7 +41,7 @@ function FilaEjercicio({
 
   return (
     <li ref={setNodeRef} style={estilo}>
-      <Card className="p-2.5! flex items-center gap-1 sm:p-3! sm:gap-2">
+      <Card className="flex flex-row items-center gap-1 p-2.5! sm:gap-2 sm:p-3!">
         <button
           type="button"
           {...attributes}

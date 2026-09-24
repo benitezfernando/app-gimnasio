@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { Button } from '@/components/ui/button';
 
 export function PageHeader({
   title,
@@ -16,14 +17,16 @@ export function PageHeader({
     <div className="sticky top-0 z-10 flex w-full items-center justify-between gap-3 bg-background py-2 lg:top-12">
       <div className="flex items-center">
         {onBack && (
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
             type="button"
             onClick={onBack}
             aria-label="Volver"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-foreground active:bg-card lg:h-9 lg:w-9"
           >
             <ArrowLeft size={22} aria-hidden />
-          </button>
+          </Button>
         )}
         {left}
       </div>

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Dumbbell } from 'lucide-react';
 import { apiFetch, ApiError } from '../../../lib/api-client';
 import { PageHeader } from '../../../components/ui/page-header';
-import { Card } from '../../../components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Pill } from '../../../components/ui/pill';
 import { GradientIcon } from '../../../components/ui/gradient-icon';
 import { LogoutButton } from '../../../components/logout-button';
@@ -55,7 +55,7 @@ export default async function AlumnoPage() {
           .map((ejercicio) => (
             <li key={ejercicio.exerciseId}>
               <Link href={`/catalogo/${ejercicio.exerciseId}`}>
-                <Card className="flex items-center gap-3">
+                <Card className="flex flex-row items-center gap-3 p-4 lg:p-3">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-background">
                     {ejercicio.imageUrl ? (
                       <Image

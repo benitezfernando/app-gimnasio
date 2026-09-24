@@ -1,5 +1,6 @@
 import { LogOut } from 'lucide-react';
 import { logoutAction } from '../lib/logout-action';
+import { Button } from '@/components/ui/button';
 
 /**
  * Form action plano — no necesita 'use client', un <form action={...}>
@@ -11,13 +12,15 @@ export function LogoutButton({ redirectTo = '/login' }: { redirectTo?: string })
   const accionConDestino = logoutAction.bind(null, redirectTo);
   return (
     <form action={accionConDestino}>
-      <button
+      <Button
+        variant="ghost"
+        size="icon"
+        className="rounded-full"
         type="submit"
         aria-label="Cerrar sesión"
-        className="flex h-11 w-11 items-center justify-center rounded-full text-foreground active:bg-card lg:h-9 lg:w-9"
       >
         <LogOut size={20} aria-hidden />
-      </button>
+      </Button>
     </form>
   );
 }

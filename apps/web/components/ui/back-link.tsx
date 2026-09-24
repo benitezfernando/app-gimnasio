@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 /**
  * Variante de solo-Link del botón "Volver" de `PageHeader` — para
@@ -10,12 +11,10 @@ import { ArrowLeft } from 'lucide-react';
  */
 export function BackLink({ href }: { href: string }) {
   return (
-    <Link
-      href={href}
-      aria-label="Volver"
-      className="flex h-11 w-11 items-center justify-center rounded-full text-foreground active:bg-card lg:h-9 lg:w-9"
-    >
-      <ArrowLeft size={22} aria-hidden />
-    </Link>
+    <Button asChild variant="ghost" size="icon" className="rounded-full">
+      <Link href={href} aria-label="Volver">
+        <ArrowLeft size={22} aria-hidden />
+      </Link>
+    </Button>
   );
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Dumbbell } from 'lucide-react';
 import { ETIQUETA_PARTE_CUERPO, regionColorVar } from '../lib/region-colors';
 import { ETIQUETA_EQUIPAMIENTO } from '../lib/equipment-options';
-import { Card } from './ui/card';
+import { Card } from '@/components/ui/card';
 import { Pill } from './ui/pill';
 import { GradientIcon } from './ui/gradient-icon';
 
@@ -22,7 +22,7 @@ export interface ExerciseCardData {
  */
 export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
   return (
-    <Card className="flex flex-col gap-3">
+    <Card className="flex flex-col gap-3 p-4 lg:p-3">
       <div className="relative aspect-square w-full overflow-hidden rounded-full bg-background">
         {ejercicio.imageUrl ? (
           <Image
