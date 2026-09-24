@@ -104,17 +104,30 @@ model RoutineTemplate {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  profesor         User                      @relation("ProfesorTemplates", fields: [profesorId], references: [id])
-  ejercicios       RoutineTemplateExercise[]
-  instanciasOrigen RoutineInstance[]         @relation("OrigenTemplate")
+  profesor User                 @relation("ProfesorTemplates", fields: [profesorId], references: [id])
+  dias     RoutineTemplateDay[]
 
   @@index([gymId])
   @@index([profesorId])
 }
 
+// Días numerados de una plantilla (1..7). Se persisten por id, nunca
+// replace-all: los RoutineInstanceDay vinculados apuntan a este id.
+model RoutineTemplateDay {
+  id         String @id @default(uuid())
+  templateId String
+  numero     Int
+
+  template       RoutineTemplate           @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  ejercicios     RoutineTemplateExercise[]
+  diasVinculados RoutineInstanceDay[]
+
+  @@unique([templateId, numero])
+}
+
 model RoutineTemplateExercise {
   id           String   @id @default(uuid())
-  templateId   String
+  dayId        String
   exerciseId   String
   orden        Int
   series       Int
@@ -122,40 +135,53 @@ model RoutineTemplateExercise {
   peso         Decimal? @db.Decimal(5, 2)
   notas        String?
 
-  template RoutineTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
-  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+  day      RoutineTemplateDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  exercise Exercise           @relation(fields: [exerciseId], references: [id])
 
-  @@unique([templateId, orden])
+  @@unique([dayId, orden])
   @@index([exerciseId])
 }
 
 model RoutineInstance {
-  id               String    @id @default(uuid())
-  gymId            String
-  profesorId       String?
-  alumnoId         String
-  nombre           String
-  origenTemplateId String?
-  vinculada        Boolean   @default(false)
-  vigenteDesde     DateTime  @default(now())
-  vigenteHasta     DateTime?
-  activa           Boolean   @default(true)
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  id           String    @id @default(uuid())
+  gymId        String
+  profesorId   String?
+  alumnoId     String
+  nombre       String
+  vigenteDesde DateTime  @default(now())
+  vigenteHasta DateTime?
+  activa       Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
-  profesor       User?                     @relation("ProfesorInstances", fields: [profesorId], references: [id], onDelete: SetNull)
-  alumno         User                      @relation("AlumnoInstances", fields: [alumnoId], references: [id])
-  origenTemplate RoutineTemplate?          @relation("OrigenTemplate", fields: [origenTemplateId], references: [id], onDelete: SetNull)
-  ejercicios     RoutineInstanceExercise[]
+  profesor User?                @relation("ProfesorInstances", fields: [profesorId], references: [id], onDelete: SetNull)
+  alumno   User                 @relation("AlumnoInstances", fields: [alumnoId], references: [id])
+  dias     RoutineInstanceDay[]
 
   @@index([gymId])
   @@index([alumnoId])
   @@index([profesorId])
 }
 
+// Días numerados de la rutina de un alumno. "Vinculado" ≡ vinculadoADiaId
+// no nulo; si se borra el día de plantilla, SetNull lo desvincula.
+model RoutineInstanceDay {
+  id              String  @id @default(uuid())
+  instanceId      String
+  numero          Int
+  vinculadoADiaId String?
+
+  instance   RoutineInstance           @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  vinculadoA RoutineTemplateDay?       @relation(fields: [vinculadoADiaId], references: [id], onDelete: SetNull)
+  ejercicios RoutineInstanceExercise[]
+
+  @@unique([instanceId, numero])
+  @@index([vinculadoADiaId])
+}
+
 model RoutineInstanceExercise {
   id           String   @id @default(uuid())
-  instanceId   String
+  dayId        String
   exerciseId   String
   orden        Int
   series       Int
@@ -163,9 +189,9 @@ model RoutineInstanceExercise {
   peso         Decimal? @db.Decimal(5, 2)
   notas        String?
 
-  instance RoutineInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
-  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+  day      RoutineInstanceDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  exercise Exercise           @relation(fields: [exerciseId], references: [id])
 
-  @@unique([instanceId, orden])
+  @@unique([dayId, orden])
   @@index([exerciseId])
 }
