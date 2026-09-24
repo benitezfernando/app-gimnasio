@@ -100,13 +100,15 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 - Dado que agrego un ejercicio del catálogo a la plantilla, cuando completo series/repeticiones/peso, entonces queda guardado en el orden que definí.
 - El peso es opcional: hay ejercicios de peso corporal (plancha, fondos, dominadas) donde no aplica cargar un valor.
 - Una plantilla sin ejercicios no puede asignarse (validación). Máximo 50 ejercicios por plantilla.
+- Puedo dividir la plantilla en días (Día 1…Día 7), reordenarlos y mover un ejercicio de un día a otro.
 
 **HU-05 — Asignar rutina a alumno**
 
 > Como Profesor, quiero asignar una plantilla (o armar una rutina desde cero) a un alumno específico, para que la vea en su dashboard.
 
 - Dado un alumno con una rutina vigente, cuando le asigno una nueva, entonces la anterior pasa a histórica (`activa: false`) y la nueva queda vigente.
-- Dado que asigno una plantilla, cuando se crea la instancia, entonces se clonan sus ejercicios y a partir de ahí son independientes de la plantilla — salvo que elija vincularla (`vinculada: true`), en cuyo caso una futura edición de la plantilla se propaga a esa instancia hasta que diverja (ver HLD §Routines).
+- Puedo armar la rutina del alumno combinando días de distintas plantillas (o traer una plantilla completa) y días armados desde cero. Con "Mantener sincronizado", cada día traído de plantilla queda vinculado a ese día de la plantilla.
+- Dado que asigno días de plantilla con "Mantener sincronizado", cuando edito esa plantilla, entonces cada día vinculado del alumno se actualiza conservando sus series/reps/peso (ver HLD §Routines).
 - **Solo puedo asignar rutina a alumnos de mi cartera** (regla de negocio 9) — no a cualquier alumno de mi gym. Si intento asignar a un alumno que no es mío, la operación se rechaza (403), sin importar que pertenezca a mi mismo gym.
 
 **HU-06 — Ajustar rutina de un alumno puntual**
@@ -114,6 +116,7 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 > Como Profesor, quiero modificar series/reps/ejercicios de la rutina vigente de un alumno en particular, para adaptarla a su progreso sin afectar a otros alumnos.
 
 - Dado que edito la `RoutineInstance` de un alumno, cuando guardo cambios, entonces ningún otro alumno ni la plantilla original se ven afectados.
+- Puedo traer un día de plantilla a la rutina vigente (como día nuevo o reemplazando uno). Si modifico los ejercicios de un día vinculado, solo ese día se desvincula y la app me lo avisa.
 - **Solo puedo ver/editar rutinas de alumnos de mi cartera.** Si el alumno tiene más de un profesor asignado, cualquiera de ellos puede ver y editar su rutina vigente — no hay "dueño único" de la instancia más allá de quién la creó originalmente.
 
 **HU-07 — Editar/desactivar plantilla**
@@ -131,6 +134,7 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 > Como Alumno, quiero ver mi rutina vigente con la lista de ejercicios, series y repeticiones, para saber qué hacer en el gym.
 
 - Dado que no tengo ninguna rutina asignada, cuando entro a mi dashboard, entonces veo un estado vacío claro ("todavía no tenés una rutina asignada"), no un error.
+- Dado que mi rutina tiene varios días, cuando entro elijo qué día hacer hoy; la app abre en el último día que elegí en ese teléfono. Con un solo día, la veo como una lista, sin selector.
 
 **HU-09 — Ver detalle de ejercicio**
 
