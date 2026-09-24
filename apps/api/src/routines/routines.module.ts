@@ -10,6 +10,7 @@ import { ListRoutineTemplatesUseCase } from './application/list-routine-template
 import { GetRoutineTemplateUseCase } from './application/get-routine-template.use-case';
 import { UpdateRoutineTemplateUseCase } from './application/update-routine-template.use-case';
 import { DeleteRoutineTemplateUseCase } from './application/delete-routine-template.use-case';
+import { ReplaceTemplateDaysUseCase } from './application/replace-template-days.use-case';
 import { UpdateRoutineInstanceUseCase } from './application/update-routine-instance.use-case';
 import { GetAlumnoRutinaVigenteAsProfesorUseCase } from './application/get-alumno-rutina-vigente-as-profesor.use-case';
 import { GetMiRutinaVigenteUseCase } from './application/get-mi-rutina-vigente.use-case';
@@ -28,6 +29,7 @@ import { RoutinesController } from './infrastructure/http/routines.controller';
     GetRoutineTemplateUseCase,
     UpdateRoutineTemplateUseCase,
     DeleteRoutineTemplateUseCase,
+    ReplaceTemplateDaysUseCase,
     UpdateRoutineInstanceUseCase,
     GetAlumnoRutinaVigenteAsProfesorUseCase,
     GetMiRutinaVigenteUseCase,

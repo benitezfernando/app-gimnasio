@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Req,
+} from '@nestjs/common';
 import type { Request } from 'express';
 import { Roles } from '../../../identity/infrastructure/decorators/roles.decorator';
 import { Role } from '../../../identity/domain/role';
@@ -8,8 +19,11 @@ import { ListRoutineTemplatesUseCase } from '../../application/list-routine-temp
 import { GetRoutineTemplateUseCase } from '../../application/get-routine-template.use-case';
 import { UpdateRoutineTemplateUseCase } from '../../application/update-routine-template.use-case';
 import { DeleteRoutineTemplateUseCase } from '../../application/delete-routine-template.use-case';
+import { ReplaceTemplateDaysUseCase } from '../../application/replace-template-days.use-case';
 import { CreateRoutineTemplateDto } from './dto/create-routine-template.dto';
 import { UpdateRoutineTemplateDto } from './dto/update-routine-template.dto';
+import { ReplaceTemplateDaysDto } from './dto/replace-template-days.dto';
+import { toDiasPlantilla } from './dto/dia.mapper';
 
 interface RequestWithUser extends Request {
   user: AuthenticatedUser;
@@ -24,6 +38,7 @@ export class RoutineTemplatesController {
     private readonly getUseCase: GetRoutineTemplateUseCase,
     private readonly updateUseCase: UpdateRoutineTemplateUseCase,
     private readonly deleteUseCase: DeleteRoutineTemplateUseCase,
+    private readonly replaceDaysUseCase: ReplaceTemplateDaysUseCase,
   ) {}
 
   @Post()
@@ -64,5 +79,19 @@ export class RoutineTemplatesController {
   @HttpCode(204)
   async delete(@Param('id') id: string, @Req() req: RequestWithUser): Promise<void> {
     await this.deleteUseCase.execute({ invocadoPor: req.user, templateId: id });
+  }
+
+  @Put(':id/dias')
+  @HttpCode(204)
+  async replaceDias(
+    @Param('id') id: string,
+    @Body() dto: ReplaceTemplateDaysDto,
+    @Req() req: RequestWithUser,
+  ): Promise<void> {
+    await this.replaceDaysUseCase.execute({
+      invocadoPor: req.user,
+      templateId: id,
+      dias: toDiasPlantilla(dto.dias),
+    });
   }
 }

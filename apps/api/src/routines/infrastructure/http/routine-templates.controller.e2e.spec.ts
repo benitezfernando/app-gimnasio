@@ -8,6 +8,7 @@ import { ListRoutineTemplatesUseCase } from '../../application/list-routine-temp
 import { GetRoutineTemplateUseCase } from '../../application/get-routine-template.use-case';
 import { UpdateRoutineTemplateUseCase } from '../../application/update-routine-template.use-case';
 import { DeleteRoutineTemplateUseCase } from '../../application/delete-routine-template.use-case';
+import { ReplaceTemplateDaysUseCase } from '../../application/replace-template-days.use-case';
 import {
   ROUTINE_TEMPLATE_REPOSITORY,
   RoutineTemplateRepositoryPort,
@@ -140,6 +141,7 @@ describe('/routine-templates (e2e)', () => {
         GetRoutineTemplateUseCase,
         UpdateRoutineTemplateUseCase,
         DeleteRoutineTemplateUseCase,
+        ReplaceTemplateDaysUseCase,
         { provide: ROUTINE_TEMPLATE_REPOSITORY, useValue: fakeTemplateRepository },
         { provide: ROUTINE_INSTANCE_REPOSITORY, useValue: fakeInstanceRepository },
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
@@ -203,5 +205,63 @@ describe('/routine-templates (e2e)', () => {
       .delete('/routine-templates/tpl-1')
       .set('Authorization', `Bearer ${token}`)
       .expect(204);
+  });
+
+  it('PUT /:id/dias guarda los días (204)', async () => {
+    const token = await firmarTokenPara('auth-prof');
+    await request(app.getHttpServer())
+      .put('/routine-templates/tpl-1/dias')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        dias: [{ ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }] }],
+      })
+      .expect(204);
+    expect(fakeTemplateRepository.guardarDias).toHaveBeenCalledWith(
+      'tpl-1',
+      [
+        {
+          ejercicios: [
+            { exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, peso: null, notas: null },
+          ],
+        },
+      ],
+      [],
+    );
+  });
+
+  it('rechaza 8 días (400, ValidationPipe)', async () => {
+    const token = await firmarTokenPara('auth-prof');
+    const dia = { ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }] };
+    await request(app.getHttpServer())
+      .put('/routine-templates/tpl-1/dias')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ dias: Array.from({ length: 8 }, () => dia) })
+      .expect(400);
+  });
+
+  it('rechaza un día vacío (400, EmptyDayError)', async () => {
+    const token = await firmarTokenPara('auth-prof');
+    const res = await request(app.getHttpServer())
+      .put('/routine-templates/tpl-1/dias')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ dias: [{ ejercicios: [] }] })
+      .expect(400);
+    expect(res.body.error).toBe('EmptyDayError');
+  });
+
+  it('rechaza campos desconocidos en un día (400, forbidNonWhitelisted)', async () => {
+    const token = await firmarTokenPara('auth-prof');
+    await request(app.getHttpServer())
+      .put('/routine-templates/tpl-1/dias')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        dias: [
+          {
+            numero: 1,
+            ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
+          },
+        ],
+      })
+      .expect(400);
   });
 });
