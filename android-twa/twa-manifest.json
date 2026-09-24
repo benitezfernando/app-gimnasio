@@ -4,13 +4,13 @@
   "name": "Gimnasio Mix",
   "launcherName": "Gimnasio Mix",
   "display": "standalone",
-  "themeColor": "#141414",
-  "themeColorDark": "#141414",
+  "themeColor": "#0D0D14",
+  "themeColorDark": "#0D0D14",
   "navigationColor": "#000000",
   "navigationColorDark": "#000000",
   "navigationDividerColor": "#000000",
   "navigationDividerColorDark": "#000000",
-  "backgroundColor": "#141414",
+  "backgroundColor": "#0D0D14",
   "enableNotifications": true,
   "startUrl": "/",
   "iconUrl": "https://mixentrenamiento.vercel.app/icons/logo-transparente.png",
@@ -20,8 +20,8 @@
     "path": "/home/fernando/Escritorio/Dev/Fernando/app-gimnasio/android-twa/release.jks",
     "alias": "gimnasio-mix-release"
   },
-  "appVersionName": "1.0.1",
-  "appVersionCode": 10001,
+  "appVersionName": "1.0.2",
+  "appVersionCode": 10002,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://mixentrenamiento.vercel.app/manifest.webmanifest",
@@ -43,5 +43,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1.0.1"
+  "appVersion": "1.0.2"
 }
