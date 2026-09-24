@@ -3,8 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api-client';
-import { RoutineExercisesEditor } from '../../../../../components/routine-exercises-editor';
-import { EjercicioEnEdicion, aPayloadDeEjercicios } from '../../../../../lib/routine-types';
+import { RoutineDaysEditor } from '../../../../../components/routine-days-editor';
+import { DiaEnEdicion } from '../../../../../lib/routine-types';
+import { aPayloadDeDias, claveDeVersion } from '../../../../../lib/routine-days';
 import { toggleActivaAction, deleteTemplateAction } from '../actions';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -14,7 +15,7 @@ interface TemplateDetail {
   id: string;
   nombre: string;
   activa: boolean;
-  ejercicios: EjercicioEnEdicion[];
+  dias: DiaEnEdicion[];
 }
 
 export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
@@ -24,13 +25,13 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   const [error, setError] = useState<string | null>(null);
   const [accionError, setAccionError] = useState<string | null>(null);
 
-  async function guardarEjercicios(ejercicios: EjercicioEnEdicion[]) {
+  async function guardarDias(dias: DiaEnEdicion[]) {
     setGuardando(true);
     setError(null);
     try {
-      await browserApiFetch(`routine-templates/${plantilla.id}/exercises`, {
+      await browserApiFetch(`routine-templates/${plantilla.id}/dias`, {
         method: 'PUT',
-        body: JSON.stringify({ ejercicios: aPayloadDeEjercicios(ejercicios) }),
+        body: JSON.stringify({ dias: aPayloadDeDias(dias, { vincular: false, incluirIds: true }) }),
       });
       router.refresh();
     } catch (err) {
@@ -95,11 +96,13 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
         </Alert>
       )}
 
-      <RoutineExercisesEditor
-        ejerciciosIniciales={plantilla.ejercicios}
-        onGuardar={guardarEjercicios}
+      <RoutineDaysEditor
+        key={claveDeVersion(plantilla.dias)}
+        diasIniciales={plantilla.dias}
+        onGuardar={guardarDias}
         guardando={guardando}
         error={error}
+        textoGuardar="Guardar plantilla"
       />
     </div>
   );
