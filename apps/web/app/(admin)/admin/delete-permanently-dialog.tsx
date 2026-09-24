@@ -3,6 +3,18 @@
 import { useEffect, useState } from 'react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { deletePermanentlyAction } from './actions';
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 
 interface DeletionImpact {
   plantillasABorrar: number;
@@ -68,16 +80,22 @@ export function DeletePermanentlyDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="flex w-full max-w-sm flex-col gap-3 rounded-2xl bg-background p-4">
-        <h2 className="text-lg font-semibold text-foreground">
-          Eliminar a {nombre} definitivamente
-        </h2>
-
-        {cargando && <p className="text-sm text-muted-foreground">Calculando impacto...</p>}
+    <AlertDialog
+      open
+      onOpenChange={(abierto) => {
+        if (!abierto) onCerrado();
+      }}
+    >
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Eliminar a {nombre} definitivamente</AlertDialogTitle>
+          <AlertDialogDescription>
+            {cargando ? 'Calculando impacto...' : 'Esta acción borra en cascada:'}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
 
         {impacto && (
-          <ul className="flex flex-col gap-1 text-sm text-foreground">
+          <ul className="flex flex-col gap-1 text-sm">
             <li>Plantillas que se borran: {impacto.plantillasABorrar}</li>
             <li>Rutinas de alumnos que se borran: {impacto.instanciasABorrar}</li>
             <li>
@@ -88,35 +106,32 @@ export function DeletePermanentlyDialog({
         )}
 
         {error && (
-          <p role="alert" className="text-sm text-destructive">
-            {error}
-          </p>
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
         )}
 
         {advertencia && (
-          <p role="alert" className="text-sm text-destructive">
-            {advertencia}
-          </p>
+          <Alert variant="destructive">
+            <AlertDescription>{advertencia}</AlertDescription>
+          </Alert>
         )}
 
-        <div className="flex gap-2">
-          <button
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+          {/* Button común, no AlertDialogAction: la acción es async y el
+                diálogo tiene que quedar abierto hasta que termine. */}
+          <Button
             type="button"
-            onClick={onCerrado}
-            className="min-h-11 flex-1 rounded-lg border border-border px-4 text-sm font-medium text-foreground"
-          >
-            Cancelar
-          </button>
-          <button
-            type="button"
+            variant="destructive"
             onClick={confirmar}
             disabled={cargando || eliminando || !impacto}
-            className="min-h-11 flex-1 rounded-lg bg-destructive px-4 text-sm font-medium text-background disabled:opacity-50"
           >
+            {eliminando && <Spinner data-icon="inline-start" />}
             {eliminando ? 'Eliminando...' : 'Eliminar definitivamente'}
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

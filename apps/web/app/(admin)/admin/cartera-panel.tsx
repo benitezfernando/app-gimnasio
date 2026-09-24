@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { assignProfesorAction, removeProfesorAction } from './actions';
-import { PrimaryButton } from '../../../components/ui/primary-button';
+import { Button } from '@/components/ui/button';
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface UserRow {
   id: string;
@@ -84,20 +86,22 @@ export function CarteraPanel({
 
   return (
     <div className="mt-2">
-      <button
+      <Button
+        variant="ghost"
+        size="sm"
         onClick={toggle}
-        className="text-sm font-medium text-primary-soft underline-offset-2 hover:underline"
+        className="text-primary-soft hover:text-primary-soft"
       >
         Profesores {abierto ? '▲' : '▼'}
-      </button>
+      </Button>
 
       {abierto && (
         <div className="mt-2 rounded-lg border border-border bg-card p-3">
           {cargando && <p className="text-sm text-muted-foreground">Cargando...</p>}
           {error && (
-            <p role="alert" className="mb-2 text-sm text-destructive">
-              {error}
-            </p>
+            <Alert variant="destructive" className="mb-2">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
           )}
 
           {!cargando && asignados !== null && (
@@ -108,13 +112,15 @@ export function CarteraPanel({
               {asignados.map((p) => (
                 <li key={p.id} className="flex items-center justify-between gap-2 text-sm">
                   <span className="text-foreground">{p.nombre}</span>
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
                     onClick={() => quitar(p.id)}
                     aria-label={`Quitar a ${p.nombre}`}
-                    className="min-h-8 min-w-8 rounded-full text-destructive hover:bg-background"
+                    className="rounded-full text-destructive hover:bg-background hover:text-destructive"
                   >
                     ✕
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -122,26 +128,27 @@ export function CarteraPanel({
 
           {!cargando && asignados !== null && disponibles.length > 0 && (
             <div className="mt-3 flex gap-2">
-              <select
+              <NativeSelect
                 value={profesorSeleccionado}
                 onChange={(e) => setProfesorSeleccionado(e.target.value)}
-                className="min-h-11 flex-1 rounded-lg border border-border bg-background px-3 text-base text-foreground lg:min-h-9 lg:text-sm"
+                className="flex-1"
               >
-                <option value="">Elegir profesor...</option>
+                <NativeSelectOption value="">Elegir profesor...</NativeSelectOption>
                 {disponibles.map((p) => (
-                  <option key={p.id} value={p.id}>
+                  <NativeSelectOption key={p.id} value={p.id}>
                     {p.nombre}
-                  </option>
+                  </NativeSelectOption>
                 ))}
-              </select>
-              <PrimaryButton
+              </NativeSelect>
+              <Button
                 type="button"
+                variant="brand"
+                size="sm"
                 onClick={asignar}
                 disabled={!profesorSeleccionado}
-                size="sm"
               >
                 Asignar
-              </PrimaryButton>
+              </Button>
             </div>
           )}
         </div>

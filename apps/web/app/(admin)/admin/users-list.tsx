@@ -5,6 +5,11 @@ import { deactivateUserAction, editUserAction } from './actions';
 import { CarteraPanel } from './cartera-panel';
 import { DeletePermanentlyDialog } from './delete-permanently-dialog';
 import { EditUserForm } from '../../../components/edit-user-form';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useConfirm } from '@/components/confirm-dialog';
 
 interface UserRow {
   id: string;
@@ -23,6 +28,7 @@ const ETIQUETA_ROL: Record<UserRow['role'], string> = {
 };
 
 export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] }) {
+  const confirmar = useConfirm();
   const [filtroRol, setFiltroRol] = useState<FiltroRol>('TODOS');
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -34,10 +40,13 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
   );
   const profesoresDelGym = usuariosIniciales.filter((u) => u.role === 'PROFESOR' && u.activo);
 
-  function handleDeactivate(userId: string, nombre: string) {
-    const confirmado = window.confirm(
-      `¿Desactivar a ${nombre}? Va a perder acceso inmediatamente. Esto no se puede deshacer desde acá.`,
-    );
+  async function handleDeactivate(userId: string, nombre: string) {
+    const confirmado = await confirmar({
+      titulo: `¿Desactivar a ${nombre}?`,
+      descripcion: 'Va a perder acceso inmediatamente. Esto no se puede deshacer desde acá.',
+      confirmarLabel: 'Desactivar',
+      destructiva: true,
+    });
     if (!confirmado) return;
 
     setError(null);
@@ -52,21 +61,25 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
   function BotonDesactivar({ u, className = '' }: { u: UserRow; className?: string }) {
     const esAdmin = u.role === 'ADMIN';
     return (
-      <button
+      <Button
+        variant="outline"
+        size="sm"
         onClick={() => handleDeactivate(u.id, u.nombre)}
         disabled={esAdmin || !u.activo || isPending}
         title={esAdmin ? 'Un ADMIN no se puede desactivar ni eliminar por esta vía' : undefined}
-        className={`min-h-11 rounded-lg border border-destructive/30 px-4 text-sm font-medium text-destructive active:bg-destructive/10 disabled:border-border disabled:text-muted-foreground lg:min-h-9 ${className}`}
+        className={`border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive ${className}`}
       >
         Desactivar
-      </button>
+      </Button>
     );
   }
 
   function BotonEliminar({ u, className = '' }: { u: UserRow; className?: string }) {
     const esAdmin = u.role === 'ADMIN';
     return (
-      <button
+      <Button
+        variant="outline"
+        size="sm"
         onClick={() => setUsuarioAEliminar(u)}
         disabled={esAdmin || u.activo}
         title={
@@ -76,22 +89,24 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
               ? 'Desactivalo primero'
               : undefined
         }
-        className={`min-h-11 rounded-lg border border-destructive/30 px-4 text-sm font-medium text-destructive disabled:opacity-40 lg:min-h-9 ${className}`}
+        className={`border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive ${className}`}
       >
         Eliminar
-      </button>
+      </Button>
     );
   }
 
   function BotonEditar({ u, className = '' }: { u: UserRow; className?: string }) {
     if (u.role === 'ADMIN') return null;
     return (
-      <button
+      <Button
+        variant="outline"
+        size="sm"
         onClick={() => setUsuarioAEditar(usuarioAEditar?.id === u.id ? null : u)}
-        className={`min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-foreground lg:min-h-9 ${className}`}
+        className={className}
       >
         Editar
-      </button>
+      </Button>
     );
   }
 
@@ -111,25 +126,27 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
     <section className="rounded-2xl bg-background p-4 shadow-xs sm:p-6">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-lg font-semibold text-foreground">Usuarios del gym</h2>
-        <label className="flex items-center gap-2 text-sm text-foreground">
-          Filtrar por rol
-          <select
+        <div className="flex items-center gap-2">
+          <Label htmlFor="filtro-rol" className="text-sm">
+            Filtrar por rol
+          </Label>
+          <NativeSelect
+            id="filtro-rol"
             value={filtroRol}
             onChange={(e) => setFiltroRol(e.target.value as FiltroRol)}
-            className="min-h-11 rounded-lg border border-border bg-background px-3 text-base text-foreground lg:min-h-9 lg:text-sm"
           >
-            <option value="TODOS">Todos</option>
-            <option value="ADMIN">Admin</option>
-            <option value="PROFESOR">Profesor</option>
-            <option value="ALUMNO">Alumno</option>
-          </select>
-        </label>
+            <NativeSelectOption value="TODOS">Todos</NativeSelectOption>
+            <NativeSelectOption value="ADMIN">Admin</NativeSelectOption>
+            <NativeSelectOption value="PROFESOR">Profesor</NativeSelectOption>
+            <NativeSelectOption value="ALUMNO">Alumno</NativeSelectOption>
+          </NativeSelect>
+        </div>
       </div>
 
       {error && (
-        <p role="alert" className="mb-4 text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {/* Mobile: tarjetas apiladas (default, sin prefijo — oculto desde md:) */}
