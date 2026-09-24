@@ -11,7 +11,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { buttonVariants } from '@/components/ui/button';
 
 export interface ConfirmOptions {
   titulo: string;
@@ -62,10 +61,8 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => cerrar(false)}>Cancelar</AlertDialogCancel>
             <AlertDialogAction
+              variant={opciones?.destructiva ? 'destructive' : 'default'}
               onClick={() => cerrar(true)}
-              className={
-                opciones?.destructiva ? buttonVariants({ variant: 'destructive' }) : undefined
-              }
             >
               {opciones?.confirmarLabel ?? 'Confirmar'}
             </AlertDialogAction>

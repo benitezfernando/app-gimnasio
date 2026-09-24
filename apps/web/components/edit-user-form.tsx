@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useId, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -44,6 +44,7 @@ export function EditUserForm({
 }) {
   const [estado, formAction] = useActionState(action, ESTADO_INICIAL);
   const [nombre, setNombre] = useState(nombreActual);
+  const id = useId();
 
   return (
     <form
@@ -51,11 +52,11 @@ export function EditUserForm({
       className="mt-2 flex flex-col gap-2 rounded-lg border border-border p-3"
     >
       <Field>
-        <FieldLabel htmlFor="editar-usuario-nombre" className="sr-only">
+        <FieldLabel htmlFor={`${id}-nombre`} className="sr-only">
           Nombre
         </FieldLabel>
         <Input
-          id="editar-usuario-nombre"
+          id={`${id}-nombre`}
           name="nombre"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
@@ -65,11 +66,11 @@ export function EditUserForm({
       </Field>
       {permitePassword && (
         <Field>
-          <FieldLabel htmlFor="editar-usuario-password" className="sr-only">
+          <FieldLabel htmlFor={`${id}-password`} className="sr-only">
             Nueva contraseña (dejalo vacío para no cambiarla)
           </FieldLabel>
           <Input
-            id="editar-usuario-password"
+            id={`${id}-password`}
             name="password"
             type="password"
             placeholder="Nueva contraseña (dejalo vacío para no cambiarla)"

@@ -80,7 +80,7 @@ export function ExercisePicker({
               <Button
                 type="button"
                 variant="ghost"
-                className="h-auto min-h-11 w-full justify-start gap-3 px-2"
+                className="h-auto min-h-11 w-full justify-start gap-3 px-2 py-2 text-left whitespace-normal lg:h-auto"
                 onClick={() => {
                   onAgregar(ejercicio);
                   setBusqueda('');
