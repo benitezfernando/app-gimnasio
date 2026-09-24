@@ -20,26 +20,26 @@ export function CreateAlumnoForm() {
   const [estado, formAction] = useActionState(createAlumnoAction, ESTADO_INICIAL);
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-3">
+    <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3">
       <form action={formAction} className="flex flex-col gap-2">
         <input
           name="nombre"
           placeholder="Nombre"
           required
           minLength={2}
-          className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
+          className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
         />
         <input
           name="apellido"
           placeholder="Apellido"
           required
           minLength={2}
-          className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
+          className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
         />
         <BotonCrear />
       </form>
       {estado.error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {estado.error}
         </p>
       )}

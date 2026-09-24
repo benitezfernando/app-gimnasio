@@ -8,7 +8,7 @@ import { PrimaryButton } from '../../../components/ui/primary-button';
 const ESTADO_INICIAL: CreateAdminActionState = { error: null, success: false };
 
 const INPUT_CLASSES =
-  'min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm';
+  'min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden lg:min-h-9 lg:text-sm';
 
 function BotonCrear() {
   const { pending } = useFormStatus();
@@ -23,8 +23,8 @@ export function CreateAdminForm({ gymIdsExistentes }: { gymIdsExistentes: string
   const [estado, formAction] = useActionState(createAdminAction, ESTADO_INICIAL);
 
   return (
-    <section className="rounded-2xl bg-surface p-4 shadow-sm sm:p-6">
-      <h2 className="mb-4 text-lg font-semibold text-text">Nuevo admin</h2>
+    <section className="rounded-2xl bg-background p-4 shadow-xs sm:p-6">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">Nuevo admin</h2>
       <form action={formAction} className="flex flex-col gap-3">
         <input
           name="gymId"
@@ -64,7 +64,7 @@ export function CreateAdminForm({ gymIdsExistentes }: { gymIdsExistentes: string
         />
         <BotonCrear />
         {estado.error && (
-          <p role="alert" className="text-sm text-danger">
+          <p role="alert" className="text-sm text-destructive">
             {estado.error}
           </p>
         )}

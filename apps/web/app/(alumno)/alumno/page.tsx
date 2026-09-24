@@ -35,8 +35,10 @@ export default async function AlumnoPage() {
     return (
       <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
         <PageHeader title="Rutina" right={<LogoutButton />} />
-        <p className="text-xl font-semibold text-text">Todavía no tenés una rutina asignada</p>
-        <p className="text-sm text-text-muted">
+        <p className="text-xl font-semibold text-foreground">
+          Todavía no tenés una rutina asignada
+        </p>
+        <p className="text-sm text-muted-foreground">
           Tu profesor te va a asignar una pronto — volvé a revisar más tarde.
         </p>
       </main>
@@ -54,7 +56,7 @@ export default async function AlumnoPage() {
             <li key={ejercicio.exerciseId}>
               <Link href={`/catalogo/${ejercicio.exerciseId}`}>
                 <Card className="flex items-center gap-3">
-                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-surface">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-background">
                     {ejercicio.imageUrl ? (
                       <Image
                         src={ejercicio.imageUrl}
@@ -70,7 +72,7 @@ export default async function AlumnoPage() {
                     )}
                   </div>
                   <div className="flex flex-1 flex-col gap-1.5">
-                    <p className="text-sm font-medium text-text">{ejercicio.nombre}</p>
+                    <p className="text-sm font-medium text-foreground">{ejercicio.nombre}</p>
                     <div className="flex flex-wrap gap-1.5">
                       <Pill>{ejercicio.series} series</Pill>
                       <Pill>{ejercicio.repeticiones} reps</Pill>

@@ -14,7 +14,7 @@ export function LogoutButton({ redirectTo = '/login' }: { redirectTo?: string })
       <button
         type="submit"
         aria-label="Cerrar sesión"
-        className="flex h-11 w-11 items-center justify-center rounded-full text-text active:bg-surface-alt lg:h-9 lg:w-9"
+        className="flex h-11 w-11 items-center justify-center rounded-full text-foreground active:bg-card lg:h-9 lg:w-9"
       >
         <LogOut size={20} aria-hidden />
       </button>

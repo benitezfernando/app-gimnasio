@@ -17,14 +17,14 @@ function BotonCrear() {
 }
 
 const INPUT_CLASSES =
-  'min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm';
+  'min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden lg:min-h-9 lg:text-sm';
 
 export function CreateProfesorForm() {
   const [estado, formAction] = useActionState(createProfesorAction, ESTADO_INICIAL);
 
   return (
-    <section className="rounded-2xl bg-surface p-4 shadow-sm sm:p-6">
-      <h2 className="mb-4 text-lg font-semibold text-text">Nuevo profesor</h2>
+    <section className="rounded-2xl bg-background p-4 shadow-xs sm:p-6">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">Nuevo profesor</h2>
       <form action={formAction} className="flex flex-col gap-3">
         <input
           name="username"
@@ -52,7 +52,7 @@ export function CreateProfesorForm() {
         />
         <BotonCrear />
         {estado.error && (
-          <p role="alert" className="text-sm text-danger">
+          <p role="alert" className="text-sm text-destructive">
             {estado.error}
           </p>
         )}

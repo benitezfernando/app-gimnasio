@@ -1,11 +1,107 @@
-@import './tokens.css';
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:is(.dark *));
 
-@layer utilities {
-  .bg-gradient-accent {
-    background: linear-gradient(135deg, rgb(var(--color-accent-from)), rgb(var(--color-accent-to)));
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Tema oscuro único (decisión de producto): no hay bloque claro ni
+ * `.dark` con otros valores. `<html class="dark">` existe solo para que
+ * las variantes `dark:` de los componentes shadcn apliquen.
+ */
+:root {
+  color-scheme: dark;
+  --radius: 0.75rem;
+
+  --background: oklch(0.163 0.015 284.7);
+  --foreground: oklch(0.972 0.007 286.3);
+  --card: oklch(0.214 0.022 284.4);
+  --card-foreground: oklch(0.972 0.007 286.3);
+  --popover: oklch(0.214 0.022 284.4);
+  --popover-foreground: oklch(0.972 0.007 286.3);
+  --primary: oklch(0.582 0.21 292.9);
+  --primary-foreground: oklch(1 0 0);
+  --primary-soft: oklch(0.827 0.108 306.4);
+  --secondary: oklch(0.258 0.024 284.6);
+  --secondary-foreground: oklch(0.972 0.007 286.3);
+  --muted: oklch(0.258 0.024 284.6);
+  --muted-foreground: oklch(0.645 0.022 285.8);
+  --accent: oklch(0.258 0.024 284.6);
+  --accent-foreground: oklch(0.972 0.007 286.3);
+  --destructive: oklch(0.711 0.166 22.2);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.8 0.182 151.7);
+  --border: oklch(0.304 0.027 284.7);
+  --input: oklch(0.304 0.027 284.7);
+  --ring: oklch(0.582 0.21 292.9);
+
+  --brand-from: oklch(0.582 0.21 292.9);
+  --brand-via: oklch(0.591 0.257 322.9);
+  --brand-to: oklch(0.623 0.188 259.8);
+
+  /* Triples RGB leídos por lib/region-colors.ts en estilos inline. */
+  --color-region-chest: 220 38 38;
+  --color-region-back: 37 99 235;
+  --color-region-shoulders: 217 119 6;
+  --color-region-upper-arms: 124 58 237;
+  --color-region-lower-arms: 168 85 247;
+  --color-region-waist: 5 150 105;
+  --color-region-upper-legs: 8 145 178;
+  --color-region-lower-legs: 13 148 136;
+  --color-region-cardio: 219 39 119;
+  --color-region-neck: 120 113 108;
+}
+
+@utility bg-gradient-brand {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-via), var(--brand-to));
+}
+
+@utility text-gradient-brand {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-via), var(--brand-to));
+  background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
   }
 }

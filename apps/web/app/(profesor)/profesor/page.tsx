@@ -19,7 +19,7 @@ export default async function ProfesorDashboardPage() {
       <PageHeader title="Mi cartera" right={<LogoutButton />} />
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-text-muted">Nuevo alumno</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">Nuevo alumno</h2>
         <CreateAlumnoForm />
       </section>
 
@@ -28,7 +28,7 @@ export default async function ProfesorDashboardPage() {
           <AlumnoRow key={alumno.id} alumno={alumno} />
         ))}
         {alumnos.length === 0 && (
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-muted-foreground">
             Todavía no tenés alumnos — creá uno arriba o pedile al Admin que te asigne alguno.
           </p>
         )}

@@ -23,7 +23,7 @@ export interface ExerciseCardData {
 export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
   return (
     <Card className="flex flex-col gap-3">
-      <div className="relative aspect-square w-full overflow-hidden rounded-full bg-surface">
+      <div className="relative aspect-square w-full overflow-hidden rounded-full bg-background">
         {ejercicio.imageUrl ? (
           <Image
             src={ejercicio.imageUrl}
@@ -39,7 +39,7 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
         )}
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="line-clamp-2 text-sm font-medium text-text">{ejercicio.nombre}</h3>
+        <h3 className="line-clamp-2 text-sm font-medium text-foreground">{ejercicio.nombre}</h3>
         <div className="flex flex-wrap gap-1.5">
           <span
             className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium text-white"

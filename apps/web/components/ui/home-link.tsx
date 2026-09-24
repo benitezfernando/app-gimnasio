@@ -7,7 +7,7 @@ export function HomeLink({ href }: { href: string }) {
     <Link
       href={href}
       aria-label="Ir al inicio"
-      className="flex h-11 w-11 items-center justify-center rounded-full text-text active:bg-surface-alt lg:h-9 lg:w-9"
+      className="flex h-11 w-11 items-center justify-center rounded-full text-foreground active:bg-card lg:h-9 lg:w-9"
     >
       <Home size={20} aria-hidden />
     </Link>

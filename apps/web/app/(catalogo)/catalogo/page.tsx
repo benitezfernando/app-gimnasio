@@ -77,13 +77,13 @@ export default function CatalogoPage() {
         right={<LogoutButton />}
       />
 
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3">
-        <Search size={18} className="text-text-muted" aria-hidden />
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3">
+        <Search size={18} className="text-muted-foreground" aria-hidden />
         <input
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar ejercicio..."
-          className="min-h-11 w-full bg-transparent text-base text-text outline-none placeholder:text-text-muted lg:min-h-9 lg:text-sm"
+          className="min-h-11 w-full bg-transparent text-base text-foreground outline-hidden placeholder:text-muted-foreground lg:min-h-9 lg:text-sm"
         />
       </div>
 
@@ -93,8 +93,8 @@ export default function CatalogoPage() {
           onClick={() => setParteCuerpo(null)}
           className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
             parteCuerpo === null
-              ? 'border-accent bg-gradient-accent text-accent-fg'
-              : 'border-border bg-surface text-text'
+              ? 'border-primary bg-gradient-brand text-primary-foreground'
+              : 'border-border bg-background text-foreground'
           }`}
         >
           Todos
@@ -106,8 +106,8 @@ export default function CatalogoPage() {
             onClick={() => setParteCuerpo(parte)}
             className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
               parteCuerpo === parte
-                ? 'border-accent bg-gradient-accent text-accent-fg'
-                : 'border-border bg-surface text-text'
+                ? 'border-primary bg-gradient-brand text-primary-foreground'
+                : 'border-border bg-background text-foreground'
             }`}
           >
             {ETIQUETA_PARTE_CUERPO[parte]}
@@ -118,7 +118,7 @@ export default function CatalogoPage() {
       <select
         value={equipamiento}
         onChange={(e) => setEquipamiento(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-base text-text lg:min-h-9 lg:text-sm"
+        className="min-h-11 rounded-lg border border-border bg-background px-3 text-base text-foreground lg:min-h-9 lg:text-sm"
       >
         <option value="">Cualquier equipamiento</option>
         {EQUIPAMIENTOS.map((eq) => (
@@ -129,7 +129,7 @@ export default function CatalogoPage() {
       </select>
 
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       )}
@@ -143,7 +143,7 @@ export default function CatalogoPage() {
       </div>
 
       {items.length === 0 && !cargando && (
-        <p className="py-8 text-center text-sm text-text-muted">
+        <p className="py-8 text-center text-sm text-muted-foreground">
           No se encontraron ejercicios con esos filtros.
         </p>
       )}
@@ -153,7 +153,7 @@ export default function CatalogoPage() {
           type="button"
           onClick={() => cargar(pagina + 1, false)}
           disabled={cargando}
-          className="min-h-11 self-center rounded-lg border border-border px-6 text-sm font-medium text-text disabled:opacity-50 lg:min-h-9"
+          className="min-h-11 self-center rounded-lg border border-border px-6 text-sm font-medium text-foreground disabled:opacity-50 lg:min-h-9"
         >
           {cargando ? 'Cargando...' : 'Cargar más'}
         </button>

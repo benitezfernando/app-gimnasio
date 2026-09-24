@@ -24,9 +24,9 @@ export default function ErrorBoundary({
   }, [error]);
 
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-surface px-6 text-center">
-      <p className="text-xl font-semibold text-text">Algo salió mal</p>
-      <p className="max-w-sm text-sm text-text-muted">
+    <main className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-background px-6 text-center">
+      <p className="text-xl font-semibold text-foreground">Algo salió mal</p>
+      <p className="max-w-sm text-sm text-muted-foreground">
         Hubo un problema inesperado. Probá de nuevo — si sigue pasando, avisale a tu profesor o al
         administrador del gimnasio.
       </p>

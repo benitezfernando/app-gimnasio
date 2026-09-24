@@ -52,24 +52,24 @@ export function ExercisePicker({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3">
-        <Search size={18} className="text-text-muted" aria-hidden />
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3">
+        <Search size={18} className="text-muted-foreground" aria-hidden />
         <input
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar ejercicio para agregar..."
-          className="min-h-11 w-full bg-transparent text-base text-text outline-none placeholder:text-text-muted"
+          className="min-h-11 w-full bg-transparent text-base text-foreground outline-hidden placeholder:text-muted-foreground"
         />
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       )}
 
       {resultados.length > 0 && (
-        <ul className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-border bg-surface p-2">
+        <ul className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-border bg-background p-2">
           {resultados.map((ejercicio) => (
             <li key={ejercicio.id}>
               <button
@@ -79,10 +79,10 @@ export function ExercisePicker({
                   setBusqueda('');
                   setResultados([]);
                 }}
-                className="flex min-h-11 w-full items-center gap-3 rounded-lg px-2 text-left hover:bg-surface-alt"
+                className="flex min-h-11 w-full items-center gap-3 rounded-lg px-2 text-left hover:bg-card"
               >
-                <span className="text-sm text-text">{ejercicio.nombre}</span>
-                <span className="text-xs text-text-muted">
+                <span className="text-sm text-foreground">{ejercicio.nombre}</span>
+                <span className="text-xs text-muted-foreground">
                   {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
                 </span>
               </button>
@@ -92,7 +92,7 @@ export function ExercisePicker({
       )}
 
       {!cargando && busqueda.trim().length >= 2 && resultados.length === 0 && !error && (
-        <p className="text-sm text-text-muted">Sin resultados.</p>
+        <p className="text-sm text-muted-foreground">Sin resultados.</p>
       )}
     </div>
   );

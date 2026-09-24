@@ -41,43 +41,43 @@ function FilaEjercicio({
 
   return (
     <li ref={setNodeRef} style={estilo}>
-      <Card className="!p-2.5 flex items-center gap-1 sm:!p-3 sm:gap-2">
+      <Card className="p-2.5! flex items-center gap-1 sm:p-3! sm:gap-2">
         <button
           type="button"
           {...attributes}
           {...listeners}
           aria-label={`Reordenar ${ejercicio.nombre}`}
-          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center text-text-muted lg:min-h-9 lg:min-w-9"
+          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center text-muted-foreground lg:min-h-9 lg:min-w-9"
         >
           <GripVertical size={20} aria-hidden />
         </button>
 
-        <span className="min-w-0 flex-1 break-words text-sm font-medium leading-tight text-text">
+        <span className="min-w-0 flex-1 break-words text-sm font-medium leading-tight text-foreground">
           {ejercicio.nombre}
         </span>
 
         <div className="flex shrink-0 gap-1 sm:gap-2">
-          <label className="flex flex-col text-xs text-text-muted">
+          <label className="flex flex-col text-xs text-muted-foreground">
             Series
             <input
               type="number"
               min={1}
               value={ejercicio.series}
               onChange={(e) => onCambiar('series', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
-          <label className="flex flex-col text-xs text-text-muted">
+          <label className="flex flex-col text-xs text-muted-foreground">
             Reps
             <input
               type="number"
               min={1}
               value={ejercicio.repeticiones}
               onChange={(e) => onCambiar('repeticiones', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
-          <label className="flex flex-col text-xs text-text-muted">
+          <label className="flex flex-col text-xs text-muted-foreground">
             <span className="sm:hidden">Peso</span>
             <span className="hidden sm:inline">Peso (kg)</span>
             <input
@@ -87,7 +87,7 @@ function FilaEjercicio({
               value={ejercicio.peso ?? ''}
               placeholder="—"
               onChange={(e) => onCambiar('peso', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-surface px-1 text-center text-text sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
             />
           </label>
         </div>
@@ -96,7 +96,7 @@ function FilaEjercicio({
           type="button"
           onClick={onQuitar}
           aria-label={`Quitar ${ejercicio.nombre}`}
-          className="min-h-11 min-w-11 shrink-0 text-danger lg:min-h-9 lg:min-w-9"
+          className="min-h-11 min-w-11 shrink-0 text-destructive lg:min-h-9 lg:min-w-9"
         >
           <X size={18} aria-hidden />
         </button>
@@ -187,7 +187,7 @@ export function RoutineExercisesEditor({
       <ExercisePicker onAgregar={agregar} />
 
       {ejercicios.length === 0 ? (
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-muted-foreground">
           Todavía no agregaste ningún ejercicio — buscá uno arriba para empezar.
         </p>
       ) : (
@@ -211,7 +211,7 @@ export function RoutineExercisesEditor({
       )}
 
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       )}

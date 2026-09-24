@@ -20,22 +20,25 @@ export function CreateTemplateForm() {
   const [estado, formAction] = useActionState(createTemplateAction, ESTADO_INICIAL);
 
   return (
-    <form action={formAction} className="flex flex-col gap-3 rounded-2xl bg-surface p-4 shadow-sm">
-      <h2 className="text-lg font-semibold text-text">Nueva plantilla</h2>
+    <form
+      action={formAction}
+      className="flex flex-col gap-3 rounded-2xl bg-background p-4 shadow-xs"
+    >
+      <h2 className="text-lg font-semibold text-foreground">Nueva plantilla</h2>
       <input
         name="nombre"
         placeholder="Nombre (ej. Full body)"
         required
         minLength={2}
-        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted lg:min-h-9 lg:text-sm"
+        className="min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground lg:min-h-9 lg:text-sm"
       />
       <input
         name="descripcion"
         placeholder="Descripción (opcional)"
-        className="min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted lg:min-h-9 lg:text-sm"
+        className="min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground lg:min-h-9 lg:text-sm"
       />
       <BotonCrear />
-      {estado.error && <p className="text-sm text-text">{estado.error}</p>}
+      {estado.error && <p className="text-sm text-foreground">{estado.error}</p>}
     </form>
   );
 }

@@ -43,7 +43,7 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
   );
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-10 flex min-h-16 items-center justify-around border-t border-border bg-surface-alt pb-[env(safe-area-inset-bottom)] lg:top-0 lg:bottom-auto lg:h-12 lg:min-h-0 lg:border-b lg:border-t-0 lg:pb-0">
+    <nav className="fixed inset-x-0 bottom-0 z-10 flex min-h-16 items-center justify-around border-t border-border bg-card pb-[env(safe-area-inset-bottom)] lg:top-0 lg:bottom-auto lg:h-12 lg:min-h-0 lg:border-b lg:border-t-0 lg:pb-0">
       {items.map((item) => {
         const activo = item.href === activeHref;
         const Icon = item.icon;
@@ -55,17 +55,17 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
           >
             <span
               className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                activo ? 'bg-gradient-accent' : ''
+                activo ? 'bg-gradient-brand' : ''
               }`}
             >
               <Icon
                 size={18}
-                className={activo ? 'text-accent-fg' : 'text-text-muted'}
+                className={activo ? 'text-primary-foreground' : 'text-muted-foreground'}
                 aria-hidden
               />
             </span>
             <span
-              className={`text-xs font-medium ${activo ? 'text-accent-text' : 'text-text-muted'}`}
+              className={`text-xs font-medium ${activo ? 'text-primary-soft' : 'text-muted-foreground'}`}
             >
               {item.label}
             </span>

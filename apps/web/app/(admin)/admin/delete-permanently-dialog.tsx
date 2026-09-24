@@ -69,13 +69,15 @@ export function DeletePermanentlyDialog({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="flex w-full max-w-sm flex-col gap-3 rounded-2xl bg-surface p-4">
-        <h2 className="text-lg font-semibold text-text">Eliminar a {nombre} definitivamente</h2>
+      <div className="flex w-full max-w-sm flex-col gap-3 rounded-2xl bg-background p-4">
+        <h2 className="text-lg font-semibold text-foreground">
+          Eliminar a {nombre} definitivamente
+        </h2>
 
-        {cargando && <p className="text-sm text-text-muted">Calculando impacto...</p>}
+        {cargando && <p className="text-sm text-muted-foreground">Calculando impacto...</p>}
 
         {impacto && (
-          <ul className="flex flex-col gap-1 text-sm text-text">
+          <ul className="flex flex-col gap-1 text-sm text-foreground">
             <li>Plantillas que se borran: {impacto.plantillasABorrar}</li>
             <li>Rutinas de alumnos que se borran: {impacto.instanciasABorrar}</li>
             <li>
@@ -86,13 +88,13 @@ export function DeletePermanentlyDialog({
         )}
 
         {error && (
-          <p role="alert" className="text-sm text-danger">
+          <p role="alert" className="text-sm text-destructive">
             {error}
           </p>
         )}
 
         {advertencia && (
-          <p role="alert" className="text-sm text-danger">
+          <p role="alert" className="text-sm text-destructive">
             {advertencia}
           </p>
         )}
@@ -101,7 +103,7 @@ export function DeletePermanentlyDialog({
           <button
             type="button"
             onClick={onCerrado}
-            className="min-h-11 flex-1 rounded-lg border border-border px-4 text-sm font-medium text-text"
+            className="min-h-11 flex-1 rounded-lg border border-border px-4 text-sm font-medium text-foreground"
           >
             Cancelar
           </button>
@@ -109,7 +111,7 @@ export function DeletePermanentlyDialog({
             type="button"
             onClick={confirmar}
             disabled={cargando || eliminando || !impacto}
-            className="min-h-11 flex-1 rounded-lg bg-danger px-4 text-sm font-medium text-surface disabled:opacity-50"
+            className="min-h-11 flex-1 rounded-lg bg-destructive px-4 text-sm font-medium text-background disabled:opacity-50"
           >
             {eliminando ? 'Eliminando...' : 'Eliminar definitivamente'}
           </button>

@@ -86,16 +86,16 @@ export function CarteraPanel({
     <div className="mt-2">
       <button
         onClick={toggle}
-        className="text-sm font-medium text-accent-text underline-offset-2 hover:underline"
+        className="text-sm font-medium text-primary-soft underline-offset-2 hover:underline"
       >
         Profesores {abierto ? '▲' : '▼'}
       </button>
 
       {abierto && (
-        <div className="mt-2 rounded-lg border border-border bg-surface-alt p-3">
-          {cargando && <p className="text-sm text-text-muted">Cargando...</p>}
+        <div className="mt-2 rounded-lg border border-border bg-card p-3">
+          {cargando && <p className="text-sm text-muted-foreground">Cargando...</p>}
           {error && (
-            <p role="alert" className="mb-2 text-sm text-danger">
+            <p role="alert" className="mb-2 text-sm text-destructive">
               {error}
             </p>
           )}
@@ -103,15 +103,15 @@ export function CarteraPanel({
           {!cargando && asignados !== null && (
             <ul className="flex flex-col gap-2">
               {asignados.length === 0 && (
-                <li className="text-sm text-text-muted">Sin profesores asignados</li>
+                <li className="text-sm text-muted-foreground">Sin profesores asignados</li>
               )}
               {asignados.map((p) => (
                 <li key={p.id} className="flex items-center justify-between gap-2 text-sm">
-                  <span className="text-text">{p.nombre}</span>
+                  <span className="text-foreground">{p.nombre}</span>
                   <button
                     onClick={() => quitar(p.id)}
                     aria-label={`Quitar a ${p.nombre}`}
-                    className="min-h-8 min-w-8 rounded-full text-danger hover:bg-surface"
+                    className="min-h-8 min-w-8 rounded-full text-destructive hover:bg-background"
                   >
                     ✕
                   </button>
@@ -125,7 +125,7 @@ export function CarteraPanel({
               <select
                 value={profesorSeleccionado}
                 onChange={(e) => setProfesorSeleccionado(e.target.value)}
-                className="min-h-11 flex-1 rounded-lg border border-border bg-surface px-3 text-base text-text lg:min-h-9 lg:text-sm"
+                className="min-h-11 flex-1 rounded-lg border border-border bg-background px-3 text-base text-foreground lg:min-h-9 lg:text-sm"
               >
                 <option value="">Elegir profesor...</option>
                 {disponibles.map((p) => (

@@ -61,9 +61,9 @@ export function AssignTemplateForm({
 
   if (plantillasActivas.length === 0) {
     return (
-      <p className="text-sm text-text-muted">
+      <p className="text-sm text-muted-foreground">
         No tenés plantillas activas — armá una en{' '}
-        <a href="/profesor/plantillas" className="text-accent-text underline">
+        <a href="/profesor/plantillas" className="text-primary-soft underline">
           Mis plantillas
         </a>{' '}
         primero, o armá la rutina desde cero más abajo.
@@ -72,11 +72,11 @@ export function AssignTemplateForm({
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-3">
+    <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3">
       <select
         value={templateId}
         onChange={(e) => setTemplateId(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text lg:min-h-9"
+        className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground lg:min-h-9"
       >
         <option value="">Elegir plantilla...</option>
         {plantillasActivas.map((p) => (
@@ -89,9 +89,9 @@ export function AssignTemplateForm({
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
         placeholder="Nombre de esta rutina para el alumno (opcional — copia el de la plantilla)"
-        className="min-h-11 rounded-lg border border-border bg-surface px-3 text-text placeholder:text-text-muted lg:min-h-9"
+        className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
       />
-      <label className="flex items-center gap-2 text-sm text-text-muted">
+      <label className="flex items-center gap-2 text-sm text-muted-foreground">
         <input
           type="checkbox"
           checked={vincular}
@@ -108,7 +108,7 @@ export function AssignTemplateForm({
             : 'Asignar plantilla'}
       </PrimaryButton>
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       )}

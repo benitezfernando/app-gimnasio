@@ -12,7 +12,7 @@ export interface EditUserActionState {
 const ESTADO_INICIAL: EditUserActionState = { error: null, success: false };
 
 const INPUT_CLASSES =
-  'min-h-11 rounded-lg border border-border bg-surface px-4 text-base text-text placeholder:text-text-muted focus:border-accent focus:outline-none lg:min-h-9 lg:text-sm';
+  'min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden lg:min-h-9 lg:text-sm';
 
 function BotonGuardar() {
   const { pending } = useFormStatus();
@@ -70,13 +70,13 @@ export function EditUserForm({
         <button
           type="button"
           onClick={onCerrar}
-          className="min-h-11 rounded-lg border border-border px-4 text-sm text-text-muted lg:min-h-9"
+          className="min-h-11 rounded-lg border border-border px-4 text-sm text-muted-foreground lg:min-h-9"
         >
           Cancelar
         </button>
       </div>
       {estado.error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {estado.error}
         </p>
       )}

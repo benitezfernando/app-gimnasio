@@ -4,9 +4,9 @@ export const metadata = {
 
 export default function PoliticaDePrivacidadPage() {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-4 bg-surface px-6 py-10 text-text">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-4 bg-background px-6 py-10 text-foreground">
       <h1 className="text-2xl font-semibold">Política de privacidad</h1>
-      <p className="text-sm text-text-muted">Última actualización: 22/09/2026</p>
+      <p className="text-sm text-muted-foreground">Última actualización: 22/09/2026</p>
 
       <section className="flex flex-col gap-2">
         <h2 className="text-lg font-medium">Qué datos guardamos</h2>

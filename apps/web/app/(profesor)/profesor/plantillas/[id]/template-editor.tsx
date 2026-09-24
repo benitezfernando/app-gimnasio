@@ -59,12 +59,12 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-text">{plantilla.nombre}</h1>
+        <h1 className="text-xl font-semibold text-foreground">{plantilla.nombre}</h1>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={alternarActiva}
-            className="min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-text lg:min-h-9"
+            className="min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-foreground lg:min-h-9"
           >
             {plantilla.activa ? 'Desactivar' : 'Reactivar'}
           </button>
@@ -73,7 +73,7 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
             onClick={eliminar}
             disabled={plantilla.activa}
             title={plantilla.activa ? 'Desactivala primero para poder eliminarla' : undefined}
-            className="min-h-11 rounded-lg border border-danger/30 px-4 text-sm font-medium text-danger disabled:opacity-40 lg:min-h-9"
+            className="min-h-11 rounded-lg border border-destructive/30 px-4 text-sm font-medium text-destructive disabled:opacity-40 lg:min-h-9"
           >
             Eliminar definitivamente
           </button>
@@ -81,7 +81,7 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
       </div>
 
       {accionError && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {accionError}
         </p>
       )}

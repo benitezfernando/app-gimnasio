@@ -54,7 +54,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
       </div>
 
       <div className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold text-text">
+        <h1 className="text-xl font-semibold text-foreground">
           {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
         </h1>
         {rutinaVigente?.vinculada && rutinaVigente.origenTemplateNombre && (
@@ -67,7 +67,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
       {(() => {
         const seccionAsignarPlantilla = (
           <section key="asignar-plantilla" className="flex flex-col gap-3">
-            <h2 className="text-sm font-medium text-text-muted">
+            <h2 className="text-sm font-medium text-muted-foreground">
               {rutinaVigente ? 'Reemplazar con una plantilla' : 'Asignar plantilla existente'}
             </h2>
             <AssignTemplateForm
@@ -80,7 +80,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
 
         const seccionEjercicios = (
           <section key="ejercicios" className="flex flex-col gap-3">
-            <h2 className="text-sm font-medium text-text-muted">
+            <h2 className="text-sm font-medium text-muted-foreground">
               {rutinaVigente ? 'Ajustar ejercicios' : 'O armar rutina desde cero'}
             </h2>
             <InstanceEditor

@@ -71,16 +71,16 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
         right={<LogoutButton />}
       />
 
-      {cargando && <p className="text-sm text-text-muted">Cargando...</p>}
+      {cargando && <p className="text-sm text-muted-foreground">Cargando...</p>}
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="text-sm text-destructive">
           {error}
         </p>
       )}
 
       {ejercicio && (
         <>
-          <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-surface-alt">
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-card">
             {ejercicio.gifUrl || ejercicio.imageUrl ? (
               <Image
                 src={ejercicio.gifUrl ?? ejercicio.imageUrl!}
@@ -92,7 +92,7 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
-                <Dumbbell className="text-text-muted" size={64} aria-hidden />
+                <Dumbbell className="text-muted-foreground" size={64} aria-hidden />
               </div>
             )}
           </div>
@@ -111,19 +111,19 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
           </div>
 
           {ejercicio.pasos.length > 0 ? (
-            <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm text-text">
+            <ol className="flex list-decimal flex-col gap-2 pl-5 text-sm text-foreground">
               {ejercicio.pasos.map((paso, indice) => (
                 <li key={indice}>{paso}</li>
               ))}
             </ol>
           ) : (
             ejercicio.instrucciones && (
-              <p className="text-sm text-text">{ejercicio.instrucciones}</p>
+              <p className="text-sm text-foreground">{ejercicio.instrucciones}</p>
             )
           )}
 
           {ejercicio.atribucionMedia && (
-            <p className="border-t border-border pt-3 text-xs text-text-muted">
+            <p className="border-t border-border pt-3 text-xs text-muted-foreground">
               {ejercicio.atribucionMedia}
             </p>
           )}

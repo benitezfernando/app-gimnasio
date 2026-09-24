@@ -19,7 +19,7 @@ export default async function SuperAdminPage() {
   ];
 
   return (
-    <main className="min-h-dvh bg-surface px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:pb-6 lg:pt-16">
+    <main className="min-h-dvh bg-background px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:pb-6 lg:pt-16">
       <div className="flex w-full flex-col gap-6 sm:mx-auto sm:max-w-3xl">
         <PageHeader title="Super Admin" right={<LogoutButton redirectTo="/super-admin/login" />} />
         <CreateAdminForm gymIdsExistentes={gymIdsExistentes} />

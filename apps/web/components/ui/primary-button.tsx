@@ -32,7 +32,7 @@ export function PrimaryButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`min-h-11 rounded-lg bg-gradient-accent font-medium text-accent-fg disabled:opacity-50 lg:min-h-9 ${TAMANOS[size]} ${className}`}
+      className={`min-h-11 rounded-lg bg-gradient-brand font-medium text-primary-foreground disabled:opacity-50 lg:min-h-9 ${TAMANOS[size]} ${className}`}
     >
       {children}
     </button>
