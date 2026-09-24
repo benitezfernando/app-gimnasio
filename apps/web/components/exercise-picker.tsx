@@ -5,6 +5,9 @@ import { Search } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../lib/browser-api-client';
 import { ETIQUETA_PARTE_CUERPO } from '../lib/region-colors';
 import { ExerciseCardData } from './exercise-card';
+import { Button } from '@/components/ui/button';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface ListExercisesResponse {
   items: ExerciseCardData[];
@@ -52,40 +55,43 @@ export function ExercisePicker({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3">
-        <Search size={18} className="text-muted-foreground" aria-hidden />
-        <input
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <Search aria-hidden />
+        </InputGroupAddon>
+        <InputGroupInput
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar ejercicio para agregar..."
-          className="min-h-11 w-full bg-transparent text-base text-foreground outline-hidden placeholder:text-muted-foreground"
+          aria-label="Buscar ejercicio para agregar"
         />
-      </div>
+      </InputGroup>
 
       {error && (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {resultados.length > 0 && (
-        <ul className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-border bg-background p-2">
+        <ul className="flex max-h-64 flex-col gap-1 overflow-y-auto rounded-lg border border-border bg-popover p-2">
           {resultados.map((ejercicio) => (
             <li key={ejercicio.id}>
-              <button
+              <Button
                 type="button"
+                variant="ghost"
+                className="h-auto min-h-11 w-full justify-start gap-3 px-2"
                 onClick={() => {
                   onAgregar(ejercicio);
                   setBusqueda('');
                   setResultados([]);
                 }}
-                className="flex min-h-11 w-full items-center gap-3 rounded-lg px-2 text-left hover:bg-card"
               >
                 <span className="text-sm text-foreground">{ejercicio.nombre}</span>
                 <span className="text-xs text-muted-foreground">
                   {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
                 </span>
-              </button>
+              </Button>
             </li>
           ))}
         </ul>

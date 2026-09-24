@@ -6,6 +6,9 @@ import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api
 import { RoutineExercisesEditor } from '../../../../../components/routine-exercises-editor';
 import { EjercicioEnEdicion, aPayloadDeEjercicios } from '../../../../../lib/routine-types';
 import { toggleActivaAction, deleteTemplateAction } from '../actions';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useConfirm } from '@/components/confirm-dialog';
 
 interface TemplateDetail {
   id: string;
@@ -16,6 +19,7 @@ interface TemplateDetail {
 
 export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   const router = useRouter();
+  const confirmar = useConfirm();
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [accionError, setAccionError] = useState<string | null>(null);
@@ -44,7 +48,14 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
 
   async function eliminar() {
     if (plantilla.activa) return;
-    if (!window.confirm(`¿Eliminar definitivamente "${plantilla.nombre}"? No se puede deshacer.`)) {
+    if (
+      !(await confirmar({
+        titulo: `¿Eliminar definitivamente "${plantilla.nombre}"?`,
+        descripcion: 'No se puede deshacer.',
+        confirmarLabel: 'Eliminar',
+        destructiva: true,
+      }))
+    ) {
       return;
     }
     setAccionError(null);
@@ -61,29 +72,27 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold text-foreground">{plantilla.nombre}</h1>
         <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={alternarActiva}
-            className="min-h-11 rounded-lg border border-border px-4 text-sm font-medium text-foreground lg:min-h-9"
-          >
+          <Button type="button" variant="outline" size="sm" onClick={alternarActiva}>
             {plantilla.activa ? 'Desactivar' : 'Reactivar'}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="sm"
             onClick={eliminar}
             disabled={plantilla.activa}
             title={plantilla.activa ? 'Desactivala primero para poder eliminarla' : undefined}
-            className="min-h-11 rounded-lg border border-destructive/30 px-4 text-sm font-medium text-destructive disabled:opacity-40 lg:min-h-9"
+            className="border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
           >
             Eliminar definitivamente
-          </button>
+          </Button>
         </div>
       </div>
 
       {accionError && (
-        <p role="alert" className="text-sm text-destructive">
-          {accionError}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{accionError}</AlertDescription>
+        </Alert>
       )}
 
       <RoutineExercisesEditor

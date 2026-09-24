@@ -3,7 +3,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api-client';
-import { PrimaryButton } from '../../../../../components/ui/primary-button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Field, FieldLabel } from '@/components/ui/field';
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { useConfirm } from '@/components/confirm-dialog';
 
 interface TemplateOption {
   id: string;
@@ -21,6 +29,7 @@ export function AssignTemplateForm({
   reemplazaRutinaVigente?: boolean;
 }) {
   const router = useRouter();
+  const confirmar = useConfirm();
   const [templateId, setTemplateId] = useState('');
   const [nombre, setNombre] = useState('');
   const [vincular, setVincular] = useState(false);
@@ -33,9 +42,11 @@ export function AssignTemplateForm({
     if (!templateId) return;
     if (
       reemplazaRutinaVigente &&
-      !window.confirm(
-        'Esto reemplaza la rutina actual del alumno por la plantilla elegida. ¿Continuar?',
-      )
+      !(await confirmar({
+        titulo: '¿Reemplazar la rutina actual?',
+        descripcion: 'Esto reemplaza la rutina actual del alumno por la plantilla elegida.',
+        confirmarLabel: 'Reemplazar',
+      }))
     ) {
       return;
     }
@@ -73,44 +84,53 @@ export function AssignTemplateForm({
 
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3">
-      <select
-        value={templateId}
-        onChange={(e) => setTemplateId(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground lg:min-h-9"
-      >
-        <option value="">Elegir plantilla...</option>
+      <NativeSelect value={templateId} onChange={(e) => setTemplateId(e.target.value)}>
+        <NativeSelectOption value="">Elegir plantilla...</NativeSelectOption>
         {plantillasActivas.map((p) => (
-          <option key={p.id} value={p.id}>
+          <NativeSelectOption key={p.id} value={p.id}>
             {p.nombre}
-          </option>
+          </NativeSelectOption>
         ))}
-      </select>
-      <input
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        placeholder="Nombre de esta rutina para el alumno (opcional — copia el de la plantilla)"
-        className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
-      />
-      <label className="flex items-center gap-2 text-sm text-muted-foreground">
-        <input
-          type="checkbox"
-          checked={vincular}
-          onChange={(e) => setVincular(e.target.checked)}
-          className="h-4 w-4"
+      </NativeSelect>
+      <Field>
+        <FieldLabel htmlFor="asignar-plantilla-nombre" className="sr-only">
+          Nombre de la rutina
+        </FieldLabel>
+        <Input
+          id="asignar-plantilla-nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          placeholder="Nombre de esta rutina para el alumno (opcional — copia el de la plantilla)"
         />
-        Vincular a la plantilla (se actualiza sola si edito la plantilla después)
-      </label>
-      <PrimaryButton type="button" onClick={asignar} disabled={asignando || !templateId} size="sm">
+      </Field>
+      <div className="flex items-center gap-2">
+        <Checkbox
+          id="asignar-plantilla-vincular"
+          checked={vincular}
+          onCheckedChange={(valor) => setVincular(valor === true)}
+        />
+        <Label htmlFor="asignar-plantilla-vincular" className="text-sm text-muted-foreground">
+          Vincular a la plantilla (se actualiza sola si edito la plantilla después)
+        </Label>
+      </div>
+      <Button
+        type="button"
+        variant="brand"
+        size="sm"
+        onClick={asignar}
+        disabled={asignando || !templateId}
+      >
+        {asignando && <Spinner data-icon="inline-start" />}
         {asignando
           ? 'Asignando...'
           : reemplazaRutinaVigente
             ? 'Reemplazar rutina'
             : 'Asignar plantilla'}
-      </PrimaryButton>
+      </Button>
       {error && (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
     </div>
   );

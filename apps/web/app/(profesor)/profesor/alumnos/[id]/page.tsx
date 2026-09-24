@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { apiFetch, ApiError } from '../../../../../lib/api-client';
 import { AssignTemplateForm } from './assign-template-form';
 import { InstanceEditor } from './instance-editor';
-import { Pill } from '../../../../../components/ui/pill';
+import { Badge } from '@/components/ui/badge';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { HomeLink } from '../../../../../components/ui/home-link';
 
@@ -59,7 +59,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
         </h1>
         {rutinaVigente?.vinculada && rutinaVigente.origenTemplateNombre && (
           <Link href={`/profesor/plantillas/${rutinaVigente.origenTemplateId}`}>
-            <Pill>Vinculada a «{rutinaVigente.origenTemplateNombre}»</Pill>
+            <Badge variant="outline">Vinculada a «{rutinaVigente.origenTemplateNombre}»</Badge>
           </Link>
         )}
       </div>

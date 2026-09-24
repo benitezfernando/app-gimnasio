@@ -2,7 +2,11 @@
 
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { PrimaryButton } from './ui/primary-button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Field, FieldLabel } from '@/components/ui/field';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
 
 export interface EditUserActionState {
   error: string | null;
@@ -11,15 +15,13 @@ export interface EditUserActionState {
 
 const ESTADO_INICIAL: EditUserActionState = { error: null, success: false };
 
-const INPUT_CLASSES =
-  'min-h-11 rounded-lg border border-border bg-background px-4 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-hidden lg:min-h-9 lg:text-sm';
-
 function BotonGuardar() {
   const { pending } = useFormStatus();
   return (
-    <PrimaryButton type="submit" size="sm" disabled={pending}>
+    <Button type="submit" variant="brand" size="sm" disabled={pending}>
+      {pending && <Spinner data-icon="inline-start" />}
       {pending ? 'Guardando...' : 'Guardar'}
-    </PrimaryButton>
+    </Button>
   );
 }
 
@@ -48,37 +50,43 @@ export function EditUserForm({
       action={formAction}
       className="mt-2 flex flex-col gap-2 rounded-lg border border-border p-3"
     >
-      <input
-        name="nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        placeholder="Nombre"
-        minLength={2}
-        className={INPUT_CLASSES}
-      />
-      {permitePassword && (
-        <input
-          name="password"
-          type="password"
-          placeholder="Nueva contraseña (dejalo vacío para no cambiarla)"
-          minLength={6}
-          className={INPUT_CLASSES}
+      <Field>
+        <FieldLabel htmlFor="editar-usuario-nombre" className="sr-only">
+          Nombre
+        </FieldLabel>
+        <Input
+          id="editar-usuario-nombre"
+          name="nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          placeholder="Nombre"
+          minLength={2}
         />
+      </Field>
+      {permitePassword && (
+        <Field>
+          <FieldLabel htmlFor="editar-usuario-password" className="sr-only">
+            Nueva contraseña (dejalo vacío para no cambiarla)
+          </FieldLabel>
+          <Input
+            id="editar-usuario-password"
+            name="password"
+            type="password"
+            placeholder="Nueva contraseña (dejalo vacío para no cambiarla)"
+            minLength={6}
+          />
+        </Field>
       )}
       <div className="flex gap-2">
         <BotonGuardar />
-        <button
-          type="button"
-          onClick={onCerrar}
-          className="min-h-11 rounded-lg border border-border px-4 text-sm text-muted-foreground lg:min-h-9"
-        >
+        <Button type="button" variant="ghost" size="sm" onClick={onCerrar}>
           Cancelar
-        </button>
+        </Button>
       </div>
       {estado.error && (
-        <p role="alert" className="text-sm text-destructive">
-          {estado.error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{estado.error}</AlertDescription>
+        </Alert>
       )}
       {estado.success && <p className="text-sm text-success">Guardado.</p>}
     </form>

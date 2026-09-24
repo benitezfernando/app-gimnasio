@@ -1,9 +1,17 @@
 import Link from 'next/link';
+import { ClipboardList } from 'lucide-react';
 import { apiFetch } from '../../../../lib/api-client';
 import { PageHeader } from '../../../../components/ui/page-header';
 import { LogoutButton } from '../../../../components/logout-button';
 import { HomeLink } from '../../../../components/ui/home-link';
 import { CreateTemplateForm } from './create-template-form';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
 
 interface TemplateSummary {
   id: string;
@@ -49,7 +57,15 @@ export default async function PlantillasPage() {
           </li>
         ))}
         {plantillas.length === 0 && (
-          <p className="text-sm text-muted-foreground">Todavía no armaste ninguna plantilla.</p>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <ClipboardList />
+              </EmptyMedia>
+              <EmptyTitle>Todavía no armaste ninguna plantilla</EmptyTitle>
+              <EmptyDescription>Creá la primera con el formulario de arriba.</EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         )}
       </ul>
     </main>

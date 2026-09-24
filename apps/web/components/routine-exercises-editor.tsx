@@ -18,12 +18,23 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, X } from 'lucide-react';
+import { GripVertical, ListPlus, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
 import { ExercisePicker } from './exercise-picker';
 import { EjercicioEnEdicion } from '../lib/routine-types';
 import { ExerciseCardData } from './exercise-card';
-import { PrimaryButton } from './ui/primary-button';
 
 function FilaEjercicio({
   ejercicio,
@@ -42,64 +53,86 @@ function FilaEjercicio({
   return (
     <li ref={setNodeRef} style={estilo}>
       <Card className="flex flex-row items-center gap-1 p-2.5! sm:gap-2 sm:p-3!">
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
+          className="shrink-0 text-muted-foreground"
           {...attributes}
           {...listeners}
           aria-label={`Reordenar ${ejercicio.nombre}`}
-          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center text-muted-foreground lg:min-h-9 lg:min-w-9"
         >
           <GripVertical size={20} aria-hidden />
-        </button>
+        </Button>
 
         <span className="min-w-0 flex-1 break-words text-sm font-medium leading-tight text-foreground">
           {ejercicio.nombre}
         </span>
 
         <div className="flex shrink-0 gap-1 sm:gap-2">
-          <label className="flex flex-col text-xs text-muted-foreground">
-            Series
-            <input
+          <div className="flex flex-col gap-1">
+            <Label
+              htmlFor={`${ejercicio.exerciseId}-series`}
+              className="text-xs text-muted-foreground"
+            >
+              Series
+            </Label>
+            <Input
+              id={`${ejercicio.exerciseId}-series`}
               type="number"
               min={1}
               value={ejercicio.series}
               onChange={(e) => onCambiar('series', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="w-10 px-1 text-center sm:w-16 sm:px-2 sm:text-left"
             />
-          </label>
-          <label className="flex flex-col text-xs text-muted-foreground">
-            Reps
-            <input
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label
+              htmlFor={`${ejercicio.exerciseId}-reps`}
+              className="text-xs text-muted-foreground"
+            >
+              Reps
+            </Label>
+            <Input
+              id={`${ejercicio.exerciseId}-reps`}
               type="number"
               min={1}
               value={ejercicio.repeticiones}
               onChange={(e) => onCambiar('repeticiones', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="w-10 px-1 text-center sm:w-16 sm:px-2 sm:text-left"
             />
-          </label>
-          <label className="flex flex-col text-xs text-muted-foreground">
-            <span className="sm:hidden">Peso</span>
-            <span className="hidden sm:inline">Peso (kg)</span>
-            <input
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label
+              htmlFor={`${ejercicio.exerciseId}-peso`}
+              className="text-xs text-muted-foreground"
+            >
+              <span className="sm:hidden">Peso</span>
+              <span className="hidden sm:inline">Peso (kg)</span>
+            </Label>
+            <Input
+              id={`${ejercicio.exerciseId}-peso`}
               type="number"
               min={0}
               step={0.5}
               value={ejercicio.peso ?? ''}
               placeholder="—"
               onChange={(e) => onCambiar('peso', e.target.value)}
-              className="min-h-11 w-10 rounded-lg border border-border bg-background px-1 text-center text-foreground sm:w-16 sm:px-2 sm:text-left lg:min-h-9"
+              className="w-10 px-1 text-center sm:w-16 sm:px-2 sm:text-left"
             />
-          </label>
+          </div>
         </div>
 
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
+          className="shrink-0 text-destructive hover:text-destructive"
           onClick={onQuitar}
           aria-label={`Quitar ${ejercicio.nombre}`}
-          className="min-h-11 min-w-11 shrink-0 text-destructive lg:min-h-9 lg:min-w-9"
         >
           <X size={18} aria-hidden />
-        </button>
+        </Button>
       </Card>
     </li>
   );
@@ -187,9 +220,15 @@ export function RoutineExercisesEditor({
       <ExercisePicker onAgregar={agregar} />
 
       {ejercicios.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
-          Todavía no agregaste ningún ejercicio — buscá uno arriba para empezar.
-        </p>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <ListPlus />
+            </EmptyMedia>
+            <EmptyTitle>Todavía no agregaste ningún ejercicio</EmptyTitle>
+            <EmptyDescription>Buscá uno arriba para empezar.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext
@@ -211,20 +250,22 @@ export function RoutineExercisesEditor({
       )}
 
       {error && (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
-      <PrimaryButton
+      <Button
         type="button"
+        variant="brand"
+        size="sm"
+        className="self-start px-6"
         onClick={() => onGuardar(ejercicios)}
         disabled={guardando || (ejercicios.length === 0 && !permiteGuardarVacio)}
-        size="sm-wide"
-        className="self-start"
       >
+        {guardando && <Spinner data-icon="inline-start" />}
         {guardando ? 'Guardando...' : 'Guardar ejercicios'}
-      </PrimaryButton>
+      </Button>
     </div>
   );
 }

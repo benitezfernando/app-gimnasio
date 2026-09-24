@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api-client';
 import { RoutineExercisesEditor } from '../../../../../components/routine-exercises-editor';
 import { EjercicioEnEdicion, aPayloadDeEjercicios } from '../../../../../lib/routine-types';
+import { Input } from '@/components/ui/input';
+import { Field, FieldLabel } from '@/components/ui/field';
 
 interface InstanceExistente {
   id: string;
@@ -59,12 +61,17 @@ export function InstanceEditor({
   return (
     <div className="flex flex-col gap-3">
       {!instanciaVigente && (
-        <input
-          value={nombreNueva}
-          onChange={(e) => setNombreNueva(e.target.value)}
-          placeholder="Nombre de la rutina"
-          className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
-        />
+        <Field>
+          <FieldLabel htmlFor="editar-instancia-nombre" className="sr-only">
+            Nombre de la rutina
+          </FieldLabel>
+          <Input
+            id="editar-instancia-nombre"
+            value={nombreNueva}
+            onChange={(e) => setNombreNueva(e.target.value)}
+            placeholder="Nombre de la rutina"
+          />
+        </Field>
       )}
       <RoutineExercisesEditor
         key={instanciaVigente?.id ?? 'nueva'}

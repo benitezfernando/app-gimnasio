@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { EditUserForm } from '../../../components/edit-user-form';
 import { editUserAction } from './actions';
 
@@ -23,17 +25,10 @@ export function AlumnoRow({ alumno }: { alumno: AlumnoRow }) {
           <p className="text-xs text-muted-foreground">@{alumno.username}</p>
         </Link>
         <div className="flex items-center gap-2">
-          {!alumno.activo && (
-            <span className="rounded-full bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground">
-              Inactivo
-            </span>
-          )}
-          <button
-            onClick={() => setEditando(!editando)}
-            className="min-h-11 rounded-lg border border-border px-3 text-sm font-medium text-foreground lg:min-h-9"
-          >
+          {!alumno.activo && <Badge variant="secondary">Inactivo</Badge>}
+          <Button variant="outline" size="sm" onClick={() => setEditando(!editando)}>
             Editar
-          </button>
+          </Button>
         </div>
       </div>
       {editando && (

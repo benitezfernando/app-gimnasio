@@ -1,8 +1,16 @@
+import { Users } from 'lucide-react';
 import { apiFetch } from '../../../lib/api-client';
 import { PageHeader } from '../../../components/ui/page-header';
 import { LogoutButton } from '../../../components/logout-button';
 import { CreateAlumnoForm } from './create-alumno-form';
 import { AlumnoRow } from './alumno-row';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
 
 interface AlumnoRowData {
   id: string;
@@ -28,9 +36,17 @@ export default async function ProfesorDashboardPage() {
           <AlumnoRow key={alumno.id} alumno={alumno} />
         ))}
         {alumnos.length === 0 && (
-          <p className="text-sm text-muted-foreground">
-            Todavía no tenés alumnos — creá uno arriba o pedile al Admin que te asigne alguno.
-          </p>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <Users />
+              </EmptyMedia>
+              <EmptyTitle>Todavía no tenés alumnos</EmptyTitle>
+              <EmptyDescription>
+                Creá uno arriba o pedile al Admin que te asigne alguno.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         )}
       </ul>
     </main>

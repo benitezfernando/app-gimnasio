@@ -3,16 +3,21 @@
 import { useFormStatus } from 'react-dom';
 import { useActionState } from 'react';
 import { createAlumnoAction, CreateAlumnoActionState } from './actions';
-import { PrimaryButton } from '../../../components/ui/primary-button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Field, FieldLabel } from '@/components/ui/field';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
 
 const ESTADO_INICIAL: CreateAlumnoActionState = { error: null, usernameGenerado: null };
 
 function BotonCrear() {
   const { pending } = useFormStatus();
   return (
-    <PrimaryButton type="submit" disabled={pending} size="sm">
+    <Button type="submit" variant="brand" disabled={pending} size="sm">
+      {pending && <Spinner data-icon="inline-start" />}
       {pending ? 'Creando...' : 'Crear alumno'}
-    </PrimaryButton>
+    </Button>
   );
 }
 
@@ -22,26 +27,36 @@ export function CreateAlumnoForm() {
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3">
       <form action={formAction} className="flex flex-col gap-2">
-        <input
-          name="nombre"
-          placeholder="Nombre"
-          required
-          minLength={2}
-          className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
-        />
-        <input
-          name="apellido"
-          placeholder="Apellido"
-          required
-          minLength={2}
-          className="min-h-11 rounded-lg border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground lg:min-h-9"
-        />
+        <Field>
+          <FieldLabel htmlFor="crear-alumno-nombre" className="sr-only">
+            Nombre
+          </FieldLabel>
+          <Input
+            id="crear-alumno-nombre"
+            name="nombre"
+            placeholder="Nombre"
+            required
+            minLength={2}
+          />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="crear-alumno-apellido" className="sr-only">
+            Apellido
+          </FieldLabel>
+          <Input
+            id="crear-alumno-apellido"
+            name="apellido"
+            placeholder="Apellido"
+            required
+            minLength={2}
+          />
+        </Field>
         <BotonCrear />
       </form>
       {estado.error && (
-        <p role="alert" className="text-sm text-destructive">
-          {estado.error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{estado.error}</AlertDescription>
+        </Alert>
       )}
       {estado.usernameGenerado && (
         <p className="rounded-lg bg-success/10 p-3 text-sm text-success">
