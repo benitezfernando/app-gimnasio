@@ -1,8 +1,19 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import { ShieldUser } from 'lucide-react';
 import { EditUserForm } from '../../../components/edit-user-form';
 import { editAdminAction, deactivateAdminAction, deleteAdminPermanentlyAction } from './actions';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
+import { useConfirm } from '@/components/confirm-dialog';
 
 interface AdminRow {
   id: string;
@@ -16,6 +27,7 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const confirmar = useConfirm();
 
   const porGym = new Map<string, AdminRow[]>();
   for (const admin of admins) {
@@ -23,8 +35,16 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
     porGym.set(clave, [...(porGym.get(clave) ?? []), admin]);
   }
 
-  function handleDesactivar(admin: AdminRow) {
-    if (!window.confirm(`¿Desactivar a ${admin.nombre}? Pierde acceso inmediatamente.`)) return;
+  async function handleDesactivar(admin: AdminRow) {
+    if (
+      !(await confirmar({
+        titulo: `¿Desactivar a ${admin.nombre}?`,
+        descripcion: 'Pierde acceso inmediatamente.',
+        confirmarLabel: 'Desactivar',
+        destructiva: true,
+      }))
+    )
+      return;
     setError(null);
     startTransition(async () => {
       const resultado = await deactivateAdminAction(admin.id);
@@ -32,8 +52,15 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
     });
   }
 
-  function handleEliminar(admin: AdminRow) {
-    if (!window.confirm(`¿Eliminar a ${admin.nombre} definitivamente? No se puede deshacer.`)) {
+  async function handleEliminar(admin: AdminRow) {
+    if (
+      !(await confirmar({
+        titulo: `¿Eliminar a ${admin.nombre} definitivamente?`,
+        descripcion: 'No se puede deshacer.',
+        confirmarLabel: 'Eliminar',
+        destructiva: true,
+      }))
+    ) {
       return;
     }
     setError(null);
@@ -49,9 +76,9 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
       <h2 className="mb-4 text-lg font-semibold text-foreground">Admins por gym</h2>
 
       {error && (
-        <p role="alert" className="mb-3 text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive" className="mb-3">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       <div className="flex flex-col gap-4">
@@ -69,29 +96,34 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
                       </p>
                     </div>
                     <div className="flex gap-2">
-                      <button
+                      <Button
+                        variant="outline"
+                        size="sm"
                         onClick={() => setEditandoId(editandoId === admin.id ? null : admin.id)}
-                        className="min-h-11 rounded-lg border border-border px-3 text-sm font-medium text-foreground lg:min-h-9"
                       >
                         Editar
-                      </button>
-                      <button
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
                         onClick={() => handleDesactivar(admin)}
                         disabled={!admin.activo || isPending}
-                        className="min-h-11 rounded-lg border border-destructive/30 px-3 text-sm font-medium text-destructive disabled:opacity-40 lg:min-h-9"
                       >
                         Desactivar
-                      </button>
-                      <button
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
                         onClick={() => handleEliminar(admin)}
                         disabled={admin.activo || isPending}
                         title={
                           admin.activo ? 'Desactivalo primero para poder eliminarlo' : undefined
                         }
-                        className="min-h-11 rounded-lg border border-destructive/30 px-3 text-sm font-medium text-destructive disabled:opacity-40 lg:min-h-9"
                       >
                         Eliminar
-                      </button>
+                      </Button>
                     </div>
                   </div>
                   {editandoId === admin.id && (
@@ -108,7 +140,15 @@ export function AdminsList({ admins }: { admins: AdminRow[] }) {
           </div>
         ))}
         {admins.length === 0 && (
-          <p className="text-sm text-muted-foreground">Todavía no hay admins.</p>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <ShieldUser />
+              </EmptyMedia>
+              <EmptyTitle>Todavía no hay admins</EmptyTitle>
+              <EmptyDescription>Creá el primero con el formulario de arriba.</EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         )}
       </div>
     </section>
