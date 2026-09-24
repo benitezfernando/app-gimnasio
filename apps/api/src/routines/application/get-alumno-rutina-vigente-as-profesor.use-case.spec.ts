@@ -4,10 +4,7 @@ import {
   RoutineInstanceRepositoryPort,
   RoutineInstanceDetail,
 } from './ports/routine-instance-repository.port';
-import {
-  RoutineTemplateRepositoryPort,
-  RoutineTemplateDetail,
-} from './ports/routine-template-repository.port';
+import { RoutineTemplateRepositoryPort } from './ports/routine-template-repository.port';
 import { CarteraRepositoryPort } from '../../identity/application/ports/cartera-repository.port';
 import {
   UserRepositoryPort,
@@ -19,6 +16,10 @@ import {
 } from '../../exercise-catalog/application/ports/exercise-repository.port';
 import { UserNotFoundError } from '../../identity/application/errors/user-not-found.error';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
+import {
+  crearInstanceRepositoryMock,
+  crearTemplateRepositoryMock,
+} from '../../test-support/repositorios-routines.mock';
 
 describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
   let instanceRepository: jest.Mocked<RoutineInstanceRepositoryPort>;
@@ -46,31 +47,26 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
     profesorId: 'prof-1',
     alumnoId: 'alum-1',
     nombre: 'Full body',
-    origenTemplateId: null,
-    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,
-    ejercicios: [
+    dias: [
       {
-        exerciseId: 'ex-1',
-        orden: 1,
-        series: 3,
-        repeticiones: 10,
-        peso: 20,
-        notas: null,
+        id: 'd0',
+        numero: 1,
+        vinculadoADiaId: null,
+        ejercicios: [
+          {
+            exerciseId: 'ex-1',
+            orden: 1,
+            series: 3,
+            repeticiones: 10,
+            peso: 20,
+            notas: null,
+          },
+        ],
       },
     ],
-  };
-
-  const template: RoutineTemplateDetail = {
-    id: 'tpl-1',
-    gymId: 'gym-1',
-    profesorId: 'prof-1',
-    nombre: 'Full body plantilla',
-    descripcion: null,
-    activa: true,
-    ejercicios: [],
   };
 
   const ejercicioResuelto: ExerciseSummary = {
@@ -84,24 +80,9 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
   };
 
   beforeEach(() => {
-    instanceRepository = {
-      findVigentePorAlumno: jest.fn(),
-      findById: jest.fn(),
-      findVinculadasActivasPorTemplate: jest.fn(),
-      crear: jest.fn(),
-      update: jest.fn(),
-      replaceExercises: jest.fn(),
-      marcarDesvinculada: jest.fn(),
-      replaceExercisesYDesvincular: jest.fn(),
-    };
-    templateRepository = {
-      findByProfesor: jest.fn(),
-      findById: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      replaceExercises: jest.fn(),
-    };
+    instanceRepository = crearInstanceRepositoryMock();
+    templateRepository = crearTemplateRepositoryMock();
+    templateRepository.findDiasByIds.mockResolvedValue([]);
     carteraRepository = {
       existe: jest.fn(),
       crear: jest.fn(),
@@ -153,69 +134,40 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
     expect(resultado).toBeNull();
   });
 
-  it('resuelve los ejercicios contra el catálogo en un solo findByIds', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    instanceRepository.findVigentePorAlumno.mockResolvedValue(instancia);
-    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
-
-    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
-
-    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1']);
-    expect(resultado!.ejercicios[0]).toMatchObject({
-      exerciseId: 'ex-1',
-      nombre: 'Sentadilla',
-      imageUrl: 'https://x/img.png',
-      series: 3,
-      peso: 20,
-    });
-  });
-
-  it('vinculada=false y origenTemplateNombre=null cuando la instancia no está vinculada', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    instanceRepository.findVigentePorAlumno.mockResolvedValue(instancia);
-    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
-
-    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
-
-    expect(resultado!.vinculada).toBe(false);
-    expect(resultado!.origenTemplateNombre).toBeNull();
-    expect(templateRepository.findById).not.toHaveBeenCalled();
-  });
-
-  it('resuelve origenTemplateNombre cuando la instancia está vinculada', async () => {
+  it('informa por día a qué plantilla y día está vinculado, y null en los independientes', async () => {
     userRepository.findById.mockResolvedValue(alumno);
     carteraRepository.existe.mockResolvedValue(true);
     instanceRepository.findVigentePorAlumno.mockResolvedValue({
       ...instancia,
-      vinculada: true,
-      origenTemplateId: 'tpl-1',
+      dias: [
+        {
+          id: 'd1',
+          numero: 1,
+          vinculadoADiaId: 'tday-2',
+          ejercicios: instancia.dias[0].ejercicios,
+        },
+        { id: 'd2', numero: 2, vinculadoADiaId: null, ejercicios: instancia.dias[0].ejercicios },
+      ],
     });
+    templateRepository.findDiasByIds.mockResolvedValue([
+      {
+        id: 'tday-2',
+        numero: 3,
+        templateId: 'tpl-1',
+        templateNombre: 'Piernas',
+        profesorId: 'prof-1',
+        gymId: 'gym-1',
+        exerciseIds: ['ex-1'],
+      },
+    ]);
     exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
-    templateRepository.findById.mockResolvedValue(template);
 
-    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+    const salida = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
 
-    expect(templateRepository.findById).toHaveBeenCalledWith('tpl-1');
-    expect(resultado!.vinculada).toBe(true);
-    expect(resultado!.origenTemplateId).toBe('tpl-1');
-    expect(resultado!.origenTemplateNombre).toBe('Full body plantilla');
-  });
-
-  it('origenTemplateNombre es null si la plantilla vinculada ya no existe (borrada)', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    instanceRepository.findVigentePorAlumno.mockResolvedValue({
-      ...instancia,
-      vinculada: true,
-      origenTemplateId: 'tpl-borrada',
-    });
-    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
-    templateRepository.findById.mockResolvedValue(null);
-
-    const resultado = await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
-
-    expect(resultado!.origenTemplateNombre).toBeNull();
+    expect(templateRepository.findDiasByIds).toHaveBeenCalledWith(['tday-2']);
+    expect(salida?.dias.map((d) => [d.id, d.numero, d.vinculado])).toEqual([
+      ['d1', 1, { diaId: 'tday-2', templateId: 'tpl-1', templateNombre: 'Piernas', numero: 3 }],
+      ['d2', 2, null],
+    ]);
   });
 });

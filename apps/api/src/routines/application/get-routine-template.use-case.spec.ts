@@ -6,6 +6,7 @@ import {
 } from './ports/routine-template-repository.port';
 import { InsufficientRoleError } from '../../identity/application/errors/insufficient-role.error';
 import { RoutineTemplateNotFoundError } from './errors/routine-template-not-found.error';
+import { crearTemplateRepositoryMock } from '../../test-support/repositorios-routines.mock';
 
 describe('GetRoutineTemplateUseCase', () => {
   let templateRepository: jest.Mocked<RoutineTemplateRepositoryPort>;
@@ -21,18 +22,11 @@ describe('GetRoutineTemplateUseCase', () => {
     nombre: 'Full body',
     descripcion: null,
     activa: true,
-    ejercicios: [],
+    dias: [],
   };
 
   beforeEach(() => {
-    templateRepository = {
-      findByProfesor: jest.fn(),
-      findById: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      replaceExercises: jest.fn(),
-    };
+    templateRepository = crearTemplateRepositoryMock();
     useCase = new GetRoutineTemplateUseCase(templateRepository);
   });
 

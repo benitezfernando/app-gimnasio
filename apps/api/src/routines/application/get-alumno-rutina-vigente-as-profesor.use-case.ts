@@ -24,40 +24,31 @@ import {
 } from './ports/routine-template-repository.port';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 import { requireGymId } from '../../identity/application/require-gym-id';
+import { RutinaVigenteDiaOutput, resolverDiasDeRutina } from './resolver-dias-de-rutina';
 
 export interface GetAlumnoRutinaVigenteAsProfesorInput {
   invocadoPor: AuthenticatedUser;
   alumnoId: string;
 }
 
-export interface RutinaVigenteEjercicioResuelto {
-  exerciseId: string;
-  nombre: string;
-  imageUrl: string | null;
-  gifUrl: string | null;
-  orden: number;
-  series: number;
-  repeticiones: number;
-  peso: number | null;
-  notas: string | null;
+export interface VinculoDiaOutput {
+  /** Id del día de plantilla: el editor del profesor lo reenvía como `vinculadoADiaId` al guardar. */
+  diaId: string;
+  templateId: string;
+  templateNombre: string;
+  numero: number;
 }
 
-export interface RutinaVigenteOutput {
+export interface RutinaVigenteDiaConVinculoOutput extends RutinaVigenteDiaOutput {
+  id: string;
+  vinculado: VinculoDiaOutput | null;
+}
+
+/** Salida exclusiva de la vista PROFESOR — el ALUMNO no recibe datos de vínculo. */
+export interface RutinaVigenteConVinculacionOutput {
   id: string;
   nombre: string;
-  ejercicios: RutinaVigenteEjercicioResuelto[];
-}
-
-/**
- * Salida exclusiva de la vista PROFESOR — `GetMiRutinaVigenteUseCase`
- * (vista del ALUMNO) sigue devolviendo `RutinaVigenteOutput` sin estos
- * campos, a propósito (ver diseño §B: "esto es información solo para el
- * profesor").
- */
-export interface RutinaVigenteConVinculacionOutput extends RutinaVigenteOutput {
-  vinculada: boolean;
-  origenTemplateId: string | null;
-  origenTemplateNombre: string | null;
+  dias: RutinaVigenteDiaConVinculoOutput[];
 }
 
 @Injectable()
@@ -94,54 +85,30 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
       return null;
     }
 
-    const rutina = await this.resolverRutina(instancia.id, instancia.nombre, instancia.ejercicios);
-
-    let origenTemplateNombre: string | null = null;
-    if (instancia.vinculada && instancia.origenTemplateId) {
-      const template = await this.templateRepository.findById(instancia.origenTemplateId);
-      origenTemplateNombre = template?.nombre ?? null;
-    }
-
-    return {
-      ...rutina,
-      vinculada: instancia.vinculada,
-      origenTemplateId: instancia.origenTemplateId,
-      origenTemplateNombre,
-    };
-  }
-
-  private async resolverRutina(
-    id: string,
-    nombre: string,
-    ejercicios: Array<{
-      exerciseId: string;
-      orden: number;
-      series: number;
-      repeticiones: number;
-      peso: number | null;
-      notas: string | null;
-    }>,
-  ): Promise<RutinaVigenteOutput> {
-    const catalogados = await this.exerciseRepository.findByIds(
-      ejercicios.map((e) => e.exerciseId),
+    const diasResueltos = await resolverDiasDeRutina(this.exerciseRepository, instancia.dias);
+    const idsVinculados = instancia.dias.flatMap((d) =>
+      d.vinculadoADiaId ? [d.vinculadoADiaId] : [],
     );
-    const porId = new Map(catalogados.map((e) => [e.id, e]));
+    const referencias = new Map(
+      (await this.templateRepository.findDiasByIds(idsVinculados)).map((r) => [r.id, r]),
+    );
 
     return {
-      id,
-      nombre,
-      ejercicios: ejercicios.map((e) => {
-        const catalogo = porId.get(e.exerciseId);
+      id: instancia.id,
+      nombre: instancia.nombre,
+      dias: instancia.dias.map((dia, indice) => {
+        const referencia = dia.vinculadoADiaId ? referencias.get(dia.vinculadoADiaId) : undefined;
         return {
-          exerciseId: e.exerciseId,
-          nombre: catalogo?.nombre ?? '(ejercicio no encontrado)',
-          imageUrl: catalogo?.imageUrl ?? null,
-          gifUrl: catalogo?.gifUrl ?? null,
-          orden: e.orden,
-          series: e.series,
-          repeticiones: e.repeticiones,
-          peso: e.peso,
-          notas: e.notas,
+          id: dia.id,
+          ...diasResueltos[indice],
+          vinculado: referencia
+            ? {
+                diaId: referencia.id,
+                templateId: referencia.templateId,
+                templateNombre: referencia.templateNombre,
+                numero: referencia.numero,
+              }
+            : null,
         };
       }),
     };

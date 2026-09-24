@@ -65,13 +65,13 @@ describe('/users/:alumnoId|me/rutina-vigente (e2e)', () => {
   };
 
   const fakeGetMiRutinaUseCase = {
-    execute: jest.fn(async () => ({ id: 'inst-mia', nombre: 'Mi rutina', ejercicios: [] })),
+    execute: jest.fn(async () => ({ id: 'inst-mia', nombre: 'Mi rutina', dias: [] })),
   };
   const fakeGetAlumnoRutinaUseCase = {
     execute: jest.fn(async () => ({
       id: 'inst-alumno',
       nombre: 'Rutina del alumno',
-      ejercicios: [],
+      dias: [],
     })),
   };
 

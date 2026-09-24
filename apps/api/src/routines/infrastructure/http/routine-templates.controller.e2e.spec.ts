@@ -7,7 +7,6 @@ import { CreateRoutineTemplateUseCase } from '../../application/create-routine-t
 import { ListRoutineTemplatesUseCase } from '../../application/list-routine-templates.use-case';
 import { GetRoutineTemplateUseCase } from '../../application/get-routine-template.use-case';
 import { UpdateRoutineTemplateUseCase } from '../../application/update-routine-template.use-case';
-import { ReplaceTemplateExercisesUseCase } from '../../application/replace-template-exercises.use-case';
 import { DeleteRoutineTemplateUseCase } from '../../application/delete-routine-template.use-case';
 import {
   ROUTINE_TEMPLATE_REPOSITORY,
@@ -80,7 +79,7 @@ describe('/routine-templates (e2e)', () => {
     nombre: 'Full body',
     descripcion: null,
     activa: false,
-    ejercicios: [],
+    dias: [],
   };
 
   const fakeTemplateRepository: RoutineTemplateRepositoryPort = {
@@ -89,15 +88,15 @@ describe('/routine-templates (e2e)', () => {
     create: jest.fn(async (data) => ({ id: 'tpl-2', activa: true, ...data })),
     update: jest.fn(async (id, data) => ({ ...templateBase, id, ...data })),
     delete: jest.fn(async () => undefined),
-    replaceExercises: jest.fn(async () => undefined),
+    findDiasByIds: jest.fn(async () => []),
+    guardarDias: jest.fn(async () => undefined),
   };
 
   const fakeInstanceRepository: Pick<
     RoutineInstanceRepositoryPort,
-    'findVinculadasActivasPorTemplate' | 'replaceExercises'
+    'findActivasConDiasVinculadosA'
   > = {
-    findVinculadasActivasPorTemplate: jest.fn(async () => []),
-    replaceExercises: jest.fn(async () => undefined),
+    findActivasConDiasVinculadosA: jest.fn(async () => []),
   };
 
   const fakeUserRepository: Pick<UserRepositoryPort, 'findByAuthUserId'> = {
@@ -140,7 +139,6 @@ describe('/routine-templates (e2e)', () => {
         ListRoutineTemplatesUseCase,
         GetRoutineTemplateUseCase,
         UpdateRoutineTemplateUseCase,
-        ReplaceTemplateExercisesUseCase,
         DeleteRoutineTemplateUseCase,
         { provide: ROUTINE_TEMPLATE_REPOSITORY, useValue: fakeTemplateRepository },
         { provide: ROUTINE_INSTANCE_REPOSITORY, useValue: fakeInstanceRepository },
@@ -205,20 +203,5 @@ describe('/routine-templates (e2e)', () => {
       .delete('/routine-templates/tpl-1')
       .set('Authorization', `Bearer ${token}`)
       .expect(204);
-  });
-
-  it('rechaza más de 50 ejercicios en el replace-all (400, ValidationPipe)', async () => {
-    const token = await firmarTokenPara('auth-prof');
-    const cincuentaYUno = Array.from({ length: 51 }, (_, i) => ({
-      exerciseId: 'ex-1',
-      orden: i + 1,
-      series: 3,
-      repeticiones: 10,
-    }));
-    await request(app.getHttpServer())
-      .put('/routine-templates/tpl-1/exercises')
-      .set('Authorization', `Bearer ${token}`)
-      .send({ ejercicios: cincuentaYUno })
-      .expect(400);
   });
 });
