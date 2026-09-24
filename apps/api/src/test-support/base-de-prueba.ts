@@ -24,12 +24,17 @@ export async function aplicarMigracion(db: PGlite, nombre: string): Promise<void
  */
 export async function crearPGliteMigrado(opciones: { excluir?: string[] } = {}): Promise<PGlite> {
   const db = await PGlite.create();
-  await db.exec('CREATE TABLE "_prisma_migrations" (id text PRIMARY KEY);');
-  const excluir = new Set(opciones.excluir ?? []);
-  for (const nombre of listarMigraciones()) {
-    if (!excluir.has(nombre)) {
-      await aplicarMigracion(db, nombre);
+  try {
+    await db.exec('CREATE TABLE "_prisma_migrations" (id text PRIMARY KEY);');
+    const excluir = new Set(opciones.excluir ?? []);
+    for (const nombre of listarMigraciones()) {
+      if (!excluir.has(nombre)) {
+        await aplicarMigracion(db, nombre);
+      }
     }
+  } catch (err) {
+    await db.close();
+    throw err;
   }
   return db;
 }
@@ -56,19 +61,48 @@ export async function conectarPrisma(db: PGlite): Promise<ConexionPrisma> {
   const port = await puertoLibre();
   const servidor = new PGLiteSocketServer({ db, port, host: '127.0.0.1' });
   await servidor.start();
-  const prisma = new PrismaClient({
-    datasources: {
-      db: {
-        url: `postgresql://postgres:postgres@127.0.0.1:${port}/postgres?connection_limit=1&sslmode=disable`,
+
+  let prisma: PrismaClient;
+  try {
+    prisma = new PrismaClient({
+      datasources: {
+        db: {
+          url: `postgresql://postgres:postgres@127.0.0.1:${port}/postgres?connection_limit=1&sslmode=disable`,
+        },
       },
-    },
-  });
+    });
+  } catch (err) {
+    await servidor.stop();
+    throw err;
+  }
+
   return {
     prisma,
     async cerrar() {
-      await prisma.$disconnect();
-      await servidor.stop();
-      await db.close();
+      const errores: Error[] = [];
+
+      try {
+        await prisma.$disconnect();
+      } catch (err) {
+        errores.push(err instanceof Error ? err : new Error(String(err)));
+      }
+
+      try {
+        await servidor.stop();
+      } catch (err) {
+        errores.push(err instanceof Error ? err : new Error(String(err)));
+      }
+
+      try {
+        await db.close();
+      } catch (err) {
+        errores.push(err instanceof Error ? err : new Error(String(err)));
+      }
+
+      if (errores.length > 0) {
+        const mensaje = errores.map((e) => e.message).join('; ');
+        throw new Error(`Error(es) durante cerrar(): ${mensaje}`);
+      }
     },
   };
 }
