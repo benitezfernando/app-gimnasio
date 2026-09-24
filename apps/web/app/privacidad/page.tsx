@@ -1,3 +1,5 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 export const metadata = {
   title: 'Política de privacidad — Gimnasio Mix',
 };
@@ -8,31 +10,44 @@ export default function PoliticaDePrivacidadPage() {
       <h1 className="text-2xl font-semibold">Política de privacidad</h1>
       <p className="text-sm text-muted-foreground">Última actualización: 22/09/2026</p>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-medium">Qué datos guardamos</h2>
-        <p>
-          Gimnasio Mix guarda únicamente los datos necesarios para operar la aplicación: tu nombre,
-          tu nombre de usuario, el gimnasio al que pertenecés, y las rutinas de entrenamiento
-          asignadas a tu cuenta. No pedimos ni almacenamos datos de pago, ubicación ni contactos.
-        </p>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Qué datos guardamos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>
+            Gimnasio Mix guarda únicamente los datos necesarios para operar la aplicación: tu
+            nombre, tu nombre de usuario, el gimnasio al que pertenecés, y las rutinas de
+            entrenamiento asignadas a tu cuenta. No pedimos ni almacenamos datos de pago, ubicación
+            ni contactos.
+          </p>
+        </CardContent>
+      </Card>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-medium">Cómo se usan tus datos</h2>
-        <p>
-          Tus datos se usan exclusivamente para mostrarte tu rutina y permitir que tu profesor o el
-          administrador de tu gimnasio la gestionen. No se comparten con terceros ni se usan con
-          fines publicitarios.
-        </p>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Cómo se usan tus datos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>
+            Tus datos se usan exclusivamente para mostrarte tu rutina y permitir que tu profesor o
+            el administrador de tu gimnasio la gestionen. No se comparten con terceros ni se usan
+            con fines publicitarios.
+          </p>
+        </CardContent>
+      </Card>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-medium">Contacto</h2>
-        <p>
-          Si querés que eliminemos tu cuenta o tenés dudas sobre tus datos, pedíselo directamente al
-          administrador de tu gimnasio.
-        </p>
-      </section>
+      <Card>
+        <CardHeader>
+          <CardTitle>Contacto</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>
+            Si querés que eliminemos tu cuenta o tenés dudas sobre tus datos, pedíselo directamente
+            al administrador de tu gimnasio.
+          </p>
+        </CardContent>
+      </Card>
     </main>
   );
 }

@@ -21,7 +21,7 @@ export default function GlobalError({
 
   return (
     <html lang="es">
-      <body className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-[#141414] px-6 text-center text-white">
+      <body className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-[#0D0D14] px-6 text-center text-white">
         <p className="text-xl font-semibold">Algo salió mal</p>
         <p className="max-w-sm text-sm text-white/70">
           Hubo un problema inesperado. Probá de nuevo — si sigue pasando, avisale a tu profesor o al
@@ -29,7 +29,8 @@ export default function GlobalError({
         </p>
         <button
           onClick={reset}
-          className="min-h-11 rounded-lg bg-white px-6 text-sm font-medium text-[#141414]"
+          className="min-h-11 rounded-xl px-6 text-sm font-medium text-white"
+          style={{ backgroundImage: 'linear-gradient(135deg, #8457E9, #C026D3, #3B82F6)' }}
         >
           Reintentar
         </button>

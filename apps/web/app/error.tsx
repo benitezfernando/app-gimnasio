@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { PrimaryButton } from '../components/ui/primary-button';
+import { Button } from '@/components/ui/button';
 
 /**
  * Error boundary de Next.js para todo lo que cuelga de este layout raíz.
@@ -30,7 +30,9 @@ export default function ErrorBoundary({
         Hubo un problema inesperado. Probá de nuevo — si sigue pasando, avisale a tu profesor o al
         administrador del gimnasio.
       </p>
-      <PrimaryButton onClick={reset}>Reintentar</PrimaryButton>
+      <Button variant="brand" onClick={reset}>
+        Reintentar
+      </Button>
     </main>
   );
 }
