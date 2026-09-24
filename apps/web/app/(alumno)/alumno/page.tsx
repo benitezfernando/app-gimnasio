@@ -4,7 +4,14 @@ import { Dumbbell } from 'lucide-react';
 import { apiFetch, ApiError } from '../../../lib/api-client';
 import { PageHeader } from '../../../components/ui/page-header';
 import { Card } from '@/components/ui/card';
-import { Pill } from '../../../components/ui/pill';
+import { Badge } from '@/components/ui/badge';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
 import { GradientIcon } from '../../../components/ui/gradient-icon';
 import { LogoutButton } from '../../../components/logout-button';
 
@@ -35,12 +42,17 @@ export default async function AlumnoPage() {
     return (
       <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
         <PageHeader title="Rutina" right={<LogoutButton />} />
-        <p className="text-xl font-semibold text-foreground">
-          Todavía no tenés una rutina asignada
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Tu profesor te va a asignar una pronto — volvé a revisar más tarde.
-        </p>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <Dumbbell />
+            </EmptyMedia>
+            <EmptyTitle>Todavía no tenés una rutina asignada</EmptyTitle>
+            <EmptyDescription>
+              Tu profesor te va a asignar una pronto — volvé a revisar más tarde.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       </main>
     );
   }
@@ -54,7 +66,10 @@ export default async function AlumnoPage() {
           .sort((a, b) => a.orden - b.orden)
           .map((ejercicio) => (
             <li key={ejercicio.exerciseId}>
-              <Link href={`/catalogo/${ejercicio.exerciseId}`}>
+              <Link
+                href={`/catalogo/${ejercicio.exerciseId}`}
+                className="block rounded-2xl focus-visible:ring-2 focus-visible:ring-ring"
+              >
                 <Card className="flex flex-row items-center gap-3 p-4 lg:p-3">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-background">
                     {ejercicio.imageUrl ? (
@@ -74,9 +89,11 @@ export default async function AlumnoPage() {
                   <div className="flex flex-1 flex-col gap-1.5">
                     <p className="text-sm font-medium text-foreground">{ejercicio.nombre}</p>
                     <div className="flex flex-wrap gap-1.5">
-                      <Pill>{ejercicio.series} series</Pill>
-                      <Pill>{ejercicio.repeticiones} reps</Pill>
-                      {ejercicio.peso !== null && <Pill>{ejercicio.peso}kg</Pill>}
+                      <Badge variant="outline">{ejercicio.series} series</Badge>
+                      <Badge variant="outline">{ejercicio.repeticiones} reps</Badge>
+                      {ejercicio.peso !== null && (
+                        <Badge variant="outline">{ejercicio.peso}kg</Badge>
+                      )}
                     </div>
                   </div>
                 </Card>

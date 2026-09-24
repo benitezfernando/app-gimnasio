@@ -3,7 +3,7 @@ import { Dumbbell } from 'lucide-react';
 import { ETIQUETA_PARTE_CUERPO, regionColorVar } from '../lib/region-colors';
 import { ETIQUETA_EQUIPAMIENTO } from '../lib/equipment-options';
 import { Card } from '@/components/ui/card';
-import { Pill } from './ui/pill';
+import { Badge } from '@/components/ui/badge';
 import { GradientIcon } from './ui/gradient-icon';
 
 export interface ExerciseCardData {
@@ -41,14 +41,16 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
       <div className="flex flex-col gap-2">
         <h3 className="line-clamp-2 text-sm font-medium text-foreground">{ejercicio.nombre}</h3>
         <div className="flex flex-wrap gap-1.5">
-          <span
-            className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium text-white"
+          <Badge
+            className="border-transparent text-white"
             style={{ backgroundColor: regionColorVar(ejercicio.parteCuerpo) }}
           >
             {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
-          </span>
+          </Badge>
           {ejercicio.equipamiento && (
-            <Pill>{ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}</Pill>
+            <Badge variant="outline">
+              {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
+            </Badge>
           )}
         </div>
       </div>

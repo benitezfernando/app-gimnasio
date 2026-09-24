@@ -10,9 +10,10 @@ import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
 import { PageHeader } from '../../../../components/ui/page-header';
-import { Pill } from '../../../../components/ui/pill';
 import { LogoutButton } from '../../../../components/logout-button';
 import { HomeLink } from '../../../../components/ui/home-link';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface ExerciseDetailResponse {
   id: string;
@@ -73,9 +74,9 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
 
       {cargando && <p className="text-sm text-muted-foreground">Cargando...</p>}
       {error && (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {ejercicio && (
@@ -98,15 +99,21 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Pill>{ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}</Pill>
-            <Pill>
+            <Badge variant="outline">
+              {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
+            </Badge>
+            <Badge variant="outline">
               {ETIQUETA_GRUPO_MUSCULAR[ejercicio.grupoMuscular] ?? ejercicio.grupoMuscular}
-            </Pill>
+            </Badge>
             {ejercicio.equipamiento && (
-              <Pill>{ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}</Pill>
+              <Badge variant="outline">
+                {ETIQUETA_EQUIPAMIENTO[ejercicio.equipamiento] ?? ejercicio.equipamiento}
+              </Badge>
             )}
             {ejercicio.gruposMuscularesSecundarios.map((g) => (
-              <Pill key={g}>{ETIQUETA_GRUPO_MUSCULAR[g] ?? g}</Pill>
+              <Badge variant="outline" key={g}>
+                {ETIQUETA_GRUPO_MUSCULAR[g] ?? g}
+              </Badge>
             ))}
           </div>
 

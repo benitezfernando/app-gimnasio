@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Search } from 'lucide-react';
+import { Search, SearchX } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { ExerciseCard, ExerciseCardData } from '../../../components/exercise-card';
 import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors';
@@ -11,6 +11,18 @@ import { PageHeader } from '../../../components/ui/page-header';
 import { LogoutButton } from '../../../components/logout-button';
 import { HomeLink } from '../../../components/ui/home-link';
 import { useRoleHome } from '../../../lib/use-role-home';
+import { Button } from '@/components/ui/button';
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+} from '@/components/ui/empty';
 
 interface ListExercisesResponse {
   items: ExerciseCardData[];
@@ -77,61 +89,55 @@ export default function CatalogoPage() {
         right={<LogoutButton />}
       />
 
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3">
-        <Search size={18} className="text-muted-foreground" aria-hidden />
-        <input
+      <InputGroup>
+        <InputGroupAddon align="inline-start">
+          <Search aria-hidden />
+        </InputGroupAddon>
+        <InputGroupInput
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar ejercicio..."
-          className="min-h-11 w-full bg-transparent text-base text-foreground outline-hidden placeholder:text-muted-foreground lg:min-h-9 lg:text-sm"
+          aria-label="Buscar ejercicio"
         />
-      </div>
+      </InputGroup>
 
       <div className="flex gap-2 overflow-x-auto pb-1">
-        <button
+        <Button
           type="button"
+          size="sm"
+          variant={parteCuerpo === null ? 'brand' : 'outline'}
           onClick={() => setParteCuerpo(null)}
-          className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
-            parteCuerpo === null
-              ? 'border-primary bg-gradient-brand text-primary-foreground'
-              : 'border-border bg-background text-foreground'
-          }`}
+          className="shrink-0 rounded-full"
         >
           Todos
-        </button>
+        </Button>
         {PARTES_CUERPO.map((parte) => (
-          <button
+          <Button
             key={parte}
             type="button"
+            size="sm"
+            variant={parteCuerpo === parte ? 'brand' : 'outline'}
             onClick={() => setParteCuerpo(parte)}
-            className={`min-h-11 shrink-0 rounded-full border px-4 text-sm font-medium lg:min-h-9 lg:px-3 ${
-              parteCuerpo === parte
-                ? 'border-primary bg-gradient-brand text-primary-foreground'
-                : 'border-border bg-background text-foreground'
-            }`}
+            className="shrink-0 rounded-full"
           >
             {ETIQUETA_PARTE_CUERPO[parte]}
-          </button>
+          </Button>
         ))}
       </div>
 
-      <select
-        value={equipamiento}
-        onChange={(e) => setEquipamiento(e.target.value)}
-        className="min-h-11 rounded-lg border border-border bg-background px-3 text-base text-foreground lg:min-h-9 lg:text-sm"
-      >
-        <option value="">Cualquier equipamiento</option>
+      <NativeSelect value={equipamiento} onChange={(e) => setEquipamiento(e.target.value)}>
+        <NativeSelectOption value="">Cualquier equipamiento</NativeSelectOption>
         {EQUIPAMIENTOS.map((eq) => (
-          <option key={eq} value={eq}>
+          <NativeSelectOption key={eq} value={eq}>
             {ETIQUETA_EQUIPAMIENTO[eq]}
-          </option>
+          </NativeSelectOption>
         ))}
-      </select>
+      </NativeSelect>
 
       {error && (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -143,20 +149,28 @@ export default function CatalogoPage() {
       </div>
 
       {items.length === 0 && !cargando && (
-        <p className="py-8 text-center text-sm text-muted-foreground">
-          No se encontraron ejercicios con esos filtros.
-        </p>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <SearchX />
+            </EmptyMedia>
+            <EmptyTitle>No se encontraron ejercicios</EmptyTitle>
+            <EmptyDescription>Probá con otros filtros.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       )}
 
       {pagina < totalPages && (
-        <button
+        <Button
           type="button"
+          variant="outline"
           onClick={() => cargar(pagina + 1, false)}
           disabled={cargando}
-          className="min-h-11 self-center rounded-lg border border-border px-6 text-sm font-medium text-foreground disabled:opacity-50 lg:min-h-9"
+          className="self-center"
         >
+          {cargando && <Spinner data-icon="inline-start" />}
           {cargando ? 'Cargando...' : 'Cargar más'}
-        </button>
+        </Button>
       )}
     </main>
   );
