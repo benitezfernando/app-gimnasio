@@ -25,3 +25,4 @@ android-twa/local.properties
 android-twa/*.apk
 android-twa/*.aab
 android-twa/*.idsig
+.worktrees/
