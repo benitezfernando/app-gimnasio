@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import { apiFetch, ApiError } from '../../../../../lib/api-client';
-import { AssignTemplateForm } from './assign-template-form';
 import { InstanceEditor } from './instance-editor';
-import { Badge } from '@/components/ui/badge';
+import { NewRoutineForm } from './new-routine-form';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { HomeLink } from '../../../../../components/ui/home-link';
+import { DiaRutinaApi, diasDeRutinaAEdicion } from '../../../../../lib/routine-days';
 
 interface TemplateOption {
   id: string;
@@ -15,33 +14,20 @@ interface TemplateOption {
 interface RutinaVigenteResponse {
   id: string;
   nombre: string;
-  vinculada: boolean;
-  origenTemplateId: string | null;
-  origenTemplateNombre: string | null;
-  ejercicios: Array<{
-    exerciseId: string;
-    nombre: string;
-    imageUrl: string | null;
-    orden: number;
-    series: number;
-    repeticiones: number;
-    peso: number | null;
-    notas: string | null;
-  }>;
+  dias: DiaRutinaApi[];
 }
 
 export default async function AlumnoDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const plantillas = await apiFetch<TemplateOption[]>('/routine-templates');
+  const plantillas = (await apiFetch<TemplateOption[]>('/routine-templates'))
+    .filter((p) => p.activa)
+    .map(({ id, nombre }) => ({ id, nombre }));
 
   let rutinaVigente: RutinaVigenteResponse | null = null;
   try {
     rutinaVigente = await apiFetch<RutinaVigenteResponse>(`/users/${params.id}/rutina-vigente`);
   } catch (error) {
-    // El backend responde 200 con el body vacío/null si no hay vigente
-    // (ver GetAlumnoRutinaVigenteAsProfesorUseCase) — este catch es solo
-    // para el caso de un 403/404 real (alumno fuera de cartera), que acá
-    // no debería pasar porque /users/me/alumnos ya filtró la cartera.
+    // 200 con body vacío si no hay vigente; este catch es para un 403/404 real.
     if (!(error instanceof ApiError)) throw error;
     rutinaVigente = null;
   }
@@ -53,64 +39,39 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
         <LogoutButton />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold text-foreground">
-          {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
-        </h1>
-        {rutinaVigente?.vinculada && rutinaVigente.origenTemplateNombre && (
-          <Link href={`/profesor/plantillas/${rutinaVigente.origenTemplateId}`}>
-            <Badge variant="outline">Vinculada a «{rutinaVigente.origenTemplateNombre}»</Badge>
-          </Link>
+      <h1 className="text-xl font-semibold text-foreground">
+        {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
+      </h1>
+
+      {rutinaVigente && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-sm font-medium text-muted-foreground">Ajustar rutina</h2>
+          <InstanceEditor
+            instancia={{ id: rutinaVigente.id, dias: diasDeRutinaAEdicion(rutinaVigente.dias) }}
+            plantillas={plantillas}
+          />
+        </section>
+      )}
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-sm font-medium text-muted-foreground">
+          {rutinaVigente ? 'Reemplazar por una rutina nueva' : 'Armar rutina'}
+        </h2>
+        {plantillas.length === 0 && (
+          <p className="text-sm text-muted-foreground">
+            No tenés plantillas activas — podés armar la rutina desde cero o crear una en{' '}
+            <a href="/profesor/plantillas" className="text-primary-soft underline">
+              Mis plantillas
+            </a>
+            .
+          </p>
         )}
-      </div>
-
-      {(() => {
-        const seccionAsignarPlantilla = (
-          <section key="asignar-plantilla" className="flex flex-col gap-3">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              {rutinaVigente ? 'Reemplazar con una plantilla' : 'Asignar plantilla existente'}
-            </h2>
-            <AssignTemplateForm
-              alumnoId={params.id}
-              plantillas={plantillas}
-              reemplazaRutinaVigente={Boolean(rutinaVigente)}
-            />
-          </section>
-        );
-
-        const seccionEjercicios = (
-          <section key="ejercicios" className="flex flex-col gap-3">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              {rutinaVigente ? 'Ajustar ejercicios' : 'O armar rutina desde cero'}
-            </h2>
-            <InstanceEditor
-              alumnoId={params.id}
-              instanciaVigente={
-                rutinaVigente
-                  ? {
-                      id: rutinaVigente.id,
-                      nombre: rutinaVigente.nombre,
-                      ejercicios: rutinaVigente.ejercicios.map((e) => ({
-                        exerciseId: e.exerciseId,
-                        nombre: e.nombre,
-                        imageUrl: e.imageUrl,
-                        orden: e.orden,
-                        series: e.series,
-                        repeticiones: e.repeticiones,
-                        peso: e.peso,
-                        notas: e.notas,
-                      })),
-                    }
-                  : null
-              }
-            />
-          </section>
-        );
-
-        return rutinaVigente
-          ? [seccionEjercicios, seccionAsignarPlantilla]
-          : [seccionAsignarPlantilla, seccionEjercicios];
-      })()}
+        <NewRoutineForm
+          alumnoId={params.id}
+          plantillas={plantillas}
+          reemplazaRutinaVigente={Boolean(rutinaVigente)}
+        />
+      </section>
     </main>
   );
 }

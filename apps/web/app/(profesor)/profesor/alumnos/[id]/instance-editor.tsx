@@ -3,53 +3,43 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { browserApiFetch, BrowserApiError } from '../../../../../lib/browser-api-client';
-import { RoutineExercisesEditor } from '../../../../../components/routine-exercises-editor';
-import { EjercicioEnEdicion, aPayloadDeEjercicios } from '../../../../../lib/routine-types';
-import { Input } from '@/components/ui/input';
-import { Field, FieldLabel } from '@/components/ui/field';
+import { RoutineDaysEditor } from '../../../../../components/routine-days-editor';
+import { DiaEnEdicion } from '../../../../../lib/routine-types';
+import { aPayloadDeDias, claveDeVersion } from '../../../../../lib/routine-days';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
-interface InstanceExistente {
-  id: string;
-  nombre: string;
-  ejercicios: EjercicioEnEdicion[];
+function textoDesvinculados(numeros: number[]): string {
+  if (numeros.length === 1)
+    return `El Día ${numeros[0]} dejó de estar sincronizado con su plantilla.`;
+  const lista = `${numeros.slice(0, -1).join(', ')} y ${numeros[numeros.length - 1]}`;
+  return `Los días ${lista} dejaron de estar sincronizados con su plantilla.`;
 }
 
 export function InstanceEditor({
-  alumnoId,
-  instanciaVigente,
+  instancia,
+  plantillas,
 }: {
-  alumnoId: string;
-  instanciaVigente: InstanceExistente | null;
+  instancia: { id: string; dias: DiaEnEdicion[] };
+  plantillas: Array<{ id: string; nombre: string }>;
 }) {
   const router = useRouter();
-  const [nombreNueva, setNombreNueva] = useState('');
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
 
-  // Con instancia vigente: PUT sobre esa instancia (ajuste, HU-06).
-  // Sin instancia vigente: primero POST /routine-instances desde cero
-  // con la lista final de ejercicios (HU-05), en un solo paso — no hay
-  // "crear vacía y después rellenar" porque el backend exige al menos un
-  // criterio de origen en la creación.
-  async function guardar(ejercicios: EjercicioEnEdicion[]) {
+  async function guardar(dias: DiaEnEdicion[], { vincular }: { vincular: boolean }) {
     setGuardando(true);
     setError(null);
+    setAviso(null);
     try {
-      if (instanciaVigente) {
-        await browserApiFetch(`routine-instances/${instanciaVigente.id}/exercises`, {
+      const { diasDesvinculados } = await browserApiFetch<{ diasDesvinculados: number[] }>(
+        `routine-instances/${instancia.id}/dias`,
+        {
           method: 'PUT',
-          body: JSON.stringify({ ejercicios: aPayloadDeEjercicios(ejercicios) }),
-        });
-      } else {
-        await browserApiFetch('routine-instances', {
-          method: 'POST',
-          body: JSON.stringify({
-            alumnoId,
-            nombre: nombreNueva || 'Rutina personalizada',
-            ejercicios: aPayloadDeEjercicios(ejercicios),
-          }),
-        });
-      }
+          body: JSON.stringify({ dias: aPayloadDeDias(dias, { vincular, incluirIds: true }) }),
+        },
+      );
+      if (diasDesvinculados.length > 0) setAviso(textoDesvinculados(diasDesvinculados));
       router.refresh();
     } catch (err) {
       setError(err instanceof BrowserApiError ? err.message : 'No se pudo guardar.');
@@ -60,26 +50,19 @@ export function InstanceEditor({
 
   return (
     <div className="flex flex-col gap-3">
-      {!instanciaVigente && (
-        <Field>
-          <FieldLabel htmlFor="editar-instancia-nombre" className="sr-only">
-            Nombre de la rutina
-          </FieldLabel>
-          <Input
-            id="editar-instancia-nombre"
-            value={nombreNueva}
-            onChange={(e) => setNombreNueva(e.target.value)}
-            placeholder="Nombre de la rutina"
-          />
-        </Field>
+      {aviso && (
+        <Alert>
+          <AlertDescription>{aviso}</AlertDescription>
+        </Alert>
       )}
-      <RoutineExercisesEditor
-        key={instanciaVigente?.id ?? 'nueva'}
-        ejerciciosIniciales={instanciaVigente?.ejercicios ?? []}
+      <RoutineDaysEditor
+        key={claveDeVersion(instancia.dias)}
+        diasIniciales={instancia.dias}
         onGuardar={guardar}
         guardando={guardando}
         error={error}
-        permiteGuardarVacio={Boolean(instanciaVigente)}
+        textoGuardar="Guardar rutina"
+        importacion={{ plantillas }}
       />
     </div>
   );

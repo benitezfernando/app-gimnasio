@@ -25,7 +25,7 @@ describe('/api/proxy/[...path] (integración)', () => {
     mockGetStoredSession.mockResolvedValue(null);
 
     const request = new NextRequest('http://localhost:3000/api/proxy/exercises');
-    const response = await GET(request, { params: { path: ['exercises'] } });
+    const response = await GET(request, { params: Promise.resolve({ path: ['exercises'] }) });
 
     expect(response.status).toBe(401);
     expect(global.fetch).not.toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe('/api/proxy/[...path] (integración)', () => {
     );
 
     const request = new NextRequest('http://localhost:3000/api/proxy/exercises?limit=2');
-    const response = await GET(request, { params: { path: ['exercises'] } });
+    const response = await GET(request, { params: Promise.resolve({ path: ['exercises'] }) });
 
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true });
@@ -73,7 +73,7 @@ describe('/api/proxy/[...path] (integración)', () => {
       );
 
     const request = new NextRequest('http://localhost:3000/api/proxy/exercises?limit=2&page=3');
-    const response = await GET(request, { params: { path: ['exercises'] } });
+    const response = await GET(request, { params: Promise.resolve({ path: ['exercises'] }) });
 
     expect(response.status).toBe(200);
     expect(global.fetch).toHaveBeenCalledTimes(2);
@@ -105,7 +105,7 @@ describe('/api/proxy/[...path] (integración)', () => {
     (global.fetch as jest.Mock).mockResolvedValueOnce(new Response(null, { status: 401 }));
 
     const request = new NextRequest('http://localhost:3000/api/proxy/exercises');
-    const response = await GET(request, { params: { path: ['exercises'] } });
+    const response = await GET(request, { params: Promise.resolve({ path: ['exercises'] }) });
 
     expect(response.status).toBe(401);
     expect(global.fetch).toHaveBeenCalledTimes(1);
@@ -136,7 +136,7 @@ describe('/api/proxy/[...path] (integración)', () => {
       { method: 'PUT', body: JSON.stringify({ ejercicios: [] }) },
     );
     const response = await PUT(request, {
-      params: { path: ['routine-instances', 'inst-1', 'exercises'] },
+      params: Promise.resolve({ path: ['routine-instances', 'inst-1', 'exercises'] }),
     });
 
     expect(response.status).toBe(200);
