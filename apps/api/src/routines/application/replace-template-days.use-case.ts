@@ -21,12 +21,18 @@ import { RoutineTemplateNotFoundError } from './errors/routine-template-not-foun
 import { RoutineDayNotFoundError } from './errors/routine-day-not-found.error';
 import { validarDias } from './dias/validar-dias';
 import { mergeDiaVinculado } from './dias/merge-dia-vinculado';
+import { MAX_EJERCICIOS_TOTALES } from './dias/limites';
 import { validarExerciseIdsEnCatalogo } from './validar-exercise-ids';
 
 export interface ReplaceTemplateDaysInput {
   invocadoPor: AuthenticatedUser;
   templateId: string;
   dias: DiaPlantillaAGuardar[];
+}
+
+export interface ReplaceTemplateDaysOutput {
+  /** alumnoId de cada alumno cuyos días vinculados a esta plantilla quedaron desincronizados en este guardado por superar el límite de ejercicios. */
+  alumnosDesincronizados: string[];
 }
 
 const ROLES_QUE_PUEDEN_EDITAR: Role[] = [Role.PROFESOR];
@@ -41,7 +47,7 @@ export class ReplaceTemplateDaysUseCase {
     @Inject(EXERCISE_REPOSITORY) private readonly exerciseRepository: ExerciseRepositoryPort,
   ) {}
 
-  async execute(input: ReplaceTemplateDaysInput): Promise<void> {
+  async execute(input: ReplaceTemplateDaysInput): Promise<ReplaceTemplateDaysOutput> {
     if (!ROLES_QUE_PUEDEN_EDITAR.includes(input.invocadoPor.role)) {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_EDITAR);
     }
@@ -63,16 +69,22 @@ export class ReplaceTemplateDaysUseCase {
       input.dias.flatMap((d) => d.ejercicios),
     );
 
-    const propagacion = await this.calcularPropagacion(template, input.dias);
-    await this.templateRepository.guardarDias(template.id, input.dias, propagacion);
+    const { actualizaciones, alumnosDesincronizados } = await this.calcularPropagacion(
+      template,
+      input.dias,
+    );
+    await this.templateRepository.guardarDias(template.id, input.dias, actualizaciones);
+    return { alumnosDesincronizados };
   }
 
   private async calcularPropagacion(
     template: RoutineTemplateDetail,
     dias: DiaPlantillaAGuardar[],
-  ): Promise<ActualizacionDiaVinculado[]> {
+  ): Promise<{ actualizaciones: ActualizacionDiaVinculado[]; alumnosDesincronizados: string[] }> {
     const idsDiasPlantilla = template.dias.map((d) => d.id);
-    if (idsDiasPlantilla.length === 0) return [];
+    if (idsDiasPlantilla.length === 0) {
+      return { actualizaciones: [], alumnosDesincronizados: [] };
+    }
 
     const deEstaPlantilla = new Set(idsDiasPlantilla);
     const diasNuevosPorId = new Map(dias.flatMap((d) => (d.id ? [[d.id, d] as const] : [])));
@@ -80,14 +92,18 @@ export class ReplaceTemplateDaysUseCase {
       await this.instanceRepository.findActivasConDiasVinculadosA(idsDiasPlantilla);
 
     const actualizaciones: ActualizacionDiaVinculado[] = [];
+    const alumnosDesincronizados: string[] = [];
+
     for (const instancia of instancias) {
       const vinculados = instancia.dias.filter(
         (d) => d.vinculadoADiaId !== null && deEstaPlantilla.has(d.vinculadoADiaId),
       );
+
+      const candidatas = new Map<string, ActualizacionDiaVinculado>();
       for (const diaInstancia of vinculados) {
         const diaPlantilla = diasNuevosPorId.get(diaInstancia.vinculadoADiaId!);
         if (!diaPlantilla) continue;
-        actualizaciones.push({
+        candidatas.set(diaInstancia.id, {
           diaInstanciaId: diaInstancia.id,
           ejercicios: mergeDiaVinculado({
             ejerciciosDiaPlantilla: diaPlantilla.ejercicios,
@@ -98,7 +114,30 @@ export class ReplaceTemplateDaysUseCase {
           }),
         });
       }
+      if (candidatas.size === 0) continue;
+
+      const totalConCambios = instancia.dias.reduce((suma, dia) => {
+        const candidata = candidatas.get(dia.id);
+        return suma + (candidata ? candidata.ejercicios.length : dia.ejercicios.length);
+      }, 0);
+
+      if (totalConCambios > MAX_EJERCICIOS_TOTALES) {
+        // Este alumno quedaría por encima del límite: sus días vinculados a
+        // esta plantilla NO reciben el cambio y se desvinculan, en vez de
+        // bloquear el guardado de la plantilla para todos los demás.
+        for (const diaInstancia of vinculados) {
+          if (!candidatas.has(diaInstancia.id)) continue;
+          actualizaciones.push({
+            diaInstanciaId: diaInstancia.id,
+            ejercicios: diaInstancia.ejercicios,
+            desvincular: true,
+          });
+        }
+        alumnosDesincronizados.push(instancia.alumnoId);
+      } else {
+        actualizaciones.push(...candidatas.values());
+      }
     }
-    return actualizaciones;
+    return { actualizaciones, alumnosDesincronizados };
   }
 }

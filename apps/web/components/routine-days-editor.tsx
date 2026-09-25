@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { ChevronLeft, ChevronRight, Download, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -49,6 +49,7 @@ export function RoutineDaysEditor({
   importacion?: ImportacionDePlantillas;
 }) {
   const confirmar = useConfirm();
+  const idSincronizado = useId();
   const [dias, setDias] = useState<DiaEnEdicion[]>(() =>
     diasIniciales.length > 0 ? diasIniciales : [crearDiaVacio()],
   );
@@ -211,11 +212,11 @@ export function RoutineDaysEditor({
       {importacion && (
         <div className="flex items-center gap-2">
           <Checkbox
-            id="mantener-sincronizado"
+            id={idSincronizado}
             checked={vincular}
             onCheckedChange={(valor) => setVincular(valor === true)}
           />
-          <Label htmlFor="mantener-sincronizado" className="text-sm text-muted-foreground">
+          <Label htmlFor={idSincronizado} className="text-sm text-muted-foreground">
             Mantener sincronizado con las plantillas
           </Label>
         </div>

@@ -207,15 +207,16 @@ describe('/routine-templates (e2e)', () => {
       .expect(204);
   });
 
-  it('PUT /:id/dias guarda los días (204)', async () => {
+  it('PUT /:id/dias guarda los días', async () => {
     const token = await firmarTokenPara('auth-prof');
-    await request(app.getHttpServer())
+    const res = await request(app.getHttpServer())
       .put('/routine-templates/tpl-1/dias')
       .set('Authorization', `Bearer ${token}`)
       .send({
         dias: [{ ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }] }],
       })
-      .expect(204);
+      .expect(200);
+    expect(res.body).toEqual({ alumnosDesincronizados: [] });
     expect(fakeTemplateRepository.guardarDias).toHaveBeenCalledWith(
       'tpl-1',
       [

@@ -82,13 +82,12 @@ export class RoutineTemplatesController {
   }
 
   @Put(':id/dias')
-  @HttpCode(204)
   async replaceDias(
     @Param('id') id: string,
     @Body() dto: ReplaceTemplateDaysDto,
     @Req() req: RequestWithUser,
-  ): Promise<void> {
-    await this.replaceDaysUseCase.execute({
+  ) {
+    return this.replaceDaysUseCase.execute({
       invocadoPor: req.user,
       templateId: id,
       dias: toDiasPlantilla(dto.dias),

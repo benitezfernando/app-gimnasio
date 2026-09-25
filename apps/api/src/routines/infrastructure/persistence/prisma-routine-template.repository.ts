@@ -141,15 +141,25 @@ export class PrismaRoutineTemplateRepository implements RoutineTemplateRepositor
         });
       }
 
-      for (const actualizacion of propagacion) {
+      if (propagacion.length > 0) {
+        const idsPropagados = propagacion.map((p) => p.diaInstanciaId);
         await tx.routineInstanceExercise.deleteMany({
-          where: { dayId: actualizacion.diaInstanciaId },
+          where: { dayId: { in: idsPropagados } },
         });
         await tx.routineInstanceExercise.createMany({
-          data: actualizacion.ejercicios.map((e) =>
-            aFilaEjercicio(actualizacion.diaInstanciaId, e),
+          data: propagacion.flatMap((p) =>
+            p.ejercicios.map((e) => aFilaEjercicio(p.diaInstanciaId, e)),
           ),
         });
+        const idsADesvincular = propagacion
+          .filter((p) => p.desvincular)
+          .map((p) => p.diaInstanciaId);
+        if (idsADesvincular.length > 0) {
+          await tx.routineInstanceDay.updateMany({
+            where: { id: { in: idsADesvincular } },
+            data: { vinculadoADiaId: null },
+          });
+        }
       }
     }, OPCIONES_TRANSACCION);
   }

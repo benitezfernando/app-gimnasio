@@ -24,15 +24,26 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [accionError, setAccionError] = useState<string | null>(null);
+  const [desyncAviso, setDesyncAviso] = useState<string | null>(null);
 
   async function guardarDias(dias: DiaEnEdicion[]) {
     setGuardando(true);
     setError(null);
+    setDesyncAviso(null);
     try {
-      await browserApiFetch(`routine-templates/${plantilla.id}/dias`, {
+      const { alumnosDesincronizados } = await browserApiFetch<{
+        alumnosDesincronizados: string[];
+      }>(`routine-templates/${plantilla.id}/dias`, {
         method: 'PUT',
         body: JSON.stringify({ dias: aPayloadDeDias(dias, { vincular: false, incluirIds: true }) }),
       });
+      if (alumnosDesincronizados.length > 0) {
+        setDesyncAviso(
+          alumnosDesincronizados.length === 1
+            ? 'Un alumno vinculado superaba el límite de 50 ejercicios y quedó desincronizado de esta plantilla.'
+            : `${alumnosDesincronizados.length} alumnos vinculados superaban el límite de 50 ejercicios y quedaron desincronizados de esta plantilla.`,
+        );
+      }
       router.refresh();
     } catch (err) {
       setError(err instanceof BrowserApiError ? err.message : 'No se pudo guardar.');
@@ -93,6 +104,12 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
       {accionError && (
         <Alert variant="destructive">
           <AlertDescription>{accionError}</AlertDescription>
+        </Alert>
+      )}
+
+      {desyncAviso && (
+        <Alert>
+          <AlertDescription>{desyncAviso}</AlertDescription>
         </Alert>
       )}
 

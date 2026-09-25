@@ -169,4 +169,59 @@ describe('ReplaceTemplateDaysUseCase', () => {
     });
     expect(instanceRepository.findActivasConDiasVinculadosA).not.toHaveBeenCalled();
   });
+
+  it('sin alumnos que superen el límite, execute resuelve con alumnosDesincronizados: []', async () => {
+    instanceRepository.findActivasConDiasVinculadosA.mockResolvedValue([
+      instanciaCon([
+        { id: 'iday-1', numero: 1, vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1', 1, 3)] },
+      ]),
+    ]);
+
+    const resultado = await useCase.execute({
+      invocadoPor: profesor,
+      templateId: 'tpl-1',
+      dias: [{ id: 'tday-1', ejercicios: [ej('ex-1', 1)] }],
+    });
+
+    expect(resultado).toEqual({ alumnosDesincronizados: [] });
+  });
+
+  it('si la propagación supera el límite de 50 ejercicios del alumno, desvincula el día vinculado sin tocar sus ejercicios y reporta al alumno', async () => {
+    const ejerciciosOtroDiaNoVinculado = Array.from({ length: 45 }, (_, i) =>
+      ej(`ex-otro-${i}`, i + 1),
+    );
+    const ejerciciosOriginalesDiaVinculado = [ej('ex-1', 1, 3)];
+    instanceRepository.findActivasConDiasVinculadosA.mockResolvedValue([
+      instanciaCon([
+        {
+          id: 'iday-1',
+          numero: 1,
+          vinculadoADiaId: 'tday-1',
+          ejercicios: ejerciciosOriginalesDiaVinculado,
+        },
+        {
+          id: 'iday-2',
+          numero: 2,
+          vinculadoADiaId: null,
+          ejercicios: ejerciciosOtroDiaNoVinculado,
+        },
+      ]),
+    ]);
+    const nuevosDiasPlantilla = Array.from({ length: 6 }, (_, i) => ej(`ex-nuevo-${i}`, i + 1));
+
+    const resultado = await useCase.execute({
+      invocadoPor: profesor,
+      templateId: 'tpl-1',
+      dias: [{ id: 'tday-1', ejercicios: nuevosDiasPlantilla }],
+    });
+
+    expect(templateRepository.guardarDias.mock.calls[0][2]).toEqual([
+      {
+        diaInstanciaId: 'iday-1',
+        ejercicios: ejerciciosOriginalesDiaVinculado,
+        desvincular: true,
+      },
+    ]);
+    expect(resultado).toEqual({ alumnosDesincronizados: ['alum-1'] });
+  });
 });

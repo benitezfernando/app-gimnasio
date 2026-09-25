@@ -155,6 +155,103 @@ describe('PrismaRoutineTemplateRepository (PGlite)', () => {
     ]);
   });
 
+  it('la propagación batchea múltiples días de instancia en una sola llamada, cada uno con sus propios ejercicios', async () => {
+    const id = await nuevaPlantilla('F');
+    await repo.guardarDias(
+      id,
+      [{ ejercicios: [ej('ex-1', 1)] }, { ejercicios: [ej('ex-2', 1)] }],
+      [],
+    );
+    const [dia1, dia2] = (await repo.findById(id))!.dias;
+    const instancia = await prisma.routineInstance.create({
+      data: {
+        gymId: GYM,
+        profesorId: 'prof-1',
+        alumnoId: 'alum-1',
+        nombre: 'R',
+        dias: {
+          create: [
+            {
+              numero: 1,
+              vinculadoADiaId: dia1.id,
+              ejercicios: { create: { exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 } },
+            },
+            {
+              numero: 2,
+              vinculadoADiaId: dia2.id,
+              ejercicios: { create: { exerciseId: 'ex-2', orden: 1, series: 3, repeticiones: 10 } },
+            },
+          ],
+        },
+      },
+      include: { dias: { orderBy: { numero: 'asc' } } },
+    });
+    const [diaInstancia1, diaInstancia2] = instancia.dias;
+
+    await repo.guardarDias(
+      id,
+      [
+        { id: dia1.id, ejercicios: [ej('ex-1', 1, 7)] },
+        { id: dia2.id, ejercicios: [ej('ex-3', 1, 8)] },
+      ],
+      [
+        { diaInstanciaId: diaInstancia1.id, ejercicios: [ej('ex-1', 1, 7)] },
+        { diaInstanciaId: diaInstancia2.id, ejercicios: [ej('ex-3', 1, 8)] },
+      ],
+    );
+
+    const ejercicios1 = await prisma.routineInstanceExercise.findMany({
+      where: { dayId: diaInstancia1.id },
+    });
+    const ejercicios2 = await prisma.routineInstanceExercise.findMany({
+      where: { dayId: diaInstancia2.id },
+    });
+    expect(ejercicios1.map((e) => [e.exerciseId, e.series])).toEqual([['ex-1', 7]]);
+    expect(ejercicios2.map((e) => [e.exerciseId, e.series])).toEqual([['ex-3', 8]]);
+  });
+
+  it('la propagación con desvincular:true limpia vinculadoADiaId y reemplaza los ejercicios', async () => {
+    const id = await nuevaPlantilla('G');
+    await repo.guardarDias(id, [{ ejercicios: [ej('ex-1', 1)] }], []);
+    const [dia] = (await repo.findById(id))!.dias;
+    const instancia = await prisma.routineInstance.create({
+      data: {
+        gymId: GYM,
+        profesorId: 'prof-1',
+        alumnoId: 'alum-2',
+        nombre: 'R',
+        dias: {
+          create: {
+            numero: 1,
+            vinculadoADiaId: dia.id,
+            ejercicios: { create: { exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 } },
+          },
+        },
+      },
+      include: { dias: true },
+    });
+    const diaInstanciaId = instancia.dias[0].id;
+
+    await repo.guardarDias(
+      id,
+      [{ id: dia.id, ejercicios: [ej('ex-1', 1), ej('ex-4', 2)] }],
+      [
+        {
+          diaInstanciaId,
+          ejercicios: [ej('ex-1', 1, 3)],
+          desvincular: true,
+        },
+      ],
+    );
+
+    const diaInstancia = await prisma.routineInstanceDay.findUniqueOrThrow({
+      where: { id: diaInstanciaId },
+      include: { ejercicios: true },
+    });
+    expect(diaInstancia.vinculadoADiaId).toBeNull();
+    expect(diaInstancia.ejercicios.map((e) => [e.exerciseId, e.series])).toEqual([['ex-1', 3]]);
+  });
+
   it('findDiasByIds devuelve plantilla, dueño y exerciseIds de cada día', async () => {
     const id = await nuevaPlantilla('Piernas');
     await repo.guardarDias(id, [{ ejercicios: [ej('ex-2', 1), ej('ex-5', 2)] }], []);

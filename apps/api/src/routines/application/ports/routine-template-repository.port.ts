@@ -49,6 +49,8 @@ export interface DiaPlantillaAGuardar {
 export interface ActualizacionDiaVinculado {
   diaInstanciaId: string;
   ejercicios: EjercicioItem[];
+  /** true = además de reemplazar los ejercicios, desvincula el día (vinculadoADiaId = null). */
+  desvincular?: boolean;
 }
 
 /**
