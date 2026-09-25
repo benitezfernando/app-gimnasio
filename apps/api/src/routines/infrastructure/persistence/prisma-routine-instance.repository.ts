@@ -1,11 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../../shared-kernel/prisma.service';
-import { EjercicioItem } from '../../application/ports/routine-template-repository.port';
 import {
+  DiaInstanciaAGuardar,
   RoutineInstanceDetail,
   RoutineInstanceRepositoryPort,
 } from '../../application/ports/routine-instance-repository.port';
+import {
+  DESPLAZAMIENTO_TEMPORAL,
+  OPCIONES_TRANSACCION,
+  aEjercicioItem,
+  aFilaEjercicio,
+} from './fila-ejercicio';
+
+const INCLUDE_DIAS = {
+  dias: {
+    orderBy: { numero: 'asc' },
+    include: { ejercicios: { orderBy: { orden: 'asc' } } },
+  },
+} satisfies Prisma.RoutineInstanceInclude;
+
+type InstanciaConDias = Prisma.RoutineInstanceGetPayload<{ include: typeof INCLUDE_DIAS }>;
 
 @Injectable()
 export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositoryPort {
@@ -15,7 +30,7 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     const instance = await this.prisma.routineInstance.findFirst({
       where: { alumnoId, activa: true },
       orderBy: { vigenteDesde: 'desc' },
-      include: { ejercicios: { orderBy: { orden: 'asc' } } },
+      include: INCLUDE_DIAS,
     });
     return instance ? this.toDetail(instance) : null;
   }
@@ -23,15 +38,18 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
   async findById(id: string): Promise<RoutineInstanceDetail | null> {
     const instance = await this.prisma.routineInstance.findUnique({
       where: { id },
-      include: { ejercicios: { orderBy: { orden: 'asc' } } },
+      include: INCLUDE_DIAS,
     });
     return instance ? this.toDetail(instance) : null;
   }
 
-  async findVinculadasActivasPorTemplate(templateId: string): Promise<RoutineInstanceDetail[]> {
+  async findActivasConDiasVinculadosA(
+    diasPlantillaIds: string[],
+  ): Promise<RoutineInstanceDetail[]> {
+    if (diasPlantillaIds.length === 0) return [];
     const instances = await this.prisma.routineInstance.findMany({
-      where: { origenTemplateId: templateId, vinculada: true, activa: true },
-      include: { ejercicios: { orderBy: { orden: 'asc' } } },
+      where: { activa: true, dias: { some: { vinculadoADiaId: { in: diasPlantillaIds } } } },
+      include: INCLUDE_DIAS,
     });
     return instances.map((instance) => this.toDetail(instance));
   }
@@ -41,139 +59,93 @@ export class PrismaRoutineInstanceRepository implements RoutineInstanceRepositor
     profesorId: string;
     alumnoId: string;
     nombre: string;
-    origenTemplateId: string | null;
-    vinculada: boolean;
-    ejercicios: EjercicioItem[];
+    dias: DiaInstanciaAGuardar[];
   }): Promise<RoutineInstanceDetail> {
-    const creada = await this.prisma.$transaction(async (tx) => {
+    const instanceId = await this.prisma.$transaction(async (tx) => {
       await tx.routineInstance.updateMany({
         where: { alumnoId: data.alumnoId, activa: true },
         data: { activa: false, vigenteHasta: new Date() },
       });
-
-      const instance = await tx.routineInstance.create({
+      const { id } = await tx.routineInstance.create({
         data: {
           gymId: data.gymId,
           profesorId: data.profesorId,
           alumnoId: data.alumnoId,
           nombre: data.nombre,
-          origenTemplateId: data.origenTemplateId,
-          vinculada: data.vinculada,
-          ejercicios: {
-            create: data.ejercicios.map((e) => ({
-              exerciseId: e.exerciseId,
-              orden: e.orden,
-              series: e.series,
-              repeticiones: e.repeticiones,
-              peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-              notas: e.notas,
-            })),
-          },
         },
-        include: { ejercicios: { orderBy: { orden: 'asc' } } },
+        select: { id: true },
       });
+      await this.escribirDias(tx, id, data.dias);
+      return id;
+    }, OPCIONES_TRANSACCION);
 
-      return instance;
-    });
-
-    return this.toDetail(creada);
+    return (await this.findById(instanceId))!;
   }
 
   async update(id: string, data: { nombre?: string }): Promise<RoutineInstanceDetail> {
     const instance = await this.prisma.routineInstance.update({
       where: { id },
       data,
-      include: { ejercicios: { orderBy: { orden: 'asc' } } },
+      include: INCLUDE_DIAS,
     });
     return this.toDetail(instance);
   }
 
-  async replaceExercises(instanceId: string, ejercicios: EjercicioItem[]): Promise<void> {
-    await this.prisma.$transaction([
-      this.prisma.routineInstanceExercise.deleteMany({ where: { instanceId } }),
-      this.prisma.routineInstanceExercise.createMany({
-        data: ejercicios.map((e) => ({
-          instanceId,
-          exerciseId: e.exerciseId,
-          orden: e.orden,
-          series: e.series,
-          repeticiones: e.repeticiones,
-          peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-          notas: e.notas,
-        })),
-      }),
-    ]);
+  async guardarDias(instanceId: string, dias: DiaInstanciaAGuardar[]): Promise<void> {
+    await this.prisma.$transaction(
+      (tx) => this.escribirDias(tx, instanceId, dias),
+      OPCIONES_TRANSACCION,
+    );
   }
 
-  async marcarDesvinculada(instanceId: string): Promise<void> {
-    await this.prisma.routineInstance.update({
-      where: { id: instanceId },
-      data: { vinculada: false },
-    });
-  }
-
-  async replaceExercisesYDesvincular(
+  private async escribirDias(
+    tx: Prisma.TransactionClient,
     instanceId: string,
-    ejercicios: EjercicioItem[],
+    dias: DiaInstanciaAGuardar[],
   ): Promise<void> {
-    await this.prisma.$transaction([
-      this.prisma.routineInstanceExercise.deleteMany({ where: { instanceId } }),
-      this.prisma.routineInstanceExercise.createMany({
-        data: ejercicios.map((e) => ({
-          instanceId,
-          exerciseId: e.exerciseId,
-          orden: e.orden,
-          series: e.series,
-          repeticiones: e.repeticiones,
-          peso: e.peso === null ? null : new Prisma.Decimal(e.peso),
-          notas: e.notas,
-        })),
-      }),
-      this.prisma.routineInstance.update({
-        where: { id: instanceId },
-        data: { vinculada: false },
-      }),
-    ]);
+    const idsConservados = dias.flatMap((dia) => (dia.id ? [dia.id] : []));
+    await tx.routineInstanceDay.deleteMany({
+      where: { instanceId, id: { notIn: idsConservados } },
+    });
+    await tx.routineInstanceDay.updateMany({
+      where: { instanceId },
+      data: { numero: { increment: DESPLAZAMIENTO_TEMPORAL } },
+    });
+
+    for (const [indice, dia] of dias.entries()) {
+      const datos = { numero: indice + 1, vinculadoADiaId: dia.vinculadoADiaId };
+      const { id: dayId } = dia.id
+        ? await tx.routineInstanceDay.update({
+            where: { id: dia.id },
+            data: datos,
+            select: { id: true },
+          })
+        : await tx.routineInstanceDay.create({
+            data: { instanceId, ...datos },
+            select: { id: true },
+          });
+      await tx.routineInstanceExercise.deleteMany({ where: { dayId } });
+      await tx.routineInstanceExercise.createMany({
+        data: dia.ejercicios.map((e) => aFilaEjercicio(dayId, e)),
+      });
+    }
   }
 
-  private toDetail(instance: {
-    id: string;
-    gymId: string;
-    profesorId: string | null;
-    alumnoId: string;
-    nombre: string;
-    origenTemplateId: string | null;
-    vinculada: boolean;
-    vigenteDesde: Date;
-    vigenteHasta: Date | null;
-    activa: boolean;
-    ejercicios: Array<{
-      exerciseId: string;
-      orden: number;
-      series: number;
-      repeticiones: number;
-      peso: Prisma.Decimal | null;
-      notas: string | null;
-    }>;
-  }): RoutineInstanceDetail {
+  private toDetail(instance: InstanciaConDias): RoutineInstanceDetail {
     return {
       id: instance.id,
       gymId: instance.gymId,
       profesorId: instance.profesorId,
       alumnoId: instance.alumnoId,
       nombre: instance.nombre,
-      origenTemplateId: instance.origenTemplateId,
-      vinculada: instance.vinculada,
       vigenteDesde: instance.vigenteDesde,
       vigenteHasta: instance.vigenteHasta,
       activa: instance.activa,
-      ejercicios: instance.ejercicios.map((e) => ({
-        exerciseId: e.exerciseId,
-        orden: e.orden,
-        series: e.series,
-        repeticiones: e.repeticiones,
-        peso: e.peso === null ? null : e.peso.toNumber(),
-        notas: e.notas,
+      dias: instance.dias.map((dia) => ({
+        id: dia.id,
+        numero: dia.numero,
+        vinculadoADiaId: dia.vinculadoADiaId,
+        ejercicios: dia.ejercicios.map(aEjercicioItem),
       })),
     };
   }

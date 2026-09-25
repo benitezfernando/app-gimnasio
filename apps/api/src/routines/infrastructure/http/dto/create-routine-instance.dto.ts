@@ -1,13 +1,13 @@
 import { Type } from 'class-transformer';
 import {
   ArrayMaxSize,
-  IsBoolean,
+  IsArray,
   IsOptional,
   IsString,
   MinLength,
   ValidateNested,
 } from 'class-validator';
-import { EjercicioDto } from './ejercicio.dto';
+import { DiaNuevoDto } from './dia.dto';
 
 export class CreateRoutineInstanceDto {
   @IsString()
@@ -19,17 +19,9 @@ export class CreateRoutineInstanceDto {
   @MinLength(2)
   nombre?: string;
 
-  @IsOptional()
-  @IsString()
-  origenTemplateId?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  vincular?: boolean;
-
-  @IsOptional()
+  @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => EjercicioDto)
-  @ArrayMaxSize(50)
-  ejercicios?: EjercicioDto[];
+  @Type(() => DiaNuevoDto)
+  @ArrayMaxSize(7)
+  dias!: DiaNuevoDto[];
 }

@@ -1,10 +1,6 @@
 export const ROUTINE_TEMPLATE_REPOSITORY = Symbol('ROUTINE_TEMPLATE_REPOSITORY');
 
-/**
- * Forma compartida de una línea de ejercicio — la usan tanto
- * `RoutineTemplateRepositoryPort` como `RoutineInstanceRepositoryPort`
- * (Tarea 7), porque el clonado plantilla→instancia copia esta forma 1:1.
- */
+/** Una línea de ejercicio; misma forma en plantillas e instancias. `orden` es relativo al día. */
 export interface EjercicioItem {
   exerciseId: string;
   orden: number;
@@ -12,6 +8,12 @@ export interface EjercicioItem {
   repeticiones: number;
   peso: number | null;
   notas: string | null;
+}
+
+export interface DiaPlantilla {
+  id: string;
+  numero: number;
+  ejercicios: EjercicioItem[];
 }
 
 export interface RoutineTemplateSummary {
@@ -24,13 +26,36 @@ export interface RoutineTemplateSummary {
 }
 
 export interface RoutineTemplateDetail extends RoutineTemplateSummary {
+  dias: DiaPlantilla[];
+}
+
+/** Día de plantilla con lo necesario para decidir un vínculo y mostrarlo. */
+export interface DiaPlantillaReferencia {
+  id: string;
+  numero: number;
+  templateId: string;
+  templateNombre: string;
+  profesorId: string;
+  gymId: string;
+  exerciseIds: string[];
+}
+
+/** `id` presente = día existente (se conserva su id); ausente = día nuevo. La posición en el array define `numero`. */
+export interface DiaPlantillaAGuardar {
+  id?: string;
   ejercicios: EjercicioItem[];
+}
+
+export interface ActualizacionDiaVinculado {
+  diaInstanciaId: string;
+  ejercicios: EjercicioItem[];
+  /** true = además de reemplazar los ejercicios, desvincula el día (vinculadoADiaId = null). */
+  desvincular?: boolean;
 }
 
 /**
  * Propiedad exclusiva del profesor que la creó — este puerto NUNCA valida
- * cartera (HLD §3 Routines). El chequeo de "es mía" (`profesorId ===
- * invocadoPor.id`) vive en los casos de uso, no acá.
+ * cartera (HLD §3 Routines). El chequeo de "es mía" vive en los casos de uso.
  */
 export interface RoutineTemplateRepositoryPort {
   findByProfesor(profesorId: string): Promise<RoutineTemplateSummary[]>;
@@ -46,6 +71,18 @@ export interface RoutineTemplateRepositoryPort {
     data: { nombre?: string; descripcion?: string | null; activa?: boolean },
   ): Promise<RoutineTemplateSummary>;
   delete(id: string): Promise<void>;
-  /** Replace-all transaccional — borra todas las líneas existentes y reinserta. */
-  replaceExercises(templateId: string, ejercicios: EjercicioItem[]): Promise<void>;
+  findDiasByIds(ids: string[]): Promise<DiaPlantillaReferencia[]>;
+  /**
+   * Una sola transacción: persiste los días de la plantilla por id (días
+   * ausentes se borran y sus vínculos pasan a null por SetNull), y aplica
+   * `propagacion` sobre los días de instancia vinculados. Escribe en
+   * tablas de instancia a propósito: plantilla + propagación tienen que ser
+   * atómicas y no se arma un Unit of Work genérico para un solo caso de uso
+   * (mismo criterio que la transacción de alta con cartera, HLD §Identity).
+   */
+  guardarDias(
+    templateId: string,
+    dias: DiaPlantillaAGuardar[],
+    propagacion: ActualizacionDiaVinculado[],
+  ): Promise<void>;
 }

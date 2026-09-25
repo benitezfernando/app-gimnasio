@@ -58,14 +58,14 @@ export class PrismaRoutinesCleanupAdapter implements RoutinesCleanupPort {
     tx: Prisma.TransactionClient,
   ): Promise<void> {
     if (role === Role.ALUMNO) {
-      // Cascada de RoutineInstanceExercise es automática (onDelete: Cascade).
+      // Días y ejercicios de RoutineInstance caen por onDelete: Cascade.
       await tx.routineInstance.deleteMany({ where: { alumnoId: userId } });
       return;
     }
 
-    // Sus plantillas se borran siempre — cascada de ejercicios automática.
-    // Las RoutineInstance que las referenciaban por origenTemplateId
-    // quedan con ese campo en null automáticamente (onDelete: SetNull).
+    // Sus plantillas se borran siempre (días y ejercicios por Cascade). Los
+    // días de instancia vinculados a ellas quedan con vinculadoADiaId =
+    // null (onDelete: SetNull).
     await tx.routineTemplate.deleteMany({ where: { profesorId: userId } });
 
     const instancias = await tx.routineInstance.findMany({

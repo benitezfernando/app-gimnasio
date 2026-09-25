@@ -2,6 +2,7 @@ import { Role } from '../../identity/domain/role';
 import { CreateRoutineTemplateUseCase } from './create-routine-template.use-case';
 import { RoutineTemplateRepositoryPort } from './ports/routine-template-repository.port';
 import { InsufficientRoleError } from '../../identity/application/errors/insufficient-role.error';
+import { crearTemplateRepositoryMock } from '../../test-support/repositorios-routines.mock';
 
 describe('CreateRoutineTemplateUseCase', () => {
   let templateRepository: jest.Mocked<RoutineTemplateRepositoryPort>;
@@ -11,14 +12,7 @@ describe('CreateRoutineTemplateUseCase', () => {
   const admin = { id: 'admin-1', gymId: 'gym-1', role: Role.ADMIN };
 
   beforeEach(() => {
-    templateRepository = {
-      findByProfesor: jest.fn(),
-      findById: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      replaceExercises: jest.fn(),
-    };
+    templateRepository = crearTemplateRepositoryMock();
     useCase = new CreateRoutineTemplateUseCase(templateRepository);
   });
 

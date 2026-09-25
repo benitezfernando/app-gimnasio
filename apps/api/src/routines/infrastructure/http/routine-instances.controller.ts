@@ -1,15 +1,15 @@
-import { Body, Controller, Get, HttpCode, Param, Patch, Post, Put, Req } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Patch, Post, Put, Req } from '@nestjs/common';
 import type { Request } from 'express';
 import { Roles } from '../../../identity/infrastructure/decorators/roles.decorator';
 import { Role } from '../../../identity/domain/role';
 import { AuthenticatedUser } from '../../../identity/domain/authenticated-user';
 import { AssignRoutineToAlumnoUseCase } from '../../application/assign-routine-to-alumno.use-case';
 import { UpdateRoutineInstanceUseCase } from '../../application/update-routine-instance.use-case';
-import { ReplaceInstanceExercisesUseCase } from '../../application/replace-instance-exercises.use-case';
+import { ReplaceInstanceDaysUseCase } from '../../application/replace-instance-days.use-case';
 import { CreateRoutineInstanceDto } from './dto/create-routine-instance.dto';
 import { UpdateRoutineInstanceDto } from './dto/update-routine-instance.dto';
-import { ReplaceExercisesDto } from './dto/replace-exercises.dto';
-import { toEjercicioItems } from './dto/ejercicio.mapper';
+import { ReplaceInstanceDaysDto } from './dto/replace-instance-days.dto';
+import { toDiasInstancia, toDiasNuevos } from './dto/dia.mapper';
 
 interface RequestWithUser extends Request {
   user: AuthenticatedUser;
@@ -21,7 +21,7 @@ export class RoutineInstancesController {
   constructor(
     private readonly assignUseCase: AssignRoutineToAlumnoUseCase,
     private readonly updateUseCase: UpdateRoutineInstanceUseCase,
-    private readonly replaceExercisesUseCase: ReplaceInstanceExercisesUseCase,
+    private readonly replaceDaysUseCase: ReplaceInstanceDaysUseCase,
   ) {}
 
   @Post()
@@ -30,9 +30,7 @@ export class RoutineInstancesController {
       invocadoPor: req.user,
       alumnoId: dto.alumnoId,
       nombre: dto.nombre,
-      origenTemplateId: dto.origenTemplateId,
-      vincular: dto.vincular,
-      ejercicios: dto.ejercicios ? toEjercicioItems(dto.ejercicios) : undefined,
+      dias: toDiasNuevos(dto.dias),
     });
   }
 
@@ -49,17 +47,17 @@ export class RoutineInstancesController {
     });
   }
 
-  @Put(':id/exercises')
-  @HttpCode(204)
-  async replaceExercises(
+  @Put(':id/dias')
+  @HttpCode(200)
+  async replaceDias(
     @Param('id') id: string,
-    @Body() dto: ReplaceExercisesDto,
+    @Body() dto: ReplaceInstanceDaysDto,
     @Req() req: RequestWithUser,
-  ): Promise<void> {
-    await this.replaceExercisesUseCase.execute({
+  ) {
+    return this.replaceDaysUseCase.execute({
       invocadoPor: req.user,
       instanceId: id,
-      ejercicios: toEjercicioItems(dto.ejercicios),
+      dias: toDiasInstancia(dto.dias),
     });
   }
 }

@@ -18,12 +18,12 @@ import { CreateRoutineTemplateUseCase } from '../../application/create-routine-t
 import { ListRoutineTemplatesUseCase } from '../../application/list-routine-templates.use-case';
 import { GetRoutineTemplateUseCase } from '../../application/get-routine-template.use-case';
 import { UpdateRoutineTemplateUseCase } from '../../application/update-routine-template.use-case';
-import { ReplaceTemplateExercisesUseCase } from '../../application/replace-template-exercises.use-case';
 import { DeleteRoutineTemplateUseCase } from '../../application/delete-routine-template.use-case';
+import { ReplaceTemplateDaysUseCase } from '../../application/replace-template-days.use-case';
 import { CreateRoutineTemplateDto } from './dto/create-routine-template.dto';
 import { UpdateRoutineTemplateDto } from './dto/update-routine-template.dto';
-import { ReplaceExercisesDto } from './dto/replace-exercises.dto';
-import { toEjercicioItems } from './dto/ejercicio.mapper';
+import { ReplaceTemplateDaysDto } from './dto/replace-template-days.dto';
+import { toDiasPlantilla } from './dto/dia.mapper';
 
 interface RequestWithUser extends Request {
   user: AuthenticatedUser;
@@ -37,8 +37,8 @@ export class RoutineTemplatesController {
     private readonly listUseCase: ListRoutineTemplatesUseCase,
     private readonly getUseCase: GetRoutineTemplateUseCase,
     private readonly updateUseCase: UpdateRoutineTemplateUseCase,
-    private readonly replaceExercisesUseCase: ReplaceTemplateExercisesUseCase,
     private readonly deleteUseCase: DeleteRoutineTemplateUseCase,
+    private readonly replaceDaysUseCase: ReplaceTemplateDaysUseCase,
   ) {}
 
   @Post()
@@ -75,23 +75,22 @@ export class RoutineTemplatesController {
     });
   }
 
-  @Put(':id/exercises')
-  @HttpCode(204)
-  async replaceExercises(
-    @Param('id') id: string,
-    @Body() dto: ReplaceExercisesDto,
-    @Req() req: RequestWithUser,
-  ): Promise<void> {
-    await this.replaceExercisesUseCase.execute({
-      invocadoPor: req.user,
-      templateId: id,
-      ejercicios: toEjercicioItems(dto.ejercicios),
-    });
-  }
-
   @Delete(':id')
   @HttpCode(204)
   async delete(@Param('id') id: string, @Req() req: RequestWithUser): Promise<void> {
     await this.deleteUseCase.execute({ invocadoPor: req.user, templateId: id });
+  }
+
+  @Put(':id/dias')
+  async replaceDias(
+    @Param('id') id: string,
+    @Body() dto: ReplaceTemplateDaysDto,
+    @Req() req: RequestWithUser,
+  ) {
+    return this.replaceDaysUseCase.execute({
+      invocadoPor: req.user,
+      templateId: id,
+      dias: toDiasPlantilla(dto.dias),
+    });
   }
 }

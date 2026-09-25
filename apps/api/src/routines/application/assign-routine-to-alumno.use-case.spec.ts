@@ -1,410 +1,179 @@
 import { Role } from '../../identity/domain/role';
-import { AssignRoutineToAlumnoUseCase } from './assign-routine-to-alumno.use-case';
-import {
-  RoutineInstanceRepositoryPort,
-  RoutineInstanceDetail,
-} from './ports/routine-instance-repository.port';
-import {
-  RoutineTemplateRepositoryPort,
-  RoutineTemplateDetail,
-} from './ports/routine-template-repository.port';
 import { CarteraRepositoryPort } from '../../identity/application/ports/cartera-repository.port';
 import {
-  UserRepositoryPort,
   UserRecord,
+  UserRepositoryPort,
 } from '../../identity/application/ports/user-repository.port';
 import { ExerciseRepositoryPort } from '../../exercise-catalog/application/ports/exercise-repository.port';
 import { InsufficientRoleError } from '../../identity/application/errors/insufficient-role.error';
-import { UserNotFoundError } from '../../identity/application/errors/user-not-found.error';
+import {
+  crearInstanceRepositoryMock,
+  crearTemplateRepositoryMock,
+} from '../../test-support/repositorios-routines.mock';
+import { AssignRoutineToAlumnoUseCase } from './assign-routine-to-alumno.use-case';
+import { EjercicioItem } from './ports/routine-template-repository.port';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 import { InvalidRoutineInstanceInputError } from './errors/invalid-routine-instance-input.error';
 import { RoutineTemplateNotFoundError } from './errors/routine-template-not-found.error';
-import { TemplateHasNoExercisesError } from './errors/template-has-no-exercises.error';
-import { TooManyExercisesError } from './errors/too-many-exercises.error';
-import { InvalidExerciseIdError } from './errors/invalid-exercise-id.error';
+import { TooManyDaysError } from './errors/too-many-days.error';
+
+function ej(exerciseId: string, orden = 1): EjercicioItem {
+  return { exerciseId, orden, series: 3, repeticiones: 10, peso: null, notas: null };
+}
 
 describe('AssignRoutineToAlumnoUseCase', () => {
-  let instanceRepository: jest.Mocked<RoutineInstanceRepositoryPort>;
-  let templateRepository: jest.Mocked<RoutineTemplateRepositoryPort>;
-  let carteraRepository: jest.Mocked<CarteraRepositoryPort>;
-  let userRepository: jest.Mocked<UserRepositoryPort>;
-  let exerciseRepository: jest.Mocked<ExerciseRepositoryPort>;
-  let useCase: AssignRoutineToAlumnoUseCase;
-
   const profesor = { id: 'prof-1', gymId: 'gym-1', role: Role.PROFESOR };
-  const admin = { id: 'admin-1', gymId: 'gym-1', role: Role.ADMIN };
-
   const alumno: UserRecord = {
     id: 'alum-1',
     authUserId: 'auth-alum',
     gymId: 'gym-1',
     username: 'juan.perez',
-    nombre: 'Juan Perez',
+    nombre: 'Juan',
     role: Role.ALUMNO,
     activo: true,
   };
-
-  const unEjercicio = {
-    exerciseId: 'ex-1',
-    orden: 1,
-    series: 3,
-    repeticiones: 10,
-    peso: null,
-    notas: null,
-  };
-
-  const template: RoutineTemplateDetail = {
-    id: 'tpl-1',
-    gymId: 'gym-1',
+  const refPiernas = {
+    id: 'tday-1',
+    numero: 1,
+    templateId: 'tpl-1',
+    templateNombre: 'Piernas',
     profesorId: 'prof-1',
-    nombre: 'Full body',
-    descripcion: null,
-    activa: true,
-    ejercicios: [unEjercicio],
+    gymId: 'gym-1',
+    exerciseIds: ['ex-1'],
   };
 
-  const instanciaCreada: RoutineInstanceDetail = {
-    id: 'inst-1',
-    gymId: 'gym-1',
-    profesorId: 'prof-1',
-    alumnoId: 'alum-1',
-    nombre: 'Full body',
-    origenTemplateId: 'tpl-1',
-    vinculada: false,
-    vigenteDesde: new Date(),
-    vigenteHasta: null,
-    activa: true,
-    ejercicios: [unEjercicio],
-  };
+  let instanceRepository: ReturnType<typeof crearInstanceRepositoryMock>;
+  let templateRepository: ReturnType<typeof crearTemplateRepositoryMock>;
+  let carteraRepository: jest.Mocked<Pick<CarteraRepositoryPort, 'existe'>>;
+  let userRepository: jest.Mocked<Pick<UserRepositoryPort, 'findById'>>;
+  let exerciseRepository: jest.Mocked<Pick<ExerciseRepositoryPort, 'findByIds'>>;
+  let useCase: AssignRoutineToAlumnoUseCase;
 
   beforeEach(() => {
-    instanceRepository = {
-      findVigentePorAlumno: jest.fn(),
-      findById: jest.fn(),
-      findVinculadasActivasPorTemplate: jest.fn(),
-      crear: jest.fn(),
-      update: jest.fn(),
-      replaceExercises: jest.fn(),
-      marcarDesvinculada: jest.fn(),
-      replaceExercisesYDesvincular: jest.fn(),
-    };
-    templateRepository = {
-      findByProfesor: jest.fn(),
-      findById: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      replaceExercises: jest.fn(),
-    };
-    carteraRepository = {
-      existe: jest.fn(),
-      crear: jest.fn(),
-      eliminar: jest.fn(),
-      findAlumnosDeProfesor: jest.fn(),
-      findProfesoresDeAlumno: jest.fn(),
-    };
-    userRepository = {
-      findByAuthUserId: jest.fn(),
-      findByGymIdAndUsername: jest.fn(),
-      findByGymId: jest.fn(),
-      findById: jest.fn(),
-      deactivate: jest.fn(),
-      create: jest.fn(),
-      updateNombre: jest.fn(),
-    };
+    instanceRepository = crearInstanceRepositoryMock();
+    templateRepository = crearTemplateRepositoryMock();
+    carteraRepository = { existe: jest.fn().mockResolvedValue(true) };
+    userRepository = { findById: jest.fn().mockResolvedValue(alumno) };
     exerciseRepository = {
-      findMany: jest.fn(),
-      findById: jest.fn(),
-      findByIds: jest.fn().mockResolvedValue([{ id: 'ex-1' }]),
-    } as unknown as jest.Mocked<ExerciseRepositoryPort>;
+      findByIds: jest.fn(async (ids: string[]) => ids.map((id) => ({ id }))),
+    } as unknown as jest.Mocked<Pick<ExerciseRepositoryPort, 'findByIds'>>;
+    templateRepository.findDiasByIds.mockResolvedValue([]);
+    instanceRepository.crear.mockImplementation(async (data) => ({
+      id: 'inst-nueva',
+      gymId: data.gymId,
+      profesorId: data.profesorId,
+      alumnoId: data.alumnoId,
+      nombre: data.nombre,
+      vigenteDesde: new Date(),
+      vigenteHasta: null,
+      activa: true,
+      dias: data.dias.map((d, i) => ({
+        id: `d${i}`,
+        numero: i + 1,
+        vinculadoADiaId: d.vinculadoADiaId,
+        ejercicios: d.ejercicios,
+      })),
+    }));
     useCase = new AssignRoutineToAlumnoUseCase(
       instanceRepository,
       templateRepository,
-      carteraRepository,
-      userRepository,
-      exerciseRepository,
+      carteraRepository as unknown as CarteraRepositoryPort,
+      userRepository as unknown as UserRepositoryPort,
+      exerciseRepository as unknown as ExerciseRepositoryPort,
     );
   });
 
-  it('rechaza si quien invoca no es PROFESOR', async () => {
+  it('solo PROFESOR', async () => {
     await expect(
       useCase.execute({
-        invocadoPor: admin,
+        invocadoPor: { ...profesor, role: Role.ADMIN },
         alumnoId: 'alum-1',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
+        nombre: 'R',
+        dias: [{ ejercicios: [ej('ex-1')] }],
       }),
     ).rejects.toThrow(InsufficientRoleError);
   });
 
-  it('rechaza con InvalidRoutineInstanceInputError si vienen origenTemplateId Y ejercicios', async () => {
+  it('sin días → 400', async () => {
     await expect(
-      useCase.execute({
-        invocadoPor: profesor,
-        alumnoId: 'alum-1',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
-        ejercicios: [unEjercicio],
-      }),
+      useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1', nombre: 'R', dias: [] }),
     ).rejects.toThrow(InvalidRoutineInstanceInputError);
   });
 
-  it('rechaza con InvalidRoutineInstanceInputError si no viene ninguno de los dos', async () => {
-    await expect(
-      useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1', nombre: 'Full body' }),
-    ).rejects.toThrow(InvalidRoutineInstanceInputError);
-  });
-
-  it('rechaza con UserNotFoundError si el alumno no existe o es de otro gym', async () => {
-    userRepository.findById.mockResolvedValue(null);
-    await expect(
-      useCase.execute({
-        invocadoPor: profesor,
-        alumnoId: 'no-existe',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
-      }),
-    ).rejects.toThrow(UserNotFoundError);
-  });
-
-  it('rechaza con AlumnoNotInCarteraError si el alumno es del mismo gym pero no está en la cartera', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
+  it('alumno fuera de la cartera → 403', async () => {
     carteraRepository.existe.mockResolvedValue(false);
     await expect(
       useCase.execute({
         invocadoPor: profesor,
         alumnoId: 'alum-1',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
+        nombre: 'R',
+        dias: [{ ejercicios: [ej('ex-1')] }],
       }),
     ).rejects.toThrow(AlumnoNotInCarteraError);
   });
 
-  it('rechaza con RoutineTemplateNotFoundError si la plantilla no es del profesor', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue({ ...template, profesorId: 'prof-OTRO' });
+  it('valida límites de días', async () => {
+    const dias = Array.from({ length: 8 }, (_, i) => ({ ejercicios: [ej(`ex-${i}`)] }));
+    await expect(
+      useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1', nombre: 'R', dias }),
+    ).rejects.toThrow(TooManyDaysError);
+  });
+
+  it('combina días vinculados y desde cero, y aplica la regla de vínculo', async () => {
+    templateRepository.findDiasByIds.mockResolvedValue([refPiernas]);
+
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      nombre: 'Mi split',
+      dias: [
+        { vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1')] },
+        { vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1'), ej('ex-2', 2)] },
+        { ejercicios: [ej('ex-3')] },
+      ],
+    });
+
+    expect(templateRepository.findDiasByIds).toHaveBeenCalledWith(['tday-1']);
+    expect(instanceRepository.crear.mock.calls[0][0].dias.map((d) => d.vinculadoADiaId)).toEqual([
+      'tday-1',
+      null,
+      null,
+    ]);
+  });
+
+  it('vincular a un día de plantilla ajena → 404', async () => {
+    templateRepository.findDiasByIds.mockResolvedValue([{ ...refPiernas, profesorId: 'prof-2' }]);
     await expect(
       useCase.execute({
         invocadoPor: profesor,
         alumnoId: 'alum-1',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
+        nombre: 'R',
+        dias: [{ vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1')] }],
       }),
     ).rejects.toThrow(RoutineTemplateNotFoundError);
   });
 
-  it('rechaza con TemplateHasNoExercisesError si la plantilla no tiene ejercicios', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue({ ...template, ejercicios: [] });
+  it('sin nombre y todos los días vinculados a la misma plantilla → usa el nombre de la plantilla', async () => {
+    templateRepository.findDiasByIds.mockResolvedValue([refPiernas]);
+    await useCase.execute({
+      invocadoPor: profesor,
+      alumnoId: 'alum-1',
+      dias: [{ vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1')] }],
+    });
+    expect(instanceRepository.crear.mock.calls[0][0].nombre).toBe('Piernas');
+  });
+
+  it('sin nombre y algún día independiente → 400', async () => {
+    templateRepository.findDiasByIds.mockResolvedValue([refPiernas]);
     await expect(
       useCase.execute({
         invocadoPor: profesor,
         alumnoId: 'alum-1',
-        nombre: 'Full body',
-        origenTemplateId: 'tpl-1',
-      }),
-    ).rejects.toThrow(TemplateHasNoExercisesError);
-  });
-
-  it('rechaza con TooManyExercisesError si arma desde cero con más de 50', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    const cincuentaYUno = Array.from({ length: 51 }, (_, i) => ({ ...unEjercicio, orden: i + 1 }));
-
-    await expect(
-      useCase.execute({
-        invocadoPor: profesor,
-        alumnoId: 'alum-1',
-        nombre: 'Custom',
-        ejercicios: cincuentaYUno,
-      }),
-    ).rejects.toThrow(TooManyExercisesError);
-  });
-
-  it('clona los ejercicios de la plantilla y crea la instancia', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue(instanciaCreada);
-
-    const resultado = await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Full body',
-      origenTemplateId: 'tpl-1',
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith({
-      gymId: 'gym-1',
-      profesorId: 'prof-1',
-      alumnoId: 'alum-1',
-      nombre: 'Full body',
-      origenTemplateId: 'tpl-1',
-      vinculada: false,
-      ejercicios: [unEjercicio],
-    });
-    expect(resultado).toEqual(instanciaCreada);
-  });
-
-  it('arma desde cero con los ejercicios provistos, sin origenTemplateId', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    instanceRepository.crear.mockResolvedValue({ ...instanciaCreada, origenTemplateId: null });
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Custom',
-      ejercicios: [unEjercicio],
-    });
-
-    expect(templateRepository.findById).not.toHaveBeenCalled();
-    expect(instanceRepository.crear).toHaveBeenCalledWith({
-      gymId: 'gym-1',
-      profesorId: 'prof-1',
-      alumnoId: 'alum-1',
-      nombre: 'Custom',
-      origenTemplateId: null,
-      vinculada: false,
-      ejercicios: [unEjercicio],
-    });
-  });
-
-  it('rechaza con InvalidExerciseIdError si arma desde cero con un exerciseId inexistente', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    exerciseRepository.findByIds.mockResolvedValue([]);
-
-    await expect(
-      useCase.execute({
-        invocadoPor: profesor,
-        alumnoId: 'alum-1',
-        nombre: 'Custom',
-        ejercicios: [unEjercicio],
-      }),
-    ).rejects.toThrow(InvalidExerciseIdError);
-    expect(instanceRepository.crear).not.toHaveBeenCalled();
-  });
-
-  it('no valida el catálogo cuando clona desde plantilla (ya validado al armar la plantilla)', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue(instanciaCreada);
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Full body',
-      origenTemplateId: 'tpl-1',
-    });
-
-    expect(exerciseRepository.findByIds).not.toHaveBeenCalled();
-  });
-
-  it('pasa vincular=true a crear() como vinculada cuando el profesor lo pide', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue({ ...instanciaCreada, vinculada: true });
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Full body',
-      origenTemplateId: 'tpl-1',
-      vincular: true,
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith(
-      expect.objectContaining({ vinculada: true }),
-    );
-  });
-
-  it('vinculada es false por defecto si no se pide vincular', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue(instanciaCreada);
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Full body',
-      origenTemplateId: 'tpl-1',
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith(
-      expect.objectContaining({ vinculada: false }),
-    );
-  });
-
-  it('ignora vincular=true si arma desde cero (sin origenTemplateId) — no hay plantilla a la cual vincular', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    instanceRepository.crear.mockResolvedValue({ ...instanciaCreada, origenTemplateId: null });
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: 'Custom',
-      ejercicios: [unEjercicio],
-      vincular: true,
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith(
-      expect.objectContaining({ vinculada: false }),
-    );
-  });
-
-  it('si no se manda nombre y viene de una plantilla, copia el nombre de la plantilla', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue(instanciaCreada);
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      origenTemplateId: 'tpl-1',
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith(
-      expect.objectContaining({ nombre: template.nombre }),
-    );
-  });
-
-  it('si el nombre viene solo con espacios y hay plantilla, también copia el nombre de la plantilla', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-    templateRepository.findById.mockResolvedValue(template);
-    instanceRepository.crear.mockResolvedValue(instanciaCreada);
-
-    await useCase.execute({
-      invocadoPor: profesor,
-      alumnoId: 'alum-1',
-      nombre: '   ',
-      origenTemplateId: 'tpl-1',
-    });
-
-    expect(instanceRepository.crear).toHaveBeenCalledWith(
-      expect.objectContaining({ nombre: template.nombre }),
-    );
-  });
-
-  it('rechaza con InvalidRoutineInstanceInputError si arma desde cero sin nombre (no hay de dónde copiarlo)', async () => {
-    userRepository.findById.mockResolvedValue(alumno);
-    carteraRepository.existe.mockResolvedValue(true);
-
-    await expect(
-      useCase.execute({
-        invocadoPor: profesor,
-        alumnoId: 'alum-1',
-        ejercicios: [unEjercicio],
+        dias: [
+          { vinculadoADiaId: 'tday-1', ejercicios: [ej('ex-1')] },
+          { ejercicios: [ej('ex-2')] },
+        ],
       }),
     ).rejects.toThrow(InvalidRoutineInstanceInputError);
-    expect(instanceRepository.crear).not.toHaveBeenCalled();
   });
 });

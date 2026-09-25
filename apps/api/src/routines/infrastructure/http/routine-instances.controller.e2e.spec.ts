@@ -5,7 +5,7 @@ import request = require('supertest');
 import { RoutineInstancesController } from './routine-instances.controller';
 import { AssignRoutineToAlumnoUseCase } from '../../application/assign-routine-to-alumno.use-case';
 import { UpdateRoutineInstanceUseCase } from '../../application/update-routine-instance.use-case';
-import { ReplaceInstanceExercisesUseCase } from '../../application/replace-instance-exercises.use-case';
+import { ReplaceInstanceDaysUseCase } from '../../application/replace-instance-days.use-case';
 import {
   ROUTINE_TEMPLATE_REPOSITORY,
   RoutineTemplateRepositoryPort,
@@ -80,28 +80,26 @@ describe('/routine-instances (e2e)', () => {
     profesorId: 'prof-1',
     alumnoId: 'alum-1',
     nombre: 'Full body',
-    origenTemplateId: null,
-    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,
-    ejercicios: [],
+    dias: [],
   };
 
   const fakeInstanceRepository: RoutineInstanceRepositoryPort = {
     findVigentePorAlumno: jest.fn(async () => instanciaBase),
     findById: jest.fn(async (id: string) => (id === 'inst-1' ? instanciaBase : null)),
-    findVinculadasActivasPorTemplate: jest.fn(async () => []),
-    crear: jest.fn(async (data) => ({ ...instanciaBase, ...data })),
+    findActivasConDiasVinculadosA: jest.fn(async () => []),
+    crear: jest.fn(async (data) => ({ ...instanciaBase, nombre: data.nombre, dias: [] })),
     update: jest.fn(async (id, data) => ({ ...instanciaBase, id, ...data })),
-    replaceExercises: jest.fn(async () => undefined),
-    marcarDesvinculada: jest.fn(async () => undefined),
-    replaceExercisesYDesvincular: jest.fn(async () => undefined),
+    guardarDias: jest.fn(async () => undefined),
   };
 
-  const fakeTemplateRepository: Pick<RoutineTemplateRepositoryPort, 'findById'> = {
-    findById: jest.fn(async () => null),
-  };
+  const fakeTemplateRepository: Pick<RoutineTemplateRepositoryPort, 'findById' | 'findDiasByIds'> =
+    {
+      findById: jest.fn(async () => null),
+      findDiasByIds: jest.fn(async () => []),
+    };
 
   const fakeCarteraRepository: Pick<CarteraRepositoryPort, 'existe'> = {
     existe: jest.fn(async () => true),
@@ -145,7 +143,7 @@ describe('/routine-instances (e2e)', () => {
       providers: [
         AssignRoutineToAlumnoUseCase,
         UpdateRoutineInstanceUseCase,
-        ReplaceInstanceExercisesUseCase,
+        ReplaceInstanceDaysUseCase,
         { provide: ROUTINE_INSTANCE_REPOSITORY, useValue: fakeInstanceRepository },
         { provide: ROUTINE_TEMPLATE_REPOSITORY, useValue: fakeTemplateRepository },
         { provide: CARTERA_REPOSITORY, useValue: fakeCarteraRepository },
@@ -169,35 +167,25 @@ describe('/routine-instances (e2e)', () => {
     await app.close();
   });
 
-  it('PROFESOR arma una instancia desde cero — 201', async () => {
+  const unDia = { ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }] };
+
+  it('PROFESOR asigna una rutina por días — 201', async () => {
     const token = await firmarToken();
     const res = await request(app.getHttpServer())
       .post('/routine-instances')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        alumnoId: 'alum-1',
-        nombre: 'Custom',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
-      })
+      .send({ alumnoId: 'alum-1', nombre: 'Custom', dias: [unDia, unDia] })
       .expect(201);
-
     expect(res.body).toMatchObject({ nombre: 'Custom' });
   });
 
-  it('rechaza (400, ValidationPipe) si vienen origenTemplateId Y ejercicios juntos — no, el DTO permite ambos opcionales; el 400 real lo tira el caso de uso', async () => {
+  it('rechaza el formato viejo (origenTemplateId / ejercicios planos) — 400', async () => {
     const token = await firmarToken();
-    const res = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .post('/routine-instances')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        alumnoId: 'alum-1',
-        nombre: 'Custom',
-        origenTemplateId: 'tpl-1',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
-      })
+      .send({ alumnoId: 'alum-1', nombre: 'Custom', origenTemplateId: 'tpl-1', dias: [unDia] })
       .expect(400);
-
-    expect(res.body.error).toBe('InvalidRoutineInstanceInputError');
   });
 
   it('rechaza (403, AlumnoNotInCarteraError) si el alumno no está en la cartera', async () => {
@@ -206,13 +194,18 @@ describe('/routine-instances (e2e)', () => {
     const res = await request(app.getHttpServer())
       .post('/routine-instances')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        alumnoId: 'alum-1',
-        nombre: 'Custom',
-        ejercicios: [{ exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10 }],
-      })
+      .send({ alumnoId: 'alum-1', nombre: 'Custom', dias: [unDia] })
       .expect(403);
-
     expect(res.body.error).toBe('AlumnoNotInCarteraError');
+  });
+
+  it('PUT /:id/dias responde 200 con los días desvinculados', async () => {
+    const token = await firmarToken();
+    const res = await request(app.getHttpServer())
+      .put('/routine-instances/inst-1/dias')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ dias: [unDia] })
+      .expect(200);
+    expect(res.body).toEqual({ diasDesvinculados: [] });
   });
 });

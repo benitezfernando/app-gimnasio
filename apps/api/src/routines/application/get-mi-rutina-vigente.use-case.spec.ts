@@ -8,6 +8,7 @@ import {
   ExerciseRepositoryPort,
   ExerciseSummary,
 } from '../../exercise-catalog/application/ports/exercise-repository.port';
+import { crearInstanceRepositoryMock } from '../../test-support/repositorios-routines.mock';
 
 describe('GetMiRutinaVigenteUseCase', () => {
   let instanceRepository: jest.Mocked<RoutineInstanceRepositoryPort>;
@@ -22,19 +23,24 @@ describe('GetMiRutinaVigenteUseCase', () => {
     profesorId: 'prof-1',
     alumnoId: 'alum-1',
     nombre: 'Full body',
-    origenTemplateId: null,
-    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,
-    ejercicios: [
+    dias: [
       {
-        exerciseId: 'ex-1',
-        orden: 1,
-        series: 3,
-        repeticiones: 10,
-        peso: null,
-        notas: null,
+        id: 'iday-1',
+        numero: 1,
+        vinculadoADiaId: null,
+        ejercicios: [
+          {
+            exerciseId: 'ex-1',
+            orden: 1,
+            series: 3,
+            repeticiones: 10,
+            peso: null,
+            notas: null,
+          },
+        ],
       },
     ],
   };
@@ -50,16 +56,7 @@ describe('GetMiRutinaVigenteUseCase', () => {
   };
 
   beforeEach(() => {
-    instanceRepository = {
-      findVigentePorAlumno: jest.fn(),
-      findById: jest.fn(),
-      findVinculadasActivasPorTemplate: jest.fn(),
-      crear: jest.fn(),
-      update: jest.fn(),
-      replaceExercises: jest.fn(),
-      marcarDesvinculada: jest.fn(),
-      replaceExercisesYDesvincular: jest.fn(),
-    };
+    instanceRepository = crearInstanceRepositoryMock();
     exerciseRepository = { findMany: jest.fn(), findById: jest.fn(), findByIds: jest.fn() };
     useCase = new GetMiRutinaVigenteUseCase(instanceRepository, exerciseRepository);
   });
@@ -79,5 +76,50 @@ describe('GetMiRutinaVigenteUseCase', () => {
     const resultado = await useCase.execute({ invocadoPor: alumno });
 
     expect(resultado).toBeNull();
+  });
+
+  it('resuelve los ejercicios de todos los días con un solo findByIds, sin duplicar ids', async () => {
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({
+      ...instancia,
+      dias: [
+        {
+          id: 'd1',
+          numero: 1,
+          vinculadoADiaId: null,
+          ejercicios: [
+            { exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, peso: null, notas: null },
+          ],
+        },
+        {
+          id: 'd2',
+          numero: 2,
+          vinculadoADiaId: 'tday-9',
+          ejercicios: [
+            { exerciseId: 'ex-1', orden: 1, series: 4, repeticiones: 8, peso: null, notas: null },
+          ],
+        },
+      ],
+    });
+    exerciseRepository.findByIds.mockResolvedValue([
+      {
+        id: 'ex-1',
+        nombre: 'Sentadilla',
+        imageUrl: null,
+        gifUrl: null,
+        parteCuerpo: 'p',
+        grupoMuscular: 'g',
+        equipamiento: null,
+      },
+    ]);
+
+    const salida = await useCase.execute({ invocadoPor: alumno });
+
+    expect(exerciseRepository.findByIds).toHaveBeenCalledTimes(1);
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1']);
+    expect(salida?.dias.map((d) => [d.numero, d.ejercicios[0].series])).toEqual([
+      [1, 3],
+      [2, 4],
+    ]);
+    expect(JSON.stringify(salida)).not.toContain('tday-9');
   });
 });

@@ -4,9 +4,7 @@ export class InvalidRoutineInstanceInputError extends DomainError {
   readonly httpStatus = 400;
 
   constructor() {
-    super(
-      'Hay que enviar exactamente uno de los dos: origenTemplateId (asignar desde plantilla) o ejercicios (armar desde cero).',
-    );
+    super('Una rutina nueva necesita al menos un día con ejercicios y un nombre.');
     this.name = 'InvalidRoutineInstanceInputError';
   }
 }

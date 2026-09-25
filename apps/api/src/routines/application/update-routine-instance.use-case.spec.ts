@@ -7,6 +7,7 @@ import {
 import { CarteraRepositoryPort } from '../../identity/application/ports/cartera-repository.port';
 import { RoutineInstanceNotFoundError } from './errors/routine-instance-not-found.error';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
+import { crearInstanceRepositoryMock } from '../../test-support/repositorios-routines.mock';
 
 describe('UpdateRoutineInstanceUseCase', () => {
   let instanceRepository: jest.Mocked<RoutineInstanceRepositoryPort>;
@@ -22,25 +23,14 @@ describe('UpdateRoutineInstanceUseCase', () => {
     profesorId: 'prof-1',
     alumnoId: 'alum-1',
     nombre: 'Full body',
-    origenTemplateId: null,
-    vinculada: false,
     vigenteDesde: new Date(),
     vigenteHasta: null,
     activa: true,
-    ejercicios: [],
+    dias: [],
   };
 
   beforeEach(() => {
-    instanceRepository = {
-      findVigentePorAlumno: jest.fn(),
-      findById: jest.fn(),
-      findVinculadasActivasPorTemplate: jest.fn(),
-      crear: jest.fn(),
-      update: jest.fn(),
-      replaceExercises: jest.fn(),
-      marcarDesvinculada: jest.fn(),
-      replaceExercisesYDesvincular: jest.fn(),
-    };
+    instanceRepository = crearInstanceRepositoryMock();
     carteraRepository = {
       existe: jest.fn(),
       crear: jest.fn(),

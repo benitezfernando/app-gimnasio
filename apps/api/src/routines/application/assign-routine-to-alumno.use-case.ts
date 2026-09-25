@@ -11,11 +11,13 @@ import {
   UserRepositoryPort,
 } from '../../identity/application/ports/user-repository.port';
 import { resolveUserInGym } from '../../identity/application/resolve-user-in-gym';
+import { requireGymId } from '../../identity/application/require-gym-id';
 import {
   EXERCISE_REPOSITORY,
   ExerciseRepositoryPort,
 } from '../../exercise-catalog/application/ports/exercise-repository.port';
 import {
+  DiaPlantillaReferencia,
   EjercicioItem,
   ROUTINE_TEMPLATE_REPOSITORY,
   RoutineTemplateRepositoryPort,
@@ -27,30 +29,23 @@ import {
 } from './ports/routine-instance-repository.port';
 import { AlumnoNotInCarteraError } from './errors/alumno-not-in-cartera.error';
 import { InvalidRoutineInstanceInputError } from './errors/invalid-routine-instance-input.error';
-import { RoutineTemplateNotFoundError } from './errors/routine-template-not-found.error';
-import { TemplateHasNoExercisesError } from './errors/template-has-no-exercises.error';
-import { TooManyExercisesError } from './errors/too-many-exercises.error';
-import { InvalidExerciseIdError } from './errors/invalid-exercise-id.error';
-import { requireGymId } from '../../identity/application/require-gym-id';
-
-const MAX_EJERCICIOS = 50;
+import { validarDias } from './dias/validar-dias';
+import { resolverVinculosPedidos } from './dias/resolver-vinculos-pedidos';
+import { validarExerciseIdsEnCatalogo } from './validar-exercise-ids';
 
 export interface AssignRoutineToAlumnoInput {
   invocadoPor: AuthenticatedUser;
   alumnoId: string;
   nombre?: string;
-  origenTemplateId?: string;
-  ejercicios?: EjercicioItem[];
-  vincular?: boolean;
+  dias: Array<{ vinculadoADiaId?: string; ejercicios: EjercicioItem[] }>;
 }
 
 const ROLES_QUE_PUEDEN_ASIGNAR: Role[] = [Role.PROFESOR];
 
 /**
- * HU-05. Exactamente uno de `origenTemplateId`/`ejercicios` — asignar
- * desde plantilla (clona 1:1) o armar desde cero. Autoriza contra la
- * cartera vigente del invocador, nunca contra `RoutineInstance.profesorId`
- * de una instancia anterior (acá se está creando una nueva).
+ * HU-05. Cada día puede venir de un día de plantilla (vinculado si el
+ * conjunto coincide) o armado desde cero. Autoriza contra la cartera
+ * vigente del invocador.
  */
 @Injectable()
 export class AssignRoutineToAlumnoUseCase {
@@ -68,50 +63,33 @@ export class AssignRoutineToAlumnoUseCase {
     if (!ROLES_QUE_PUEDEN_ASIGNAR.includes(input.invocadoPor.role)) {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_ASIGNAR);
     }
-
-    const tieneOrigen = Boolean(input.origenTemplateId);
-    const tieneEjerciciosPropios = Boolean(input.ejercicios && input.ejercicios.length > 0);
-    if (tieneOrigen === tieneEjerciciosPropios) {
+    if (input.dias.length === 0) {
       throw new InvalidRoutineInstanceInputError();
     }
 
     const gymId = requireGymId(input.invocadoPor);
-
     const alumno = await resolveUserInGym(this.userRepository, input.alumnoId, gymId);
     if (alumno.role !== Role.ALUMNO) {
       throw new AlumnoNotInCarteraError(input.alumnoId);
     }
-
     const enCartera = await this.carteraRepository.existe(input.invocadoPor.id, input.alumnoId);
     if (!enCartera) {
       throw new AlumnoNotInCarteraError(input.alumnoId);
     }
 
-    let ejercicios: EjercicioItem[];
-    let nombreDeLaPlantilla: string | undefined;
-    if (input.origenTemplateId) {
-      const template = await this.templateRepository.findById(input.origenTemplateId);
-      if (!template || template.profesorId !== input.invocadoPor.id) {
-        throw new RoutineTemplateNotFoundError(input.origenTemplateId);
-      }
-      if (template.ejercicios.length === 0) {
-        throw new TemplateHasNoExercisesError(template.id);
-      }
-      ejercicios = template.ejercicios;
-      nombreDeLaPlantilla = template.nombre;
-    } else {
-      ejercicios = input.ejercicios!;
-      if (ejercicios.length > MAX_EJERCICIOS) {
-        throw new TooManyExercisesError(ejercicios.length);
-      }
-      await this.validarExerciseIdsEnCatalogo(ejercicios);
-    }
+    validarDias(input.dias);
+    await validarExerciseIdsEnCatalogo(
+      this.exerciseRepository,
+      input.dias.flatMap((d) => d.ejercicios),
+    );
 
-    // Si el profesor no le puso nombre a la rutina del alumno y viene de
-    // una plantilla, copia el nombre de la plantilla — nunca queda sin
-    // nombre. Armando desde cero no hay de dónde copiar, así que ahí
-    // `nombre` sigue siendo obligatorio (lo exige el DTO/frontend).
-    const nombre = input.nombre?.trim() || nombreDeLaPlantilla;
+    const { vinculos, referencias } = await resolverVinculosPedidos(
+      this.templateRepository,
+      { id: input.invocadoPor.id, gymId },
+      input.dias.map((d) => ({ ...d, anterior: null })),
+    );
+
+    const nombre = input.nombre?.trim() || nombreDePlantillaComun(vinculos, referencias);
     if (!nombre) {
       throw new InvalidRoutineInstanceInputError();
     }
@@ -121,19 +99,17 @@ export class AssignRoutineToAlumnoUseCase {
       profesorId: input.invocadoPor.id,
       alumnoId: input.alumnoId,
       nombre,
-      origenTemplateId: input.origenTemplateId ?? null,
-      vinculada: Boolean(input.origenTemplateId) && (input.vincular ?? false),
-      ejercicios,
+      dias: input.dias.map((d, i) => ({ vinculadoADiaId: vinculos[i], ejercicios: d.ejercicios })),
     });
   }
+}
 
-  private async validarExerciseIdsEnCatalogo(ejercicios: EjercicioItem[]): Promise<void> {
-    const exerciseIds = new Set(ejercicios.map((e) => e.exerciseId));
-    const catalogados = await this.exerciseRepository.findByIds([...exerciseIds]);
-    if (catalogados.length !== exerciseIds.size) {
-      const encontrados = new Set(catalogados.map((e) => e.id));
-      const faltantes = [...exerciseIds].filter((id) => !encontrados.has(id));
-      throw new InvalidExerciseIdError(faltantes);
-    }
-  }
+function nombreDePlantillaComun(
+  vinculos: Array<string | null>,
+  referencias: Map<string, DiaPlantillaReferencia>,
+): string | undefined {
+  if (vinculos.some((v) => v === null)) return undefined;
+  const plantillas = new Set(vinculos.map((v) => referencias.get(v!)!.templateId));
+  if (plantillas.size !== 1) return undefined;
+  return referencias.get(vinculos[0]!)!.templateNombre;
 }
