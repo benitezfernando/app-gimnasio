@@ -11,6 +11,7 @@
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "seed:exercises": "tsx prisma/seed-exercises.ts",
+    "backfill:nombre-original": "tsx prisma/backfill-nombre-original.ts",
     "upload-exercise-media": "tsx prisma/upload-exercise-media.ts",
     "seed:admin": "tsx prisma/seed-admin.ts",
     "seed:super-admin": "tsx prisma/seed-super-admin.ts",

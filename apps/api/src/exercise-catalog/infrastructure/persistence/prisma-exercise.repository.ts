@@ -13,6 +13,7 @@ import { normalizarNombre } from '../../normalizar-nombre';
 const SELECT_SUMMARY = {
   id: true,
   nombre: true,
+  nombreOriginal: true,
   imageUrl: true,
   gifUrl: true,
   parteCuerpo: true,
@@ -36,7 +37,12 @@ export class PrismaExerciseRepository implements ExerciseRepositoryPort {
     const where: Prisma.ExerciseWhereInput = {
       activo: true,
       ...(filter.search
-        ? { nombreNormalizado: { contains: normalizarNombre(filter.search) } }
+        ? {
+            OR: [
+              { nombreNormalizado: { contains: normalizarNombre(filter.search) } },
+              { nombreOriginalNormalizado: { contains: normalizarNombre(filter.search) } },
+            ],
+          }
         : {}),
       ...(filter.parteCuerpo ? { parteCuerpo: filter.parteCuerpo } : {}),
       ...(filter.equipamiento ? { equipamiento: filter.equipamiento } : {}),

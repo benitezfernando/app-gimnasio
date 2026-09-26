@@ -46,6 +46,7 @@ describe('/exercises (e2e)', () => {
   const ejercicioResumen = {
     id: 'ex-1',
     nombre: '3/4 Sit-Up',
+    nombreOriginal: null,
     imageUrl: null,
     gifUrl: null,
     parteCuerpo: 'waist',

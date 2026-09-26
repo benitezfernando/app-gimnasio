@@ -8,6 +8,7 @@ describe('ListExercisesUseCase', () => {
   const ejercicio: ExerciseSummary = {
     id: 'ex-1',
     nombre: '3/4 Sit-Up',
+    nombreOriginal: null,
     imageUrl: 'https://example.com/img.jpg',
     gifUrl: null,
     parteCuerpo: 'waist',

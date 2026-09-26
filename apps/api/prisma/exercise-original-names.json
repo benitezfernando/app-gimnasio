@@ -1,0 +1,5298 @@
+[
+  {
+    "externalId": "0001",
+    "nombreOriginal": "3/4 sit-up"
+  },
+  {
+    "externalId": "0002",
+    "nombreOriginal": "45° side bend"
+  },
+  {
+    "externalId": "0003",
+    "nombreOriginal": "air bike"
+  },
+  {
+    "externalId": "1512",
+    "nombreOriginal": "all fours squad stretch"
+  },
+  {
+    "externalId": "0006",
+    "nombreOriginal": "alternate heel touchers"
+  },
+  {
+    "externalId": "0007",
+    "nombreOriginal": "alternate lateral pulldown"
+  },
+  {
+    "externalId": "1368",
+    "nombreOriginal": "ankle circles"
+  },
+  {
+    "externalId": "3293",
+    "nombreOriginal": "archer pull up"
+  },
+  {
+    "externalId": "3294",
+    "nombreOriginal": "archer push up"
+  },
+  {
+    "externalId": "2355",
+    "nombreOriginal": "arm slingers hanging bent knee legs"
+  },
+  {
+    "externalId": "2333",
+    "nombreOriginal": "arm slingers hanging straight legs"
+  },
+  {
+    "externalId": "3214",
+    "nombreOriginal": "arms apart circular toe touch (male)"
+  },
+  {
+    "externalId": "3204",
+    "nombreOriginal": "arms overhead full sit-up (male)"
+  },
+  {
+    "externalId": "0009",
+    "nombreOriginal": "assisted chest dip (kneeling)"
+  },
+  {
+    "externalId": "0011",
+    "nombreOriginal": "assisted hanging knee raise"
+  },
+  {
+    "externalId": "0010",
+    "nombreOriginal": "assisted hanging knee raise with throw down"
+  },
+  {
+    "externalId": "1708",
+    "nombreOriginal": "assisted lying calves stretch"
+  },
+  {
+    "externalId": "1709",
+    "nombreOriginal": "assisted lying glutes stretch"
+  },
+  {
+    "externalId": "1710",
+    "nombreOriginal": "assisted lying gluteus and piriformis stretch"
+  },
+  {
+    "externalId": "0012",
+    "nombreOriginal": "assisted lying leg raise with lateral throw down"
+  },
+  {
+    "externalId": "0013",
+    "nombreOriginal": "assisted lying leg raise with throw down"
+  },
+  {
+    "externalId": "0014",
+    "nombreOriginal": "assisted motion russian twist"
+  },
+  {
+    "externalId": "0015",
+    "nombreOriginal": "assisted parallel close grip pull-up"
+  },
+  {
+    "externalId": "0016",
+    "nombreOriginal": "assisted prone hamstring"
+  },
+  {
+    "externalId": "1713",
+    "nombreOriginal": "assisted prone lying quads stretch"
+  },
+  {
+    "externalId": "1714",
+    "nombreOriginal": "assisted prone rectus femoris stretch"
+  },
+  {
+    "externalId": "0017",
+    "nombreOriginal": "assisted pull-up"
+  },
+  {
+    "externalId": "1716",
+    "nombreOriginal": "assisted seated pectoralis major stretch with stability ball"
+  },
+  {
+    "externalId": "1712",
+    "nombreOriginal": "assisted side lying adductor stretch"
+  },
+  {
+    "externalId": "1758",
+    "nombreOriginal": "assisted sit-up"
+  },
+  {
+    "externalId": "1431",
+    "nombreOriginal": "assisted standing chin-up"
+  },
+  {
+    "externalId": "1432",
+    "nombreOriginal": "assisted standing pull-up"
+  },
+  {
+    "externalId": "0018",
+    "nombreOriginal": "assisted standing triceps extension (with towel)"
+  },
+  {
+    "externalId": "0019",
+    "nombreOriginal": "assisted triceps dip (kneeling)"
+  },
+  {
+    "externalId": "2364",
+    "nombreOriginal": "assisted wide-grip chest dip (kneeling)"
+  },
+  {
+    "externalId": "3220",
+    "nombreOriginal": "astride jumps (male)"
+  },
+  {
+    "externalId": "3672",
+    "nombreOriginal": "back and forth step"
+  },
+  {
+    "externalId": "1314",
+    "nombreOriginal": "back extension on exercise ball"
+  },
+  {
+    "externalId": "3297",
+    "nombreOriginal": "back lever"
+  },
+  {
+    "externalId": "1405",
+    "nombreOriginal": "back pec stretch"
+  },
+  {
+    "externalId": "1473",
+    "nombreOriginal": "backward jump"
+  },
+  {
+    "externalId": "0020",
+    "nombreOriginal": "balance board"
+  },
+  {
+    "externalId": "0968",
+    "nombreOriginal": "band alternating biceps curl"
+  },
+  {
+    "externalId": "0969",
+    "nombreOriginal": "band alternating v-up"
+  },
+  {
+    "externalId": "0970",
+    "nombreOriginal": "band assisted pull-up"
+  },
+  {
+    "externalId": "0971",
+    "nombreOriginal": "band assisted wheel rollerout"
+  },
+  {
+    "externalId": "1254",
+    "nombreOriginal": "band bench press"
+  },
+  {
+    "externalId": "0980",
+    "nombreOriginal": "band bent-over hip extension"
+  },
+  {
+    "externalId": "0972",
+    "nombreOriginal": "band bicycle crunch"
+  },
+  {
+    "externalId": "0974",
+    "nombreOriginal": "band close-grip pulldown"
+  },
+  {
+    "externalId": "0975",
+    "nombreOriginal": "band close-grip push-up"
+  },
+  {
+    "externalId": "0976",
+    "nombreOriginal": "band concentration curl"
+  },
+  {
+    "externalId": "3117",
+    "nombreOriginal": "band fixed back close grip pulldown"
+  },
+  {
+    "externalId": "3116",
+    "nombreOriginal": "band fixed back underhand pulldown"
+  },
+  {
+    "externalId": "0977",
+    "nombreOriginal": "band front lateral raise"
+  },
+  {
+    "externalId": "0978",
+    "nombreOriginal": "band front raise"
+  },
+  {
+    "externalId": "1408",
+    "nombreOriginal": "band hip lift"
+  },
+  {
+    "externalId": "0979",
+    "nombreOriginal": "band horizontal pallof press"
+  },
+  {
+    "externalId": "0981",
+    "nombreOriginal": "band jack knife sit-up"
+  },
+  {
+    "externalId": "0983",
+    "nombreOriginal": "band kneeling one arm pulldown"
+  },
+  {
+    "externalId": "0985",
+    "nombreOriginal": "band kneeling twisting crunch"
+  },
+  {
+    "externalId": "0984",
+    "nombreOriginal": "band lying hip internal rotation"
+  },
+  {
+    "externalId": "1002",
+    "nombreOriginal": "band lying straight leg raise"
+  },
+  {
+    "externalId": "0986",
+    "nombreOriginal": "band one arm overhead biceps curl"
+  },
+  {
+    "externalId": "0987",
+    "nombreOriginal": "band one arm single leg split squat"
+  },
+  {
+    "externalId": "0988",
+    "nombreOriginal": "band one arm standing low row"
+  },
+  {
+    "externalId": "0989",
+    "nombreOriginal": "band one arm twisting chest press"
+  },
+  {
+    "externalId": "0990",
+    "nombreOriginal": "band one arm twisting seated row"
+  },
+  {
+    "externalId": "0991",
+    "nombreOriginal": "band pull through"
+  },
+  {
+    "externalId": "0992",
+    "nombreOriginal": "band push sit-up"
+  },
+  {
+    "externalId": "0993",
+    "nombreOriginal": "band reverse fly"
+  },
+  {
+    "externalId": "0994",
+    "nombreOriginal": "band reverse wrist curl"
+  },
+  {
+    "externalId": "0996",
+    "nombreOriginal": "band seated hip internal rotation"
+  },
+  {
+    "externalId": "1011",
+    "nombreOriginal": "band seated twist"
+  },
+  {
+    "externalId": "0997",
+    "nombreOriginal": "band shoulder press"
+  },
+  {
+    "externalId": "1018",
+    "nombreOriginal": "band shrug"
+  },
+  {
+    "externalId": "0998",
+    "nombreOriginal": "band side triceps extension"
+  },
+  {
+    "externalId": "0999",
+    "nombreOriginal": "band single leg calf raise"
+  },
+  {
+    "externalId": "1000",
+    "nombreOriginal": "band single leg reverse calf raise"
+  },
+  {
+    "externalId": "1001",
+    "nombreOriginal": "band single leg split squat"
+  },
+  {
+    "externalId": "1004",
+    "nombreOriginal": "band squat"
+  },
+  {
+    "externalId": "1003",
+    "nombreOriginal": "band squat row"
+  },
+  {
+    "externalId": "1005",
+    "nombreOriginal": "band standing crunch"
+  },
+  {
+    "externalId": "1022",
+    "nombreOriginal": "band standing rear delt row"
+  },
+  {
+    "externalId": "1007",
+    "nombreOriginal": "band standing twisting crunch"
+  },
+  {
+    "externalId": "1008",
+    "nombreOriginal": "band step-up"
+  },
+  {
+    "externalId": "1009",
+    "nombreOriginal": "band stiff leg deadlift"
+  },
+  {
+    "externalId": "1023",
+    "nombreOriginal": "band straight back stiff leg deadlift"
+  },
+  {
+    "externalId": "1010",
+    "nombreOriginal": "band straight leg deadlift"
+  },
+  {
+    "externalId": "1012",
+    "nombreOriginal": "band twisting overhead press"
+  },
+  {
+    "externalId": "1369",
+    "nombreOriginal": "band two legs calf raise - (band under both legs) v. 2"
+  },
+  {
+    "externalId": "1013",
+    "nombreOriginal": "band underhand pulldown"
+  },
+  {
+    "externalId": "1014",
+    "nombreOriginal": "band v-up"
+  },
+  {
+    "externalId": "1015",
+    "nombreOriginal": "band vertical pallof press"
+  },
+  {
+    "externalId": "1016",
+    "nombreOriginal": "band wrist curl"
+  },
+  {
+    "externalId": "1017",
+    "nombreOriginal": "band y-raise"
+  },
+  {
+    "externalId": "0023",
+    "nombreOriginal": "barbell alternate biceps curl"
+  },
+  {
+    "externalId": "0024",
+    "nombreOriginal": "barbell bench front squat"
+  },
+  {
+    "externalId": "0025",
+    "nombreOriginal": "barbell bench press"
+  },
+  {
+    "externalId": "0026",
+    "nombreOriginal": "barbell bench squat"
+  },
+  {
+    "externalId": "1316",
+    "nombreOriginal": "barbell bent arm pullover"
+  },
+  {
+    "externalId": "0027",
+    "nombreOriginal": "barbell bent over row"
+  },
+  {
+    "externalId": "2407",
+    "nombreOriginal": "barbell biceps curl (with arm blaster)"
+  },
+  {
+    "externalId": "0028",
+    "nombreOriginal": "barbell clean and press"
+  },
+  {
+    "externalId": "0029",
+    "nombreOriginal": "barbell clean-grip front squat"
+  },
+  {
+    "externalId": "0030",
+    "nombreOriginal": "barbell close-grip bench press"
+  },
+  {
+    "externalId": "0031",
+    "nombreOriginal": "barbell curl"
+  },
+  {
+    "externalId": "0032",
+    "nombreOriginal": "barbell deadlift"
+  },
+  {
+    "externalId": "0033",
+    "nombreOriginal": "barbell decline bench press"
+  },
+  {
+    "externalId": "0034",
+    "nombreOriginal": "barbell decline bent arm pullover"
+  },
+  {
+    "externalId": "0035",
+    "nombreOriginal": "barbell decline close grip to skull press"
+  },
+  {
+    "externalId": "1255",
+    "nombreOriginal": "barbell decline pullover"
+  },
+  {
+    "externalId": "0036",
+    "nombreOriginal": "barbell decline wide-grip press"
+  },
+  {
+    "externalId": "0037",
+    "nombreOriginal": "barbell decline wide-grip pullover"
+  },
+  {
+    "externalId": "0038",
+    "nombreOriginal": "barbell drag curl"
+  },
+  {
+    "externalId": "1370",
+    "nombreOriginal": "barbell floor calf raise"
+  },
+  {
+    "externalId": "0039",
+    "nombreOriginal": "barbell front chest squat"
+  },
+  {
+    "externalId": "0041",
+    "nombreOriginal": "barbell front raise"
+  },
+  {
+    "externalId": "0040",
+    "nombreOriginal": "barbell front raise and pullover"
+  },
+  {
+    "externalId": "0042",
+    "nombreOriginal": "barbell front squat"
+  },
+  {
+    "externalId": "0043",
+    "nombreOriginal": "barbell full squat"
+  },
+  {
+    "externalId": "1461",
+    "nombreOriginal": "barbell full squat (back pov)"
+  },
+  {
+    "externalId": "1462",
+    "nombreOriginal": "barbell full squat (side pov)"
+  },
+  {
+    "externalId": "1545",
+    "nombreOriginal": "barbell full zercher squat"
+  },
+  {
+    "externalId": "1409",
+    "nombreOriginal": "barbell glute bridge"
+  },
+  {
+    "externalId": "3562",
+    "nombreOriginal": "barbell glute bridge two legs on bench (male)"
+  },
+  {
+    "externalId": "0044",
+    "nombreOriginal": "barbell good morning"
+  },
+  {
+    "externalId": "0045",
+    "nombreOriginal": "barbell guillotine bench press"
+  },
+  {
+    "externalId": "0046",
+    "nombreOriginal": "barbell hack squat"
+  },
+  {
+    "externalId": "1436",
+    "nombreOriginal": "barbell high bar squat"
+  },
+  {
+    "externalId": "0047",
+    "nombreOriginal": "barbell incline bench press"
+  },
+  {
+    "externalId": "1719",
+    "nombreOriginal": "barbell incline close grip bench press"
+  },
+  {
+    "externalId": "0048",
+    "nombreOriginal": "barbell incline reverse-grip press"
+  },
+  {
+    "externalId": "0049",
+    "nombreOriginal": "barbell incline row"
+  },
+  {
+    "externalId": "0050",
+    "nombreOriginal": "barbell incline shoulder raise"
+  },
+  {
+    "externalId": "0051",
+    "nombreOriginal": "barbell jefferson squat"
+  },
+  {
+    "externalId": "0052",
+    "nombreOriginal": "barbell jm bench press"
+  },
+  {
+    "externalId": "0053",
+    "nombreOriginal": "barbell jump squat"
+  },
+  {
+    "externalId": "1410",
+    "nombreOriginal": "barbell lateral lunge"
+  },
+  {
+    "externalId": "1435",
+    "nombreOriginal": "barbell low bar squat"
+  },
+  {
+    "externalId": "0054",
+    "nombreOriginal": "barbell lunge"
+  },
+  {
+    "externalId": "1720",
+    "nombreOriginal": "barbell lying back of the head tricep extension"
+  },
+  {
+    "externalId": "0055",
+    "nombreOriginal": "barbell lying close-grip press"
+  },
+  {
+    "externalId": "0056",
+    "nombreOriginal": "barbell lying close-grip triceps extension"
+  },
+  {
+    "externalId": "0057",
+    "nombreOriginal": "barbell lying extension"
+  },
+  {
+    "externalId": "0058",
+    "nombreOriginal": "barbell lying lifting (on hip)"
+  },
+  {
+    "externalId": "0059",
+    "nombreOriginal": "barbell lying preacher curl"
+  },
+  {
+    "externalId": "0061",
+    "nombreOriginal": "barbell lying triceps extension"
+  },
+  {
+    "externalId": "0060",
+    "nombreOriginal": "barbell lying triceps extension skull crusher"
+  },
+  {
+    "externalId": "0063",
+    "nombreOriginal": "barbell narrow stance squat"
+  },
+  {
+    "externalId": "0064",
+    "nombreOriginal": "barbell one arm bent over row"
+  },
+  {
+    "externalId": "0065",
+    "nombreOriginal": "barbell one arm floor press"
+  },
+  {
+    "externalId": "0066",
+    "nombreOriginal": "barbell one arm side deadlift"
+  },
+  {
+    "externalId": "0067",
+    "nombreOriginal": "barbell one arm snatch"
+  },
+  {
+    "externalId": "0068",
+    "nombreOriginal": "barbell one leg squat"
+  },
+  {
+    "externalId": "0069",
+    "nombreOriginal": "barbell overhead squat"
+  },
+  {
+    "externalId": "1411",
+    "nombreOriginal": "barbell palms down wrist curl over a bench"
+  },
+  {
+    "externalId": "1412",
+    "nombreOriginal": "barbell palms up wrist curl over a bench"
+  },
+  {
+    "externalId": "3017",
+    "nombreOriginal": "barbell pendlay row"
+  },
+  {
+    "externalId": "1751",
+    "nombreOriginal": "barbell pin presses"
+  },
+  {
+    "externalId": "0070",
+    "nombreOriginal": "barbell preacher curl"
+  },
+  {
+    "externalId": "0071",
+    "nombreOriginal": "barbell press sit-up"
+  },
+  {
+    "externalId": "0072",
+    "nombreOriginal": "barbell prone incline curl"
+  },
+  {
+    "externalId": "0073",
+    "nombreOriginal": "barbell pullover"
+  },
+  {
+    "externalId": "0022",
+    "nombreOriginal": "barbell pullover to press"
+  },
+  {
+    "externalId": "0074",
+    "nombreOriginal": "barbell rack pull"
+  },
+  {
+    "externalId": "0075",
+    "nombreOriginal": "barbell rear delt raise"
+  },
+  {
+    "externalId": "0076",
+    "nombreOriginal": "barbell rear delt row"
+  },
+  {
+    "externalId": "0078",
+    "nombreOriginal": "barbell rear lunge"
+  },
+  {
+    "externalId": "0077",
+    "nombreOriginal": "barbell rear lunge v. 2"
+  },
+  {
+    "externalId": "0079",
+    "nombreOriginal": "barbell revers wrist curl v. 2"
+  },
+  {
+    "externalId": "2187",
+    "nombreOriginal": "barbell reverse close-grip bench press"
+  },
+  {
+    "externalId": "0080",
+    "nombreOriginal": "barbell reverse curl"
+  },
+  {
+    "externalId": "0118",
+    "nombreOriginal": "barbell reverse grip bent over row"
+  },
+  {
+    "externalId": "1256",
+    "nombreOriginal": "barbell reverse grip decline bench press"
+  },
+  {
+    "externalId": "1257",
+    "nombreOriginal": "barbell reverse grip incline bench press"
+  },
+  {
+    "externalId": "1317",
+    "nombreOriginal": "barbell reverse grip incline bench row"
+  },
+  {
+    "externalId": "1721",
+    "nombreOriginal": "barbell reverse grip skullcrusher"
+  },
+  {
+    "externalId": "0081",
+    "nombreOriginal": "barbell reverse preacher curl"
+  },
+  {
+    "externalId": "0082",
+    "nombreOriginal": "barbell reverse wrist curl"
+  },
+  {
+    "externalId": "0084",
+    "nombreOriginal": "barbell rollerout"
+  },
+  {
+    "externalId": "0083",
+    "nombreOriginal": "barbell rollerout from bench"
+  },
+  {
+    "externalId": "0085",
+    "nombreOriginal": "barbell romanian deadlift"
+  },
+  {
+    "externalId": "0086",
+    "nombreOriginal": "barbell seated behind head military press"
+  },
+  {
+    "externalId": "0087",
+    "nombreOriginal": "barbell seated bradford rocky press"
+  },
+  {
+    "externalId": "0088",
+    "nombreOriginal": "barbell seated calf raise"
+  },
+  {
+    "externalId": "1371",
+    "nombreOriginal": "barbell seated calf raise"
+  },
+  {
+    "externalId": "1718",
+    "nombreOriginal": "barbell seated close grip behind neck triceps extension"
+  },
+  {
+    "externalId": "0089",
+    "nombreOriginal": "barbell seated close-grip concentration curl"
+  },
+  {
+    "externalId": "0090",
+    "nombreOriginal": "barbell seated good morning"
+  },
+  {
+    "externalId": "0091",
+    "nombreOriginal": "barbell seated overhead press"
+  },
+  {
+    "externalId": "0092",
+    "nombreOriginal": "barbell seated overhead triceps extension"
+  },
+  {
+    "externalId": "0094",
+    "nombreOriginal": "barbell seated twist"
+  },
+  {
+    "externalId": "0095",
+    "nombreOriginal": "barbell shrug"
+  },
+  {
+    "externalId": "0096",
+    "nombreOriginal": "barbell side bent v. 2"
+  },
+  {
+    "externalId": "0098",
+    "nombreOriginal": "barbell side split squat"
+  },
+  {
+    "externalId": "0097",
+    "nombreOriginal": "barbell side split squat v. 2"
+  },
+  {
+    "externalId": "1756",
+    "nombreOriginal": "barbell single leg deadlift"
+  },
+  {
+    "externalId": "0099",
+    "nombreOriginal": "barbell single leg split squat"
+  },
+  {
+    "externalId": "2799",
+    "nombreOriginal": "barbell sitted alternate leg raise"
+  },
+  {
+    "externalId": "2800",
+    "nombreOriginal": "barbell sitted alternate leg raise (female)"
+  },
+  {
+    "externalId": "0100",
+    "nombreOriginal": "barbell skier"
+  },
+  {
+    "externalId": "0101",
+    "nombreOriginal": "barbell speed squat"
+  },
+  {
+    "externalId": "2810",
+    "nombreOriginal": "barbell split squat v. 2"
+  },
+  {
+    "externalId": "0102",
+    "nombreOriginal": "barbell squat (on knees)"
+  },
+  {
+    "externalId": "2798",
+    "nombreOriginal": "barbell squat jump step rear lunge"
+  },
+  {
+    "externalId": "0103",
+    "nombreOriginal": "barbell standing ab rollerout"
+  },
+  {
+    "externalId": "0104",
+    "nombreOriginal": "barbell standing back wrist curl"
+  },
+  {
+    "externalId": "0105",
+    "nombreOriginal": "barbell standing bradford press"
+  },
+  {
+    "externalId": "1372",
+    "nombreOriginal": "barbell standing calf raise"
+  },
+  {
+    "externalId": "0106",
+    "nombreOriginal": "barbell standing close grip curl"
+  },
+  {
+    "externalId": "1456",
+    "nombreOriginal": "barbell standing close grip military press"
+  },
+  {
+    "externalId": "2414",
+    "nombreOriginal": "barbell standing concentration curl"
+  },
+  {
+    "externalId": "0107",
+    "nombreOriginal": "barbell standing front raise over head"
+  },
+  {
+    "externalId": "0108",
+    "nombreOriginal": "barbell standing leg calf raise"
+  },
+  {
+    "externalId": "0109",
+    "nombreOriginal": "barbell standing overhead triceps extension"
+  },
+  {
+    "externalId": "0110",
+    "nombreOriginal": "barbell standing reverse grip curl"
+  },
+  {
+    "externalId": "0111",
+    "nombreOriginal": "barbell standing rocking leg calf raise"
+  },
+  {
+    "externalId": "0112",
+    "nombreOriginal": "barbell standing twist"
+  },
+  {
+    "externalId": "1629",
+    "nombreOriginal": "barbell standing wide grip biceps curl"
+  },
+  {
+    "externalId": "1457",
+    "nombreOriginal": "barbell standing wide military press"
+  },
+  {
+    "externalId": "0113",
+    "nombreOriginal": "barbell standing wide-grip curl"
+  },
+  {
+    "externalId": "0114",
+    "nombreOriginal": "barbell step-up"
+  },
+  {
+    "externalId": "0115",
+    "nombreOriginal": "barbell stiff leg good morning"
+  },
+  {
+    "externalId": "0116",
+    "nombreOriginal": "barbell straight leg deadlift"
+  },
+  {
+    "externalId": "0117",
+    "nombreOriginal": "barbell sumo deadlift"
+  },
+  {
+    "externalId": "3305",
+    "nombreOriginal": "barbell thruster"
+  },
+  {
+    "externalId": "0120",
+    "nombreOriginal": "barbell upright row"
+  },
+  {
+    "externalId": "0119",
+    "nombreOriginal": "barbell upright row v. 2"
+  },
+  {
+    "externalId": "0121",
+    "nombreOriginal": "barbell upright row v. 3"
+  },
+  {
+    "externalId": "0122",
+    "nombreOriginal": "barbell wide bench press"
+  },
+  {
+    "externalId": "1258",
+    "nombreOriginal": "barbell wide reverse grip bench press"
+  },
+  {
+    "externalId": "0124",
+    "nombreOriginal": "barbell wide squat"
+  },
+  {
+    "externalId": "0123",
+    "nombreOriginal": "barbell wide-grip upright row"
+  },
+  {
+    "externalId": "0126",
+    "nombreOriginal": "barbell wrist curl"
+  },
+  {
+    "externalId": "0125",
+    "nombreOriginal": "barbell wrist curl v. 2"
+  },
+  {
+    "externalId": "0127",
+    "nombreOriginal": "barbell zercher squat"
+  },
+  {
+    "externalId": "3212",
+    "nombreOriginal": "basic toe touch (male)"
+  },
+  {
+    "externalId": "0128",
+    "nombreOriginal": "battling ropes"
+  },
+  {
+    "externalId": "3360",
+    "nombreOriginal": "bear crawl"
+  },
+  {
+    "externalId": "1259",
+    "nombreOriginal": "behind head chest stretch"
+  },
+  {
+    "externalId": "0129",
+    "nombreOriginal": "bench dip (knees bent)"
+  },
+  {
+    "externalId": "1399",
+    "nombreOriginal": "bench dip on floor"
+  },
+  {
+    "externalId": "0130",
+    "nombreOriginal": "bench hip extension"
+  },
+  {
+    "externalId": "3019",
+    "nombreOriginal": "bench pull-ups"
+  },
+  {
+    "externalId": "3639",
+    "nombreOriginal": "bent knee lying twist (male)"
+  },
+  {
+    "externalId": "1770",
+    "nombreOriginal": "biceps leg concentration curl"
+  },
+  {
+    "externalId": "0139",
+    "nombreOriginal": "biceps narrow pull-ups"
+  },
+  {
+    "externalId": "0140",
+    "nombreOriginal": "biceps pull-up"
+  },
+  {
+    "externalId": "0137",
+    "nombreOriginal": "body-up"
+  },
+  {
+    "externalId": "3543",
+    "nombreOriginal": "bodyweight drop jump squat"
+  },
+  {
+    "externalId": "3544",
+    "nombreOriginal": "bodyweight incline side plank"
+  },
+  {
+    "externalId": "1771",
+    "nombreOriginal": "bodyweight kneeling triceps extension"
+  },
+  {
+    "externalId": "1769",
+    "nombreOriginal": "bodyweight side lying biceps curl"
+  },
+  {
+    "externalId": "3168",
+    "nombreOriginal": "bodyweight squatting row"
+  },
+  {
+    "externalId": "3167",
+    "nombreOriginal": "bodyweight squatting row (with towel)"
+  },
+  {
+    "externalId": "1373",
+    "nombreOriginal": "bodyweight standing calf raise"
+  },
+  {
+    "externalId": "3156",
+    "nombreOriginal": "bodyweight standing close-grip one arm row"
+  },
+  {
+    "externalId": "3158",
+    "nombreOriginal": "bodyweight standing close-grip row"
+  },
+  {
+    "externalId": "3162",
+    "nombreOriginal": "bodyweight standing one arm row"
+  },
+  {
+    "externalId": "3161",
+    "nombreOriginal": "bodyweight standing one arm row (with towel)"
+  },
+  {
+    "externalId": "3166",
+    "nombreOriginal": "bodyweight standing row"
+  },
+  {
+    "externalId": "3165",
+    "nombreOriginal": "bodyweight standing row (with towel)"
+  },
+  {
+    "externalId": "0138",
+    "nombreOriginal": "bottoms-up"
+  },
+  {
+    "externalId": "1374",
+    "nombreOriginal": "box jump down with one leg stabilization"
+  },
+  {
+    "externalId": "2466",
+    "nombreOriginal": "bridge - mountain climber (cross body)"
+  },
+  {
+    "externalId": "1160",
+    "nombreOriginal": "burpee"
+  },
+  {
+    "externalId": "0870",
+    "nombreOriginal": "butt-ups"
+  },
+  {
+    "externalId": "1494",
+    "nombreOriginal": "butterfly yoga pose"
+  },
+  {
+    "externalId": "0148",
+    "nombreOriginal": "cable alternate shoulder press"
+  },
+  {
+    "externalId": "0149",
+    "nombreOriginal": "cable alternate triceps extension"
+  },
+  {
+    "externalId": "3235",
+    "nombreOriginal": "cable assisted inverse leg curl"
+  },
+  {
+    "externalId": "0150",
+    "nombreOriginal": "cable bar lateral pulldown"
+  },
+  {
+    "externalId": "0151",
+    "nombreOriginal": "cable bench press"
+  },
+  {
+    "externalId": "1630",
+    "nombreOriginal": "cable close grip curl"
+  },
+  {
+    "externalId": "1631",
+    "nombreOriginal": "cable concentration curl"
+  },
+  {
+    "externalId": "0152",
+    "nombreOriginal": "cable concentration extension (on knee)"
+  },
+  {
+    "externalId": "0153",
+    "nombreOriginal": "cable cross-over lateral pulldown"
+  },
+  {
+    "externalId": "0154",
+    "nombreOriginal": "cable cross-over revers fly"
+  },
+  {
+    "externalId": "0155",
+    "nombreOriginal": "cable cross-over variation"
+  },
+  {
+    "externalId": "0868",
+    "nombreOriginal": "cable curl"
+  },
+  {
+    "externalId": "0157",
+    "nombreOriginal": "cable deadlift"
+  },
+  {
+    "externalId": "0158",
+    "nombreOriginal": "cable decline fly"
+  },
+  {
+    "externalId": "1260",
+    "nombreOriginal": "cable decline one arm press"
+  },
+  {
+    "externalId": "1261",
+    "nombreOriginal": "cable decline press"
+  },
+  {
+    "externalId": "0159",
+    "nombreOriginal": "cable decline seated wide-grip row"
+  },
+  {
+    "externalId": "1632",
+    "nombreOriginal": "cable drag curl"
+  },
+  {
+    "externalId": "0160",
+    "nombreOriginal": "cable floor seated wide-grip row"
+  },
+  {
+    "externalId": "0161",
+    "nombreOriginal": "cable forward raise"
+  },
+  {
+    "externalId": "0162",
+    "nombreOriginal": "cable front raise"
+  },
+  {
+    "externalId": "0164",
+    "nombreOriginal": "cable front shoulder raise"
+  },
+  {
+    "externalId": "0165",
+    "nombreOriginal": "cable hammer curl (with rope)"
+  },
+  {
+    "externalId": "1722",
+    "nombreOriginal": "cable high pulley overhead tricep extension"
+  },
+  {
+    "externalId": "0167",
+    "nombreOriginal": "cable high row (kneeling)"
+  },
+  {
+    "externalId": "0168",
+    "nombreOriginal": "cable hip adduction"
+  },
+  {
+    "externalId": "0169",
+    "nombreOriginal": "cable incline bench press"
+  },
+  {
+    "externalId": "1318",
+    "nombreOriginal": "cable incline bench row"
+  },
+  {
+    "externalId": "0171",
+    "nombreOriginal": "cable incline fly"
+  },
+  {
+    "externalId": "0170",
+    "nombreOriginal": "cable incline fly (on stability ball)"
+  },
+  {
+    "externalId": "0172",
+    "nombreOriginal": "cable incline pushdown"
+  },
+  {
+    "externalId": "0173",
+    "nombreOriginal": "cable incline triceps extension"
+  },
+  {
+    "externalId": "0174",
+    "nombreOriginal": "cable judo flip"
+  },
+  {
+    "externalId": "0860",
+    "nombreOriginal": "cable kickback"
+  },
+  {
+    "externalId": "0175",
+    "nombreOriginal": "cable kneeling crunch"
+  },
+  {
+    "externalId": "3697",
+    "nombreOriginal": "cable kneeling rear delt row (with rope) (male)"
+  },
+  {
+    "externalId": "0176",
+    "nombreOriginal": "cable kneeling triceps extension"
+  },
+  {
+    "externalId": "2330",
+    "nombreOriginal": "cable lat pulldown full range of motion"
+  },
+  {
+    "externalId": "0177",
+    "nombreOriginal": "cable lateral pulldown (with rope attachment)"
+  },
+  {
+    "externalId": "2616",
+    "nombreOriginal": "cable lateral pulldown with v-bar"
+  },
+  {
+    "externalId": "0178",
+    "nombreOriginal": "cable lateral raise"
+  },
+  {
+    "externalId": "0179",
+    "nombreOriginal": "cable low fly"
+  },
+  {
+    "externalId": "0180",
+    "nombreOriginal": "cable low seated row"
+  },
+  {
+    "externalId": "1634",
+    "nombreOriginal": "cable lying bicep curl"
+  },
+  {
+    "externalId": "0182",
+    "nombreOriginal": "cable lying close-grip curl"
+  },
+  {
+    "externalId": "0184",
+    "nombreOriginal": "cable lying extension pullover (with rope attachment)"
+  },
+  {
+    "externalId": "0185",
+    "nombreOriginal": "cable lying fly"
+  },
+  {
+    "externalId": "0186",
+    "nombreOriginal": "cable lying triceps extension v. 2"
+  },
+  {
+    "externalId": "0188",
+    "nombreOriginal": "cable middle fly"
+  },
+  {
+    "externalId": "0189",
+    "nombreOriginal": "cable one arm bent over row"
+  },
+  {
+    "externalId": "0190",
+    "nombreOriginal": "cable one arm curl"
+  },
+  {
+    "externalId": "1262",
+    "nombreOriginal": "cable one arm decline chest fly"
+  },
+  {
+    "externalId": "1263",
+    "nombreOriginal": "cable one arm fly on exercise ball"
+  },
+  {
+    "externalId": "1264",
+    "nombreOriginal": "cable one arm incline fly on exercise ball"
+  },
+  {
+    "externalId": "1265",
+    "nombreOriginal": "cable one arm incline press"
+  },
+  {
+    "externalId": "1266",
+    "nombreOriginal": "cable one arm incline press on exercise ball"
+  },
+  {
+    "externalId": "0191",
+    "nombreOriginal": "cable one arm lateral bent-over"
+  },
+  {
+    "externalId": "0192",
+    "nombreOriginal": "cable one arm lateral raise"
+  },
+  {
+    "externalId": "1633",
+    "nombreOriginal": "cable one arm preacher curl"
+  },
+  {
+    "externalId": "1267",
+    "nombreOriginal": "cable one arm press on exercise ball"
+  },
+  {
+    "externalId": "3563",
+    "nombreOriginal": "cable one arm pulldown"
+  },
+  {
+    "externalId": "1635",
+    "nombreOriginal": "cable one arm reverse preacher curl"
+  },
+  {
+    "externalId": "0193",
+    "nombreOriginal": "cable one arm straight back high row (kneeling)"
+  },
+  {
+    "externalId": "1723",
+    "nombreOriginal": "cable one arm tricep pushdown"
+  },
+  {
+    "externalId": "1636",
+    "nombreOriginal": "cable overhead curl"
+  },
+  {
+    "externalId": "1637",
+    "nombreOriginal": "cable overhead curl on exercise ball"
+  },
+  {
+    "externalId": "0194",
+    "nombreOriginal": "cable overhead triceps extension (rope attachment)"
+  },
+  {
+    "externalId": "1319",
+    "nombreOriginal": "cable palm rotational row"
+  },
+  {
+    "externalId": "0195",
+    "nombreOriginal": "cable preacher curl"
+  },
+  {
+    "externalId": "1268",
+    "nombreOriginal": "cable press on exercise ball"
+  },
+  {
+    "externalId": "0196",
+    "nombreOriginal": "cable pull through (with rope)"
+  },
+  {
+    "externalId": "0198",
+    "nombreOriginal": "cable pulldown"
+  },
+  {
+    "externalId": "0197",
+    "nombreOriginal": "cable pulldown (pro lat bar)"
+  },
+  {
+    "externalId": "1638",
+    "nombreOriginal": "cable pulldown bicep curl"
+  },
+  {
+    "externalId": "0201",
+    "nombreOriginal": "cable pushdown"
+  },
+  {
+    "externalId": "0199",
+    "nombreOriginal": "cable pushdown (straight arm) v. 2"
+  },
+  {
+    "externalId": "0200",
+    "nombreOriginal": "cable pushdown (with rope attachment)"
+  },
+  {
+    "externalId": "0202",
+    "nombreOriginal": "cable rear delt row (stirrups)"
+  },
+  {
+    "externalId": "0203",
+    "nombreOriginal": "cable rear delt row (with rope)"
+  },
+  {
+    "externalId": "0204",
+    "nombreOriginal": "cable rear drive"
+  },
+  {
+    "externalId": "0205",
+    "nombreOriginal": "cable rear pulldown"
+  },
+  {
+    "externalId": "0873",
+    "nombreOriginal": "cable reverse crunch"
+  },
+  {
+    "externalId": "0206",
+    "nombreOriginal": "cable reverse curl"
+  },
+  {
+    "externalId": "2406",
+    "nombreOriginal": "cable reverse grip triceps pushdown (sz-bar) (with arm blaster)"
+  },
+  {
+    "externalId": "1413",
+    "nombreOriginal": "cable reverse one arm curl"
+  },
+  {
+    "externalId": "0209",
+    "nombreOriginal": "cable reverse preacher curl"
+  },
+  {
+    "externalId": "0210",
+    "nombreOriginal": "cable reverse wrist curl"
+  },
+  {
+    "externalId": "0207",
+    "nombreOriginal": "cable reverse-grip pushdown"
+  },
+  {
+    "externalId": "0208",
+    "nombreOriginal": "cable reverse-grip straight back seated high row"
+  },
+  {
+    "externalId": "1320",
+    "nombreOriginal": "cable rope crossover seated row"
+  },
+  {
+    "externalId": "1321",
+    "nombreOriginal": "cable rope elevated seated row"
+  },
+  {
+    "externalId": "1322",
+    "nombreOriginal": "cable rope extension incline bench row"
+  },
+  {
+    "externalId": "1639",
+    "nombreOriginal": "cable rope hammer preacher curl"
+  },
+  {
+    "externalId": "1724",
+    "nombreOriginal": "cable rope high pulley overhead tricep extension"
+  },
+  {
+    "externalId": "1725",
+    "nombreOriginal": "cable rope incline tricep extension"
+  },
+  {
+    "externalId": "1726",
+    "nombreOriginal": "cable rope lying on floor tricep extension"
+  },
+  {
+    "externalId": "1640",
+    "nombreOriginal": "cable rope one arm hammer preacher curl"
+  },
+  {
+    "externalId": "1323",
+    "nombreOriginal": "cable rope seated row"
+  },
+  {
+    "externalId": "0211",
+    "nombreOriginal": "cable russian twists (on stability ball)"
+  },
+  {
+    "externalId": "2144",
+    "nombreOriginal": "cable seated chest press"
+  },
+  {
+    "externalId": "0212",
+    "nombreOriginal": "cable seated crunch"
+  },
+  {
+    "externalId": "1641",
+    "nombreOriginal": "cable seated curl"
+  },
+  {
+    "externalId": "0213",
+    "nombreOriginal": "cable seated high row (v-bar)"
+  },
+  {
+    "externalId": "0214",
+    "nombreOriginal": "cable seated one arm alternate row"
+  },
+  {
+    "externalId": "1642",
+    "nombreOriginal": "cable seated one arm concentration curl"
+  },
+  {
+    "externalId": "1643",
+    "nombreOriginal": "cable seated overhead curl"
+  },
+  {
+    "externalId": "0215",
+    "nombreOriginal": "cable seated rear lateral raise"
+  },
+  {
+    "externalId": "0861",
+    "nombreOriginal": "cable seated row"
+  },
+  {
+    "externalId": "0216",
+    "nombreOriginal": "cable seated shoulder internal rotation"
+  },
+  {
+    "externalId": "2399",
+    "nombreOriginal": "cable seated twist"
+  },
+  {
+    "externalId": "0218",
+    "nombreOriginal": "cable seated wide-grip row"
+  },
+  {
+    "externalId": "0219",
+    "nombreOriginal": "cable shoulder press"
+  },
+  {
+    "externalId": "0220",
+    "nombreOriginal": "cable shrug"
+  },
+  {
+    "externalId": "0222",
+    "nombreOriginal": "cable side bend"
+  },
+  {
+    "externalId": "0221",
+    "nombreOriginal": "cable side bend crunch (bosu ball)"
+  },
+  {
+    "externalId": "0223",
+    "nombreOriginal": "cable side crunch"
+  },
+  {
+    "externalId": "1717",
+    "nombreOriginal": "cable squat row (with rope attachment)"
+  },
+  {
+    "externalId": "1644",
+    "nombreOriginal": "cable squatting curl"
+  },
+  {
+    "externalId": "0224",
+    "nombreOriginal": "cable standing back wrist curl"
+  },
+  {
+    "externalId": "1375",
+    "nombreOriginal": "cable standing calf raise"
+  },
+  {
+    "externalId": "0225",
+    "nombreOriginal": "cable standing cross-over high reverse fly"
+  },
+  {
+    "externalId": "0226",
+    "nombreOriginal": "cable standing crunch"
+  },
+  {
+    "externalId": "0874",
+    "nombreOriginal": "cable standing crunch (with rope attachment)"
+  },
+  {
+    "externalId": "0227",
+    "nombreOriginal": "cable standing fly"
+  },
+  {
+    "externalId": "0228",
+    "nombreOriginal": "cable standing hip extension"
+  },
+  {
+    "externalId": "0229",
+    "nombreOriginal": "cable standing inner curl"
+  },
+  {
+    "externalId": "0230",
+    "nombreOriginal": "cable standing lift"
+  },
+  {
+    "externalId": "0231",
+    "nombreOriginal": "cable standing one arm triceps extension"
+  },
+  {
+    "externalId": "1376",
+    "nombreOriginal": "cable standing one leg calf raise"
+  },
+  {
+    "externalId": "0232",
+    "nombreOriginal": "cable standing pulldown (with rope)"
+  },
+  {
+    "externalId": "0233",
+    "nombreOriginal": "cable standing rear delt row (with rope)"
+  },
+  {
+    "externalId": "1727",
+    "nombreOriginal": "cable standing reverse grip one arm overhead tricep extension"
+  },
+  {
+    "externalId": "0234",
+    "nombreOriginal": "cable standing row (v-bar)"
+  },
+  {
+    "externalId": "0235",
+    "nombreOriginal": "cable standing shoulder external rotation"
+  },
+  {
+    "externalId": "0236",
+    "nombreOriginal": "cable standing twist row (v-bar)"
+  },
+  {
+    "externalId": "1269",
+    "nombreOriginal": "cable standing up straight crossovers"
+  },
+  {
+    "externalId": "0238",
+    "nombreOriginal": "cable straight arm pulldown"
+  },
+  {
+    "externalId": "0237",
+    "nombreOriginal": "cable straight arm pulldown (with rope)"
+  },
+  {
+    "externalId": "0239",
+    "nombreOriginal": "cable straight back seated row"
+  },
+  {
+    "externalId": "0240",
+    "nombreOriginal": "cable supine reverse fly"
+  },
+  {
+    "externalId": "2464",
+    "nombreOriginal": "cable thibaudeau kayak row"
+  },
+  {
+    "externalId": "0241",
+    "nombreOriginal": "cable triceps pushdown (v-bar)"
+  },
+  {
+    "externalId": "2405",
+    "nombreOriginal": "cable triceps pushdown (v-bar) (with arm blaster)"
+  },
+  {
+    "externalId": "0242",
+    "nombreOriginal": "cable tuck reverse crunch"
+  },
+  {
+    "externalId": "0243",
+    "nombreOriginal": "cable twist"
+  },
+  {
+    "externalId": "0862",
+    "nombreOriginal": "cable twist (up-down)"
+  },
+  {
+    "externalId": "0244",
+    "nombreOriginal": "cable twisting pull"
+  },
+  {
+    "externalId": "1645",
+    "nombreOriginal": "cable two arm curl on incline bench"
+  },
+  {
+    "externalId": "1728",
+    "nombreOriginal": "cable two arm tricep kickback"
+  },
+  {
+    "externalId": "0245",
+    "nombreOriginal": "cable underhand pulldown"
+  },
+  {
+    "externalId": "1270",
+    "nombreOriginal": "cable upper chest crossovers"
+  },
+  {
+    "externalId": "1324",
+    "nombreOriginal": "cable upper row"
+  },
+  {
+    "externalId": "0246",
+    "nombreOriginal": "cable upright row"
+  },
+  {
+    "externalId": "1325",
+    "nombreOriginal": "cable wide grip rear pulldown behind neck"
+  },
+  {
+    "externalId": "0247",
+    "nombreOriginal": "cable wrist curl"
+  },
+  {
+    "externalId": "1407",
+    "nombreOriginal": "calf push stretch with hands against wall"
+  },
+  {
+    "externalId": "1377",
+    "nombreOriginal": "calf stretch with hands against wall"
+  },
+  {
+    "externalId": "1378",
+    "nombreOriginal": "calf stretch with rope"
+  },
+  {
+    "externalId": "0248",
+    "nombreOriginal": "cambered bar lying row"
+  },
+  {
+    "externalId": "2963",
+    "nombreOriginal": "captains chair straight leg raise"
+  },
+  {
+    "externalId": "1548",
+    "nombreOriginal": "chair leg extended stretch"
+  },
+  {
+    "externalId": "1271",
+    "nombreOriginal": "chest and front of shoulder stretch"
+  },
+  {
+    "externalId": "0251",
+    "nombreOriginal": "chest dip"
+  },
+  {
+    "externalId": "1430",
+    "nombreOriginal": "chest dip (on dip-pull-up cage)"
+  },
+  {
+    "externalId": "2462",
+    "nombreOriginal": "chest dip on straight bar"
+  },
+  {
+    "externalId": "1272",
+    "nombreOriginal": "chest stretch with exercise ball"
+  },
+  {
+    "externalId": "3216",
+    "nombreOriginal": "chest tap push-up (male)"
+  },
+  {
+    "externalId": "1326",
+    "nombreOriginal": "chin-up"
+  },
+  {
+    "externalId": "0253",
+    "nombreOriginal": "chin-ups (narrow parallel grip)"
+  },
+  {
+    "externalId": "0257",
+    "nombreOriginal": "circles knee stretch"
+  },
+  {
+    "externalId": "1273",
+    "nombreOriginal": "clap push up"
+  },
+  {
+    "externalId": "0258",
+    "nombreOriginal": "clock push-up"
+  },
+  {
+    "externalId": "1327",
+    "nombreOriginal": "close grip chin-up"
+  },
+  {
+    "externalId": "0259",
+    "nombreOriginal": "close-grip push-up"
+  },
+  {
+    "externalId": "2398",
+    "nombreOriginal": "close-grip push-up (on knees)"
+  },
+  {
+    "externalId": "0260",
+    "nombreOriginal": "cocoons"
+  },
+  {
+    "externalId": "1468",
+    "nombreOriginal": "crab twist toe touch"
+  },
+  {
+    "externalId": "0262",
+    "nombreOriginal": "cross body crunch"
+  },
+  {
+    "externalId": "0267",
+    "nombreOriginal": "crunch (hands overhead)"
+  },
+  {
+    "externalId": "0271",
+    "nombreOriginal": "crunch (on stability ball)"
+  },
+  {
+    "externalId": "0272",
+    "nombreOriginal": "crunch (on stability ball, arms straight)"
+  },
+  {
+    "externalId": "0274",
+    "nombreOriginal": "crunch floor"
+  },
+  {
+    "externalId": "3016",
+    "nombreOriginal": "curl-up"
+  },
+  {
+    "externalId": "3769",
+    "nombreOriginal": "curtsey squat"
+  },
+  {
+    "externalId": "2331",
+    "nombreOriginal": "cycle cross trainer"
+  },
+  {
+    "externalId": "0276",
+    "nombreOriginal": "dead bug"
+  },
+  {
+    "externalId": "0277",
+    "nombreOriginal": "decline crunch"
+  },
+  {
+    "externalId": "0279",
+    "nombreOriginal": "decline push-up"
+  },
+  {
+    "externalId": "0282",
+    "nombreOriginal": "decline sit-up"
+  },
+  {
+    "externalId": "1274",
+    "nombreOriginal": "deep push up"
+  },
+  {
+    "externalId": "0283",
+    "nombreOriginal": "diamond push-up"
+  },
+  {
+    "externalId": "0284",
+    "nombreOriginal": "donkey calf raise"
+  },
+  {
+    "externalId": "1275",
+    "nombreOriginal": "drop push up"
+  },
+  {
+    "externalId": "0285",
+    "nombreOriginal": "dumbbell alternate biceps curl"
+  },
+  {
+    "externalId": "2403",
+    "nombreOriginal": "dumbbell alternate biceps curl (with arm blaster)"
+  },
+  {
+    "externalId": "1646",
+    "nombreOriginal": "dumbbell alternate hammer preacher curl"
+  },
+  {
+    "externalId": "1647",
+    "nombreOriginal": "dumbbell alternate preacher curl"
+  },
+  {
+    "externalId": "1648",
+    "nombreOriginal": "dumbbell alternate seated hammer curl"
+  },
+  {
+    "externalId": "0286",
+    "nombreOriginal": "dumbbell alternate side press"
+  },
+  {
+    "externalId": "1649",
+    "nombreOriginal": "dumbbell alternating bicep curl with leg raised on exercise ball"
+  },
+  {
+    "externalId": "1650",
+    "nombreOriginal": "dumbbell alternating seated bicep curl on exercise ball"
+  },
+  {
+    "externalId": "2137",
+    "nombreOriginal": "dumbbell arnold press"
+  },
+  {
+    "externalId": "0287",
+    "nombreOriginal": "dumbbell arnold press v. 2"
+  },
+  {
+    "externalId": "0288",
+    "nombreOriginal": "dumbbell around pullover"
+  },
+  {
+    "externalId": "0289",
+    "nombreOriginal": "dumbbell bench press"
+  },
+  {
+    "externalId": "0290",
+    "nombreOriginal": "dumbbell bench seated press"
+  },
+  {
+    "externalId": "0291",
+    "nombreOriginal": "dumbbell bench squat"
+  },
+  {
+    "externalId": "0293",
+    "nombreOriginal": "dumbbell bent over row"
+  },
+  {
+    "externalId": "1651",
+    "nombreOriginal": "dumbbell bicep curl lunge with bowling motion"
+  },
+  {
+    "externalId": "1652",
+    "nombreOriginal": "dumbbell bicep curl on exercise ball with leg raised"
+  },
+  {
+    "externalId": "1653",
+    "nombreOriginal": "dumbbell bicep curl with stork stance"
+  },
+  {
+    "externalId": "0294",
+    "nombreOriginal": "dumbbell biceps curl"
+  },
+  {
+    "externalId": "2401",
+    "nombreOriginal": "dumbbell biceps curl (with arm blaster)"
+  },
+  {
+    "externalId": "1654",
+    "nombreOriginal": "dumbbell biceps curl reverse"
+  },
+  {
+    "externalId": "1655",
+    "nombreOriginal": "dumbbell biceps curl squat"
+  },
+  {
+    "externalId": "1656",
+    "nombreOriginal": "dumbbell biceps curl v sit on bosu ball"
+  },
+  {
+    "externalId": "1201",
+    "nombreOriginal": "dumbbell burpee"
+  },
+  {
+    "externalId": "0295",
+    "nombreOriginal": "dumbbell clean"
+  },
+  {
+    "externalId": "1731",
+    "nombreOriginal": "dumbbell close grip press"
+  },
+  {
+    "externalId": "0296",
+    "nombreOriginal": "dumbbell close-grip press"
+  },
+  {
+    "externalId": "0297",
+    "nombreOriginal": "dumbbell concentration curl"
+  },
+  {
+    "externalId": "3635",
+    "nombreOriginal": "dumbbell contralateral forward lunge"
+  },
+  {
+    "externalId": "0298",
+    "nombreOriginal": "dumbbell cross body hammer curl"
+  },
+  {
+    "externalId": "1657",
+    "nombreOriginal": "dumbbell cross body hammer curl v. 2"
+  },
+  {
+    "externalId": "0299",
+    "nombreOriginal": "dumbbell cuban press"
+  },
+  {
+    "externalId": "2136",
+    "nombreOriginal": "dumbbell cuban press v. 2"
+  },
+  {
+    "externalId": "0300",
+    "nombreOriginal": "dumbbell deadlift"
+  },
+  {
+    "externalId": "0301",
+    "nombreOriginal": "dumbbell decline bench press"
+  },
+  {
+    "externalId": "0302",
+    "nombreOriginal": "dumbbell decline fly"
+  },
+  {
+    "externalId": "0303",
+    "nombreOriginal": "dumbbell decline hammer press"
+  },
+  {
+    "externalId": "1276",
+    "nombreOriginal": "dumbbell decline one arm fly"
+  },
+  {
+    "externalId": "1617",
+    "nombreOriginal": "dumbbell decline one arm hammer press"
+  },
+  {
+    "externalId": "0305",
+    "nombreOriginal": "dumbbell decline shrug"
+  },
+  {
+    "externalId": "0304",
+    "nombreOriginal": "dumbbell decline shrug v. 2"
+  },
+  {
+    "externalId": "0306",
+    "nombreOriginal": "dumbbell decline triceps extension"
+  },
+  {
+    "externalId": "0307",
+    "nombreOriginal": "dumbbell decline twist fly"
+  },
+  {
+    "externalId": "1437",
+    "nombreOriginal": "dumbbell finger curls"
+  },
+  {
+    "externalId": "0308",
+    "nombreOriginal": "dumbbell fly"
+  },
+  {
+    "externalId": "1277",
+    "nombreOriginal": "dumbbell fly on exercise ball"
+  },
+  {
+    "externalId": "1732",
+    "nombreOriginal": "dumbbell forward lunge triceps extension"
+  },
+  {
+    "externalId": "0310",
+    "nombreOriginal": "dumbbell front raise"
+  },
+  {
+    "externalId": "0309",
+    "nombreOriginal": "dumbbell front raise v. 2"
+  },
+  {
+    "externalId": "0311",
+    "nombreOriginal": "dumbbell full can lateral raise"
+  },
+  {
+    "externalId": "1760",
+    "nombreOriginal": "dumbbell goblet squat"
+  },
+  {
+    "externalId": "0313",
+    "nombreOriginal": "dumbbell hammer curl"
+  },
+  {
+    "externalId": "1659",
+    "nombreOriginal": "dumbbell hammer curl on exercise ball"
+  },
+  {
+    "externalId": "0312",
+    "nombreOriginal": "dumbbell hammer curl v. 2"
+  },
+  {
+    "externalId": "2402",
+    "nombreOriginal": "dumbbell hammer curls (with arm blaster)"
+  },
+  {
+    "externalId": "1664",
+    "nombreOriginal": "dumbbell high curl"
+  },
+  {
+    "externalId": "3545",
+    "nombreOriginal": "dumbbell incline alternate press"
+  },
+  {
+    "externalId": "0314",
+    "nombreOriginal": "dumbbell incline bench press"
+  },
+  {
+    "externalId": "0315",
+    "nombreOriginal": "dumbbell incline biceps curl"
+  },
+  {
+    "externalId": "0316",
+    "nombreOriginal": "dumbbell incline breeding"
+  },
+  {
+    "externalId": "0318",
+    "nombreOriginal": "dumbbell incline curl"
+  },
+  {
+    "externalId": "0317",
+    "nombreOriginal": "dumbbell incline curl v. 2"
+  },
+  {
+    "externalId": "0319",
+    "nombreOriginal": "dumbbell incline fly"
+  },
+  {
+    "externalId": "1278",
+    "nombreOriginal": "dumbbell incline fly on exercise ball"
+  },
+  {
+    "externalId": "0320",
+    "nombreOriginal": "dumbbell incline hammer curl"
+  },
+  {
+    "externalId": "0321",
+    "nombreOriginal": "dumbbell incline hammer press"
+  },
+  {
+    "externalId": "1618",
+    "nombreOriginal": "dumbbell incline hammer press on exercise ball"
+  },
+  {
+    "externalId": "0322",
+    "nombreOriginal": "dumbbell incline inner biceps curl"
+  },
+  {
+    "externalId": "1279",
+    "nombreOriginal": "dumbbell incline one arm fly"
+  },
+  {
+    "externalId": "1280",
+    "nombreOriginal": "dumbbell incline one arm fly on exercise ball"
+  },
+  {
+    "externalId": "1619",
+    "nombreOriginal": "dumbbell incline one arm hammer press"
+  },
+  {
+    "externalId": "1620",
+    "nombreOriginal": "dumbbell incline one arm hammer press on exercise ball"
+  },
+  {
+    "externalId": "0323",
+    "nombreOriginal": "dumbbell incline one arm lateral raise"
+  },
+  {
+    "externalId": "1281",
+    "nombreOriginal": "dumbbell incline one arm press"
+  },
+  {
+    "externalId": "1282",
+    "nombreOriginal": "dumbbell incline one arm press on exercise ball"
+  },
+  {
+    "externalId": "0324",
+    "nombreOriginal": "dumbbell incline palm-in press"
+  },
+  {
+    "externalId": "1283",
+    "nombreOriginal": "dumbbell incline press on exercise ball"
+  },
+  {
+    "externalId": "0325",
+    "nombreOriginal": "dumbbell incline raise"
+  },
+  {
+    "externalId": "0326",
+    "nombreOriginal": "dumbbell incline rear lateral raise"
+  },
+  {
+    "externalId": "0327",
+    "nombreOriginal": "dumbbell incline row"
+  },
+  {
+    "externalId": "0328",
+    "nombreOriginal": "dumbbell incline shoulder raise"
+  },
+  {
+    "externalId": "0329",
+    "nombreOriginal": "dumbbell incline shrug"
+  },
+  {
+    "externalId": "3542",
+    "nombreOriginal": "dumbbell incline t-raise"
+  },
+  {
+    "externalId": "0330",
+    "nombreOriginal": "dumbbell incline triceps extension"
+  },
+  {
+    "externalId": "0331",
+    "nombreOriginal": "dumbbell incline twisted flyes"
+  },
+  {
+    "externalId": "1733",
+    "nombreOriginal": "dumbbell incline two arm extension"
+  },
+  {
+    "externalId": "3541",
+    "nombreOriginal": "dumbbell incline y-raise"
+  },
+  {
+    "externalId": "0332",
+    "nombreOriginal": "dumbbell iron cross"
+  },
+  {
+    "externalId": "0333",
+    "nombreOriginal": "dumbbell kickback"
+  },
+  {
+    "externalId": "1734",
+    "nombreOriginal": "dumbbell kickbacks on exercise ball"
+  },
+  {
+    "externalId": "1660",
+    "nombreOriginal": "dumbbell kneeling bicep curl exercise ball"
+  },
+  {
+    "externalId": "0334",
+    "nombreOriginal": "dumbbell lateral raise"
+  },
+  {
+    "externalId": "0335",
+    "nombreOriginal": "dumbbell lateral to front raise"
+  },
+  {
+    "externalId": "0336",
+    "nombreOriginal": "dumbbell lunge"
+  },
+  {
+    "externalId": "1658",
+    "nombreOriginal": "dumbbell lunge with bicep curl"
+  },
+  {
+    "externalId": "0337",
+    "nombreOriginal": "dumbbell lying extension (across face)"
+  },
+  {
+    "externalId": "1729",
+    "nombreOriginal": "dumbbell lying alternate extension"
+  },
+  {
+    "externalId": "0338",
+    "nombreOriginal": "dumbbell lying elbow press"
+  },
+  {
+    "externalId": "0863",
+    "nombreOriginal": "dumbbell lying external shoulder rotation"
+  },
+  {
+    "externalId": "0339",
+    "nombreOriginal": "dumbbell lying femoral"
+  },
+  {
+    "externalId": "0340",
+    "nombreOriginal": "dumbbell lying hammer press"
+  },
+  {
+    "externalId": "2470",
+    "nombreOriginal": "dumbbell lying on floor rear delt raise"
+  },
+  {
+    "externalId": "0341",
+    "nombreOriginal": "dumbbell lying one arm deltoid rear"
+  },
+  {
+    "externalId": "0343",
+    "nombreOriginal": "dumbbell lying one arm press"
+  },
+  {
+    "externalId": "0342",
+    "nombreOriginal": "dumbbell lying one arm press v. 2"
+  },
+  {
+    "externalId": "0344",
+    "nombreOriginal": "dumbbell lying one arm pronated triceps extension"
+  },
+  {
+    "externalId": "0345",
+    "nombreOriginal": "dumbbell lying one arm rear lateral raise"
+  },
+  {
+    "externalId": "0346",
+    "nombreOriginal": "dumbbell lying one arm supinated triceps extension"
+  },
+  {
+    "externalId": "0347",
+    "nombreOriginal": "dumbbell lying pronation"
+  },
+  {
+    "externalId": "2705",
+    "nombreOriginal": "dumbbell lying pronation on floor"
+  },
+  {
+    "externalId": "1284",
+    "nombreOriginal": "dumbbell lying pullover on exercise ball"
+  },
+  {
+    "externalId": "1328",
+    "nombreOriginal": "dumbbell lying rear delt row"
+  },
+  {
+    "externalId": "0348",
+    "nombreOriginal": "dumbbell lying rear lateral raise"
+  },
+  {
+    "externalId": "1735",
+    "nombreOriginal": "dumbbell lying single extension"
+  },
+  {
+    "externalId": "0349",
+    "nombreOriginal": "dumbbell lying supination"
+  },
+  {
+    "externalId": "2706",
+    "nombreOriginal": "dumbbell lying supination on floor"
+  },
+  {
+    "externalId": "1661",
+    "nombreOriginal": "dumbbell lying supine biceps curl"
+  },
+  {
+    "externalId": "0350",
+    "nombreOriginal": "dumbbell lying supine curl"
+  },
+  {
+    "externalId": "0351",
+    "nombreOriginal": "dumbbell lying triceps extension"
+  },
+  {
+    "externalId": "1662",
+    "nombreOriginal": "dumbbell lying wide curl"
+  },
+  {
+    "externalId": "0352",
+    "nombreOriginal": "dumbbell neutral grip bench press"
+  },
+  {
+    "externalId": "1285",
+    "nombreOriginal": "dumbbell one arm bench fly"
+  },
+  {
+    "externalId": "0292",
+    "nombreOriginal": "dumbbell one arm bent-over row"
+  },
+  {
+    "externalId": "1286",
+    "nombreOriginal": "dumbbell one arm chest fly on exercise ball"
+  },
+  {
+    "externalId": "0353",
+    "nombreOriginal": "dumbbell one arm concentration curl (on stability ball)"
+  },
+  {
+    "externalId": "1287",
+    "nombreOriginal": "dumbbell one arm decline chest press"
+  },
+  {
+    "externalId": "1288",
+    "nombreOriginal": "dumbbell one arm fly on exercise ball"
+  },
+  {
+    "externalId": "1736",
+    "nombreOriginal": "dumbbell one arm french press on exercise ball"
+  },
+  {
+    "externalId": "1663",
+    "nombreOriginal": "dumbbell one arm hammer preacher curl"
+  },
+  {
+    "externalId": "1621",
+    "nombreOriginal": "dumbbell one arm hammer press on exercise ball"
+  },
+  {
+    "externalId": "1289",
+    "nombreOriginal": "dumbbell one arm incline chest press"
+  },
+  {
+    "externalId": "0354",
+    "nombreOriginal": "dumbbell one arm kickback"
+  },
+  {
+    "externalId": "0355",
+    "nombreOriginal": "dumbbell one arm lateral raise"
+  },
+  {
+    "externalId": "0356",
+    "nombreOriginal": "dumbbell one arm lateral raise with support"
+  },
+  {
+    "externalId": "1290",
+    "nombreOriginal": "dumbbell one arm press on exercise ball"
+  },
+  {
+    "externalId": "1665",
+    "nombreOriginal": "dumbbell one arm prone curl"
+  },
+  {
+    "externalId": "1666",
+    "nombreOriginal": "dumbbell one arm prone hammer curl"
+  },
+  {
+    "externalId": "1291",
+    "nombreOriginal": "dumbbell one arm pullover on exercise ball"
+  },
+  {
+    "externalId": "0358",
+    "nombreOriginal": "dumbbell one arm reverse wrist curl"
+  },
+  {
+    "externalId": "0359",
+    "nombreOriginal": "dumbbell one arm reverse fly (with support)"
+  },
+  {
+    "externalId": "1622",
+    "nombreOriginal": "dumbbell one arm reverse grip press"
+  },
+  {
+    "externalId": "1414",
+    "nombreOriginal": "dumbbell one arm reverse preacher curl"
+  },
+  {
+    "externalId": "1667",
+    "nombreOriginal": "dumbbell one arm reverse spider curl"
+  },
+  {
+    "externalId": "1668",
+    "nombreOriginal": "dumbbell one arm seated bicep curl on exercise ball"
+  },
+  {
+    "externalId": "1669",
+    "nombreOriginal": "dumbbell one arm seated hammer curl"
+  },
+  {
+    "externalId": "1415",
+    "nombreOriginal": "dumbbell one arm seated neutral wrist curl"
+  },
+  {
+    "externalId": "0361",
+    "nombreOriginal": "dumbbell one arm shoulder press"
+  },
+  {
+    "externalId": "0360",
+    "nombreOriginal": "dumbbell one arm shoulder press v. 2"
+  },
+  {
+    "externalId": "3888",
+    "nombreOriginal": "dumbbell one arm snatch"
+  },
+  {
+    "externalId": "1670",
+    "nombreOriginal": "dumbbell one arm standing curl"
+  },
+  {
+    "externalId": "1671",
+    "nombreOriginal": "dumbbell one arm standing hammer curl"
+  },
+  {
+    "externalId": "0362",
+    "nombreOriginal": "dumbbell one arm triceps extension (on bench)"
+  },
+  {
+    "externalId": "0363",
+    "nombreOriginal": "dumbbell one arm upright row"
+  },
+  {
+    "externalId": "0364",
+    "nombreOriginal": "dumbbell one arm wrist curl"
+  },
+  {
+    "externalId": "1672",
+    "nombreOriginal": "dumbbell one arm zottman preacher curl"
+  },
+  {
+    "externalId": "1292",
+    "nombreOriginal": "dumbbell one leg fly on exercise ball"
+  },
+  {
+    "externalId": "0365",
+    "nombreOriginal": "dumbbell over bench neutral wrist curl"
+  },
+  {
+    "externalId": "0366",
+    "nombreOriginal": "dumbbell over bench one arm neutral wrist curl"
+  },
+  {
+    "externalId": "1441",
+    "nombreOriginal": "dumbbell over bench one arm reverse wrist curl"
+  },
+  {
+    "externalId": "0367",
+    "nombreOriginal": "dumbbell over bench one arm wrist curl"
+  },
+  {
+    "externalId": "0368",
+    "nombreOriginal": "dumbbell over bench revers wrist curl"
+  },
+  {
+    "externalId": "0369",
+    "nombreOriginal": "dumbbell over bench wrist curl"
+  },
+  {
+    "externalId": "1329",
+    "nombreOriginal": "dumbbell palm rotational bent over row"
+  },
+  {
+    "externalId": "1623",
+    "nombreOriginal": "dumbbell palms in incline bench press"
+  },
+  {
+    "externalId": "0370",
+    "nombreOriginal": "dumbbell peacher hammer curl"
+  },
+  {
+    "externalId": "0371",
+    "nombreOriginal": "dumbbell plyo squat"
+  },
+  {
+    "externalId": "0372",
+    "nombreOriginal": "dumbbell preacher curl"
+  },
+  {
+    "externalId": "1673",
+    "nombreOriginal": "dumbbell preacher curl over exercise ball"
+  },
+  {
+    "externalId": "1293",
+    "nombreOriginal": "dumbbell press on exercise ball"
+  },
+  {
+    "externalId": "0373",
+    "nombreOriginal": "dumbbell pronate-grip triceps extension"
+  },
+  {
+    "externalId": "0374",
+    "nombreOriginal": "dumbbell prone incline curl"
+  },
+  {
+    "externalId": "1674",
+    "nombreOriginal": "dumbbell prone incline hammer curl"
+  },
+  {
+    "externalId": "0375",
+    "nombreOriginal": "dumbbell pullover"
+  },
+  {
+    "externalId": "1294",
+    "nombreOriginal": "dumbbell pullover hip extension on exercise ball"
+  },
+  {
+    "externalId": "1295",
+    "nombreOriginal": "dumbbell pullover on exercise ball"
+  },
+  {
+    "externalId": "1700",
+    "nombreOriginal": "dumbbell push press"
+  },
+  {
+    "externalId": "0376",
+    "nombreOriginal": "dumbbell raise"
+  },
+  {
+    "externalId": "2292",
+    "nombreOriginal": "dumbbell rear delt raise"
+  },
+  {
+    "externalId": "0377",
+    "nombreOriginal": "dumbbell rear delt row_shoulder"
+  },
+  {
+    "externalId": "0378",
+    "nombreOriginal": "dumbbell rear fly"
+  },
+  {
+    "externalId": "0380",
+    "nombreOriginal": "dumbbell rear lateral raise"
+  },
+  {
+    "externalId": "0379",
+    "nombreOriginal": "dumbbell rear lateral raise (support head)"
+  },
+  {
+    "externalId": "0381",
+    "nombreOriginal": "dumbbell rear lunge"
+  },
+  {
+    "externalId": "0382",
+    "nombreOriginal": "dumbbell revers grip biceps curl"
+  },
+  {
+    "externalId": "1624",
+    "nombreOriginal": "dumbbell reverse bench press"
+  },
+  {
+    "externalId": "0383",
+    "nombreOriginal": "dumbbell reverse fly"
+  },
+  {
+    "externalId": "1330",
+    "nombreOriginal": "dumbbell reverse grip incline bench one arm row"
+  },
+  {
+    "externalId": "1331",
+    "nombreOriginal": "dumbbell reverse grip incline bench two arm row"
+  },
+  {
+    "externalId": "2327",
+    "nombreOriginal": "dumbbell reverse grip row (female)"
+  },
+  {
+    "externalId": "0384",
+    "nombreOriginal": "dumbbell reverse preacher curl"
+  },
+  {
+    "externalId": "1675",
+    "nombreOriginal": "dumbbell reverse spider curl"
+  },
+  {
+    "externalId": "0385",
+    "nombreOriginal": "dumbbell reverse wrist curl"
+  },
+  {
+    "externalId": "1459",
+    "nombreOriginal": "dumbbell romanian deadlift"
+  },
+  {
+    "externalId": "0386",
+    "nombreOriginal": "dumbbell rotation reverse fly"
+  },
+  {
+    "externalId": "2397",
+    "nombreOriginal": "dumbbell scott press"
+  },
+  {
+    "externalId": "0387",
+    "nombreOriginal": "dumbbell seated alternate front raise"
+  },
+  {
+    "externalId": "1676",
+    "nombreOriginal": "dumbbell seated alternate hammer curl on exercise ball"
+  },
+  {
+    "externalId": "0388",
+    "nombreOriginal": "dumbbell seated alternate press"
+  },
+  {
+    "externalId": "3546",
+    "nombreOriginal": "dumbbell seated alternate shoulder"
+  },
+  {
+    "externalId": "0389",
+    "nombreOriginal": "dumbbell seated bench extension"
+  },
+  {
+    "externalId": "2317",
+    "nombreOriginal": "dumbbell seated bent arm lateral raise"
+  },
+  {
+    "externalId": "1730",
+    "nombreOriginal": "dumbbell seated bent over alternate kickback"
+  },
+  {
+    "externalId": "1737",
+    "nombreOriginal": "dumbbell seated bent over triceps extension"
+  },
+  {
+    "externalId": "1677",
+    "nombreOriginal": "dumbbell seated bicep curl"
+  },
+  {
+    "externalId": "0390",
+    "nombreOriginal": "dumbbell seated biceps curl (on stability ball)"
+  },
+  {
+    "externalId": "3547",
+    "nombreOriginal": "dumbbell seated biceps curl to shoulder press"
+  },
+  {
+    "externalId": "1379",
+    "nombreOriginal": "dumbbell seated calf raise"
+  },
+  {
+    "externalId": "0391",
+    "nombreOriginal": "dumbbell seated curl"
+  },
+  {
+    "externalId": "0392",
+    "nombreOriginal": "dumbbell seated front raise"
+  },
+  {
+    "externalId": "1678",
+    "nombreOriginal": "dumbbell seated hammer curl"
+  },
+  {
+    "externalId": "0393",
+    "nombreOriginal": "dumbbell seated inner biceps curl"
+  },
+  {
+    "externalId": "0394",
+    "nombreOriginal": "dumbbell seated kickback"
+  },
+  {
+    "externalId": "0396",
+    "nombreOriginal": "dumbbell seated lateral raise"
+  },
+  {
+    "externalId": "0395",
+    "nombreOriginal": "dumbbell seated lateral raise v. 2"
+  },
+  {
+    "externalId": "0397",
+    "nombreOriginal": "dumbbell seated neutral wrist curl"
+  },
+  {
+    "externalId": "1679",
+    "nombreOriginal": "dumbbell seated one arm bicep curl on exercise ball with leg raised"
+  },
+  {
+    "externalId": "0398",
+    "nombreOriginal": "dumbbell seated one arm kickback"
+  },
+  {
+    "externalId": "0399",
+    "nombreOriginal": "dumbbell seated one arm rotate"
+  },
+  {
+    "externalId": "0400",
+    "nombreOriginal": "dumbbell seated one leg calf raise"
+  },
+  {
+    "externalId": "1380",
+    "nombreOriginal": "dumbbell seated one leg calf raise - hammer grip"
+  },
+  {
+    "externalId": "1381",
+    "nombreOriginal": "dumbbell seated one leg calf raise - palm up"
+  },
+  {
+    "externalId": "0401",
+    "nombreOriginal": "dumbbell seated palms up wrist curl"
+  },
+  {
+    "externalId": "0402",
+    "nombreOriginal": "dumbbell seated preacher curl"
+  },
+  {
+    "externalId": "0403",
+    "nombreOriginal": "dumbbell seated revers grip concentration curl"
+  },
+  {
+    "externalId": "1738",
+    "nombreOriginal": "dumbbell seated reverse grip one arm overhead tricep extension"
+  },
+  {
+    "externalId": "0405",
+    "nombreOriginal": "dumbbell seated shoulder press"
+  },
+  {
+    "externalId": "0404",
+    "nombreOriginal": "dumbbell seated shoulder press (parallel grip)"
+  },
+  {
+    "externalId": "2188",
+    "nombreOriginal": "dumbbell seated triceps extension"
+  },
+  {
+    "externalId": "0406",
+    "nombreOriginal": "dumbbell shrug"
+  },
+  {
+    "externalId": "0407",
+    "nombreOriginal": "dumbbell side bend"
+  },
+  {
+    "externalId": "0408",
+    "nombreOriginal": "dumbbell side lying one hand raise"
+  },
+  {
+    "externalId": "3664",
+    "nombreOriginal": "dumbbell side plank with rear fly"
+  },
+  {
+    "externalId": "3548",
+    "nombreOriginal": "dumbbell single arm overhead carry"
+  },
+  {
+    "externalId": "0409",
+    "nombreOriginal": "dumbbell single leg calf raise"
+  },
+  {
+    "externalId": "1757",
+    "nombreOriginal": "dumbbell single leg deadlift"
+  },
+  {
+    "externalId": "2805",
+    "nombreOriginal": "dumbbell single leg deadlift with stepbox support"
+  },
+  {
+    "externalId": "0410",
+    "nombreOriginal": "dumbbell single leg split squat"
+  },
+  {
+    "externalId": "0411",
+    "nombreOriginal": "dumbbell single leg squat"
+  },
+  {
+    "externalId": "0413",
+    "nombreOriginal": "dumbbell squat"
+  },
+  {
+    "externalId": "3560",
+    "nombreOriginal": "dumbbell standing alternate hammer curl and press"
+  },
+  {
+    "externalId": "0414",
+    "nombreOriginal": "dumbbell standing alternate overhead press"
+  },
+  {
+    "externalId": "0415",
+    "nombreOriginal": "dumbbell standing alternate raise"
+  },
+  {
+    "externalId": "1739",
+    "nombreOriginal": "dumbbell standing alternating tricep kickback"
+  },
+  {
+    "externalId": "2143",
+    "nombreOriginal": "dumbbell standing around world"
+  },
+  {
+    "externalId": "1740",
+    "nombreOriginal": "dumbbell standing bent over one arm triceps extension"
+  },
+  {
+    "externalId": "1741",
+    "nombreOriginal": "dumbbell standing bent over two arm triceps extension"
+  },
+  {
+    "externalId": "0416",
+    "nombreOriginal": "dumbbell standing biceps curl"
+  },
+  {
+    "externalId": "0417",
+    "nombreOriginal": "dumbbell standing calf raise"
+  },
+  {
+    "externalId": "0418",
+    "nombreOriginal": "dumbbell standing concentration curl"
+  },
+  {
+    "externalId": "0419",
+    "nombreOriginal": "dumbbell standing front raise above head"
+  },
+  {
+    "externalId": "2321",
+    "nombreOriginal": "dumbbell standing inner biceps curl v. 2"
+  },
+  {
+    "externalId": "0420",
+    "nombreOriginal": "dumbbell standing kickback"
+  },
+  {
+    "externalId": "0421",
+    "nombreOriginal": "dumbbell standing one arm concentration curl"
+  },
+  {
+    "externalId": "0422",
+    "nombreOriginal": "dumbbell standing one arm curl (over incline bench)"
+  },
+  {
+    "externalId": "1680",
+    "nombreOriginal": "dumbbell standing one arm curl over incline bench"
+  },
+  {
+    "externalId": "0423",
+    "nombreOriginal": "dumbbell standing one arm extension"
+  },
+  {
+    "externalId": "0424",
+    "nombreOriginal": "dumbbell standing one arm palm in press"
+  },
+  {
+    "externalId": "0425",
+    "nombreOriginal": "dumbbell standing one arm reverse curl"
+  },
+  {
+    "externalId": "0426",
+    "nombreOriginal": "dumbbell standing overhead press"
+  },
+  {
+    "externalId": "0427",
+    "nombreOriginal": "dumbbell standing palms in press"
+  },
+  {
+    "externalId": "0428",
+    "nombreOriginal": "dumbbell standing preacher curl"
+  },
+  {
+    "externalId": "0429",
+    "nombreOriginal": "dumbbell standing reverse curl"
+  },
+  {
+    "externalId": "0430",
+    "nombreOriginal": "dumbbell standing triceps extension"
+  },
+  {
+    "externalId": "2293",
+    "nombreOriginal": "dumbbell standing zottman preacher curl"
+  },
+  {
+    "externalId": "1684",
+    "nombreOriginal": "dumbbell step up single leg balance with bicep curl"
+  },
+  {
+    "externalId": "0431",
+    "nombreOriginal": "dumbbell step-up"
+  },
+  {
+    "externalId": "2796",
+    "nombreOriginal": "dumbbell step-up lunge"
+  },
+  {
+    "externalId": "2812",
+    "nombreOriginal": "dumbbell step-up split squat"
+  },
+  {
+    "externalId": "0432",
+    "nombreOriginal": "dumbbell stiff leg deadlift"
+  },
+  {
+    "externalId": "0433",
+    "nombreOriginal": "dumbbell straight arm pullover"
+  },
+  {
+    "externalId": "0434",
+    "nombreOriginal": "dumbbell straight leg deadlift"
+  },
+  {
+    "externalId": "2808",
+    "nombreOriginal": "dumbbell sumo pull through"
+  },
+  {
+    "externalId": "2803",
+    "nombreOriginal": "dumbbell supported squat"
+  },
+  {
+    "externalId": "0436",
+    "nombreOriginal": "dumbbell tate press"
+  },
+  {
+    "externalId": "1742",
+    "nombreOriginal": "dumbbell tricep kickback with stork stance"
+  },
+  {
+    "externalId": "1743",
+    "nombreOriginal": "dumbbell twisting bench press"
+  },
+  {
+    "externalId": "0437",
+    "nombreOriginal": "dumbbell upright row"
+  },
+  {
+    "externalId": "1765",
+    "nombreOriginal": "dumbbell upright row (back pov)"
+  },
+  {
+    "externalId": "0864",
+    "nombreOriginal": "dumbbell upright shoulder external rotation"
+  },
+  {
+    "externalId": "5201",
+    "nombreOriginal": "dumbbell waiter biceps curl"
+  },
+  {
+    "externalId": "0438",
+    "nombreOriginal": "dumbbell w-press"
+  },
+  {
+    "externalId": "0439",
+    "nombreOriginal": "dumbbell zottman curl"
+  },
+  {
+    "externalId": "2294",
+    "nombreOriginal": "dumbbell zottman preacher curl"
+  },
+  {
+    "externalId": "2189",
+    "nombreOriginal": "dumbbells seated triceps extension"
+  },
+  {
+    "externalId": "1167",
+    "nombreOriginal": "dynamic chest stretch (male)"
+  },
+  {
+    "externalId": "3287",
+    "nombreOriginal": "elbow dips"
+  },
+  {
+    "externalId": "1772",
+    "nombreOriginal": "elbow lift - reverse push-up"
+  },
+  {
+    "externalId": "0443",
+    "nombreOriginal": "elbow-to-knee"
+  },
+  {
+    "externalId": "3292",
+    "nombreOriginal": "elevator"
+  },
+  {
+    "externalId": "1332",
+    "nombreOriginal": "exercise ball alternating arm ups"
+  },
+  {
+    "externalId": "1333",
+    "nombreOriginal": "exercise ball back extension with arms extended"
+  },
+  {
+    "externalId": "1334",
+    "nombreOriginal": "exercise ball back extension with hands behind head"
+  },
+  {
+    "externalId": "1335",
+    "nombreOriginal": "exercise ball back extension with knees off ground"
+  },
+  {
+    "externalId": "1336",
+    "nombreOriginal": "exercise ball back extension with rotation"
+  },
+  {
+    "externalId": "1744",
+    "nombreOriginal": "exercise ball dip"
+  },
+  {
+    "externalId": "1559",
+    "nombreOriginal": "exercise ball hip flexor stretch"
+  },
+  {
+    "externalId": "1338",
+    "nombreOriginal": "exercise ball hug"
+  },
+  {
+    "externalId": "1339",
+    "nombreOriginal": "exercise ball lat stretch"
+  },
+  {
+    "externalId": "1341",
+    "nombreOriginal": "exercise ball lower back stretch (pyramid)"
+  },
+  {
+    "externalId": "1342",
+    "nombreOriginal": "exercise ball lying side lat stretch"
+  },
+  {
+    "externalId": "1382",
+    "nombreOriginal": "exercise ball on the wall calf raise"
+  },
+  {
+    "externalId": "3241",
+    "nombreOriginal": "exercise ball on the wall calf raise (tennis ball between ankles)"
+  },
+  {
+    "externalId": "3240",
+    "nombreOriginal": "exercise ball on the wall calf raise (tennis ball between knees)"
+  },
+  {
+    "externalId": "1416",
+    "nombreOriginal": "exercise ball one leg prone lower body rotation"
+  },
+  {
+    "externalId": "1417",
+    "nombreOriginal": "exercise ball one legged diagonal kick hamstring curl"
+  },
+  {
+    "externalId": "1296",
+    "nombreOriginal": "exercise ball pike push up"
+  },
+  {
+    "externalId": "1343",
+    "nombreOriginal": "exercise ball prone leg raise"
+  },
+  {
+    "externalId": "1560",
+    "nombreOriginal": "exercise ball seated hamstring stretch"
+  },
+  {
+    "externalId": "1745",
+    "nombreOriginal": "exercise ball seated triceps stretch"
+  },
+  {
+    "externalId": "1746",
+    "nombreOriginal": "exercise ball supine triceps extension"
+  },
+  {
+    "externalId": "1747",
+    "nombreOriginal": "ez bar french press on exercise ball"
+  },
+  {
+    "externalId": "3010",
+    "nombreOriginal": "ez bar lying bent arms pullover"
+  },
+  {
+    "externalId": "1748",
+    "nombreOriginal": "ez bar lying close grip triceps extension behind head"
+  },
+  {
+    "externalId": "1344",
+    "nombreOriginal": "ez bar reverse grip bent over row"
+  },
+  {
+    "externalId": "1682",
+    "nombreOriginal": "ez bar seated close grip concentration curl"
+  },
+  {
+    "externalId": "1749",
+    "nombreOriginal": "ez bar standing french press"
+  },
+  {
+    "externalId": "0445",
+    "nombreOriginal": "ez barbell anti gravity press"
+  },
+  {
+    "externalId": "1627",
+    "nombreOriginal": "ez barbell close grip preacher curl"
+  },
+  {
+    "externalId": "0446",
+    "nombreOriginal": "ez barbell close-grip curl"
+  },
+  {
+    "externalId": "0447",
+    "nombreOriginal": "ez barbell curl"
+  },
+  {
+    "externalId": "0448",
+    "nombreOriginal": "ez barbell decline close grip face press"
+  },
+  {
+    "externalId": "2186",
+    "nombreOriginal": "ez barbell decline triceps extension"
+  },
+  {
+    "externalId": "0449",
+    "nombreOriginal": "ez barbell incline triceps extension"
+  },
+  {
+    "externalId": "0450",
+    "nombreOriginal": "ez barbell jm bench press"
+  },
+  {
+    "externalId": "0451",
+    "nombreOriginal": "ez barbell reverse grip curl"
+  },
+  {
+    "externalId": "0452",
+    "nombreOriginal": "ez barbell reverse grip preacher curl"
+  },
+  {
+    "externalId": "1458",
+    "nombreOriginal": "ez barbell seated curls"
+  },
+  {
+    "externalId": "0453",
+    "nombreOriginal": "ez barbell seated triceps extension"
+  },
+  {
+    "externalId": "0454",
+    "nombreOriginal": "ez barbell spider curl"
+  },
+  {
+    "externalId": "1628",
+    "nombreOriginal": "ez barbell spider curl"
+  },
+  {
+    "externalId": "2404",
+    "nombreOriginal": "ez-bar biceps curl (with arm blaster)"
+  },
+  {
+    "externalId": "2432",
+    "nombreOriginal": "ez-bar close-grip bench press"
+  },
+  {
+    "externalId": "2741",
+    "nombreOriginal": "ez-barbell standing wide grip biceps curl"
+  },
+  {
+    "externalId": "2133",
+    "nombreOriginal": "farmers walk"
+  },
+  {
+    "externalId": "0455",
+    "nombreOriginal": "finger curls"
+  },
+  {
+    "externalId": "3303",
+    "nombreOriginal": "flag"
+  },
+  {
+    "externalId": "0456",
+    "nombreOriginal": "flexion leg sit up (bent knee)"
+  },
+  {
+    "externalId": "0457",
+    "nombreOriginal": "flexion leg sit up (straight arm)"
+  },
+  {
+    "externalId": "0458",
+    "nombreOriginal": "floor fly (with barbell)"
+  },
+  {
+    "externalId": "0459",
+    "nombreOriginal": "flutter kicks"
+  },
+  {
+    "externalId": "1472",
+    "nombreOriginal": "forward jump"
+  },
+  {
+    "externalId": "3470",
+    "nombreOriginal": "forward lunge (male)"
+  },
+  {
+    "externalId": "3194",
+    "nombreOriginal": "frankenstein squat"
+  },
+  {
+    "externalId": "2429",
+    "nombreOriginal": "frog crunch"
+  },
+  {
+    "externalId": "3301",
+    "nombreOriginal": "frog planche"
+  },
+  {
+    "externalId": "3296",
+    "nombreOriginal": "front lever"
+  },
+  {
+    "externalId": "3295",
+    "nombreOriginal": "front lever reps"
+  },
+  {
+    "externalId": "0464",
+    "nombreOriginal": "front plank with twist"
+  },
+  {
+    "externalId": "3315",
+    "nombreOriginal": "full maltese"
+  },
+  {
+    "externalId": "3299",
+    "nombreOriginal": "full planche"
+  },
+  {
+    "externalId": "3327",
+    "nombreOriginal": "full planche push-up"
+  },
+  {
+    "externalId": "0466",
+    "nombreOriginal": "gironda sternum chin"
+  },
+  {
+    "externalId": "3561",
+    "nombreOriginal": "glute bridge march"
+  },
+  {
+    "externalId": "3523",
+    "nombreOriginal": "glute bridge two legs on bench (male)"
+  },
+  {
+    "externalId": "3193",
+    "nombreOriginal": "glute-ham raise"
+  },
+  {
+    "externalId": "0467",
+    "nombreOriginal": "gorilla chin"
+  },
+  {
+    "externalId": "0469",
+    "nombreOriginal": "groin crunch"
+  },
+  {
+    "externalId": "1383",
+    "nombreOriginal": "hack calf raise"
+  },
+  {
+    "externalId": "1384",
+    "nombreOriginal": "hack one leg calf raise"
+  },
+  {
+    "externalId": "3221",
+    "nombreOriginal": "half knee bends (male)"
+  },
+  {
+    "externalId": "3202",
+    "nombreOriginal": "half sit-up (male)"
+  },
+  {
+    "externalId": "1511",
+    "nombreOriginal": "hamstring stretch"
+  },
+  {
+    "externalId": "2139",
+    "nombreOriginal": "hands bike"
+  },
+  {
+    "externalId": "3218",
+    "nombreOriginal": "hands clasped circular toe touch (male)"
+  },
+  {
+    "externalId": "3215",
+    "nombreOriginal": "hands reversed clasped circular toe touch (male)"
+  },
+  {
+    "externalId": "3302",
+    "nombreOriginal": "handstand"
+  },
+  {
+    "externalId": "0471",
+    "nombreOriginal": "handstand push-up"
+  },
+  {
+    "externalId": "1764",
+    "nombreOriginal": "hanging leg hip raise"
+  },
+  {
+    "externalId": "0472",
+    "nombreOriginal": "hanging leg raise"
+  },
+  {
+    "externalId": "1761",
+    "nombreOriginal": "hanging oblique knee raise"
+  },
+  {
+    "externalId": "0473",
+    "nombreOriginal": "hanging pike"
+  },
+  {
+    "externalId": "0474",
+    "nombreOriginal": "hanging straight leg hip raise"
+  },
+  {
+    "externalId": "0475",
+    "nombreOriginal": "hanging straight leg raise"
+  },
+  {
+    "externalId": "0476",
+    "nombreOriginal": "hanging straight twisting leg hip raise"
+  },
+  {
+    "externalId": "3636",
+    "nombreOriginal": "high knee against wall"
+  },
+  {
+    "externalId": "0484",
+    "nombreOriginal": "hip raise (bent knee)"
+  },
+  {
+    "externalId": "1418",
+    "nombreOriginal": "hug keens to chest"
+  },
+  {
+    "externalId": "3234",
+    "nombreOriginal": "hyght dumbbell fly"
+  },
+  {
+    "externalId": "0489",
+    "nombreOriginal": "hyperextension"
+  },
+  {
+    "externalId": "0488",
+    "nombreOriginal": "hyperextension (on bench)"
+  },
+  {
+    "externalId": "3289",
+    "nombreOriginal": "impossible dips"
+  },
+  {
+    "externalId": "1471",
+    "nombreOriginal": "inchworm"
+  },
+  {
+    "externalId": "3698",
+    "nombreOriginal": "inchworm v. 2"
+  },
+  {
+    "externalId": "0490",
+    "nombreOriginal": "incline close-grip push-up"
+  },
+  {
+    "externalId": "0491",
+    "nombreOriginal": "incline leg hip raise (leg straight)"
+  },
+  {
+    "externalId": "0492",
+    "nombreOriginal": "incline push up depth jump"
+  },
+  {
+    "externalId": "0493",
+    "nombreOriginal": "incline push-up"
+  },
+  {
+    "externalId": "3785",
+    "nombreOriginal": "incline push-up (on box)"
+  },
+  {
+    "externalId": "0494",
+    "nombreOriginal": "incline reverse grip push-up"
+  },
+  {
+    "externalId": "3011",
+    "nombreOriginal": "incline scapula push up"
+  },
+  {
+    "externalId": "0495",
+    "nombreOriginal": "incline twisting sit-up"
+  },
+  {
+    "externalId": "1564",
+    "nombreOriginal": "intermediate hip flexor and quad stretch"
+  },
+  {
+    "externalId": "0496",
+    "nombreOriginal": "inverse leg curl (bench support)"
+  },
+  {
+    "externalId": "2400",
+    "nombreOriginal": "inverse leg curl (on pull-up cable machine)"
+  },
+  {
+    "externalId": "0499",
+    "nombreOriginal": "inverted row"
+  },
+  {
+    "externalId": "2300",
+    "nombreOriginal": "inverted row bent knees"
+  },
+  {
+    "externalId": "2298",
+    "nombreOriginal": "inverted row on bench"
+  },
+  {
+    "externalId": "0497",
+    "nombreOriginal": "inverted row v. 2"
+  },
+  {
+    "externalId": "0498",
+    "nombreOriginal": "inverted row with straps"
+  },
+  {
+    "externalId": "1419",
+    "nombreOriginal": "iron cross stretch"
+  },
+  {
+    "externalId": "1297",
+    "nombreOriginal": "isometric chest squeeze"
+  },
+  {
+    "externalId": "0500",
+    "nombreOriginal": "isometric wipers"
+  },
+  {
+    "externalId": "0501",
+    "nombreOriginal": "jack burpee"
+  },
+  {
+    "externalId": "3224",
+    "nombreOriginal": "jack jump (male)"
+  },
+  {
+    "externalId": "0507",
+    "nombreOriginal": "jackknife sit-up"
+  },
+  {
+    "externalId": "0508",
+    "nombreOriginal": "janda sit-up"
+  },
+  {
+    "externalId": "2612",
+    "nombreOriginal": "jump rope"
+  },
+  {
+    "externalId": "0514",
+    "nombreOriginal": "jump squat"
+  },
+  {
+    "externalId": "0513",
+    "nombreOriginal": "jump squat v. 2"
+  },
+  {
+    "externalId": "0517",
+    "nombreOriginal": "kettlebell advanced windmill"
+  },
+  {
+    "externalId": "0518",
+    "nombreOriginal": "kettlebell alternating hang clean"
+  },
+  {
+    "externalId": "0520",
+    "nombreOriginal": "kettlebell alternating press"
+  },
+  {
+    "externalId": "0519",
+    "nombreOriginal": "kettlebell alternating press on floor"
+  },
+  {
+    "externalId": "0521",
+    "nombreOriginal": "kettlebell alternating renegade row"
+  },
+  {
+    "externalId": "0522",
+    "nombreOriginal": "kettlebell alternating row"
+  },
+  {
+    "externalId": "0523",
+    "nombreOriginal": "kettlebell arnold press"
+  },
+  {
+    "externalId": "0524",
+    "nombreOriginal": "kettlebell bent press"
+  },
+  {
+    "externalId": "0525",
+    "nombreOriginal": "kettlebell bottoms up clean from the hang position"
+  },
+  {
+    "externalId": "0526",
+    "nombreOriginal": "kettlebell double alternating hang clean"
+  },
+  {
+    "externalId": "0527",
+    "nombreOriginal": "kettlebell double jerk"
+  },
+  {
+    "externalId": "0528",
+    "nombreOriginal": "kettlebell double push press"
+  },
+  {
+    "externalId": "0529",
+    "nombreOriginal": "kettlebell double snatch"
+  },
+  {
+    "externalId": "0530",
+    "nombreOriginal": "kettlebell double windmill"
+  },
+  {
+    "externalId": "0531",
+    "nombreOriginal": "kettlebell extended range one arm press on floor"
+  },
+  {
+    "externalId": "0532",
+    "nombreOriginal": "kettlebell figure 8"
+  },
+  {
+    "externalId": "0533",
+    "nombreOriginal": "kettlebell front squat"
+  },
+  {
+    "externalId": "0534",
+    "nombreOriginal": "kettlebell goblet squat"
+  },
+  {
+    "externalId": "0535",
+    "nombreOriginal": "kettlebell hang clean"
+  },
+  {
+    "externalId": "0536",
+    "nombreOriginal": "kettlebell lunge pass through"
+  },
+  {
+    "externalId": "0537",
+    "nombreOriginal": "kettlebell one arm clean and jerk"
+  },
+  {
+    "externalId": "1298",
+    "nombreOriginal": "kettlebell one arm floor press"
+  },
+  {
+    "externalId": "0538",
+    "nombreOriginal": "kettlebell one arm jerk"
+  },
+  {
+    "externalId": "0539",
+    "nombreOriginal": "kettlebell one arm military press to the side"
+  },
+  {
+    "externalId": "0540",
+    "nombreOriginal": "kettlebell one arm push press"
+  },
+  {
+    "externalId": "0541",
+    "nombreOriginal": "kettlebell one arm row"
+  },
+  {
+    "externalId": "0542",
+    "nombreOriginal": "kettlebell one arm snatch"
+  },
+  {
+    "externalId": "0543",
+    "nombreOriginal": "kettlebell pirate supper legs"
+  },
+  {
+    "externalId": "0544",
+    "nombreOriginal": "kettlebell pistol squat"
+  },
+  {
+    "externalId": "0545",
+    "nombreOriginal": "kettlebell plyo push-up"
+  },
+  {
+    "externalId": "0546",
+    "nombreOriginal": "kettlebell seated press"
+  },
+  {
+    "externalId": "1438",
+    "nombreOriginal": "kettlebell seated two arm military press"
+  },
+  {
+    "externalId": "0547",
+    "nombreOriginal": "kettlebell seesaw press"
+  },
+  {
+    "externalId": "0548",
+    "nombreOriginal": "kettlebell sumo high pull"
+  },
+  {
+    "externalId": "0549",
+    "nombreOriginal": "kettlebell swing"
+  },
+  {
+    "externalId": "0550",
+    "nombreOriginal": "kettlebell thruster"
+  },
+  {
+    "externalId": "0551",
+    "nombreOriginal": "kettlebell turkish get up (squat style)"
+  },
+  {
+    "externalId": "0552",
+    "nombreOriginal": "kettlebell two arm clean"
+  },
+  {
+    "externalId": "0553",
+    "nombreOriginal": "kettlebell two arm military press"
+  },
+  {
+    "externalId": "1345",
+    "nombreOriginal": "kettlebell two arm row"
+  },
+  {
+    "externalId": "0554",
+    "nombreOriginal": "kettlebell windmill"
+  },
+  {
+    "externalId": "0555",
+    "nombreOriginal": "kick out sit"
+  },
+  {
+    "externalId": "0558",
+    "nombreOriginal": "kipping muscle up"
+  },
+  {
+    "externalId": "3640",
+    "nombreOriginal": "knee touch crunch"
+  },
+  {
+    "externalId": "1420",
+    "nombreOriginal": "kneeling jump squat"
+  },
+  {
+    "externalId": "1346",
+    "nombreOriginal": "kneeling lat stretch"
+  },
+  {
+    "externalId": "3239",
+    "nombreOriginal": "kneeling plank tap shoulder (male)"
+  },
+  {
+    "externalId": "3211",
+    "nombreOriginal": "kneeling push-up (male)"
+  },
+  {
+    "externalId": "3288",
+    "nombreOriginal": "korean dips"
+  },
+  {
+    "externalId": "3418",
+    "nombreOriginal": "l-pull-up"
+  },
+  {
+    "externalId": "3419",
+    "nombreOriginal": "l-sit on floor"
+  },
+  {
+    "externalId": "0562",
+    "nombreOriginal": "landmine 180"
+  },
+  {
+    "externalId": "3237",
+    "nombreOriginal": "landmine lateral raise"
+  },
+  {
+    "externalId": "3300",
+    "nombreOriginal": "lean planche"
+  },
+  {
+    "externalId": "2271",
+    "nombreOriginal": "left hook. boxing"
+  },
+  {
+    "externalId": "0570",
+    "nombreOriginal": "leg pull in flat bench"
+  },
+  {
+    "externalId": "1576",
+    "nombreOriginal": "leg up hamstring stretch"
+  },
+  {
+    "externalId": "2287",
+    "nombreOriginal": "lever alternate leg press"
+  },
+  {
+    "externalId": "0571",
+    "nombreOriginal": "lever alternating narrow grip seated row"
+  },
+  {
+    "externalId": "0572",
+    "nombreOriginal": "lever assisted chin-up"
+  },
+  {
+    "externalId": "0573",
+    "nombreOriginal": "lever back extension"
+  },
+  {
+    "externalId": "0574",
+    "nombreOriginal": "lever bent over row"
+  },
+  {
+    "externalId": "3200",
+    "nombreOriginal": "lever bent-over row with v-bar"
+  },
+  {
+    "externalId": "0575",
+    "nombreOriginal": "lever bicep curl"
+  },
+  {
+    "externalId": "2289",
+    "nombreOriginal": "lever calf press"
+  },
+  {
+    "externalId": "0577",
+    "nombreOriginal": "lever chest press"
+  },
+  {
+    "externalId": "0576",
+    "nombreOriginal": "lever chest press"
+  },
+  {
+    "externalId": "0578",
+    "nombreOriginal": "lever deadlift"
+  },
+  {
+    "externalId": "1300",
+    "nombreOriginal": "lever decline chest press"
+  },
+  {
+    "externalId": "1253",
+    "nombreOriginal": "lever donkey calf raise"
+  },
+  {
+    "externalId": "0579",
+    "nombreOriginal": "lever front pulldown"
+  },
+  {
+    "externalId": "0580",
+    "nombreOriginal": "lever gripless shrug"
+  },
+  {
+    "externalId": "1439",
+    "nombreOriginal": "lever gripless shrug v. 2"
+  },
+  {
+    "externalId": "2288",
+    "nombreOriginal": "lever gripper hands"
+  },
+  {
+    "externalId": "1615",
+    "nombreOriginal": "lever hammer grip preacher curl"
+  },
+  {
+    "externalId": "0581",
+    "nombreOriginal": "lever high row"
+  },
+  {
+    "externalId": "2286",
+    "nombreOriginal": "lever hip extension v. 2"
+  },
+  {
+    "externalId": "2611",
+    "nombreOriginal": "lever horizontal one leg press"
+  },
+  {
+    "externalId": "1299",
+    "nombreOriginal": "lever incline chest press"
+  },
+  {
+    "externalId": "1479",
+    "nombreOriginal": "lever incline chest press v. 2"
+  },
+  {
+    "externalId": "0582",
+    "nombreOriginal": "lever kneeling leg curl"
+  },
+  {
+    "externalId": "0583",
+    "nombreOriginal": "lever kneeling twist"
+  },
+  {
+    "externalId": "0584",
+    "nombreOriginal": "lever lateral raise"
+  },
+  {
+    "externalId": "0585",
+    "nombreOriginal": "lever leg extension"
+  },
+  {
+    "externalId": "0586",
+    "nombreOriginal": "lever lying leg curl"
+  },
+  {
+    "externalId": "3195",
+    "nombreOriginal": "lever lying two-one leg curl"
+  },
+  {
+    "externalId": "0587",
+    "nombreOriginal": "lever military press"
+  },
+  {
+    "externalId": "0588",
+    "nombreOriginal": "lever narrow grip seated row"
+  },
+  {
+    "externalId": "0589",
+    "nombreOriginal": "lever one arm bent over row"
+  },
+  {
+    "externalId": "1356",
+    "nombreOriginal": "lever one arm lateral high row"
+  },
+  {
+    "externalId": "1347",
+    "nombreOriginal": "lever one arm lateral wide pulldown"
+  },
+  {
+    "externalId": "0590",
+    "nombreOriginal": "lever one arm shoulder press"
+  },
+  {
+    "externalId": "0591",
+    "nombreOriginal": "lever overhand triceps dip"
+  },
+  {
+    "externalId": "0592",
+    "nombreOriginal": "lever preacher curl"
+  },
+  {
+    "externalId": "1614",
+    "nombreOriginal": "lever preacher curl v. 2"
+  },
+  {
+    "externalId": "2285",
+    "nombreOriginal": "lever pullover"
+  },
+  {
+    "externalId": "2736",
+    "nombreOriginal": "lever reverse grip lateral pulldown"
+  },
+  {
+    "externalId": "1616",
+    "nombreOriginal": "lever reverse grip preacher curl"
+  },
+  {
+    "externalId": "1348",
+    "nombreOriginal": "lever reverse grip vertical row"
+  },
+  {
+    "externalId": "0593",
+    "nombreOriginal": "lever reverse hyperextension"
+  },
+  {
+    "externalId": "1349",
+    "nombreOriginal": "lever reverse t-bar row"
+  },
+  {
+    "externalId": "2315",
+    "nombreOriginal": "lever rotary calf"
+  },
+  {
+    "externalId": "2335",
+    "nombreOriginal": "lever seated calf press"
+  },
+  {
+    "externalId": "0594",
+    "nombreOriginal": "lever seated calf raise"
+  },
+  {
+    "externalId": "1452",
+    "nombreOriginal": "lever seated crunch"
+  },
+  {
+    "externalId": "0595",
+    "nombreOriginal": "lever seated crunch (chest pad)"
+  },
+  {
+    "externalId": "3760",
+    "nombreOriginal": "lever seated crunch v. 2"
+  },
+  {
+    "externalId": "1451",
+    "nombreOriginal": "lever seated dip"
+  },
+  {
+    "externalId": "0596",
+    "nombreOriginal": "lever seated fly"
+  },
+  {
+    "externalId": "3759",
+    "nombreOriginal": "lever seated good morning"
+  },
+  {
+    "externalId": "0597",
+    "nombreOriginal": "lever seated hip abduction"
+  },
+  {
+    "externalId": "0598",
+    "nombreOriginal": "lever seated hip adduction"
+  },
+  {
+    "externalId": "0599",
+    "nombreOriginal": "lever seated leg curl"
+  },
+  {
+    "externalId": "0600",
+    "nombreOriginal": "lever seated leg raise crunch"
+  },
+  {
+    "externalId": "0602",
+    "nombreOriginal": "lever seated reverse fly"
+  },
+  {
+    "externalId": "0601",
+    "nombreOriginal": "lever seated reverse fly (parallel grip)"
+  },
+  {
+    "externalId": "1350",
+    "nombreOriginal": "lever seated row"
+  },
+  {
+    "externalId": "1385",
+    "nombreOriginal": "lever seated squat calf raise on leg press machine"
+  },
+  {
+    "externalId": "0603",
+    "nombreOriginal": "lever shoulder press"
+  },
+  {
+    "externalId": "0869",
+    "nombreOriginal": "lever shoulder press v. 2"
+  },
+  {
+    "externalId": "2318",
+    "nombreOriginal": "lever shoulder press v. 3"
+  },
+  {
+    "externalId": "0604",
+    "nombreOriginal": "lever shrug"
+  },
+  {
+    "externalId": "0605",
+    "nombreOriginal": "lever standing calf raise"
+  },
+  {
+    "externalId": "3758",
+    "nombreOriginal": "lever standing chest press"
+  },
+  {
+    "externalId": "0606",
+    "nombreOriginal": "lever t bar row"
+  },
+  {
+    "externalId": "1351",
+    "nombreOriginal": "lever t-bar reverse grip row"
+  },
+  {
+    "externalId": "0607",
+    "nombreOriginal": "lever triceps extension"
+  },
+  {
+    "externalId": "1313",
+    "nombreOriginal": "lever unilateral row"
+  },
+  {
+    "externalId": "0609",
+    "nombreOriginal": "london bridge"
+  },
+  {
+    "externalId": "3013",
+    "nombreOriginal": "low glute bridge on floor"
+  },
+  {
+    "externalId": "1352",
+    "nombreOriginal": "lower back curl"
+  },
+  {
+    "externalId": "3582",
+    "nombreOriginal": "lunge with jump"
+  },
+  {
+    "externalId": "1688",
+    "nombreOriginal": "lunge with twist"
+  },
+  {
+    "externalId": "0613",
+    "nombreOriginal": "lying (side) quads stretch"
+  },
+  {
+    "externalId": "2312",
+    "nombreOriginal": "lying elbow to knee"
+  },
+  {
+    "externalId": "0620",
+    "nombreOriginal": "lying leg raise flat bench"
+  },
+  {
+    "externalId": "0865",
+    "nombreOriginal": "lying leg-hip raise"
+  },
+  {
+    "externalId": "1301",
+    "nombreOriginal": "machine inner chest press"
+  },
+  {
+    "externalId": "0624",
+    "nombreOriginal": "march sit (wall)"
+  },
+  {
+    "externalId": "1353",
+    "nombreOriginal": "medicine ball catch and overhead throw"
+  },
+  {
+    "externalId": "1302",
+    "nombreOriginal": "medicine ball chest pass"
+  },
+  {
+    "externalId": "1303",
+    "nombreOriginal": "medicine ball chest push from 3 point stance"
+  },
+  {
+    "externalId": "1304",
+    "nombreOriginal": "medicine ball chest push multiple response"
+  },
+  {
+    "externalId": "1305",
+    "nombreOriginal": "medicine ball chest push single response"
+  },
+  {
+    "externalId": "1312",
+    "nombreOriginal": "medicine ball chest push with run release"
+  },
+  {
+    "externalId": "1701",
+    "nombreOriginal": "medicine ball close grip push up"
+  },
+  {
+    "externalId": "1354",
+    "nombreOriginal": "medicine ball overhead slam"
+  },
+  {
+    "externalId": "1750",
+    "nombreOriginal": "medicine ball supine chest throw"
+  },
+  {
+    "externalId": "0627",
+    "nombreOriginal": "mixed grip chin-up"
+  },
+  {
+    "externalId": "3217",
+    "nombreOriginal": "modified hindu push-up (male)"
+  },
+  {
+    "externalId": "1421",
+    "nombreOriginal": "modified push up to lower arms"
+  },
+  {
+    "externalId": "0628",
+    "nombreOriginal": "monster walk"
+  },
+  {
+    "externalId": "0630",
+    "nombreOriginal": "mountain climber"
+  },
+  {
+    "externalId": "0631",
+    "nombreOriginal": "muscle up"
+  },
+  {
+    "externalId": "1401",
+    "nombreOriginal": "muscle-up (on vertical bar)"
+  },
+  {
+    "externalId": "2328",
+    "nombreOriginal": "narrow push-up on exercise ball"
+  },
+  {
+    "externalId": "1403",
+    "nombreOriginal": "neck side stretch"
+  },
+  {
+    "externalId": "0634",
+    "nombreOriginal": "negative crunch"
+  },
+  {
+    "externalId": "1495",
+    "nombreOriginal": "oblique crunch v. 2"
+  },
+  {
+    "externalId": "0635",
+    "nombreOriginal": "oblique crunches floor"
+  },
+  {
+    "externalId": "0636",
+    "nombreOriginal": "olympic barbell hammer curl"
+  },
+  {
+    "externalId": "0637",
+    "nombreOriginal": "olympic barbell triceps extension"
+  },
+  {
+    "externalId": "1355",
+    "nombreOriginal": "one arm against wall"
+  },
+  {
+    "externalId": "0638",
+    "nombreOriginal": "one arm chin-up"
+  },
+  {
+    "externalId": "0639",
+    "nombreOriginal": "one arm dip"
+  },
+  {
+    "externalId": "0640",
+    "nombreOriginal": "one arm slam (with medicine ball)"
+  },
+  {
+    "externalId": "1773",
+    "nombreOriginal": "one arm towel row"
+  },
+  {
+    "externalId": "1386",
+    "nombreOriginal": "one leg donkey calf raise"
+  },
+  {
+    "externalId": "1387",
+    "nombreOriginal": "one leg floor calf raise"
+  },
+  {
+    "externalId": "1476",
+    "nombreOriginal": "one leg squat"
+  },
+  {
+    "externalId": "0641",
+    "nombreOriginal": "otis up"
+  },
+  {
+    "externalId": "0642",
+    "nombreOriginal": "outside leg kick push-up"
+  },
+  {
+    "externalId": "0643",
+    "nombreOriginal": "overhead triceps stretch"
+  },
+  {
+    "externalId": "3147",
+    "nombreOriginal": "pelvic tilt"
+  },
+  {
+    "externalId": "1422",
+    "nombreOriginal": "pelvic tilt into bridge"
+  },
+  {
+    "externalId": "1388",
+    "nombreOriginal": "peroneals stretch"
+  },
+  {
+    "externalId": "3662",
+    "nombreOriginal": "pike-to-cobra push-up"
+  },
+  {
+    "externalId": "1306",
+    "nombreOriginal": "plyo push up"
+  },
+  {
+    "externalId": "1687",
+    "nombreOriginal": "posterior step to overhead reach"
+  },
+  {
+    "externalId": "1389",
+    "nombreOriginal": "posterior tibialis stretch"
+  },
+  {
+    "externalId": "3119",
+    "nombreOriginal": "potty squat"
+  },
+  {
+    "externalId": "3132",
+    "nombreOriginal": "potty squat with support"
+  },
+  {
+    "externalId": "0648",
+    "nombreOriginal": "power clean"
+  },
+  {
+    "externalId": "3665",
+    "nombreOriginal": "power point plank"
+  },
+  {
+    "externalId": "3203",
+    "nombreOriginal": "prisoner half sit-up (male)"
+  },
+  {
+    "externalId": "1707",
+    "nombreOriginal": "prone twist on stability ball"
+  },
+  {
+    "externalId": "0651",
+    "nombreOriginal": "pull up (neutral grip)"
+  },
+  {
+    "externalId": "0650",
+    "nombreOriginal": "pull-in (on stability ball)"
+  },
+  {
+    "externalId": "0652",
+    "nombreOriginal": "pull-up"
+  },
+  {
+    "externalId": "1689",
+    "nombreOriginal": "push and pull bodyweight"
+  },
+  {
+    "externalId": "3638",
+    "nombreOriginal": "push to run"
+  },
+  {
+    "externalId": "1307",
+    "nombreOriginal": "push up on bosu ball"
+  },
+  {
+    "externalId": "0662",
+    "nombreOriginal": "push-up"
+  },
+  {
+    "externalId": "0653",
+    "nombreOriginal": "push-up (bosu ball)"
+  },
+  {
+    "externalId": "0655",
+    "nombreOriginal": "push-up (on stability ball)"
+  },
+  {
+    "externalId": "0656",
+    "nombreOriginal": "push-up (on stability ball)"
+  },
+  {
+    "externalId": "0659",
+    "nombreOriginal": "push-up (wall)"
+  },
+  {
+    "externalId": "0658",
+    "nombreOriginal": "push-up (wall) v. 2"
+  },
+  {
+    "externalId": "0660",
+    "nombreOriginal": "push-up close-grip off dumbbell"
+  },
+  {
+    "externalId": "0661",
+    "nombreOriginal": "push-up inside leg kick"
+  },
+  {
+    "externalId": "0663",
+    "nombreOriginal": "push-up medicine ball"
+  },
+  {
+    "externalId": "1467",
+    "nombreOriginal": "push-up on lower arms"
+  },
+  {
+    "externalId": "3145",
+    "nombreOriginal": "push-up plus"
+  },
+  {
+    "externalId": "0664",
+    "nombreOriginal": "push-up to side plank"
+  },
+  {
+    "externalId": "3533",
+    "nombreOriginal": "quads"
+  },
+  {
+    "externalId": "3201",
+    "nombreOriginal": "quarter sit-up"
+  },
+  {
+    "externalId": "3552",
+    "nombreOriginal": "quick feet v. 2"
+  },
+  {
+    "externalId": "0666",
+    "nombreOriginal": "raise single arm push-up"
+  },
+  {
+    "externalId": "0668",
+    "nombreOriginal": "rear decline bridge"
+  },
+  {
+    "externalId": "0669",
+    "nombreOriginal": "rear deltoid stretch"
+  },
+  {
+    "externalId": "0670",
+    "nombreOriginal": "rear pull-up"
+  },
+  {
+    "externalId": "1582",
+    "nombreOriginal": "reclining big toe pose with rope"
+  },
+  {
+    "externalId": "3236",
+    "nombreOriginal": "resistance band hip thrusts on knees (female)"
+  },
+  {
+    "externalId": "3007",
+    "nombreOriginal": "resistance band leg extension"
+  },
+  {
+    "externalId": "3123",
+    "nombreOriginal": "resistance band seated biceps curl"
+  },
+  {
+    "externalId": "3124",
+    "nombreOriginal": "resistance band seated chest press"
+  },
+  {
+    "externalId": "3006",
+    "nombreOriginal": "resistance band seated hip abduction"
+  },
+  {
+    "externalId": "3122",
+    "nombreOriginal": "resistance band seated shoulder press"
+  },
+  {
+    "externalId": "3144",
+    "nombreOriginal": "resistance band seated straight back row"
+  },
+  {
+    "externalId": "0872",
+    "nombreOriginal": "reverse crunch"
+  },
+  {
+    "externalId": "0672",
+    "nombreOriginal": "reverse dip"
+  },
+  {
+    "externalId": "0673",
+    "nombreOriginal": "reverse grip machine lat pulldown"
+  },
+  {
+    "externalId": "0674",
+    "nombreOriginal": "reverse grip pull-up"
+  },
+  {
+    "externalId": "0675",
+    "nombreOriginal": "reverse hyper extension (on stability ball)"
+  },
+  {
+    "externalId": "1423",
+    "nombreOriginal": "reverse hyper on flat bench"
+  },
+  {
+    "externalId": "3663",
+    "nombreOriginal": "reverse plank with leg lift"
+  },
+  {
+    "externalId": "0677",
+    "nombreOriginal": "ring dips"
+  },
+  {
+    "externalId": "2571",
+    "nombreOriginal": "rocking frog stretch"
+  },
+  {
+    "externalId": "0678",
+    "nombreOriginal": "rocky pull-up pulldown"
+  },
+  {
+    "externalId": "2208",
+    "nombreOriginal": "roller back stretch"
+  },
+  {
+    "externalId": "2204",
+    "nombreOriginal": "roller body saw"
+  },
+  {
+    "externalId": "2205",
+    "nombreOriginal": "roller hip lat stretch"
+  },
+  {
+    "externalId": "2202",
+    "nombreOriginal": "roller hip stretch"
+  },
+  {
+    "externalId": "2206",
+    "nombreOriginal": "roller reverse crunch"
+  },
+  {
+    "externalId": "2203",
+    "nombreOriginal": "roller seated shoulder flexor depresor retractor"
+  },
+  {
+    "externalId": "2209",
+    "nombreOriginal": "roller seated single leg shoulder flexor depresor retractor"
+  },
+  {
+    "externalId": "2207",
+    "nombreOriginal": "roller side lat stretch"
+  },
+  {
+    "externalId": "0680",
+    "nombreOriginal": "rope climb"
+  },
+  {
+    "externalId": "0685",
+    "nombreOriginal": "run"
+  },
+  {
+    "externalId": "0684",
+    "nombreOriginal": "run (equipment)"
+  },
+  {
+    "externalId": "1585",
+    "nombreOriginal": "runners stretch"
+  },
+  {
+    "externalId": "0687",
+    "nombreOriginal": "russian twist"
+  },
+  {
+    "externalId": "3012",
+    "nombreOriginal": "scapula dips"
+  },
+  {
+    "externalId": "3021",
+    "nombreOriginal": "scapula push-up"
+  },
+  {
+    "externalId": "0688",
+    "nombreOriginal": "scapular pull-up"
+  },
+  {
+    "externalId": "3219",
+    "nombreOriginal": "scissor jumps (male)"
+  },
+  {
+    "externalId": "1390",
+    "nombreOriginal": "seated calf stretch (male)"
+  },
+  {
+    "externalId": "1424",
+    "nombreOriginal": "seated glute stretch"
+  },
+  {
+    "externalId": "0689",
+    "nombreOriginal": "seated leg raise"
+  },
+  {
+    "externalId": "0690",
+    "nombreOriginal": "seated lower back stretch"
+  },
+  {
+    "externalId": "2567",
+    "nombreOriginal": "seated piriformis stretch"
+  },
+  {
+    "externalId": "0691",
+    "nombreOriginal": "seated side crunch (wall)"
+  },
+  {
+    "externalId": "1587",
+    "nombreOriginal": "seated wide angle pose sequence"
+  },
+  {
+    "externalId": "0697",
+    "nombreOriginal": "self assisted inverse leg curl"
+  },
+  {
+    "externalId": "1766",
+    "nombreOriginal": "self assisted inverse leg curl"
+  },
+  {
+    "externalId": "0696",
+    "nombreOriginal": "self assisted inverse leg curl (on floor)"
+  },
+  {
+    "externalId": "3222",
+    "nombreOriginal": "semi squat jump (male)"
+  },
+  {
+    "externalId": "3656",
+    "nombreOriginal": "short stride run"
+  },
+  {
+    "externalId": "1763",
+    "nombreOriginal": "shoulder grip pull-up"
+  },
+  {
+    "externalId": "3699",
+    "nombreOriginal": "shoulder tap"
+  },
+  {
+    "externalId": "0699",
+    "nombreOriginal": "shoulder tap push-up"
+  },
+  {
+    "externalId": "1774",
+    "nombreOriginal": "side bridge hip abduction"
+  },
+  {
+    "externalId": "0705",
+    "nombreOriginal": "side bridge v. 2"
+  },
+  {
+    "externalId": "0709",
+    "nombreOriginal": "side hip (on parallel bars)"
+  },
+  {
+    "externalId": "0710",
+    "nombreOriginal": "side hip abduction"
+  },
+  {
+    "externalId": "1358",
+    "nombreOriginal": "side lying floor stretch"
+  },
+  {
+    "externalId": "3667",
+    "nombreOriginal": "side lying hip adduction (male)"
+  },
+  {
+    "externalId": "1775",
+    "nombreOriginal": "side plank hip adduction"
+  },
+  {
+    "externalId": "0716",
+    "nombreOriginal": "side push neck stretch"
+  },
+  {
+    "externalId": "0717",
+    "nombreOriginal": "side push-up"
+  },
+  {
+    "externalId": "0721",
+    "nombreOriginal": "side wrist pull stretch"
+  },
+  {
+    "externalId": "0720",
+    "nombreOriginal": "side-to-side chin"
+  },
+  {
+    "externalId": "3213",
+    "nombreOriginal": "side-to-side toe touch (male)"
+  },
+  {
+    "externalId": "0725",
+    "nombreOriginal": "single arm push-up"
+  },
+  {
+    "externalId": "3645",
+    "nombreOriginal": "single leg bridge with outstretched leg"
+  },
+  {
+    "externalId": "0727",
+    "nombreOriginal": "single leg calf raise (on a dumbbell)"
+  },
+  {
+    "externalId": "0730",
+    "nombreOriginal": "single leg platform slide"
+  },
+  {
+    "externalId": "1759",
+    "nombreOriginal": "single leg squat (pistol) male"
+  },
+  {
+    "externalId": "1489",
+    "nombreOriginal": "sissy squat"
+  },
+  {
+    "externalId": "0735",
+    "nombreOriginal": "sit-up v. 2"
+  },
+  {
+    "externalId": "3679",
+    "nombreOriginal": "sit-up with arms on chest"
+  },
+  {
+    "externalId": "3361",
+    "nombreOriginal": "skater hops"
+  },
+  {
+    "externalId": "2142",
+    "nombreOriginal": "ski ergometer"
+  },
+  {
+    "externalId": "3671",
+    "nombreOriginal": "ski step"
+  },
+  {
+    "externalId": "3304",
+    "nombreOriginal": "skin the cat"
+  },
+  {
+    "externalId": "1425",
+    "nombreOriginal": "sled 45 degrees one leg press"
+  },
+  {
+    "externalId": "0738",
+    "nombreOriginal": "sled 45в° calf press"
+  },
+  {
+    "externalId": "0739",
+    "nombreOriginal": "sled 45в° leg press"
+  },
+  {
+    "externalId": "1464",
+    "nombreOriginal": "sled 45в° leg press (back pov)"
+  },
+  {
+    "externalId": "1463",
+    "nombreOriginal": "sled 45° leg press (side pov)"
+  },
+  {
+    "externalId": "0740",
+    "nombreOriginal": "sled 45в° leg wide press"
+  },
+  {
+    "externalId": "1391",
+    "nombreOriginal": "sled calf press on leg press"
+  },
+  {
+    "externalId": "0741",
+    "nombreOriginal": "sled closer hack squat"
+  },
+  {
+    "externalId": "0742",
+    "nombreOriginal": "sled forward angled calf raise"
+  },
+  {
+    "externalId": "0743",
+    "nombreOriginal": "sled hack squat"
+  },
+  {
+    "externalId": "2334",
+    "nombreOriginal": "sled lying calf press"
+  },
+  {
+    "externalId": "0744",
+    "nombreOriginal": "sled lying squat"
+  },
+  {
+    "externalId": "1392",
+    "nombreOriginal": "sled one leg calf press on leg press"
+  },
+  {
+    "externalId": "1496",
+    "nombreOriginal": "sledge hammer"
+  },
+  {
+    "externalId": "0746",
+    "nombreOriginal": "smith back shrug"
+  },
+  {
+    "externalId": "0747",
+    "nombreOriginal": "smith behind neck press"
+  },
+  {
+    "externalId": "0748",
+    "nombreOriginal": "smith bench press"
+  },
+  {
+    "externalId": "0749",
+    "nombreOriginal": "smith bent knee good morning"
+  },
+  {
+    "externalId": "1359",
+    "nombreOriginal": "smith bent over row"
+  },
+  {
+    "externalId": "0750",
+    "nombreOriginal": "smith chair squat"
+  },
+  {
+    "externalId": "0751",
+    "nombreOriginal": "smith close-grip bench press"
+  },
+  {
+    "externalId": "0752",
+    "nombreOriginal": "smith deadlift"
+  },
+  {
+    "externalId": "0753",
+    "nombreOriginal": "smith decline bench press"
+  },
+  {
+    "externalId": "0754",
+    "nombreOriginal": "smith decline reverse-grip press"
+  },
+  {
+    "externalId": "1433",
+    "nombreOriginal": "smith front squat (clean grip)"
+  },
+  {
+    "externalId": "3281",
+    "nombreOriginal": "smith full squat"
+  },
+  {
+    "externalId": "0755",
+    "nombreOriginal": "smith hack squat"
+  },
+  {
+    "externalId": "0756",
+    "nombreOriginal": "smith hip raise"
+  },
+  {
+    "externalId": "0757",
+    "nombreOriginal": "smith incline bench press"
+  },
+  {
+    "externalId": "0758",
+    "nombreOriginal": "smith incline reverse-grip press"
+  },
+  {
+    "externalId": "0759",
+    "nombreOriginal": "smith incline shoulder raises"
+  },
+  {
+    "externalId": "0760",
+    "nombreOriginal": "smith leg press"
+  },
+  {
+    "externalId": "1434",
+    "nombreOriginal": "smith low bar squat"
+  },
+  {
+    "externalId": "1683",
+    "nombreOriginal": "smith machine bicep curl"
+  },
+  {
+    "externalId": "1625",
+    "nombreOriginal": "smith machine decline close grip bench press"
+  },
+  {
+    "externalId": "1752",
+    "nombreOriginal": "smith machine incline tricep extension"
+  },
+  {
+    "externalId": "1626",
+    "nombreOriginal": "smith machine reverse decline close grip bench press"
+  },
+  {
+    "externalId": "0761",
+    "nombreOriginal": "smith narrow row"
+  },
+  {
+    "externalId": "1360",
+    "nombreOriginal": "smith one arm row"
+  },
+  {
+    "externalId": "1393",
+    "nombreOriginal": "smith one leg floor calf raise"
+  },
+  {
+    "externalId": "0762",
+    "nombreOriginal": "smith rear delt row"
+  },
+  {
+    "externalId": "0763",
+    "nombreOriginal": "smith reverse calf raises"
+  },
+  {
+    "externalId": "1394",
+    "nombreOriginal": "smith reverse calf raises"
+  },
+  {
+    "externalId": "1361",
+    "nombreOriginal": "smith reverse grip bent over row"
+  },
+  {
+    "externalId": "0764",
+    "nombreOriginal": "smith reverse-grip press"
+  },
+  {
+    "externalId": "1395",
+    "nombreOriginal": "smith seated one leg calf raise"
+  },
+  {
+    "externalId": "0765",
+    "nombreOriginal": "smith seated shoulder press"
+  },
+  {
+    "externalId": "1426",
+    "nombreOriginal": "smith seated wrist curl"
+  },
+  {
+    "externalId": "0766",
+    "nombreOriginal": "smith shoulder press"
+  },
+  {
+    "externalId": "0767",
+    "nombreOriginal": "smith shrug"
+  },
+  {
+    "externalId": "0768",
+    "nombreOriginal": "smith single leg split squat"
+  },
+  {
+    "externalId": "0769",
+    "nombreOriginal": "smith sprint lunge"
+  },
+  {
+    "externalId": "0770",
+    "nombreOriginal": "smith squat"
+  },
+  {
+    "externalId": "0771",
+    "nombreOriginal": "smith standing back wrist curl"
+  },
+  {
+    "externalId": "0772",
+    "nombreOriginal": "smith standing behind head military press"
+  },
+  {
+    "externalId": "0773",
+    "nombreOriginal": "smith standing leg calf raise"
+  },
+  {
+    "externalId": "0774",
+    "nombreOriginal": "smith standing military press"
+  },
+  {
+    "externalId": "3142",
+    "nombreOriginal": "smith sumo squat"
+  },
+  {
+    "externalId": "1396",
+    "nombreOriginal": "smith toe raise"
+  },
+  {
+    "externalId": "0775",
+    "nombreOriginal": "smith upright row"
+  },
+  {
+    "externalId": "1308",
+    "nombreOriginal": "smith wide grip bench press"
+  },
+  {
+    "externalId": "1309",
+    "nombreOriginal": "smith wide grip decline bench press"
+  },
+  {
+    "externalId": "0776",
+    "nombreOriginal": "snatch pull"
+  },
+  {
+    "externalId": "0777",
+    "nombreOriginal": "spell caster"
+  },
+  {
+    "externalId": "1362",
+    "nombreOriginal": "sphinx"
+  },
+  {
+    "externalId": "0778",
+    "nombreOriginal": "spider crawl push up"
+  },
+  {
+    "externalId": "1363",
+    "nombreOriginal": "spine stretch"
+  },
+  {
+    "externalId": "2329",
+    "nombreOriginal": "spine twist"
+  },
+  {
+    "externalId": "2368",
+    "nombreOriginal": "split squats"
+  },
+  {
+    "externalId": "0786",
+    "nombreOriginal": "squat jerk"
+  },
+  {
+    "externalId": "1705",
+    "nombreOriginal": "squat on bosu ball"
+  },
+  {
+    "externalId": "1685",
+    "nombreOriginal": "squat to overhead reach"
+  },
+  {
+    "externalId": "1686",
+    "nombreOriginal": "squat to overhead reach with twist"
+  },
+  {
+    "externalId": "2297",
+    "nombreOriginal": "stability ball crunch (full range hands behind head)"
+  },
+  {
+    "externalId": "3291",
+    "nombreOriginal": "stalder press"
+  },
+  {
+    "externalId": "3669",
+    "nombreOriginal": "standing archer"
+  },
+  {
+    "externalId": "0788",
+    "nombreOriginal": "standing behind neck press"
+  },
+  {
+    "externalId": "1490",
+    "nombreOriginal": "standing calf raise (on a staircase)"
+  },
+  {
+    "externalId": "1397",
+    "nombreOriginal": "standing calves"
+  },
+  {
+    "externalId": "1398",
+    "nombreOriginal": "standing calves calf stretch"
+  },
+  {
+    "externalId": "1599",
+    "nombreOriginal": "standing hamstring and calf stretch with strap"
+  },
+  {
+    "externalId": "0794",
+    "nombreOriginal": "standing lateral stretch"
+  },
+  {
+    "externalId": "1364",
+    "nombreOriginal": "standing pelvic tilt"
+  },
+  {
+    "externalId": "0795",
+    "nombreOriginal": "standing single leg curl"
+  },
+  {
+    "externalId": "0796",
+    "nombreOriginal": "standing wheel rollerout"
+  },
+  {
+    "externalId": "3223",
+    "nombreOriginal": "star jump (male)"
+  },
+  {
+    "externalId": "2138",
+    "nombreOriginal": "stationary bike run v. 3"
+  },
+  {
+    "externalId": "0798",
+    "nombreOriginal": "stationary bike walk"
+  },
+  {
+    "externalId": "3314",
+    "nombreOriginal": "straddle maltese"
+  },
+  {
+    "externalId": "3298",
+    "nombreOriginal": "straddle planche"
+  },
+  {
+    "externalId": "1427",
+    "nombreOriginal": "straight leg outer hip abductor"
+  },
+  {
+    "externalId": "0803",
+    "nombreOriginal": "superman push-up"
+  },
+  {
+    "externalId": "0805",
+    "nombreOriginal": "suspended abdominal fallout"
+  },
+  {
+    "externalId": "0806",
+    "nombreOriginal": "suspended push-up"
+  },
+  {
+    "externalId": "0807",
+    "nombreOriginal": "suspended reverse crunch"
+  },
+  {
+    "externalId": "0808",
+    "nombreOriginal": "suspended row"
+  },
+  {
+    "externalId": "0809",
+    "nombreOriginal": "suspended split squat"
+  },
+  {
+    "externalId": "3433",
+    "nombreOriginal": "swimmer kicks v. 2 (male)"
+  },
+  {
+    "externalId": "3318",
+    "nombreOriginal": "swing 360"
+  },
+  {
+    "externalId": "1753",
+    "nombreOriginal": "three bench dip"
+  },
+  {
+    "externalId": "2459",
+    "nombreOriginal": "tire flip"
+  },
+  {
+    "externalId": "0811",
+    "nombreOriginal": "trap bar deadlift"
+  },
+  {
+    "externalId": "0814",
+    "nombreOriginal": "triceps dip"
+  },
+  {
+    "externalId": "0812",
+    "nombreOriginal": "triceps dip (bench leg)"
+  },
+  {
+    "externalId": "0813",
+    "nombreOriginal": "triceps dip (between benches)"
+  },
+  {
+    "externalId": "0815",
+    "nombreOriginal": "triceps dips floor"
+  },
+  {
+    "externalId": "0816",
+    "nombreOriginal": "triceps press"
+  },
+  {
+    "externalId": "0817",
+    "nombreOriginal": "triceps stretch"
+  },
+  {
+    "externalId": "0871",
+    "nombreOriginal": "tuck crunch"
+  },
+  {
+    "externalId": "0818",
+    "nombreOriginal": "twin handle parallel grip lat pulldown"
+  },
+  {
+    "externalId": "1466",
+    "nombreOriginal": "twist hip lift"
+  },
+  {
+    "externalId": "2802",
+    "nombreOriginal": "twisted leg raise"
+  },
+  {
+    "externalId": "2801",
+    "nombreOriginal": "twisted leg raise (female)"
+  },
+  {
+    "externalId": "3231",
+    "nombreOriginal": "two toe touch (male)"
+  },
+  {
+    "externalId": "1365",
+    "nombreOriginal": "upper back stretch"
+  },
+  {
+    "externalId": "1366",
+    "nombreOriginal": "upward facing dog"
+  },
+  {
+    "externalId": "3420",
+    "nombreOriginal": "v-sit on floor"
+  },
+  {
+    "externalId": "0826",
+    "nombreOriginal": "vertical leg raise (on parallel bars)"
+  },
+  {
+    "externalId": "2141",
+    "nombreOriginal": "walk elliptical cross trainer"
+  },
+  {
+    "externalId": "3655",
+    "nombreOriginal": "walking high knees lunge"
+  },
+  {
+    "externalId": "1460",
+    "nombreOriginal": "walking lunge"
+  },
+  {
+    "externalId": "3666",
+    "nombreOriginal": "walking on incline treadmill"
+  },
+  {
+    "externalId": "2311",
+    "nombreOriginal": "walking on stepmill"
+  },
+  {
+    "externalId": "0830",
+    "nombreOriginal": "weighted bench dip"
+  },
+  {
+    "externalId": "2987",
+    "nombreOriginal": "weighted close grip chin-up on dip cage"
+  },
+  {
+    "externalId": "3643",
+    "nombreOriginal": "weighted cossack squats (male)"
+  },
+  {
+    "externalId": "0832",
+    "nombreOriginal": "weighted crunch"
+  },
+  {
+    "externalId": "3670",
+    "nombreOriginal": "weighted decline sit-up"
+  },
+  {
+    "externalId": "0833",
+    "nombreOriginal": "weighted donkey calf raise"
+  },
+  {
+    "externalId": "1310",
+    "nombreOriginal": "weighted drop push up"
+  },
+  {
+    "externalId": "2135",
+    "nombreOriginal": "weighted front plank"
+  },
+  {
+    "externalId": "0834",
+    "nombreOriginal": "weighted front raise"
+  },
+  {
+    "externalId": "0866",
+    "nombreOriginal": "weighted hanging leg-hip raise"
+  },
+  {
+    "externalId": "0835",
+    "nombreOriginal": "weighted hyperextension (on stability ball)"
+  },
+  {
+    "externalId": "3641",
+    "nombreOriginal": "weighted kneeling step with swing"
+  },
+  {
+    "externalId": "3644",
+    "nombreOriginal": "weighted lunge with swing"
+  },
+  {
+    "externalId": "3286",
+    "nombreOriginal": "weighted muscle up"
+  },
+  {
+    "externalId": "3312",
+    "nombreOriginal": "weighted muscle up (on bar)"
+  },
+  {
+    "externalId": "3290",
+    "nombreOriginal": "weighted one hand pull up"
+  },
+  {
+    "externalId": "0840",
+    "nombreOriginal": "weighted overhead crunch (on stability ball)"
+  },
+  {
+    "externalId": "0841",
+    "nombreOriginal": "weighted pull-up"
+  },
+  {
+    "externalId": "0844",
+    "nombreOriginal": "weighted round arm"
+  },
+  {
+    "externalId": "0846",
+    "nombreOriginal": "weighted russian twist"
+  },
+  {
+    "externalId": "0845",
+    "nombreOriginal": "weighted russian twist (legs up)"
+  },
+  {
+    "externalId": "2371",
+    "nombreOriginal": "weighted russian twist v. 2"
+  },
+  {
+    "externalId": "0847",
+    "nombreOriginal": "weighted seated bicep curl (on stability ball)"
+  },
+  {
+    "externalId": "0849",
+    "nombreOriginal": "weighted seated twist (on stability ball)"
+  },
+  {
+    "externalId": "0850",
+    "nombreOriginal": "weighted side bend (on stability ball)"
+  },
+  {
+    "externalId": "0851",
+    "nombreOriginal": "weighted sissy squat"
+  },
+  {
+    "externalId": "0852",
+    "nombreOriginal": "weighted squat"
+  },
+  {
+    "externalId": "0853",
+    "nombreOriginal": "weighted standing curl"
+  },
+  {
+    "externalId": "0854",
+    "nombreOriginal": "weighted standing hand squeeze"
+  },
+  {
+    "externalId": "3313",
+    "nombreOriginal": "weighted straight bar dip"
+  },
+  {
+    "externalId": "3642",
+    "nombreOriginal": "weighted stretch lunge"
+  },
+  {
+    "externalId": "0856",
+    "nombreOriginal": "weighted svend press"
+  },
+  {
+    "externalId": "1754",
+    "nombreOriginal": "weighted three bench dips"
+  },
+  {
+    "externalId": "1755",
+    "nombreOriginal": "weighted tricep dips"
+  },
+  {
+    "externalId": "1767",
+    "nombreOriginal": "weighted triceps dip on high parallel bars"
+  },
+  {
+    "externalId": "0857",
+    "nombreOriginal": "wheel rollerout"
+  },
+  {
+    "externalId": "3637",
+    "nombreOriginal": "wheel run"
+  },
+  {
+    "externalId": "1429",
+    "nombreOriginal": "wide grip pull-up"
+  },
+  {
+    "externalId": "1367",
+    "nombreOriginal": "wide grip rear pull-up"
+  },
+  {
+    "externalId": "1311",
+    "nombreOriginal": "wide hand push up"
+  },
+  {
+    "externalId": "2363",
+    "nombreOriginal": "wide-grip chest dip on high parallel bars"
+  },
+  {
+    "externalId": "0858",
+    "nombreOriginal": "wind sprints"
+  },
+  {
+    "externalId": "1604",
+    "nombreOriginal": "world greatest stretch"
+  },
+  {
+    "externalId": "1428",
+    "nombreOriginal": "wrist circles"
+  },
+  {
+    "externalId": "0859",
+    "nombreOriginal": "wrist rollerer"
+  }
+]

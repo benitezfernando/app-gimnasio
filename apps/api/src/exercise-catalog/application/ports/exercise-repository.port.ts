@@ -3,6 +3,7 @@ export const EXERCISE_REPOSITORY = Symbol('EXERCISE_REPOSITORY');
 export interface ExerciseSummary {
   id: string;
   nombre: string;
+  nombreOriginal: string | null;
   imageUrl: string | null;
   gifUrl: string | null;
   parteCuerpo: string;

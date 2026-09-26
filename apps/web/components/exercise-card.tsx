@@ -9,9 +9,22 @@ import { GradientIcon } from './ui/gradient-icon';
 export interface ExerciseCardData {
   id: string;
   nombre: string;
+  nombreOriginal: string | null;
   imageUrl: string | null;
   parteCuerpo: string;
   equipamiento: string | null;
+}
+
+/**
+ * "Nombre (Original)" para que alguien que busca por el nombre en
+ * inglés del dataset original pueda reconocer el ejercicio — solo si
+ * difiere del nombre en español (muchos ya coinciden o el original no
+ * aporta nada distinto).
+ */
+export function nombreConOriginal(nombre: string, nombreOriginal: string | null): string {
+  if (!nombreOriginal) return nombre;
+  if (nombreOriginal.trim().toLowerCase() === nombre.trim().toLowerCase()) return nombre;
+  return `${nombre} (${nombreOriginal})`;
 }
 
 /**
@@ -39,7 +52,9 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
         )}
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="line-clamp-2 text-sm font-medium text-foreground">{ejercicio.nombre}</h3>
+        <h3 className="line-clamp-2 text-sm font-medium text-foreground">
+          {nombreConOriginal(ejercicio.nombre, ejercicio.nombreOriginal)}
+        </h3>
         <div className="flex flex-wrap gap-1.5">
           <Badge
             className="border-transparent text-white"

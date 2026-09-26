@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../lib/browser-api-client';
 import { ETIQUETA_PARTE_CUERPO } from '../lib/region-colors';
-import { ExerciseCardData } from './exercise-card';
+import { ExerciseCardData, nombreConOriginal } from './exercise-card';
 import { Button } from '@/components/ui/button';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -87,7 +87,9 @@ export function ExercisePicker({
                   setResultados([]);
                 }}
               >
-                <span className="text-sm text-foreground">{ejercicio.nombre}</span>
+                <span className="text-sm text-foreground">
+                  {nombreConOriginal(ejercicio.nombre, ejercicio.nombreOriginal)}
+                </span>
                 <span className="text-xs text-muted-foreground">
                   {ETIQUETA_PARTE_CUERPO[ejercicio.parteCuerpo] ?? ejercicio.parteCuerpo}
                 </span>

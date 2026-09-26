@@ -8,6 +8,7 @@ describe('GetExercisesByIdsUseCase', () => {
   const resumenA: ExerciseSummary = {
     id: 'ex-a',
     nombre: 'Sentadilla',
+    nombreOriginal: null,
     imageUrl: null,
     gifUrl: null,
     parteCuerpo: 'legs',

@@ -117,6 +117,7 @@ describe('/routine-instances (e2e)', () => {
         .map((id) => ({
           id,
           nombre: 'Ejercicio',
+          nombreOriginal: null,
           imageUrl: null,
           gifUrl: null,
           parteCuerpo: 'pecho',

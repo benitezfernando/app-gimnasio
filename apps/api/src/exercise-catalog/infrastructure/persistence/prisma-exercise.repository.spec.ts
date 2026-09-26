@@ -58,13 +58,27 @@ describe('PrismaExerciseRepository', () => {
     expect(prisma.exercise.findMany).not.toHaveBeenCalled();
   });
 
-  it('findMany con search filtra por nombreNormalizado normalizado, no por nombre', async () => {
+  it('findMany con search filtra por nombreNormalizado o nombreOriginalNormalizado (OR), no por nombre', async () => {
     await repo.findMany({ search: 'Frances', page: 1, limit: 24 });
 
     const args = prisma.exercise.findMany.mock.calls[0][0];
     expect(args.where).toEqual(
-      expect.objectContaining({ nombreNormalizado: { contains: 'frances' } }),
+      expect.objectContaining({
+        OR: [
+          { nombreNormalizado: { contains: 'frances' } },
+          { nombreOriginalNormalizado: { contains: 'frances' } },
+        ],
+      }),
     );
     expect(args.where).not.toHaveProperty('nombre');
+  });
+
+  it('findMany con search también matchea buscando por el nombre original (ej. "sit-up")', async () => {
+    await repo.findMany({ search: 'Sit-Up', page: 1, limit: 24 });
+
+    const args = prisma.exercise.findMany.mock.calls[0][0];
+    expect(args.where.OR).toContainEqual({
+      nombreOriginalNormalizado: { contains: 'sit-up' },
+    });
   });
 });

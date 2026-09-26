@@ -48,6 +48,7 @@ describe('GetMiRutinaVigenteUseCase', () => {
   const ejercicioResuelto: ExerciseSummary = {
     id: 'ex-1',
     nombre: 'Sentadilla',
+    nombreOriginal: null,
     imageUrl: null,
     gifUrl: 'https://x/anim.gif',
     parteCuerpo: 'upper legs',
@@ -104,6 +105,7 @@ describe('GetMiRutinaVigenteUseCase', () => {
       {
         id: 'ex-1',
         nombre: 'Sentadilla',
+        nombreOriginal: null,
         imageUrl: null,
         gifUrl: null,
         parteCuerpo: 'p',

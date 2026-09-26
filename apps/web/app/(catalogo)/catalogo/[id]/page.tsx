@@ -10,6 +10,7 @@ import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
 import { PageHeader } from '../../../../components/ui/page-header';
+import { nombreConOriginal } from '../../../../components/exercise-card';
 import { LogoutButton } from '../../../../components/logout-button';
 import { HomeLink } from '../../../../components/ui/home-link';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +19,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 interface ExerciseDetailResponse {
   id: string;
   nombre: string;
+  nombreOriginal: string | null;
   imageUrl: string | null;
   gifUrl: string | null;
   parteCuerpo: string;
@@ -66,7 +68,9 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
         devolverlo a donde estaba.
       */}
       <PageHeader
-        title={ejercicio?.nombre ?? 'Ejercicio'}
+        title={
+          ejercicio ? nombreConOriginal(ejercicio.nombre, ejercicio.nombreOriginal) : 'Ejercicio'
+        }
         onBack={() => router.back()}
         left={homeHref && <HomeLink href={homeHref} />}
         right={<LogoutButton />}

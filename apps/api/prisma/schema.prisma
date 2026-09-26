@@ -68,6 +68,8 @@ model Exercise {
   gymId                       String?
   nombre                      String
   nombreNormalizado           String         @default("")
+  nombreOriginal              String?
+  nombreOriginalNormalizado   String         @default("")
   parteCuerpo                 String
   grupoMuscular               String
   gruposMuscularesSecundarios String[]       @default([])
@@ -91,6 +93,7 @@ model Exercise {
   @@index([equipamiento])
   @@index([activo])
   @@index([nombreNormalizado])
+  @@index([nombreOriginalNormalizado])
 }
 
 // Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)
