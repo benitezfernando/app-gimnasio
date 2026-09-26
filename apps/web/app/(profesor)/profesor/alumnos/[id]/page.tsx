@@ -1,6 +1,6 @@
 import { apiFetch, ApiError } from '../../../../../lib/api-client';
 import { InstanceEditor } from './instance-editor';
-import { NewRoutineForm } from './new-routine-form';
+import { ReemplazarRutinaSection } from './reemplazar-rutina-section';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { HomeLink } from '../../../../../components/ui/home-link';
 import { DiaRutinaApi, diasDeRutinaAEdicion } from '../../../../../lib/routine-days';
@@ -53,25 +53,11 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
         </section>
       )}
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-muted-foreground">
-          {rutinaVigente ? 'Reemplazar por una rutina nueva' : 'Armar rutina'}
-        </h2>
-        {plantillas.length === 0 && (
-          <p className="text-sm text-muted-foreground">
-            No tenés plantillas activas — podés armar la rutina desde cero o crear una en{' '}
-            <a href="/profesor/plantillas" className="text-primary-soft underline">
-              Mis plantillas
-            </a>
-            .
-          </p>
-        )}
-        <NewRoutineForm
-          alumnoId={params.id}
-          plantillas={plantillas}
-          reemplazaRutinaVigente={Boolean(rutinaVigente)}
-        />
-      </section>
+      <ReemplazarRutinaSection
+        alumnoId={params.id}
+        plantillas={plantillas}
+        hayRutinaVigente={Boolean(rutinaVigente)}
+      />
     </main>
   );
 }
