@@ -5,6 +5,13 @@ name: Keep Render awake
 # en producción (login lento tras inactividad, rápido en el segundo
 # intento inmediato).
 #
+# Desde 2026-10-17 /health también hace un SELECT 1 contra Supabase (ver
+# health.controller.ts): Supabase free pausa el proyecto tras 7 días sin
+# actividad en la DB, y un ping que no toca la DB no cuenta como actividad
+# para Supabase aunque mantenga despierto a Render. Con gaps de hasta 12hs
+# en el cron (ver medición abajo) igual queda sobrado margen contra el
+# umbral de 7 días.
+#
 # ESTE WORKFLOW SOLO ES BACKUP — NO ES LA DEFENSA PRINCIPAL (sesión
 # 2026-09-18). Medido con `gh run list`: pese al cron de */10 min, GitHub
 # ejecutó este schedule con un gap PROMEDIO de 253 min (máx. 715 min ≈
