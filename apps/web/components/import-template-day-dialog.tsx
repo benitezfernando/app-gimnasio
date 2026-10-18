@@ -21,6 +21,7 @@ import { SeleccionImportacion, aPlantillaParaImportar } from '../lib/routine-day
 interface ExerciseSummary {
   id: string;
   nombre: string;
+  nombreCatalogo?: string | null;
   imageUrl: string | null;
 }
 

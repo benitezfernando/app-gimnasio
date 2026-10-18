@@ -73,6 +73,25 @@ export function totalEjercicios(dias: DiaEnEdicion[]): number {
   return dias.reduce((suma, d) => suma + d.ejercicios.length, 0);
 }
 
+/**
+ * Un alias vale para todo el perfil del profesor: al renombrar (o volver al
+ * nombre original) se actualizan TODAS las líneas del editor con ese
+ * ejercicio, en todos los días. `nombreCatalogo` es `null` al volver al original.
+ */
+export function aplicarNombreAEjercicio(
+  dias: DiaEnEdicion[],
+  exerciseId: string,
+  nombre: string,
+  nombreCatalogo: string | null,
+): DiaEnEdicion[] {
+  return dias.map((d) => ({
+    ...d,
+    ejercicios: d.ejercicios.map((e) =>
+      e.exerciseId === exerciseId ? { ...e, nombre, nombreCatalogo } : e,
+    ),
+  }));
+}
+
 export interface SeleccionImportacion {
   diaId: string | 'todos';
   /** `null` = agregar como día nuevo. Se ignora con `diaId: 'todos'`. */
@@ -143,7 +162,11 @@ export function aPayloadDeDias(
     });
 }
 
-type DetalleEjercicio = { nombre: string; imageUrl: string | null };
+type DetalleEjercicio = {
+  nombre: string;
+  imageUrl: string | null;
+  nombreCatalogo?: string | null;
+};
 
 function ejercicioApiADatos(
   e: EjercicioApi,
@@ -152,6 +175,7 @@ function ejercicioApiADatos(
   return {
     exerciseId: e.exerciseId,
     nombre: detalle?.nombre ?? '(ejercicio no encontrado)',
+    nombreCatalogo: detalle?.nombreCatalogo ?? null,
     imageUrl: detalle?.imageUrl ?? null,
     series: e.series,
     repeticiones: e.repeticiones,

@@ -9,6 +9,7 @@ import { diasDePlantillaAEdicion } from '../../../../../lib/routine-days';
 interface ExerciseSummary {
   id: string;
   nombre: string;
+  nombreCatalogo?: string | null;
   imageUrl: string | null;
 }
 
