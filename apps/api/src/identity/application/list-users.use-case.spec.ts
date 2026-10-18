@@ -58,6 +58,23 @@ describe('ListUsersUseCase', () => {
     expect(resultado).toEqual(usuariosDelGym);
   });
 
+  it('no incluye al propio usuario que invoca', async () => {
+    const elPropioAdmin: UserRecord = {
+      id: 'admin-1',
+      authUserId: 'a-admin',
+      gymId: 'gym-1',
+      username: 'admin',
+      nombre: 'Admin',
+      role: Role.ADMIN,
+      activo: true,
+    };
+    userRepository.findByGymId.mockResolvedValue([elPropioAdmin, ...usuariosDelGym]);
+
+    const resultado = await useCase.execute({ invocadoPor: admin });
+
+    expect(resultado).toEqual(usuariosDelGym);
+  });
+
   it('ADMIN puede filtrar por rol', async () => {
     userRepository.findByGymId.mockResolvedValue([usuariosDelGym[1]]);
 
