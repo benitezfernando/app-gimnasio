@@ -105,3 +105,30 @@
     cursor: pointer;
   }
 }
+
+/*
+ * Glow decorativo del fondo: dos manchas radiales grandes y difuminadas
+ * con los colores de marca, muy baja opacidad. Sin esto el panel de
+ * vidrio del sidebar (bg-card/60 + backdrop-blur) no tiene nada de color
+ * debajo para que se note el efecto — el --background es un oklch sólido
+ * parejo. Puramente decorativo, position: fixed para que no se mueva con
+ * el scroll, pointer-events: none para no interceptar clicks.
+ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      circle at 15% 20%,
+      color-mix(in oklch, var(--brand-from) 18%, transparent) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      color-mix(in oklch, var(--brand-to) 15%, transparent) 0%,
+      transparent 45%
+    );
+}
