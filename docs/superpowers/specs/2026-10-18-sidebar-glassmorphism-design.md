@@ -142,3 +142,27 @@ layouts para pasarle `user` al `AppShell`.
   la app y revisar en mobile y desktop que el sidebar/bottom nav se vean
   como se describe, sin romper el layout de ninguna de las 4 secciones
   (admin, profesor, alumno, super-admin).
+
+## Addenda — revisión del plan (2026-10-18)
+
+Cambios aprobados al revisar el plan contra el código, que corrigen o
+amplían lo de arriba:
+
+- **5 route groups, no 4.** `(catalogo)` (compartido por ADMIN, PROFESOR
+  y ALUMNO, ítems de nav según rol) también pasa a `AppShell`.
+- **Offsets de desktop.** Además de `PageHeader` (`lg:top-12`), 10
+  páginas tienen `lg:pt-16` en su `<main>` para compensar la barra
+  superior; pasan a `lg:pt-6`. Los `<main>` de admin y super-admin
+  pierden `bg-background` (opaco, tapaba el glow).
+- **`PageHeader` glass:** `bg-background/70 backdrop-blur-xl` en vez de
+  la franja sólida.
+- **Marca en el sidebar:** "Gimnasio Mix" con `text-gradient-brand`
+  arriba del bloque de usuario.
+- **`aria-current="page"`** en el ítem activo (sidebar y bottom nav).
+- **Tests:** no hay React Testing Library en el repo; los tests de
+  render de `Sidebar`/`AppShell` mencionados arriba se reemplazan por
+  test de la lógica pura (`inicialDe`) + verificación manual, siguiendo
+  el patrón existente.
+- **Orden de deploy:** primero el API (Manual Deploy en Render) con el
+  nuevo `GET /users/me`, después el frontend; si no, `user.nombre` llega
+  `undefined` y los layouts fallan.
