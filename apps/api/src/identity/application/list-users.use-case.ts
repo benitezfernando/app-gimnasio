@@ -14,7 +14,8 @@ const ROLES_QUE_PUEDEN_LISTAR: Role[] = [Role.ADMIN];
 
 /**
  * Lista los usuarios del gym de quien invoca (el gymId sale siempre de
- * `invocadoPor`, nunca de un parámetro del cliente). Solo ADMIN.
+ * `invocadoPor`, nunca de un parámetro del cliente). Solo ADMIN. Excluye
+ * a quien invoca: el listado es para gestionar a otros (HU-03).
  */
 @Injectable()
 export class ListUsersUseCase {
@@ -24,6 +25,10 @@ export class ListUsersUseCase {
     if (!ROLES_QUE_PUEDEN_LISTAR.includes(input.invocadoPor.role)) {
       throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_LISTAR);
     }
-    return this.userRepository.findByGymId(requireGymId(input.invocadoPor), input.role);
+    const usuarios = await this.userRepository.findByGymId(
+      requireGymId(input.invocadoPor),
+      input.role,
+    );
+    return usuarios.filter((usuario) => usuario.id !== input.invocadoPor.id);
   }
 }

@@ -21,6 +21,7 @@ import { DeactivateUserUseCase } from '../../application/deactivate-user.use-cas
 import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
 import { EditUserUseCase } from '../../application/edit-user.use-case';
+import { GetCurrentUserUseCase } from '../../application/get-current-user.use-case';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
 import { CreateAlumnoDto } from './dto/create-alumno.dto';
 import { EditUserDto } from './dto/edit-user.dto';
@@ -39,6 +40,7 @@ export class UsersController {
     private readonly getUserDeletionImpactUseCase: GetUserDeletionImpactUseCase,
     private readonly deleteUserPermanentlyUseCase: DeleteUserPermanentlyUseCase,
     private readonly editUserUseCase: EditUserUseCase,
+    private readonly getCurrentUserUseCase: GetCurrentUserUseCase,
   ) {}
 
   @Post('profesor')
@@ -67,8 +69,9 @@ export class UsersController {
   }
 
   @Get('me')
-  me(@Req() req: RequestWithUser) {
-    return { id: req.user.id, gymId: req.user.gymId, role: req.user.role };
+  async me(@Req() req: RequestWithUser) {
+    const user = await this.getCurrentUserUseCase.execute({ userId: req.user.id });
+    return toUserResponse(user);
   }
 
   @Get()

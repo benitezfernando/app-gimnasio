@@ -9,6 +9,7 @@ import { DeactivateUserUseCase } from '../../application/deactivate-user.use-cas
 import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
 import { EditUserUseCase } from '../../application/edit-user.use-case';
+import { GetCurrentUserUseCase } from '../../application/get-current-user.use-case';
 import {
   USER_REPOSITORY,
   UserRepositoryPort,
@@ -111,6 +112,7 @@ describe('PATCH /users/:id (e2e)', () => {
         GetUserDeletionImpactUseCase,
         DeleteUserPermanentlyUseCase,
         EditUserUseCase,
+        GetCurrentUserUseCase,
         { provide: USER_REPOSITORY, useValue: fakeUserRepository },
         { provide: AUTH_PROVIDER, useValue: fakeAuthProvider },
         { provide: CARTERA_REPOSITORY, useValue: fakeCarteraRepository },
@@ -175,5 +177,20 @@ describe('PATCH /users/:id (e2e)', () => {
       .send({ nombre: 'X' });
 
     expect(res.status).toBe(403);
+  });
+
+  it('GET /users/me devuelve nombre y username del usuario autenticado', async () => {
+    const token = await tokenPara('auth-admin');
+    const res = await request(app.getHttpServer())
+      .get('/users/me')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchObject({
+      id: admin.id,
+      role: admin.role,
+      nombre: admin.nombre,
+      username: admin.username,
+    });
   });
 });

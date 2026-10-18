@@ -12,6 +12,7 @@ import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from './application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from './application/delete-user-permanently.use-case';
 import { EditUserUseCase } from './application/edit-user.use-case';
+import { GetCurrentUserUseCase } from './application/get-current-user.use-case';
 import { AssignProfesorToAlumnoUseCase } from './application/cartera/assign-profesor-to-alumno.use-case';
 import { RemoveProfesorFromAlumnoUseCase } from './application/cartera/remove-profesor-from-alumno.use-case';
 import { ListCarteraUseCase } from './application/cartera/list-cartera.use-case';
@@ -44,6 +45,7 @@ import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
     GetUserDeletionImpactUseCase,
     DeleteUserPermanentlyUseCase,
     EditUserUseCase,
+    GetCurrentUserUseCase,
     AssignProfesorToAlumnoUseCase,
     RemoveProfesorFromAlumnoUseCase,
     ListCarteraUseCase,
