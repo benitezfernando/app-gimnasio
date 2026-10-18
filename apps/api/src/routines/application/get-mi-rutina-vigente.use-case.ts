@@ -31,7 +31,11 @@ export class GetMiRutinaVigenteUseCase {
     return {
       id: instancia.id,
       nombre: instancia.nombre,
-      dias: await resolverDiasDeRutina(this.exerciseRepository, instancia.dias),
+      dias: await resolverDiasDeRutina(
+        this.exerciseRepository,
+        instancia.dias,
+        instancia.profesorId,
+      ),
     };
   }
 }

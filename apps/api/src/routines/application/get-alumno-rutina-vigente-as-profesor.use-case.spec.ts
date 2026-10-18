@@ -171,4 +171,18 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       ['d2', 2, null],
     ]);
   });
+
+  it('resuelve los nombres con el alias del profesor dueño de la rutina, no con el del invocador', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({
+      ...instancia,
+      profesorId: 'prof-2',
+    });
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+
+    await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1'], 'prof-2');
+  });
 });

@@ -85,7 +85,11 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
       return null;
     }
 
-    const diasResueltos = await resolverDiasDeRutina(this.exerciseRepository, instancia.dias);
+    const diasResueltos = await resolverDiasDeRutina(
+      this.exerciseRepository,
+      instancia.dias,
+      instancia.profesorId,
+    );
     const idsVinculados = instancia.dias.flatMap((d) =>
       d.vinculadoADiaId ? [d.vinculadoADiaId] : [],
     );
