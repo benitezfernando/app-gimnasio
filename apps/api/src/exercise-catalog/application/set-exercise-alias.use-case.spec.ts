@@ -95,6 +95,22 @@ describe('SetExerciseAliasUseCase', () => {
       nombreNormalizado: 'banca plana ae',
     });
     expect(exerciseRepository.findById).toHaveBeenLastCalledWith('ex-1', 'prof-1');
+    expect(aliasRepository.delete).not.toHaveBeenCalled();
     expect(resultado).toEqual(detalle);
+  });
+
+  it('borra el alias en vez de guardarlo si es idéntico al nombre del catálogo', async () => {
+    const sinAlias = { ...detalle, nombre: 'Barra press de banca' };
+    exerciseRepository.findById.mockResolvedValue(sinAlias);
+
+    const resultado = await useCase.execute({
+      invocadoPor: profesor,
+      exerciseId: 'ex-1',
+      nombre: '  Barra press de banca  ',
+    });
+
+    expect(aliasRepository.upsert).not.toHaveBeenCalled();
+    expect(aliasRepository.delete).toHaveBeenCalledWith('prof-1', 'ex-1');
+    expect(resultado).toEqual(sinAlias);
   });
 });

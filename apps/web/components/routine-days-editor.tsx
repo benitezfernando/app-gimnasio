@@ -40,6 +40,7 @@ export function RoutineDaysEditor({
   textoGuardar = 'Guardar',
   permiteGuardarVacio = true,
   importacion,
+  puedeRenombrar = true,
 }: {
   diasIniciales: DiaEnEdicion[];
   onGuardar: (dias: DiaEnEdicion[], opciones: { vincular: boolean }) => Promise<void>;
@@ -48,6 +49,7 @@ export function RoutineDaysEditor({
   textoGuardar?: string;
   permiteGuardarVacio?: boolean;
   importacion?: ImportacionDePlantillas;
+  puedeRenombrar?: boolean;
 }) {
   const confirmar = useConfirm();
   const idSincronizado = useId();
@@ -190,6 +192,7 @@ export function RoutineDaysEditor({
       )}
 
       <DayExercisesList
+        puedeRenombrar={puedeRenombrar}
         ejercicios={activo.ejercicios}
         onChange={(ejercicios) => setDias(actualizarEjerciciosDeDia(dias, activo.uid, ejercicios))}
         destinosParaMover={destinosParaMover}

@@ -52,12 +52,17 @@ export class SetExerciseAliasUseCase {
       throw new ExerciseNotFoundError(input.exerciseId);
     }
 
-    await this.aliasRepository.upsert({
-      profesorId: input.invocadoPor.id,
-      exerciseId: input.exerciseId,
-      nombre,
-      nombreNormalizado: normalizarNombre(nombre),
-    });
+    // Un alias idéntico al catálogo es ruido que ensucia `nombreCatalogo`.
+    if (nombre === existente.nombre) {
+      await this.aliasRepository.delete(input.invocadoPor.id, input.exerciseId);
+    } else {
+      await this.aliasRepository.upsert({
+        profesorId: input.invocadoPor.id,
+        exerciseId: input.exerciseId,
+        nombre,
+        nombreNormalizado: normalizarNombre(nombre),
+      });
+    }
 
     const resuelto = await this.exerciseRepository.findById(input.exerciseId, input.invocadoPor.id);
     if (!resuelto) {

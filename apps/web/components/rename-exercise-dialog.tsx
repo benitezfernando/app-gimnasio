@@ -51,7 +51,8 @@ export function RenameExerciseDialog({
   const tieneAlias = Boolean(ejercicio.nombreCatalogo);
   const nombreCatalogo = ejercicio.nombreCatalogo ?? ejercicio.nombre;
   const recortado = valor.trim();
-  const invalido = recortado.length === 0 || recortado.length > MAX_ALIAS;
+  const invalido =
+    recortado.length === 0 || recortado.length > MAX_ALIAS || recortado === ejercicio.nombre;
   const rutaAlias = `exercises/${ejercicio.exerciseId}/alias`;
 
   async function ejecutar(accion: () => Promise<EjercicioResuelto>) {

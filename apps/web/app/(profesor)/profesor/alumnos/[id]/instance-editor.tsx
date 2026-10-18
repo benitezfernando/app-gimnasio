@@ -18,9 +18,11 @@ function textoDesvinculados(numeros: number[]): string {
 export function InstanceEditor({
   instancia,
   plantillas,
+  puedeRenombrar = true,
 }: {
   instancia: { id: string; dias: DiaEnEdicion[] };
   plantillas: Array<{ id: string; nombre: string }>;
+  puedeRenombrar?: boolean;
 }) {
   const router = useRouter();
   const [guardando, setGuardando] = useState(false);
@@ -63,6 +65,7 @@ export function InstanceEditor({
         error={error}
         textoGuardar="Guardar rutina"
         importacion={{ plantillas }}
+        puedeRenombrar={puedeRenombrar}
       />
     </div>
   );

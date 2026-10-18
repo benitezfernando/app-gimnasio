@@ -59,6 +59,7 @@ function FilaEjercicio({
   onQuitar,
   onMover,
   onRenombrar,
+  puedeRenombrar,
 }: {
   ejercicio: EjercicioEnEdicion;
   destinos: DestinoParaMover[];
@@ -66,6 +67,7 @@ function FilaEjercicio({
   onQuitar: () => void;
   onMover: (diaUid: string) => void;
   onRenombrar: () => void;
+  puedeRenombrar: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: ejercicio.uid,
@@ -127,40 +129,44 @@ function FilaEjercicio({
         </div>
 
         {/* modal={false}: el diálogo de renombrar se abre al elegir un ítem; con el menú modal, Radix puede dejar la página sin responder al cerrarlo. */}
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="shrink-0 text-muted-foreground"
-              aria-label={`Más opciones de ${ejercicio.nombre}`}
-            >
-              <MoreVertical size={18} aria-hidden />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onSelect={onRenombrar}>
-              <Pencil size={16} aria-hidden />
-              Renombrar
-            </DropdownMenuItem>
-            {destinos.length > 0 && (
-              <>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel>Mover a</DropdownMenuLabel>
-                {destinos.map((destino) => (
-                  <DropdownMenuItem
-                    key={destino.uid}
-                    disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
-                    onSelect={() => onMover(destino.uid)}
-                  >
-                    Día {destino.numero}
-                  </DropdownMenuItem>
-                ))}
-              </>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {(puedeRenombrar || destinos.length > 0) && (
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="shrink-0 text-muted-foreground"
+                aria-label={`Más opciones de ${ejercicio.nombre}`}
+              >
+                <MoreVertical size={18} aria-hidden />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {puedeRenombrar && (
+                <DropdownMenuItem onSelect={onRenombrar}>
+                  <Pencil size={16} aria-hidden />
+                  Renombrar
+                </DropdownMenuItem>
+              )}
+              {destinos.length > 0 && (
+                <>
+                  {puedeRenombrar && <DropdownMenuSeparator />}
+                  <DropdownMenuLabel>Mover a</DropdownMenuLabel>
+                  {destinos.map((destino) => (
+                    <DropdownMenuItem
+                      key={destino.uid}
+                      disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
+                      onSelect={() => onMover(destino.uid)}
+                    >
+                      Día {destino.numero}
+                    </DropdownMenuItem>
+                  ))}
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
 
         <Button
           type="button"
@@ -184,6 +190,7 @@ export function DayExercisesList({
   destinosParaMover,
   onMoverADia,
   onRenombrado,
+  puedeRenombrar = true,
 }: {
   ejercicios: EjercicioEnEdicion[];
   onChange: (ejercicios: EjercicioEnEdicion[]) => void;
@@ -191,6 +198,8 @@ export function DayExercisesList({
   onMoverADia: (ejercicioUid: string, diaUid: string) => void;
   /** El alias vale para todo el perfil: el padre actualiza todas las líneas con ese ejercicio, en todos los días. */
   onRenombrado: (exerciseId: string, nombre: string, nombreCatalogo: string | null) => void;
+  /** false cuando la rutina es de otro profesor: el alias que se editaría no es el que ven sus nombres. */
+  puedeRenombrar?: boolean;
 }) {
   const [renombrando, setRenombrando] = useState<EjercicioEnEdicion | null>(null);
   const sensors = useSensors(
@@ -264,6 +273,7 @@ export function DayExercisesList({
                   onQuitar={() => onChange(ejercicios.filter((e) => e.uid !== ejercicio.uid))}
                   onMover={(diaUid) => onMoverADia(ejercicio.uid, diaUid)}
                   onRenombrar={() => setRenombrando(ejercicio)}
+                  puedeRenombrar={puedeRenombrar}
                 />
               ))}
             </ul>
