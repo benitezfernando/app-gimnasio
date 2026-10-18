@@ -45,7 +45,10 @@ export function Sidebar({
       </div>
 
       <div className="flex items-center gap-3 border-b border-border/60 px-5 py-5">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-sm font-semibold text-primary-foreground">
+        <span
+          aria-hidden
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-sm font-semibold text-primary-foreground"
+        >
           {inicialDe(user.nombre)}
         </span>
         <div className="min-w-0">
@@ -81,7 +84,9 @@ export function Sidebar({
       </nav>
 
       <div className="flex items-center justify-between border-t border-border/60 px-3 py-3">
-        <span className="text-xs text-muted-foreground">Cerrar sesión</span>
+        <span aria-hidden className="text-xs text-muted-foreground">
+          Cerrar sesión
+        </span>
         <LogoutButton redirectTo={logoutRedirectTo} />
       </div>
     </aside>

@@ -55,7 +55,7 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
             className="flex min-w-11 flex-col items-center gap-1 px-3 py-1 transition-transform duration-150 active:scale-95"
           >
             <span
-              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 ${
+              className={`flex h-8 w-8 items-center justify-center rounded-full ${
                 activo ? 'bg-gradient-brand' : ''
               }`}
             >

@@ -7,11 +7,9 @@ export interface GetCurrentUserInput {
 }
 
 /**
- * A diferencia de `req.user` (poblado desde el JWT, sin ir a la DB), esto
- * trae el `UserRecord` completo — lo necesita `GET /users/me` para
- * devolver `nombre`/`username`, que no viajan en el JWT. Solo este
- * endpoint paga el round-trip extra; el guard de cada request sigue sin
- * tocar la DB.
+ * `req.user` (`AuthenticatedUser`) solo expone `id`/`gymId`/`role`. Este use
+ * case trae el `UserRecord` completo para que `GET /users/me` devuelva
+ * `nombre`/`username` sin ampliar `AuthenticatedUser`.
  */
 @Injectable()
 export class GetCurrentUserUseCase {
