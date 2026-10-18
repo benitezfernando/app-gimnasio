@@ -14,6 +14,8 @@ interface TemplateOption {
 interface RutinaVigenteResponse {
   id: string;
   nombre: string;
+  /** Ausente si el API es anterior a este campo: se asume dueño. */
+  esDueno?: boolean;
   dias: DiaRutinaApi[];
 }
 
@@ -49,6 +51,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
           <InstanceEditor
             instancia={{ id: rutinaVigente.id, dias: diasDeRutinaAEdicion(rutinaVigente.dias) }}
             plantillas={plantillas}
+            puedeRenombrar={rutinaVigente.esDueno !== false}
           />
         </section>
       )}

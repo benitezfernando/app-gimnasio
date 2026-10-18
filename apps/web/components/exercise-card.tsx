@@ -9,6 +9,8 @@ import { GradientIcon } from './ui/gradient-icon';
 export interface ExerciseCardData {
   id: string;
   nombre: string;
+  /** Nombre del catálogo cuando `nombre` es un alias del profesor; null/ausente si no hay alias. */
+  nombreCatalogo?: string | null;
   nombreOriginal: string | null;
   imageUrl: string | null;
   parteCuerpo: string;

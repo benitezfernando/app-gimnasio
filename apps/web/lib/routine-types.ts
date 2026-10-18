@@ -3,6 +3,8 @@ export interface EjercicioEnEdicion {
   uid: string;
   exerciseId: string;
   nombre: string;
+  /** Nombre del catálogo cuando `nombre` es un alias del profesor; null/ausente si no hay alias. */
+  nombreCatalogo?: string | null;
   imageUrl: string | null;
   series: number;
   repeticiones: number;

@@ -3,6 +3,7 @@ import {
   aPayloadDeDias,
   aPlantillaParaImportar,
   agregarDia,
+  aplicarNombreAEjercicio,
   claveDeVersion,
   crearDiaVacio,
   diaInicialParaAlumno,
@@ -270,5 +271,94 @@ describe('routine-days', () => {
     expect(diaInicialParaAlumno(null, 4)).toBe(1);
     expect(diaInicialParaAlumno('abc', 4)).toBe(1);
     expect(diaInicialParaAlumno('0', 4)).toBe(1);
+  });
+});
+
+describe('aplicarNombreAEjercicio', () => {
+  it('actualiza nombre y nombreCatalogo en todas las líneas de ese ejercicio, en todos los días', () => {
+    const dias = [dia('d1', [ej('ex-1', 'u1'), ej('ex-2', 'u2')]), dia('d2', [ej('ex-1', 'u3')])];
+
+    const resultado = aplicarNombreAEjercicio(dias, 'ex-1', 'Banca plana', 'Barra press de banca');
+
+    expect(
+      resultado.flatMap((d) => d.ejercicios.map((e) => [e.uid, e.nombre, e.nombreCatalogo])),
+    ).toEqual([
+      ['u1', 'Banca plana', 'Barra press de banca'],
+      ['u2', 'ex-2', undefined],
+      ['u3', 'Banca plana', 'Barra press de banca'],
+    ]);
+  });
+
+  it('no muta los días originales', () => {
+    const dias = [dia('d1', [ej('ex-1')])];
+
+    aplicarNombreAEjercicio(dias, 'ex-1', 'Banca plana', 'Barra press de banca');
+
+    expect(dias[0].ejercicios[0].nombre).toBe('ex-1');
+  });
+
+  it('volver al nombre original deja nombreCatalogo en null', () => {
+    const dias = [dia('d1', [{ ...ej('ex-1'), nombre: 'Banca plana', nombreCatalogo: 'Barra' }])];
+
+    const resultado = aplicarNombreAEjercicio(dias, 'ex-1', 'Barra press de banca', null);
+
+    expect(resultado[0].ejercicios[0]).toMatchObject({
+      nombre: 'Barra press de banca',
+      nombreCatalogo: null,
+    });
+  });
+});
+
+describe('nombreCatalogo en la conversión desde la API', () => {
+  it('diasDePlantillaAEdicion lo toma del detalle del ejercicio', () => {
+    const dias = diasDePlantillaAEdicion(
+      [
+        {
+          id: 't1',
+          numero: 1,
+          ejercicios: [
+            { exerciseId: 'ex-1', orden: 1, series: 3, repeticiones: 10, peso: null, notas: null },
+            { exerciseId: 'ex-2', orden: 2, series: 3, repeticiones: 10, peso: null, notas: null },
+          ],
+        },
+      ],
+      new Map<string, { nombre: string; imageUrl: string | null; nombreCatalogo?: string | null }>([
+        ['ex-1', { nombre: 'Banca plana', imageUrl: null, nombreCatalogo: 'Barra press de banca' }],
+        ['ex-2', { nombre: 'Sentadilla', imageUrl: null }],
+      ]),
+    );
+
+    expect(dias[0].ejercicios.map((e) => [e.nombre, e.nombreCatalogo])).toEqual([
+      ['Banca plana', 'Barra press de banca'],
+      ['Sentadilla', null],
+    ]);
+  });
+
+  it('diasDeRutinaAEdicion lo toma de la rutina resuelta por la API', () => {
+    const dias = diasDeRutinaAEdicion([
+      {
+        id: 'i1',
+        numero: 1,
+        vinculado: null,
+        ejercicios: [
+          {
+            exerciseId: 'ex-1',
+            orden: 1,
+            series: 3,
+            repeticiones: 10,
+            peso: null,
+            notas: null,
+            nombre: 'Banca plana',
+            imageUrl: null,
+            nombreCatalogo: 'Barra press de banca',
+          },
+        ],
+      },
+    ]);
+
+    expect(dias[0].ejercicios[0]).toMatchObject({
+      nombre: 'Banca plana',
+      nombreCatalogo: 'Barra press de banca',
+    });
   });
 });

@@ -18,6 +18,7 @@ import {
   SeleccionImportacion,
   actualizarEjerciciosDeDia,
   agregarDia,
+  aplicarNombreAEjercicio,
   crearDiaVacio,
   eliminarDia,
   importarDePlantilla,
@@ -39,6 +40,7 @@ export function RoutineDaysEditor({
   textoGuardar = 'Guardar',
   permiteGuardarVacio = true,
   importacion,
+  puedeRenombrar = true,
 }: {
   diasIniciales: DiaEnEdicion[];
   onGuardar: (dias: DiaEnEdicion[], opciones: { vincular: boolean }) => Promise<void>;
@@ -47,6 +49,7 @@ export function RoutineDaysEditor({
   textoGuardar?: string;
   permiteGuardarVacio?: boolean;
   importacion?: ImportacionDePlantillas;
+  puedeRenombrar?: boolean;
 }) {
   const confirmar = useConfirm();
   const idSincronizado = useId();
@@ -189,11 +192,15 @@ export function RoutineDaysEditor({
       )}
 
       <DayExercisesList
+        puedeRenombrar={puedeRenombrar}
         ejercicios={activo.ejercicios}
         onChange={(ejercicios) => setDias(actualizarEjerciciosDeDia(dias, activo.uid, ejercicios))}
         destinosParaMover={destinosParaMover}
         onMoverADia={(ejercicioUid, diaUid) =>
           setDias(moverEjercicioADia(dias, activo.uid, ejercicioUid, diaUid))
+        }
+        onRenombrado={(exerciseId, nombre, nombreCatalogo) =>
+          setDias(aplicarNombreAEjercicio(dias, exerciseId, nombre, nombreCatalogo))
         }
       />
 
