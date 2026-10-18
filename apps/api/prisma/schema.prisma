@@ -37,6 +37,7 @@ model User {
   instanciasComoAlumno   RoutineInstance[] @relation("AlumnoInstances")
   alumnosAsignados       ProfesorAlumno[]  @relation("CarteraDelProfesor")
   profesoresAsignados    ProfesorAlumno[]  @relation("ProfesoresDelAlumno")
+  aliasesDeEjercicios    ExerciseAlias[]
 
   @@unique([gymId, username])
   @@index([gymId])
@@ -87,6 +88,7 @@ model Exercise {
 
   ejerciciosDeTemplate RoutineTemplateExercise[]
   ejerciciosDeInstance RoutineInstanceExercise[]
+  aliases              ExerciseAlias[]
 
   @@index([gymId])
   @@index([parteCuerpo])
@@ -94,6 +96,25 @@ model Exercise {
   @@index([activo])
   @@index([nombreNormalizado])
   @@index([nombreOriginalNormalizado])
+}
+
+// Alias de nombre de ejercicio por profesor: renombra un ejercicio del
+// catálogo solo para ese profesor (y, por la resolución al leer, para las
+// rutinas que él asignó). El catálogo `Exercise` nunca se modifica.
+model ExerciseAlias {
+  id                String   @id @default(uuid())
+  profesorId        String
+  exerciseId        String
+  nombre            String
+  nombreNormalizado String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  profesor User     @relation(fields: [profesorId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([profesorId, exerciseId])
+  @@index([profesorId, nombreNormalizado])
 }
 
 // Routines — modelo plantilla -> clon al asignar (HLD §3 / PRD §3)
