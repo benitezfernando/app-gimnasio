@@ -27,7 +27,7 @@ describe('GetExercisesByIdsUseCase', () => {
 
     const resultado = await useCase.execute(['ex-a', 'ex-b']);
 
-    expect(repo.findByIds).toHaveBeenCalledWith(['ex-a', 'ex-b']);
+    expect(repo.findByIds).toHaveBeenCalledWith(['ex-a', 'ex-b'], undefined);
     expect(resultado).toEqual([resumenA, resumenB]);
   });
 
@@ -36,5 +36,13 @@ describe('GetExercisesByIdsUseCase', () => {
 
     expect(repo.findByIds).not.toHaveBeenCalled();
     expect(resultado).toEqual([]);
+  });
+
+  it('pasa aliasDeProfesorId al repositorio para resolver el alias', async () => {
+    repo.findByIds.mockResolvedValue([resumenA]);
+
+    await useCase.execute(['ex-a'], 'prof-1');
+
+    expect(repo.findByIds).toHaveBeenCalledWith(['ex-a'], 'prof-1');
   });
 });
