@@ -44,7 +44,10 @@ export function SelectorDeDias({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Días de tu rutina">
+      <div
+        className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:flex-wrap lg:overflow-visible"
+        aria-label="Días de tu rutina"
+      >
         {dias.map((d) => (
           <Button
             key={d.numero}

@@ -93,6 +93,14 @@
   color: transparent;
 }
 
+/* Filas de chips con scroll horizontal: se scrollean con el dedo o el trackpad, sin barra nativa. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

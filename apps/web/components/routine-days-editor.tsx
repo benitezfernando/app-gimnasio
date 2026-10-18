@@ -112,7 +112,10 @@ export function RoutineDaysEditor({
   return (
     <div className="flex flex-col gap-4">
       {variosDias && (
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Días de la rutina">
+        <div
+          className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:flex-wrap lg:overflow-visible"
+          aria-label="Días de la rutina"
+        >
           {dias.map((d, i) => (
             <Button
               key={d.uid}

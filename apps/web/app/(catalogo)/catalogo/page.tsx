@@ -101,7 +101,7 @@ export default function CatalogoPage() {
         />
       </InputGroup>
 
-      <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="scrollbar-none flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible">
         <Button
           type="button"
           size="sm"
