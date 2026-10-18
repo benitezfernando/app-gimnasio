@@ -2,7 +2,9 @@ import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { ApiError } from '../../lib/api-client';
 import { getUsersList } from '../../lib/get-users-list';
-import { BottomNav, ADMIN_NAV_ITEMS } from '../../components/ui/bottom-nav';
+import { getCurrentUser } from '../../lib/get-current-user';
+import { AppShell } from '../../components/ui/app-shell';
+import { ADMIN_NAV_ITEMS } from '../../components/ui/bottom-nav';
 
 /**
  * Valida server-side que la sesión actual pertenece a un ADMIN — sin
@@ -23,10 +25,11 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     throw error;
   }
 
+  const user = await getCurrentUser();
+
   return (
-    <>
+    <AppShell items={ADMIN_NAV_ITEMS} user={user}>
       {children}
-      <BottomNav items={ADMIN_NAV_ITEMS} />
-    </>
+    </AppShell>
   );
 }

@@ -82,7 +82,7 @@ export default function CatalogoPage() {
   }, [busqueda, parteCuerpo, equipamiento]);
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl lg:pb-6 lg:pt-16">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-5xl lg:pb-6 lg:pt-6">
       <PageHeader
         title="Catálogo de ejercicios"
         left={homeHref && <HomeLink href={homeHref} />}
@@ -101,7 +101,7 @@ export default function CatalogoPage() {
         />
       </InputGroup>
 
-      <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="scrollbar-none flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible">
         <Button
           type="button"
           size="sm"

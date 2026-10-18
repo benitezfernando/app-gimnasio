@@ -59,7 +59,7 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
   }, [params.id]);
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
       {/*
         router.back() en vez de un href fijo a /catalogo — esta pantalla
         se llega tanto desde /catalogo (browse general) como desde

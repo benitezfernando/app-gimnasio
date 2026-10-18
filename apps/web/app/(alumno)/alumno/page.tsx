@@ -29,7 +29,7 @@ export default async function AlumnoPage() {
 
   if (!rutina || rutina.dias.length === 0) {
     return (
-      <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+      <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
         <PageHeader title="Rutina" right={<LogoutButton />} />
         <Empty>
           <EmptyHeader>
@@ -53,7 +53,7 @@ export default async function AlumnoPage() {
   }
 
   return (
-    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+    <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
       <PageHeader title={rutina.nombre} right={<LogoutButton />} />
 
       {rutina.dias.length === 1 ? (

@@ -1,13 +1,9 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
-import { apiFetch, ApiError } from '../../lib/api-client';
-import { BottomNav, PROFESOR_NAV_ITEMS } from '../../components/ui/bottom-nav';
-
-interface MeResponse {
-  id: string;
-  gymId: string;
-  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO';
-}
+import { ApiError } from '../../lib/api-client';
+import { getCurrentUser, CurrentUser } from '../../lib/get-current-user';
+import { AppShell } from '../../components/ui/app-shell';
+import { PROFESOR_NAV_ITEMS } from '../../components/ui/bottom-nav';
 
 /**
  * Exige rol PROFESOR real — pendiente desde el Bloque 3A, que dejó este
@@ -18,9 +14,9 @@ interface MeResponse {
  * chequeo de rol se hace acá, comparando el campo `role` de la respuesta.
  */
 export default async function ProfesorLayout({ children }: { children: ReactNode }) {
-  let me: MeResponse;
+  let user: CurrentUser;
   try {
-    me = await apiFetch<MeResponse>('/users/me');
+    user = await getCurrentUser();
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
       redirect('/login');
@@ -28,14 +24,13 @@ export default async function ProfesorLayout({ children }: { children: ReactNode
     throw error;
   }
 
-  if (me.role !== 'PROFESOR') {
+  if (user.role !== 'PROFESOR') {
     redirect('/login');
   }
 
   return (
-    <>
+    <AppShell items={PROFESOR_NAV_ITEMS} user={user}>
       {children}
-      <BottomNav items={PROFESOR_NAV_ITEMS} />
-    </>
+    </AppShell>
   );
 }
