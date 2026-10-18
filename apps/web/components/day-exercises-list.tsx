@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   DndContext,
   KeyboardSensor,
@@ -17,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, ListPlus, MoreVertical, X } from 'lucide-react';
+import { GripVertical, ListPlus, MoreVertical, Pencil, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +28,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -38,6 +40,7 @@ import {
 } from '@/components/ui/empty';
 import { ExercisePicker } from './exercise-picker';
 import { ExerciseCardData } from './exercise-card';
+import { RenameExerciseDialog } from './rename-exercise-dialog';
 import { EjercicioEnEdicion } from '../lib/routine-types';
 import { nuevoUid } from '../lib/routine-days';
 
@@ -55,12 +58,14 @@ function FilaEjercicio({
   onCambiar,
   onQuitar,
   onMover,
+  onRenombrar,
 }: {
   ejercicio: EjercicioEnEdicion;
   destinos: DestinoParaMover[];
   onCambiar: (campo: CampoEditable, valor: string) => void;
   onQuitar: () => void;
   onMover: (diaUid: string) => void;
+  onRenombrar: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id: ejercicio.uid,
@@ -121,33 +126,41 @@ function FilaEjercicio({
           ))}
         </div>
 
-        {destinos.length > 0 && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="shrink-0 text-muted-foreground"
-                aria-label={`Más opciones de ${ejercicio.nombre}`}
-              >
-                <MoreVertical size={18} aria-hidden />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Mover a</DropdownMenuLabel>
-              {destinos.map((destino) => (
-                <DropdownMenuItem
-                  key={destino.uid}
-                  disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
-                  onSelect={() => onMover(destino.uid)}
-                >
-                  Día {destino.numero}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        {/* modal={false}: el diálogo de renombrar se abre al elegir un ítem; con el menú modal, Radix puede dejar la página sin responder al cerrarlo. */}
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="shrink-0 text-muted-foreground"
+              aria-label={`Más opciones de ${ejercicio.nombre}`}
+            >
+              <MoreVertical size={18} aria-hidden />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onSelect={onRenombrar}>
+              <Pencil size={16} aria-hidden />
+              Renombrar
+            </DropdownMenuItem>
+            {destinos.length > 0 && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Mover a</DropdownMenuLabel>
+                {destinos.map((destino) => (
+                  <DropdownMenuItem
+                    key={destino.uid}
+                    disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
+                    onSelect={() => onMover(destino.uid)}
+                  >
+                    Día {destino.numero}
+                  </DropdownMenuItem>
+                ))}
+              </>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <Button
           type="button"
@@ -170,12 +183,16 @@ export function DayExercisesList({
   onChange,
   destinosParaMover,
   onMoverADia,
+  onRenombrado,
 }: {
   ejercicios: EjercicioEnEdicion[];
   onChange: (ejercicios: EjercicioEnEdicion[]) => void;
   destinosParaMover: DestinoParaMover[];
   onMoverADia: (ejercicioUid: string, diaUid: string) => void;
+  /** El alias vale para todo el perfil: el padre actualiza todas las líneas con ese ejercicio, en todos los días. */
+  onRenombrado: (exerciseId: string, nombre: string, nombreCatalogo: string | null) => void;
 }) {
+  const [renombrando, setRenombrando] = useState<EjercicioEnEdicion | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
@@ -189,6 +206,7 @@ export function DayExercisesList({
         uid: nuevoUid(),
         exerciseId: ejercicio.id,
         nombre: ejercicio.nombre,
+        nombreCatalogo: ejercicio.nombreCatalogo ?? null,
         imageUrl: ejercicio.imageUrl,
         series: 3,
         repeticiones: 10,
@@ -245,11 +263,24 @@ export function DayExercisesList({
                   onCambiar={(campo, valor) => cambiar(ejercicio.uid, campo, valor)}
                   onQuitar={() => onChange(ejercicios.filter((e) => e.uid !== ejercicio.uid))}
                   onMover={(diaUid) => onMoverADia(ejercicio.uid, diaUid)}
+                  onRenombrar={() => setRenombrando(ejercicio)}
                 />
               ))}
             </ul>
           </SortableContext>
         </DndContext>
+      )}
+
+      {renombrando && (
+        <RenameExerciseDialog
+          key={renombrando.uid}
+          ejercicio={renombrando}
+          onCerrar={() => setRenombrando(null)}
+          onRenombrado={(exerciseId, nombre, nombreCatalogo) => {
+            onRenombrado(exerciseId, nombre, nombreCatalogo);
+            setRenombrando(null);
+          }}
+        />
       )}
     </div>
   );

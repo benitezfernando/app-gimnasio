@@ -18,6 +18,7 @@ import {
   SeleccionImportacion,
   actualizarEjerciciosDeDia,
   agregarDia,
+  aplicarNombreAEjercicio,
   crearDiaVacio,
   eliminarDia,
   importarDePlantilla,
@@ -194,6 +195,9 @@ export function RoutineDaysEditor({
         destinosParaMover={destinosParaMover}
         onMoverADia={(ejercicioUid, diaUid) =>
           setDias(moverEjercicioADia(dias, activo.uid, ejercicioUid, diaUid))
+        }
+        onRenombrado={(exerciseId, nombre, nombreCatalogo) =>
+          setDias(aplicarNombreAEjercicio(dias, exerciseId, nombre, nombreCatalogo))
         }
       />
 
