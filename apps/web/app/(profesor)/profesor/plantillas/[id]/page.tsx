@@ -29,7 +29,7 @@ export default async function PlantillaDetailPage(props: { params: Promise<{ id:
   const dias = diasDePlantillaAEdicion(plantilla.dias, new Map(detalles.map((d) => [d.id, d])));
 
   return (
-    <main className="w-full px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+    <main className="w-full px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center">
           <BackLink href="/profesor/plantillas" />

@@ -14,7 +14,7 @@ export function PageHeader({
   right?: ReactNode;
 }) {
   return (
-    <div className="sticky top-0 z-10 flex w-full items-center justify-between gap-3 bg-background py-2 lg:top-12">
+    <div className="sticky top-0 z-10 flex w-full items-center justify-between gap-3 bg-background/70 py-2 backdrop-blur-xl">
       <div className="flex items-center">
         {onBack && (
           <Button

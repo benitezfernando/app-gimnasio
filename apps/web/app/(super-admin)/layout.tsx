@@ -1,22 +1,20 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
-import { apiFetch, ApiError } from '../../lib/api-client';
-
-interface MeResponse {
-  id: string;
-  gymId: string | null;
-  role: 'ADMIN' | 'PROFESOR' | 'ALUMNO' | 'SUPER_ADMIN';
-}
+import { ApiError } from '../../lib/api-client';
+import { getCurrentUser, CurrentUser } from '../../lib/get-current-user';
+import { AppShell } from '../../components/ui/app-shell';
 
 /**
  * Gate de rol SUPER_ADMIN. Mismo patrón que `(admin)/layout.tsx`, pero
- * usando `GET /users/me` (no hay lista propia del super admin que
+ * usando `getCurrentUser()` (no hay lista propia del super admin que
  * memoizar) y redirigiendo a `/super-admin/login` en vez de `/login`.
+ * `items={[]}`: no hay NAV_ITEMS propio (una sola página), el sidebar
+ * muestra solo el bloque de usuario + logout.
  */
 export default async function SuperAdminLayout({ children }: { children: ReactNode }) {
-  let me: MeResponse;
+  let user: CurrentUser;
   try {
-    me = await apiFetch<MeResponse>('/users/me');
+    user = await getCurrentUser();
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
       redirect('/super-admin/login');
@@ -24,9 +22,13 @@ export default async function SuperAdminLayout({ children }: { children: ReactNo
     throw error;
   }
 
-  if (me.role !== 'SUPER_ADMIN') {
+  if (user.role !== 'SUPER_ADMIN') {
     redirect('/super-admin/login');
   }
 
-  return <>{children}</>;
+  return (
+    <AppShell items={[]} user={user} logoutRedirectTo="/super-admin/login">
+      {children}
+    </AppShell>
+  );
 }

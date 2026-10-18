@@ -33,7 +33,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
   }
 
   return (
-    <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-16">
+    <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
       <div className="flex items-center justify-between">
         <HomeLink href="/profesor" />
         <LogoutButton />
