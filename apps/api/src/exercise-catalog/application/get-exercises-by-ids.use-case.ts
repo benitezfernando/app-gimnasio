@@ -19,10 +19,10 @@ export class GetExercisesByIdsUseCase {
     @Inject(EXERCISE_REPOSITORY) private readonly exerciseRepository: ExerciseRepositoryPort,
   ) {}
 
-  async execute(ids: string[]): Promise<ExerciseSummary[]> {
+  async execute(ids: string[], aliasDeProfesorId?: string): Promise<ExerciseSummary[]> {
     if (ids.length === 0) {
       return [];
     }
-    return this.exerciseRepository.findByIds(ids);
+    return this.exerciseRepository.findByIds(ids, aliasDeProfesorId);
   }
 }

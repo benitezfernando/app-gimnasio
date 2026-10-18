@@ -12,8 +12,8 @@ export class GetExerciseUseCase {
     @Inject(EXERCISE_REPOSITORY) private readonly exerciseRepository: ExerciseRepositoryPort,
   ) {}
 
-  async execute(id: string): Promise<ExerciseDetail> {
-    const exercise = await this.exerciseRepository.findById(id);
+  async execute(id: string, aliasDeProfesorId?: string): Promise<ExerciseDetail> {
+    const exercise = await this.exerciseRepository.findById(id, aliasDeProfesorId);
     if (!exercise) {
       throw new ExerciseNotFoundError(id);
     }

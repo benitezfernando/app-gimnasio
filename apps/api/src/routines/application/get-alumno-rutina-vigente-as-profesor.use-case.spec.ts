@@ -171,4 +171,40 @@ describe('GetAlumnoRutinaVigenteAsProfesorUseCase', () => {
       ['d2', 2, null],
     ]);
   });
+
+  it('resuelve los nombres con el alias del profesor dueño de la rutina, no con el del invocador', async () => {
+    userRepository.findById.mockResolvedValue(alumno);
+    carteraRepository.existe.mockResolvedValue(true);
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({
+      ...instancia,
+      profesorId: 'prof-2',
+    });
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+
+    await useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1'], 'prof-2');
+  });
+
+  describe('esDueno', () => {
+    const ejecutarConDueno = async (profesorId: string | null) => {
+      userRepository.findById.mockResolvedValue(alumno);
+      carteraRepository.existe.mockResolvedValue(true);
+      instanceRepository.findVigentePorAlumno.mockResolvedValue({ ...instancia, profesorId });
+      exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+      return useCase.execute({ invocadoPor: profesor, alumnoId: 'alum-1' });
+    };
+
+    it('es true cuando el invocador es el profesor dueño de la rutina', async () => {
+      expect((await ejecutarConDueno('prof-1'))?.esDueno).toBe(true);
+    });
+
+    it('es false cuando el dueño es otro profesor', async () => {
+      expect((await ejecutarConDueno('prof-2'))?.esDueno).toBe(false);
+    });
+
+    it('es false cuando la rutina quedó sin dueño', async () => {
+      expect((await ejecutarConDueno(null))?.esDueno).toBe(false);
+    });
+  });
 });

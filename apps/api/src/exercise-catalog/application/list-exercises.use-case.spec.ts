@@ -63,4 +63,17 @@ describe('ListExercisesUseCase', () => {
 
     expect(resultado.totalPages).toBe(1);
   });
+
+  it('pasa aliasDeProfesorId al repositorio', async () => {
+    repo.findMany.mockResolvedValue({ items: [], total: 0 });
+
+    await useCase.execute({ search: 'banca', aliasDeProfesorId: 'prof-1', page: 1, limit: 24 });
+
+    expect(repo.findMany).toHaveBeenCalledWith({
+      search: 'banca',
+      aliasDeProfesorId: 'prof-1',
+      page: 1,
+      limit: 24,
+    });
+  });
 });

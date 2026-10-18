@@ -117,11 +117,35 @@ describe('GetMiRutinaVigenteUseCase', () => {
     const salida = await useCase.execute({ invocadoPor: alumno });
 
     expect(exerciseRepository.findByIds).toHaveBeenCalledTimes(1);
-    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1']);
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1'], 'prof-1');
     expect(salida?.dias.map((d) => [d.numero, d.ejercicios[0].series])).toEqual([
       [1, 3],
       [2, 4],
     ]);
     expect(JSON.stringify(salida)).not.toContain('tday-9');
+  });
+
+  it('resuelve los nombres con el alias del profesor dueño de la rutina', async () => {
+    instanceRepository.findVigentePorAlumno.mockResolvedValue(instancia);
+    exerciseRepository.findByIds.mockResolvedValue([
+      { ...ejercicioResuelto, nombre: 'Sentadilla del gym', nombreCatalogo: 'Sentadilla' },
+    ]);
+
+    const salida = await useCase.execute({ invocadoPor: alumno });
+
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1'], 'prof-1');
+    expect(salida?.dias[0].ejercicios[0]).toMatchObject({
+      nombre: 'Sentadilla del gym',
+      nombreCatalogo: 'Sentadilla',
+    });
+  });
+
+  it('sin profesor dueño (borrado) resuelve con el nombre del catálogo', async () => {
+    instanceRepository.findVigentePorAlumno.mockResolvedValue({ ...instancia, profesorId: null });
+    exerciseRepository.findByIds.mockResolvedValue([ejercicioResuelto]);
+
+    await useCase.execute({ invocadoPor: alumno });
+
+    expect(exerciseRepository.findByIds).toHaveBeenCalledWith(['ex-1'], undefined);
   });
 });

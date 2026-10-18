@@ -81,4 +81,31 @@ describe('PrismaExerciseRepository', () => {
       nombreOriginalNormalizado: { contains: 'sit-up' },
     });
   });
+
+  it('findByIds con aliasDeProfesorId pide en el select los alias de ese profesor (máximo uno)', async () => {
+    await repo.findByIds(['ex-1'], 'prof-1');
+
+    const args = prisma.exercise.findMany.mock.calls[0][0];
+    expect(args.select.aliases).toEqual({
+      where: { profesorId: 'prof-1' },
+      select: { nombre: true },
+      take: 1,
+    });
+  });
+
+  it('findByIds sin aliasDeProfesorId no pide alias', async () => {
+    await repo.findByIds(['ex-1']);
+
+    const args = prisma.exercise.findMany.mock.calls[0][0];
+    expect(args.select).not.toHaveProperty('aliases');
+  });
+
+  it('findMany con aliasDeProfesorId suma el match por alias propio al OR de la búsqueda', async () => {
+    await repo.findMany({ search: 'Banca', aliasDeProfesorId: 'prof-1', page: 1, limit: 24 });
+
+    const args = prisma.exercise.findMany.mock.calls[0][0];
+    expect(args.where.OR).toContainEqual({
+      aliases: { some: { profesorId: 'prof-1', nombreNormalizado: { contains: 'banca' } } },
+    });
+  });
 });

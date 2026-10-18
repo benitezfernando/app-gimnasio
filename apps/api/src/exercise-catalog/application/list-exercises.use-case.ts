@@ -9,6 +9,8 @@ export interface ListExercisesInput {
   search?: string;
   parteCuerpo?: string;
   equipamiento?: string;
+  /** Profesor cuyos alias se aplican al listado y a la búsqueda; ausente = catálogo puro. */
+  aliasDeProfesorId?: string;
   page: number;
   limit: number;
 }
@@ -32,6 +34,7 @@ export class ListExercisesUseCase {
       search: input.search,
       parteCuerpo: input.parteCuerpo,
       equipamiento: input.equipamiento,
+      aliasDeProfesorId: input.aliasDeProfesorId,
       page: input.page,
       limit: input.limit,
     });

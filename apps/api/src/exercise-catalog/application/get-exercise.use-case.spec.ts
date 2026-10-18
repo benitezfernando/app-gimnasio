@@ -31,7 +31,7 @@ describe('GetExerciseUseCase', () => {
 
     const resultado = await useCase.execute('ex-1');
 
-    expect(repo.findById).toHaveBeenCalledWith('ex-1');
+    expect(repo.findById).toHaveBeenCalledWith('ex-1', undefined);
     expect(resultado).toEqual(detalle);
   });
 
@@ -39,5 +39,13 @@ describe('GetExerciseUseCase', () => {
     repo.findById.mockResolvedValue(null);
 
     await expect(useCase.execute('no-existe')).rejects.toThrow(ExerciseNotFoundError);
+  });
+
+  it('pasa aliasDeProfesorId al repositorio para resolver el alias', async () => {
+    repo.findById.mockResolvedValue(detalle);
+
+    await useCase.execute('ex-1', 'prof-1');
+
+    expect(repo.findById).toHaveBeenCalledWith('ex-1', 'prof-1');
   });
 });

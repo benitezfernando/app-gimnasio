@@ -48,6 +48,8 @@ export interface RutinaVigenteDiaConVinculoOutput extends RutinaVigenteDiaOutput
 export interface RutinaVigenteConVinculacionOutput {
   id: string;
   nombre: string;
+  /** false si la rutina es de otro profesor o no tiene dueño: los nombres no son los del invocador. */
+  esDueno: boolean;
   dias: RutinaVigenteDiaConVinculoOutput[];
 }
 
@@ -85,7 +87,11 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
       return null;
     }
 
-    const diasResueltos = await resolverDiasDeRutina(this.exerciseRepository, instancia.dias);
+    const diasResueltos = await resolverDiasDeRutina(
+      this.exerciseRepository,
+      instancia.dias,
+      instancia.profesorId,
+    );
     const idsVinculados = instancia.dias.flatMap((d) =>
       d.vinculadoADiaId ? [d.vinculadoADiaId] : [],
     );
@@ -96,6 +102,7 @@ export class GetAlumnoRutinaVigenteAsProfesorUseCase {
     return {
       id: instancia.id,
       nombre: instancia.nombre,
+      esDueno: instancia.profesorId === input.invocadoPor.id,
       dias: instancia.dias.map((dia, indice) => {
         const referencia = dia.vinculadoADiaId ? referencias.get(dia.vinculadoADiaId) : undefined;
         return {
