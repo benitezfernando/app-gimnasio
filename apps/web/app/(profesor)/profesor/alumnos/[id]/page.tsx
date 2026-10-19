@@ -21,18 +21,20 @@ interface RutinaVigenteResponse {
 
 export default async function AlumnoDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const plantillas = (await apiFetch<TemplateOption[]>('/routine-templates'))
+  // Independientes entre sí: en paralelo, no una después de la otra.
+  const [todasLasPlantillas, rutinaVigente] = await Promise.all([
+    apiFetch<TemplateOption[]>('/routine-templates'),
+    apiFetch<RutinaVigenteResponse>(`/users/${params.id}/rutina-vigente`).catch(
+      (error: unknown) => {
+        // 200 con body vacío si no hay vigente; este catch es para un 403/404 real.
+        if (!(error instanceof ApiError)) throw error;
+        return null;
+      },
+    ),
+  ]);
+  const plantillas = todasLasPlantillas
     .filter((p) => p.activa)
     .map(({ id, nombre }) => ({ id, nombre }));
-
-  let rutinaVigente: RutinaVigenteResponse | null = null;
-  try {
-    rutinaVigente = await apiFetch<RutinaVigenteResponse>(`/users/${params.id}/rutina-vigente`);
-  } catch (error) {
-    // 200 con body vacío si no hay vigente; este catch es para un 403/404 real.
-    if (!(error instanceof ApiError)) throw error;
-    rutinaVigente = null;
-  }
 
   return (
     <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">

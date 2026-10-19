@@ -1,23 +1,20 @@
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { ApiError } from '../../lib/api-client';
-import { getUsersList } from '../../lib/get-users-list';
-import { getCurrentUser } from '../../lib/get-current-user';
+import { getCurrentUser, CurrentUser } from '../../lib/get-current-user';
 import { AppShell } from '../../components/ui/app-shell';
 import { ADMIN_NAV_ITEMS } from '../../components/ui/bottom-nav';
 
 /**
- * Valida server-side que la sesión actual pertenece a un ADMIN — sin
- * reimplementar la verificación del JWT: llama a `GET /users` del backend,
- * gateado por `@Roles(ADMIN)` + `JwtAuthGuard`. Si responde 401/403,
- * redirige a `/login`. Usa `getUsersList()` (memoizada por request) en vez
- * de `apiFetch` directo — admin/page.tsx pide la misma lista para sus
- * datos, y sin la memoización se pagaba el round-trip dos veces por
- * navegación.
+ * Exige rol ADMIN — mismo criterio que (profesor)/layout.tsx. Antes el gate
+ * era `GET /users` seguido de `GET /users/me` (dos idas y vueltas en
+ * serie); ahora alcanza con el usuario, y la página pide la lista en
+ * paralelo con este layout. El backend igual exige ADMIN en cada endpoint.
  */
 export default async function AdminLayout({ children }: { children: ReactNode }) {
+  let user: CurrentUser;
   try {
-    await getUsersList();
+    user = await getCurrentUser();
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
       redirect('/login');
@@ -25,7 +22,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     throw error;
   }
 
-  const user = await getCurrentUser();
+  if (user.role !== 'ADMIN') {
+    redirect('/login');
+  }
 
   return (
     <AppShell items={ADMIN_NAV_ITEMS} user={user}>

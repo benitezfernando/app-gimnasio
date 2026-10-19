@@ -9,12 +9,7 @@ export interface UserRow {
   activo: boolean;
 }
 
-/**
- * `React.cache` memoiza por request: (admin)/layout.tsx la llama solo para
- * verificar que responda 200 (auth gate) y admin/page.tsx la llama de
- * nuevo para los datos reales — mismo endpoint, mismo render. Sin esto,
- * cada navegación a /admin pagaba el round-trip a GET /users dos veces.
- */
+/** `React.cache` memoiza por request por si más de un componente del render la pide. */
 export const getUsersList = cache(async (): Promise<UserRow[]> => {
   return apiFetch<UserRow[]>('/users');
 });

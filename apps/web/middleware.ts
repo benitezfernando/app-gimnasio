@@ -100,5 +100,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/profesor/:path*', '/alumno/:path*', '/super-admin/:path*'],
+  // `/catalogo` y `/` también: sin refresh proactivo, quien volvía tras más
+  // de una hora y entraba directo ahí terminaba en el login.
+  matcher: [
+    '/',
+    '/admin/:path*',
+    '/profesor/:path*',
+    '/alumno/:path*',
+    '/catalogo/:path*',
+    '/super-admin/:path*',
+  ],
 };

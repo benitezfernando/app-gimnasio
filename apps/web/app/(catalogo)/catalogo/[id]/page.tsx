@@ -1,11 +1,8 @@
-'use client';
-
-import { useEffect, useState, use } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { Dumbbell } from 'lucide-react';
-import { browserApiFetch, BrowserApiError } from '../../../../lib/browser-api-client';
-import { useRoleHome } from '../../../../lib/use-role-home';
+import { apiFetch, ApiError } from '../../../../lib/api-client';
+import { getCurrentUser } from '../../../../lib/get-current-user';
+import { homeDeRol } from '../../../../lib/role-home';
 import { ETIQUETA_PARTE_CUERPO } from '../../../../lib/region-colors';
 import { ETIQUETA_GRUPO_MUSCULAR } from '../../../../lib/muscle-group-options';
 import { ETIQUETA_EQUIPAMIENTO } from '../../../../lib/equipment-options';
@@ -13,6 +10,7 @@ import { PageHeader } from '../../../../components/ui/page-header';
 import { nombreConOriginal } from '../../../../components/exercise-card';
 import { LogoutButton } from '../../../../components/logout-button';
 import { HomeLink } from '../../../../components/ui/home-link';
+import { BackButton } from '../../../../components/ui/back-button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -31,52 +29,46 @@ interface ExerciseDetailResponse {
   atribucionMedia: string | null;
 }
 
-export default function DetalleEjercicioPage(props: { params: Promise<{ id: string }> }) {
-  const params = use(props.params);
-  const router = useRouter();
-  const [ejercicio, setEjercicio] = useState<ExerciseDetailResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [cargando, setCargando] = useState(true);
-  const homeHref = useRoleHome();
-
-  useEffect(() => {
-    let cancelado = false;
-    async function cargar() {
-      try {
-        const respuesta = await browserApiFetch<ExerciseDetailResponse>(`/exercises/${params.id}`);
-        if (!cancelado) setEjercicio(respuesta);
-      } catch (err) {
-        if (cancelado) return;
-        setError(err instanceof BrowserApiError ? err.message : 'No se pudo cargar el ejercicio.');
-      } finally {
-        if (!cancelado) setCargando(false);
-      }
-    }
-    cargar();
-    return () => {
-      cancelado = true;
-    };
-  }, [params.id]);
+/**
+ * Server Component: el ejercicio llega en el HTML, sin el ida y vuelta
+ * extra navegador → proxy → API que hacía la versión cliente. El usuario
+ * ya lo pidió el layout (`getCurrentUser` está memoizado por request).
+ */
+export default async function DetalleEjercicioPage(props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
+  const [usuario, resultado] = await Promise.all([
+    getCurrentUser(),
+    apiFetch<ExerciseDetailResponse>(`/exercises/${id}`).then(
+      (ejercicio) => ({ ejercicio, error: null }),
+      (err: unknown) => {
+        if (!(err instanceof ApiError)) throw err;
+        return { ejercicio: null, error: err.message };
+      },
+    ),
+  ]);
+  const { ejercicio, error } = resultado;
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
       {/*
-        router.back() en vez de un href fijo a /catalogo — esta pantalla
-        se llega tanto desde /catalogo (browse general) como desde
-        /alumno (ejercicio dentro de la rutina vigente); un destino fijo
-        sacaba al alumno de su rutina hacia el catálogo general en vez de
-        devolverlo a donde estaba.
+        Volver con router.back() en vez de un href fijo a /catalogo — esta
+        pantalla se llega tanto desde /catalogo como desde /alumno
+        (ejercicio dentro de la rutina vigente); un destino fijo sacaba al
+        alumno de su rutina hacia el catálogo general.
       */}
       <PageHeader
         title={
           ejercicio ? nombreConOriginal(ejercicio.nombre, ejercicio.nombreOriginal) : 'Ejercicio'
         }
-        onBack={() => router.back()}
-        left={homeHref && <HomeLink href={homeHref} />}
+        left={
+          <>
+            <BackButton />
+            <HomeLink href={homeDeRol(usuario.role)} />
+          </>
+        }
         right={<LogoutButton />}
       />
 
-      {cargando && <p className="text-sm text-muted-foreground">Cargando...</p>}
       {error && (
         <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>
