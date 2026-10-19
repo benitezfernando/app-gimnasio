@@ -42,6 +42,9 @@ export function ExerciseCard({ ejercicio }: { ejercicio: ExerciseCardData }) {
         {ejercicio.imageUrl ? (
           <Image
             src={ejercicio.imageUrl}
+            // JPG de 180 px y ~5 KB: el optimizador de Vercel no los mejora
+            // y gastaría la cuota mensual de transformaciones del plan.
+            unoptimized
             alt={ejercicio.nombre}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

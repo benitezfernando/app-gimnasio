@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Search, SearchX } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
@@ -45,8 +45,15 @@ export default function CatalogoPage() {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Una búsqueda nueva cancela la anterior: sin esto, una respuesta lenta de
+  // un término viejo podía llegar última y pisar los resultados del actual.
+  const pedidoEnCurso = useRef<AbortController | null>(null);
+
   const cargar = useCallback(
     async (paginaActual: number, reemplazar: boolean) => {
+      pedidoEnCurso.current?.abort();
+      const controlador = new AbortController();
+      pedidoEnCurso.current = controlador;
       setCargando(true);
       setError(null);
       try {
@@ -59,6 +66,7 @@ export default function CatalogoPage() {
 
         const respuesta = await browserApiFetch<ListExercisesResponse>(
           `/exercises?${params.toString()}`,
+          { signal: controlador.signal },
         );
         setItems((anteriores) =>
           reemplazar ? respuesta.items : [...anteriores, ...respuesta.items],
@@ -66,13 +74,16 @@ export default function CatalogoPage() {
         setTotalPages(respuesta.totalPages);
         setPagina(paginaActual);
       } catch (err) {
+        if (controlador.signal.aborted) return;
         setError(err instanceof BrowserApiError ? err.message : 'No se pudo cargar el catálogo.');
       } finally {
-        setCargando(false);
+        if (!controlador.signal.aborted) setCargando(false);
       }
     },
     [busqueda, parteCuerpo, equipamiento],
   );
+
+  useEffect(() => () => pedidoEnCurso.current?.abort(), []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

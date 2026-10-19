@@ -36,21 +36,28 @@ export function ExercisePicker({
       setResultados([]);
       return;
     }
+    // Abortar al cambiar el término evita que una respuesta vieja pise la nueva.
+    const controlador = new AbortController();
     const timeoutId = setTimeout(async () => {
       setCargando(true);
       setError(null);
       try {
         const respuesta = await browserApiFetch<ListExercisesResponse>(
           `exercises?search=${encodeURIComponent(busqueda)}&limit=10`,
+          { signal: controlador.signal },
         );
         setResultados(respuesta.items);
       } catch (err) {
+        if (controlador.signal.aborted) return;
         setError(err instanceof BrowserApiError ? err.message : 'No se pudo buscar.');
       } finally {
-        setCargando(false);
+        if (!controlador.signal.aborted) setCargando(false);
       }
     }, 300);
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      controlador.abort();
+    };
   }, [busqueda]);
 
   return (

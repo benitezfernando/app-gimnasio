@@ -31,6 +31,7 @@ export function ListaEjerciciosDelDia({ ejercicios }: { ejercicios: EjercicioDeR
                   {ejercicio.imageUrl ? (
                     <Image
                       src={ejercicio.imageUrl}
+                      unoptimized
                       alt={ejercicio.nombre}
                       fill
                       sizes="56px"

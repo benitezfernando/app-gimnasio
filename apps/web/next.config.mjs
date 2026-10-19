@@ -12,6 +12,12 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // `import { Slot } from 'radix-ui'` (button/badge) arrastraba el paquete
+  // entero (~213 KB sin comprimir) a cada página con un botón; esto lo
+  // reescribe a imports por primitiva.
+  experimental: {
+    optimizePackageImports: ['radix-ui'],
+  },
   images: {
     remotePatterns: supabaseHostname
       ? [

@@ -97,7 +97,7 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
                 src={ejercicio.gifUrl ?? ejercicio.imageUrl!}
                 alt={ejercicio.nombre}
                 fill
-                unoptimized={Boolean(ejercicio.gifUrl)}
+                unoptimized
                 sizes="(max-width: 640px) 75vw, 360px"
                 className="object-cover"
               />
