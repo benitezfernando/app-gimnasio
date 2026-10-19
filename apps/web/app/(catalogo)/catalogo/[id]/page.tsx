@@ -85,14 +85,20 @@ export default function DetalleEjercicioPage(props: { params: Promise<{ id: stri
 
       {ejercicio && (
         <>
-          <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-card">
+          {/*
+            La media del catálogo mide 180×180 px: estirada al ancho de la
+            columna (~640 px, 3,6×) se ve borrosa. Tope en 360 px = 2× el
+            original, el máximo que todavía se ve nítido. En celular, 75% del
+            ancho (~1,4× en un teléfono de 375 px) para ganar nitidez.
+          */}
+          <div className="relative mx-auto aspect-square w-3/4 self-center max-w-[360px] overflow-hidden rounded-xl bg-card sm:w-full">
             {ejercicio.gifUrl || ejercicio.imageUrl ? (
               <Image
                 src={ejercicio.gifUrl ?? ejercicio.imageUrl!}
                 alt={ejercicio.nombre}
                 fill
                 unoptimized={Boolean(ejercicio.gifUrl)}
-                sizes="(max-width: 640px) 100vw, 640px"
+                sizes="(max-width: 640px) 75vw, 360px"
                 className="object-cover"
               />
             ) : (
