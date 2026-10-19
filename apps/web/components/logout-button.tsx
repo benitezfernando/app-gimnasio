@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button';
 
 /**
  * Form action plano — no necesita 'use client', un <form action={...}>
- * de Server Action funciona sin JS del lado del browser. `redirectTo`
- * opcional (default `/login`) para que SUPER_ADMIN vuelva a
- * `/super-admin/login` en vez del login de tenant.
+ * de Server Action funciona sin JS del lado del browser. Sin
+ * `redirectTo`, `logoutAction` manda al login del rol del usuario.
  */
-export function LogoutButton({ redirectTo = '/login' }: { redirectTo?: string }) {
+export function LogoutButton({ redirectTo }: { redirectTo?: string }) {
   const accionConDestino = logoutAction.bind(null, redirectTo);
   return (
     <form action={accionConDestino}>

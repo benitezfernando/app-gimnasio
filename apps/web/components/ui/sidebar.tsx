@@ -26,7 +26,7 @@ const ETIQUETA_ROL: Record<Role, string> = {
 export function Sidebar({
   items,
   user,
-  logoutRedirectTo = '/login',
+  logoutRedirectTo,
 }: {
   items: BottomNavItem[];
   user: CurrentUser;

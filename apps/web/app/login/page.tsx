@@ -2,6 +2,7 @@
 
 import { Suspense } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useFormStatus } from 'react-dom';
 import { useActionState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -87,7 +88,8 @@ export default function LoginPage() {
               id="login-password"
               name="password"
               type="password"
-              placeholder="Contraseña (dejalo vacío si sos alumno)"
+              placeholder="Contraseña"
+              required
             />
           </Field>
           <BotonIngresar />
@@ -97,6 +99,12 @@ export default function LoginPage() {
             </Alert>
           )}
         </form>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          ¿Sos alumno?{' '}
+          <Link href="/alumno/login" className="underline underline-offset-2 hover:text-foreground">
+            Ingresá acá
+          </Link>
+        </p>
       </div>
     </main>
   );

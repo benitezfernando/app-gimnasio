@@ -4,6 +4,7 @@ import { ApiError } from '../../lib/api-client';
 import { getCurrentUser, CurrentUser } from '../../lib/get-current-user';
 import { AppShell } from '../../components/ui/app-shell';
 import { ALUMNO_NAV_ITEMS } from '../../components/ui/bottom-nav';
+import { LOGIN_ALUMNO } from '../../lib/login-routes';
 
 /** Exige rol ALUMNO real — mismo criterio que (profesor)/layout.tsx. */
 export default async function AlumnoLayout({ children }: { children: ReactNode }) {
@@ -12,13 +13,13 @@ export default async function AlumnoLayout({ children }: { children: ReactNode }
     user = await getCurrentUser();
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
-      redirect('/login');
+      redirect(LOGIN_ALUMNO);
     }
     throw error;
   }
 
   if (user.role !== 'ALUMNO') {
-    redirect('/login');
+    redirect(LOGIN_ALUMNO);
   }
 
   return (

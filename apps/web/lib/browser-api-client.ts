@@ -1,3 +1,5 @@
+import { loginPorSesionVencida } from './login-routes';
+
 export class BrowserApiError extends Error {
   constructor(
     public readonly status: number,
@@ -28,7 +30,7 @@ export async function browserApiFetch<T>(path: string, init: RequestInit = {}): 
 
   if (response.status === 401) {
     if (typeof window !== 'undefined') {
-      window.location.href = '/login?sessionExpired=1';
+      window.location.href = loginPorSesionVencida(window.location.pathname);
     }
     throw new BrowserApiError(401, 'Sesión expirada');
   }

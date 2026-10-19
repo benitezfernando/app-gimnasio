@@ -14,7 +14,7 @@ import type { CurrentUser } from '../../lib/get-current-user';
 export function AppShell({
   items,
   user,
-  logoutRedirectTo = '/login',
+  logoutRedirectTo,
   children,
 }: {
   items: BottomNavItem[];

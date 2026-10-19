@@ -9,6 +9,7 @@ export interface LoginActionState {
 }
 
 const API_BASE_URL = process.env.API_BASE_URL ?? 'http://localhost:3001';
+const ERROR_GENERICO = 'Usuario o contraseña incorrectos.';
 
 export async function loginAction(
   _prevState: LoginActionState,
@@ -16,18 +17,21 @@ export async function loginAction(
 ): Promise<LoginActionState> {
   const gymId = String(formData.get('gymId') ?? '');
   const username = String(formData.get('username') ?? '');
-  const passwordRaw = formData.get('password');
-  const password = passwordRaw ? String(passwordRaw) : undefined;
+  const password = String(formData.get('password') ?? '');
+  // Sin contraseña el backend tomaría la rama de alumno: este login es solo de staff.
+  if (!password) {
+    return { error: ERROR_GENERICO };
+  }
 
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ gymId, username, ...(password ? { password } : {}) }),
+    body: JSON.stringify({ gymId, username, password }),
     cache: 'no-store',
   });
 
   if (!response.ok) {
-    return { error: 'Usuario o contraseña incorrectos.' };
+    return { error: ERROR_GENERICO };
   }
 
   const { accessToken, refreshToken } = await response.json();
@@ -36,11 +40,14 @@ export async function loginAction(
   await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
 
   const { role } = await apiFetch<{ role: 'ADMIN' | 'PROFESOR' | 'ALUMNO' }>('/users/me');
+  if (role === 'ALUMNO') {
+    await supabase.auth.signOut();
+    return { error: ERROR_GENERICO };
+  }
 
-  const destinoPorRole: Record<'ADMIN' | 'PROFESOR' | 'ALUMNO', string> = {
+  const destinoPorRole: Record<'ADMIN' | 'PROFESOR', string> = {
     ADMIN: '/admin',
     PROFESOR: '/profesor',
-    ALUMNO: '/alumno',
   };
 
   redirect(destinoPorRole[role]);

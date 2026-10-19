@@ -30,7 +30,7 @@ export default async function CatalogoLayout({ children }: { children: ReactNode
     user = await getCurrentUser();
   } catch (error) {
     if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
-      redirect('/login');
+      redirect('/');
     }
     throw error;
   }
