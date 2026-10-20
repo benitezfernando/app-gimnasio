@@ -50,6 +50,27 @@ export async function toggleActivaAction(
   return { error: null };
 }
 
+/** Solo el profesor que la creó puede renombrarla: el API responde "no encontrada" al resto. */
+export async function renameTemplateAction(
+  templateId: string,
+  nombre: string,
+): Promise<{ error: string | null }> {
+  try {
+    await apiFetch(`/routine-templates/${templateId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ nombre }),
+    });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'No se pudo renombrar la plantilla.' };
+  }
+  revalidatePath('/profesor/plantillas');
+  revalidatePath(`/profesor/plantillas/${templateId}`);
+  return { error: null };
+}
+
 export async function deleteTemplateAction(templateId: string): Promise<{ error: string | null }> {
   try {
     await apiFetch(`/routine-templates/${templateId}`, { method: 'DELETE' });

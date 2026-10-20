@@ -7,6 +7,8 @@ import { RoutineDaysEditor } from '../../../../../components/routine-days-editor
 import { DiaEnEdicion } from '../../../../../lib/routine-types';
 import { aPayloadDeDias, claveDeVersion } from '../../../../../lib/routine-days';
 import { toggleActivaAction, deleteTemplateAction } from '../actions';
+import { RenameTemplateDialog } from './rename-template-dialog';
+import { Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useConfirm } from '@/components/confirm-dialog';
@@ -25,6 +27,7 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   const [error, setError] = useState<string | null>(null);
   const [accionError, setAccionError] = useState<string | null>(null);
   const [desyncAviso, setDesyncAviso] = useState<string | null>(null);
+  const [renombrando, setRenombrando] = useState(false);
 
   async function guardarDias(dias: DiaEnEdicion[]) {
     setGuardando(true);
@@ -82,7 +85,22 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-foreground">{plantilla.nombre}</h1>
+        <div className="flex min-w-0 items-center gap-1">
+          <h1 className="min-w-0 break-words text-xl font-semibold text-foreground">
+            {plantilla.nombre}
+          </h1>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="shrink-0 text-muted-foreground"
+            onClick={() => setRenombrando(true)}
+            aria-label={`Renombrar plantilla ${plantilla.nombre}`}
+            title="Renombrar plantilla"
+          >
+            <Pencil size={16} aria-hidden />
+          </Button>
+        </div>
         <div className="flex gap-2">
           <Button type="button" variant="outline" size="sm" onClick={alternarActiva}>
             {plantilla.activa ? 'Desactivar' : 'Reactivar'}
@@ -111,6 +129,18 @@ export function TemplateEditor({ plantilla }: { plantilla: TemplateDetail }) {
         <Alert>
           <AlertDescription>{desyncAviso}</AlertDescription>
         </Alert>
+      )}
+
+      {renombrando && (
+        <RenameTemplateDialog
+          templateId={plantilla.id}
+          nombreActual={plantilla.nombre}
+          onCerrar={() => setRenombrando(false)}
+          onRenombrada={() => {
+            setRenombrando(false);
+            router.refresh();
+          }}
+        />
       )}
 
       <RoutineDaysEditor
