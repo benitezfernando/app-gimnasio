@@ -214,6 +214,15 @@ export interface DiaRutinaApi {
   ejercicios: Array<EjercicioApi & DetalleEjercicio>;
 }
 
+/**
+ * Una rutina es "personalizada" si algún día ya no sigue a una plantilla: el
+ * profesor lo editó solo para ese alumno o lo armó desde cero. Con todos los
+ * días sincronizados, la rutina es la de la plantilla.
+ */
+export function esRutinaPersonalizada(dias: Array<Pick<DiaRutinaApi, 'vinculado'>>): boolean {
+  return dias.some((d) => d.vinculado === null);
+}
+
 /** `vinculadoADiaId` se reenvía tal cual al guardar: sin él, cada guardado desvincularía el día. */
 export function diasDeRutinaAEdicion(dias: DiaRutinaApi[]): DiaEnEdicion[] {
   return [...dias]

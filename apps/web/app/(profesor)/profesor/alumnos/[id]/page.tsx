@@ -3,7 +3,12 @@ import { InstanceEditor } from './instance-editor';
 import { ReemplazarRutinaSection } from './reemplazar-rutina-section';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { HomeLink } from '../../../../../components/ui/home-link';
-import { DiaRutinaApi, diasDeRutinaAEdicion } from '../../../../../lib/routine-days';
+import {
+  DiaRutinaApi,
+  diasDeRutinaAEdicion,
+  esRutinaPersonalizada,
+} from '../../../../../lib/routine-days';
+import { Badge } from '@/components/ui/badge';
 import { getCurrentUser } from '../../../../../lib/get-current-user';
 import { GuiaDePantalla } from '../../../../../components/guia-de-pantalla';
 import { GUIA_EDITOR_RUTINA, GUIA_PROFESOR_ALUMNO } from '../../../../../lib/guias-contenido';
@@ -48,9 +53,16 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
         <LogoutButton />
       </div>
 
-      <h1 className="text-xl font-semibold text-foreground">
-        {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
-      </h1>
+      <div className="flex flex-wrap items-center gap-2">
+        <h1 className="text-xl font-semibold text-foreground">
+          {rutinaVigente ? `Rutina de ${rutinaVigente.nombre}` : 'Sin rutina asignada'}
+        </h1>
+        {rutinaVigente && esRutinaPersonalizada(rutinaVigente.dias) && (
+          <Badge variant="outline" title="Alguno de sus días se editó solo para este alumno">
+            Personalizada
+          </Badge>
+        )}
+      </div>
 
       {rutinaVigente && (
         <section className="flex flex-col gap-3">

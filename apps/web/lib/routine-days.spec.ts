@@ -14,6 +14,7 @@ import {
   moverDia,
   moverEjercicioADia,
   totalEjercicios,
+  esRutinaPersonalizada,
 } from './routine-days';
 import { DiaEnEdicion, EjercicioEnEdicion, PlantillaParaImportar } from './routine-types';
 
@@ -360,5 +361,28 @@ describe('nombreCatalogo en la conversión desde la API', () => {
       nombre: 'Banca plana',
       nombreCatalogo: 'Barra press de banca',
     });
+  });
+});
+
+describe('esRutinaPersonalizada', () => {
+  const vinculado = { diaId: 'd', templateId: 't', templateNombre: 'Fuerza', numero: 1 };
+  const dia = (conVinculo: boolean) => ({
+    id: 'x',
+    numero: 1,
+    vinculado: conVinculo ? vinculado : null,
+    ejercicios: [],
+  });
+
+  it('es personalizada si algún día es independiente', () => {
+    expect(esRutinaPersonalizada([dia(true), dia(false)])).toBe(true);
+    expect(esRutinaPersonalizada([dia(false)])).toBe(true);
+  });
+
+  it('no es personalizada si todos los días siguen a una plantilla', () => {
+    expect(esRutinaPersonalizada([dia(true), dia(true)])).toBe(false);
+  });
+
+  it('una rutina sin días no es personalizada', () => {
+    expect(esRutinaPersonalizada([])).toBe(false);
   });
 });
