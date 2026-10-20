@@ -11,6 +11,9 @@ import {
 import { LogoutButton } from '../../../components/logout-button';
 import { ListaEjerciciosDelDia, EjercicioDeRutina } from './lista-ejercicios-del-dia';
 import { SelectorDeDias } from './selector-de-dias';
+import { getCurrentUser } from '../../../lib/get-current-user';
+import { GuiaDePantalla } from '../../../components/guia-de-pantalla';
+import { GUIA_ALUMNO_RUTINA } from '../../../lib/guias-contenido';
 
 interface RutinaVigenteResponse {
   id: string;
@@ -20,6 +23,7 @@ interface RutinaVigenteResponse {
 
 export default async function AlumnoPage() {
   let rutina: RutinaVigenteResponse | null = null;
+  const usuario = await getCurrentUser();
   try {
     rutina = await apiFetch<RutinaVigenteResponse>('/users/me/rutina-vigente');
   } catch (error) {
@@ -30,6 +34,7 @@ export default async function AlumnoPage() {
   if (!rutina || rutina.dias.length === 0) {
     return (
       <main className="flex w-full flex-col items-center gap-2 px-8 pb-28 pt-8 text-center sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
+        <GuiaDePantalla userId={usuario.id} guias={[GUIA_ALUMNO_RUTINA]} />
         <PageHeader title="Rutina" right={<LogoutButton />} />
         <Empty>
           <EmptyHeader>
@@ -54,6 +59,7 @@ export default async function AlumnoPage() {
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
+      <GuiaDePantalla userId={usuario.id} guias={[GUIA_ALUMNO_RUTINA]} />
       <PageHeader title={rutina.nombre} right={<LogoutButton />} />
 
       {rutina.dias.length === 1 ? (

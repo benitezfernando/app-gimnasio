@@ -11,6 +11,9 @@ import {
   EmptyTitle,
   EmptyDescription,
 } from '@/components/ui/empty';
+import { getCurrentUser } from '../../../lib/get-current-user';
+import { GuiaDePantalla } from '../../../components/guia-de-pantalla';
+import { GUIA_PROFESOR_CARTERA } from '../../../lib/guias-contenido';
 
 interface AlumnoRowData {
   id: string;
@@ -21,9 +24,11 @@ interface AlumnoRowData {
 
 export default async function ProfesorDashboardPage() {
   const alumnos = await apiFetch<AlumnoRowData[]>('/users/me/alumnos');
+  const usuario = await getCurrentUser();
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
+      <GuiaDePantalla userId={usuario.id} guias={[GUIA_PROFESOR_CARTERA]} />
       <PageHeader title="Mi cartera" right={<LogoutButton />} />
 
       <section className="flex flex-col gap-3">

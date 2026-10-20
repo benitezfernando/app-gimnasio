@@ -32,6 +32,7 @@ export function ListaEjerciciosDelDia({ ejercicios }: { ejercicios: EjercicioDeR
                 type="button"
                 onClick={() => setViendoDetalle(ejercicio)}
                 aria-label={`Ver detalle de ${ejercicio.nombre}`}
+                data-guia="ejercicio-rutina"
                 className="block w-full rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Card className="flex flex-row items-center gap-3 p-4 lg:p-3">

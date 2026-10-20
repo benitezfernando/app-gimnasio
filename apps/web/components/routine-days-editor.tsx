@@ -118,6 +118,7 @@ export function RoutineDaysEditor({
         <div
           className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:flex-wrap lg:overflow-visible"
           aria-label="Días de la rutina"
+          data-guia="editor-dias"
         >
           {dias.map((d, i) => (
             <Button
@@ -253,6 +254,7 @@ export function RoutineDaysEditor({
         variant="brand"
         size="sm"
         className="self-start px-6"
+        data-guia="editor-guardar"
         onClick={() => onGuardar(dias, { vincular })}
         disabled={
           guardando || total > MAX_EJERCICIOS_TOTALES || (total === 0 && !permiteGuardarVacio)

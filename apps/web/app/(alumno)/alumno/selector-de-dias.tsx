@@ -47,6 +47,7 @@ export function SelectorDeDias({
       <div
         className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:flex-wrap lg:overflow-visible"
         aria-label="Días de tu rutina"
+        data-guia="dias-rutina"
       >
         {dias.map((d) => (
           <Button

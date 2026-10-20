@@ -18,7 +18,7 @@ export function AlumnoRow({ alumno }: { alumno: AlumnoRow }) {
   const [editando, setEditando] = useState(false);
 
   return (
-    <li>
+    <li data-guia="alumno-fila">
       <div className="flex min-h-11 items-center justify-between rounded-lg border border-border bg-background px-4 py-2">
         <Link href={`/profesor/alumnos/${alumno.id}`} className="flex-1">
           <p className="text-sm font-medium text-foreground">{alumno.nombre}</p>

@@ -17,12 +17,10 @@ const NAV_ITEMS_POR_ROL: Partial<Record<CurrentUser['role'], BottomNavItem[]>> =
 };
 
 /**
- * Solo valida sesión — el catálogo es legible por ADMIN/PROFESOR/ALUMNO
- * por igual. Route group propio (separado de (profesor)/(alumno)/(admin),
- * que sí exigen rol) porque el alumno necesita esta pantalla para HU-09
- * y no puede vivir bajo un layout que excluya su rol. Usa `user.role`
- * para saber qué variante de nav mostrar — es la única pantalla
- * compartida por los 3 roles.
+ * Catálogo compartido por PROFESOR y ADMIN (route group propio, separado de
+ * (profesor)/(admin), que exigen un único rol). Usa `user.role` para saber
+ * qué variante de nav mostrar. El ALUMNO ya no tiene catálogo: se lo manda
+ * a su rutina, donde ve el detalle de sus ejercicios.
  */
 export default async function CatalogoLayout({ children }: { children: ReactNode }) {
   let user: CurrentUser;
@@ -33,6 +31,11 @@ export default async function CatalogoLayout({ children }: { children: ReactNode
       redirect('/');
     }
     throw error;
+  }
+
+  // El alumno no tiene catálogo (ve el detalle de sus ejercicios en la rutina).
+  if (user.role === 'ALUMNO') {
+    redirect('/alumno');
   }
 
   return (

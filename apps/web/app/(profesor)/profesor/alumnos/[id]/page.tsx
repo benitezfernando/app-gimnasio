@@ -4,6 +4,9 @@ import { ReemplazarRutinaSection } from './reemplazar-rutina-section';
 import { LogoutButton } from '../../../../../components/logout-button';
 import { HomeLink } from '../../../../../components/ui/home-link';
 import { DiaRutinaApi, diasDeRutinaAEdicion } from '../../../../../lib/routine-days';
+import { getCurrentUser } from '../../../../../lib/get-current-user';
+import { GuiaDePantalla } from '../../../../../components/guia-de-pantalla';
+import { GUIA_EDITOR_RUTINA, GUIA_PROFESOR_ALUMNO } from '../../../../../lib/guias-contenido';
 
 interface TemplateOption {
   id: string;
@@ -21,6 +24,7 @@ interface RutinaVigenteResponse {
 
 export default async function AlumnoDetailPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
+  const usuario = await getCurrentUser();
   // Independientes entre sí: en paralelo, no una después de la otra.
   const [todasLasPlantillas, rutinaVigente] = await Promise.all([
     apiFetch<TemplateOption[]>('/routine-templates'),
@@ -38,6 +42,7 @@ export default async function AlumnoDetailPage(props: { params: Promise<{ id: st
 
   return (
     <main className="flex w-full flex-col gap-6 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
+      <GuiaDePantalla userId={usuario.id} guias={[GUIA_EDITOR_RUTINA, GUIA_PROFESOR_ALUMNO]} />
       <div className="flex items-center justify-between">
         <HomeLink href="/profesor" />
         <LogoutButton />

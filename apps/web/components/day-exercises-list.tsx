@@ -99,6 +99,7 @@ function FilaEjercicio({
           {...attributes}
           {...listeners}
           aria-label={`Reordenar ${ejercicio.nombre}`}
+          data-guia="editor-arrastrar"
         >
           <GripVertical size={20} aria-hidden />
         </Button>
@@ -107,6 +108,7 @@ function FilaEjercicio({
           type="button"
           onClick={onVerDetalle}
           aria-label={`Ver detalle de ${ejercicio.nombre}`}
+          data-guia="editor-imagen"
           className="relative order-2 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-background transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {ejercicio.imageUrl ? (
@@ -134,6 +136,7 @@ function FilaEjercicio({
               type="button"
               onClick={onRenombrar}
               aria-label={`Renombrar ejercicio ${ejercicio.nombre}`}
+              data-guia="editor-renombrar"
               className="inline-flex items-center gap-1 rounded text-xs text-primary-soft hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Pencil size={12} aria-hidden />
@@ -142,7 +145,10 @@ function FilaEjercicio({
           )}
         </div>
 
-        <div className="order-5 flex basis-full gap-2 pl-11 sm:order-4 sm:basis-auto sm:shrink-0 sm:pl-0">
+        <div
+          data-guia="editor-valores"
+          className="order-5 flex basis-full gap-2 pl-11 sm:order-4 sm:basis-auto sm:shrink-0 sm:pl-0"
+        >
           {campos.map(({ campo, etiqueta, min, step }) => (
             <div key={campo} className="flex flex-col gap-1">
               <Label

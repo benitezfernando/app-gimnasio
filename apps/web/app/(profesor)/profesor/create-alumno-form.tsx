@@ -25,7 +25,10 @@ export function CreateAlumnoForm() {
   const [estado, formAction] = useActionState(createAlumnoAction, ESTADO_INICIAL);
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3">
+    <div
+      data-guia="nuevo-alumno"
+      className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3"
+    >
       <form action={formAction} className="flex flex-col gap-2">
         <Field>
           <FieldLabel htmlFor="crear-alumno-nombre" className="sr-only">

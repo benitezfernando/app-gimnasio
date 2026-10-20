@@ -30,7 +30,13 @@ export function ReemplazarRutinaSection({
 
   if (!abierto) {
     return (
-      <Button type="button" variant="outline" size="sm" onClick={() => setAbierto(true)}>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        data-guia="asignar-rutina"
+        onClick={() => setAbierto(true)}
+      >
         <Plus data-icon="inline-start" aria-hidden />
         Armar una rutina nueva desde cero
       </Button>
@@ -38,7 +44,7 @@ export function ReemplazarRutinaSection({
   }
 
   return (
-    <section className="flex flex-col gap-3">
+    <section data-guia="asignar-rutina" className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-medium text-muted-foreground">
           {hayRutinaVigente ? 'Reemplazar por una rutina nueva' : 'Armar rutina'}

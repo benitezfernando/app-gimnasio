@@ -65,6 +65,7 @@ export function Sidebar({
             <Link
               key={item.href}
               href={item.href}
+              data-guia={`nav-${item.href.split('/').pop()}`}
               aria-current={activo ? 'page' : undefined}
               className={`group flex items-center gap-3 rounded-xl border-l-2 px-3 py-2.5 transition-colors duration-200 ${
                 activo

@@ -62,7 +62,7 @@ export function ExercisePicker({
 
   return (
     <div className="flex flex-col gap-2">
-      <InputGroup>
+      <InputGroup data-guia="editor-buscador">
         <InputGroupAddon align="inline-start">
           <Search aria-hidden />
         </InputGroupAddon>

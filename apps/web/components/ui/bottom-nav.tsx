@@ -12,9 +12,9 @@ export interface BottomNavItem {
   icon: LucideIcon;
 }
 
+// El alumno no ve el catálogo completo: solo los ejercicios de su rutina.
 export const ALUMNO_NAV_ITEMS: BottomNavItem[] = [
   { href: '/alumno', label: 'Rutina', icon: Dumbbell },
-  { href: '/catalogo', label: 'Catálogo', icon: LayoutGrid },
 ];
 
 export const PROFESOR_NAV_ITEMS: BottomNavItem[] = [
@@ -56,6 +56,7 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
           <Link
             key={item.href}
             href={item.href}
+            data-guia={`nav-${item.href.split('/').pop()}`}
             aria-current={activo ? 'page' : undefined}
             className="flex min-w-11 flex-col items-center gap-1 px-3 py-1 transition-transform duration-150 active:scale-95"
           >

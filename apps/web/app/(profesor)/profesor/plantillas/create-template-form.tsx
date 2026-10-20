@@ -26,6 +26,7 @@ export function CreateTemplateForm() {
   return (
     <form
       action={formAction}
+      data-guia="nueva-plantilla"
       className="flex flex-col gap-3 rounded-2xl bg-background p-4 shadow-xs"
     >
       <h2 className="text-lg font-semibold text-foreground">Nueva plantilla</h2>

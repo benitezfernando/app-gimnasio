@@ -111,7 +111,7 @@ export function CatalogoCliente({
         right={<LogoutButton />}
       />
 
-      <InputGroup>
+      <InputGroup data-guia="catalogo-buscador">
         <InputGroupAddon align="inline-start">
           <Search aria-hidden />
         </InputGroupAddon>
@@ -123,38 +123,40 @@ export function CatalogoCliente({
         />
       </InputGroup>
 
-      <div className="scrollbar-none flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible">
-        <Button
-          type="button"
-          size="sm"
-          variant={parteCuerpo === null ? 'brand' : 'outline'}
-          onClick={() => setParteCuerpo(null)}
-          className="shrink-0 rounded-full"
-        >
-          Todos
-        </Button>
-        {PARTES_CUERPO.map((parte) => (
+      <div data-guia="catalogo-filtros" className="flex flex-col gap-4">
+        <div className="scrollbar-none flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible">
           <Button
-            key={parte}
             type="button"
             size="sm"
-            variant={parteCuerpo === parte ? 'brand' : 'outline'}
-            onClick={() => setParteCuerpo(parte)}
+            variant={parteCuerpo === null ? 'brand' : 'outline'}
+            onClick={() => setParteCuerpo(null)}
             className="shrink-0 rounded-full"
           >
-            {ETIQUETA_PARTE_CUERPO[parte]}
+            Todos
           </Button>
-        ))}
-      </div>
+          {PARTES_CUERPO.map((parte) => (
+            <Button
+              key={parte}
+              type="button"
+              size="sm"
+              variant={parteCuerpo === parte ? 'brand' : 'outline'}
+              onClick={() => setParteCuerpo(parte)}
+              className="shrink-0 rounded-full"
+            >
+              {ETIQUETA_PARTE_CUERPO[parte]}
+            </Button>
+          ))}
+        </div>
 
-      <NativeSelect value={equipamiento} onChange={(e) => setEquipamiento(e.target.value)}>
-        <NativeSelectOption value="">Cualquier equipamiento</NativeSelectOption>
-        {EQUIPAMIENTOS.map((eq) => (
-          <NativeSelectOption key={eq} value={eq}>
-            {ETIQUETA_EQUIPAMIENTO[eq]}
-          </NativeSelectOption>
-        ))}
-      </NativeSelect>
+        <NativeSelect value={equipamiento} onChange={(e) => setEquipamiento(e.target.value)}>
+          <NativeSelectOption value="">Cualquier equipamiento</NativeSelectOption>
+          {EQUIPAMIENTOS.map((eq) => (
+            <NativeSelectOption key={eq} value={eq}>
+              {ETIQUETA_EQUIPAMIENTO[eq]}
+            </NativeSelectOption>
+          ))}
+        </NativeSelect>
+      </div>
 
       {error && (
         <Alert variant="destructive">
@@ -169,6 +171,7 @@ export function CatalogoCliente({
             type="button"
             onClick={() => setViendoDetalle(ejercicio)}
             aria-label={`Ver detalle de ${ejercicio.nombre}`}
+            data-guia="catalogo-tarjeta"
             className="rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <ExerciseCard ejercicio={ejercicio} />

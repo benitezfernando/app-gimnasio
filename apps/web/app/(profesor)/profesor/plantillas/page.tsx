@@ -12,6 +12,9 @@ import {
   EmptyTitle,
   EmptyDescription,
 } from '@/components/ui/empty';
+import { getCurrentUser } from '../../../../lib/get-current-user';
+import { GuiaDePantalla } from '../../../../components/guia-de-pantalla';
+import { GUIA_PROFESOR_PLANTILLAS } from '../../../../lib/guias-contenido';
 
 interface TemplateSummary {
   id: string;
@@ -22,9 +25,11 @@ interface TemplateSummary {
 
 export default async function PlantillasPage() {
   const plantillas = await apiFetch<TemplateSummary[]>('/routine-templates');
+  const usuario = await getCurrentUser();
 
   return (
     <main className="flex w-full flex-col gap-4 px-4 pb-28 pt-4 sm:mx-auto sm:max-w-2xl lg:pb-6 lg:pt-6">
+      <GuiaDePantalla userId={usuario.id} guias={[GUIA_PROFESOR_PLANTILLAS]} />
       <PageHeader
         title="Mis plantillas"
         left={<HomeLink href="/profesor" />}
@@ -35,7 +40,7 @@ export default async function PlantillasPage() {
 
       <ul className="flex flex-col gap-2">
         {plantillas.map((plantilla) => (
-          <li key={plantilla.id}>
+          <li key={plantilla.id} data-guia="plantilla-fila">
             <Link
               href={`/profesor/plantillas/${plantilla.id}`}
               className="flex min-h-11 items-center justify-between rounded-lg border border-border bg-background px-4 py-2"
