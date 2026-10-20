@@ -142,11 +142,14 @@ body::before {
 }
 
 /*
- * Globos de las guías de bienvenida (driver.js, `popoverClass`). La flecha
+ * Globos de las guías de bienvenida (driver.js, `popoverClass`). El selector
+ * del globo lleva `.driver-popover` para ganarle en especificidad a
+ * driver.css, que se carga después de este archivo (si no, el fondo
+ * seguía blanco). La flecha
  * se oculta: sus colores por lado vienen de driver.css y no hay forma
  * confiable de recolorearla sin pisar el orden de carga de los estilos.
  */
-.guia-popover {
+.driver-popover.guia-popover {
   background-color: var(--card);
   color: var(--foreground);
   border: 1px solid var(--border);
@@ -159,6 +162,7 @@ body::before {
 }
 
 .guia-popover .driver-popover-title {
+  color: var(--foreground);
   font-size: 1rem;
   font-weight: 600;
 }
