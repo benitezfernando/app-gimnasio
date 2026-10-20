@@ -43,11 +43,11 @@ export function Sidebar({
   return (
     <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r border-border/60 bg-card/60 backdrop-blur-xl lg:flex">
       <div className="px-5 pb-2 pt-6">
-        <div className="h-12 w-12 overflow-hidden rounded-full bg-card">
+        <div className="h-[72px] w-[72px] overflow-hidden rounded-full bg-card">
           <Image
             src={logoGimnasio}
             alt="Gimnasio Mix"
-            sizes="48px"
+            sizes="72px"
             className="h-full w-full object-cover"
           />
         </div>
