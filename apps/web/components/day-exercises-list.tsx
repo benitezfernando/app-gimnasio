@@ -18,7 +18,8 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, ListPlus, MoreVertical, Pencil, X } from 'lucide-react';
+import Image from 'next/image';
+import { Dumbbell, GripVertical, ListPlus, MoreVertical, Pencil, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -38,6 +39,7 @@ import {
   EmptyTitle,
 } from '@/components/ui/empty';
 import { ExercisePicker } from './exercise-picker';
+import { GradientIcon } from './ui/gradient-icon';
 import { ExerciseCardData } from './exercise-card';
 import { RenameExerciseDialog } from './rename-exercise-dialog';
 import { EjercicioEnEdicion } from '../lib/routine-types';
@@ -72,26 +74,25 @@ function FilaEjercicio({
     id: ejercicio.uid,
   });
   const estilo = { transform: CSS.Transform.toString(transform), transition };
-  const campos: Array<{
-    campo: CampoEditable;
-    corto: string;
-    largo: string;
-    min: number;
-    step?: number;
-  }> = [
-    { campo: 'series', corto: 'Series', largo: 'Series', min: 1 },
-    { campo: 'repeticiones', corto: 'Reps', largo: 'Reps', min: 1 },
-    { campo: 'peso', corto: 'Peso', largo: 'Peso (kg)', min: 0, step: 0.5 },
+  const campos: Array<{ campo: CampoEditable; etiqueta: string; min: number; step?: number }> = [
+    { campo: 'series', etiqueta: 'Series', min: 1 },
+    { campo: 'repeticiones', etiqueta: 'Reps', min: 1 },
+    { campo: 'peso', etiqueta: 'Peso (kg)', min: 0, step: 0.5 },
   ];
 
   return (
     <li ref={setNodeRef} style={estilo}>
-      <Card className="flex flex-row items-center gap-1 p-2.5! sm:gap-2 sm:p-3!">
+      {/*
+        flex-wrap + order: en celular los campos (basis-full) bajan a un
+        segundo renglón y el nombre conserva el ancho; desde sm todo va en
+        una fila.
+      */}
+      <Card className="flex flex-row flex-wrap items-center gap-x-1 gap-y-2 p-2.5! sm:flex-nowrap sm:gap-2 sm:p-3!">
         <Button
           type="button"
           variant="ghost"
           size="icon"
-          className="shrink-0 text-muted-foreground"
+          className="order-1 shrink-0 text-muted-foreground"
           {...attributes}
           {...listeners}
           aria-label={`Reordenar ${ejercicio.nombre}`}
@@ -99,8 +100,24 @@ function FilaEjercicio({
           <GripVertical size={20} aria-hidden />
         </Button>
 
-        {/* Debajo del nombre (no al lado) para no quitarle ancho a la fila en celular. */}
-        <div className="flex min-w-0 flex-1 flex-col items-start gap-1">
+        <div className="relative order-2 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-background">
+          {ejercicio.imageUrl ? (
+            <Image
+              src={ejercicio.imageUrl}
+              alt=""
+              fill
+              unoptimized
+              sizes="40px"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <GradientIcon icon={Dumbbell} size={16} />
+            </div>
+          )}
+        </div>
+
+        <div className="order-3 flex min-w-0 flex-1 flex-col items-start gap-1">
           <span className="min-w-0 break-words text-sm font-medium leading-tight text-foreground">
             {ejercicio.nombre}
           </span>
@@ -117,15 +134,14 @@ function FilaEjercicio({
           )}
         </div>
 
-        <div className="flex shrink-0 gap-1 sm:gap-2">
-          {campos.map(({ campo, corto, largo, min, step }) => (
+        <div className="order-5 flex basis-full gap-2 pl-11 sm:order-4 sm:basis-auto sm:shrink-0 sm:pl-0">
+          {campos.map(({ campo, etiqueta, min, step }) => (
             <div key={campo} className="flex flex-col gap-1">
               <Label
                 htmlFor={`${ejercicio.uid}-${campo}`}
                 className="text-xs text-muted-foreground"
               >
-                <span className="sm:hidden">{corto}</span>
-                <span className="hidden sm:inline">{largo}</span>
+                {etiqueta}
               </Label>
               <Input
                 id={`${ejercicio.uid}-${campo}`}
@@ -135,50 +151,52 @@ function FilaEjercicio({
                 value={campo === 'peso' ? (ejercicio.peso ?? '') : ejercicio[campo]}
                 placeholder={campo === 'peso' ? '—' : undefined}
                 onChange={(e) => onCambiar(campo, e.target.value)}
-                className="w-10 px-1 text-center sm:w-16 sm:px-2 sm:text-left"
+                className="w-16 px-2"
               />
             </div>
           ))}
         </div>
 
-        {destinos.length > 0 && (
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="shrink-0 text-muted-foreground"
-                aria-label={`Más opciones de ${ejercicio.nombre}`}
-              >
-                <MoreVertical size={18} aria-hidden />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Mover a</DropdownMenuLabel>
-              {destinos.map((destino) => (
-                <DropdownMenuItem
-                  key={destino.uid}
-                  disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
-                  onSelect={() => onMover(destino.uid)}
+        <div className="order-4 flex shrink-0 items-center sm:order-5">
+          {destinos.length > 0 && (
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="shrink-0 text-muted-foreground"
+                  aria-label={`Más opciones de ${ejercicio.nombre}`}
                 >
-                  Día {destino.numero}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+                  <MoreVertical size={18} aria-hidden />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Mover a</DropdownMenuLabel>
+                {destinos.map((destino) => (
+                  <DropdownMenuItem
+                    key={destino.uid}
+                    disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
+                    onSelect={() => onMover(destino.uid)}
+                  >
+                    Día {destino.numero}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="shrink-0 text-destructive hover:text-destructive"
-          onClick={onQuitar}
-          aria-label={`Quitar ${ejercicio.nombre}`}
-        >
-          <X size={18} aria-hidden />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="shrink-0 text-destructive hover:text-destructive"
+            onClick={onQuitar}
+            aria-label={`Quitar ${ejercicio.nombre}`}
+          >
+            <X size={18} aria-hidden />
+          </Button>
+        </div>
       </Card>
     </li>
   );
