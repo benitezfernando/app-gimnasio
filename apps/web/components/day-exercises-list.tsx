@@ -28,7 +28,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -100,9 +99,23 @@ function FilaEjercicio({
           <GripVertical size={20} aria-hidden />
         </Button>
 
-        <span className="min-w-0 flex-1 break-words text-sm font-medium leading-tight text-foreground">
-          {ejercicio.nombre}
-        </span>
+        {/* Debajo del nombre (no al lado) para no quitarle ancho a la fila en celular. */}
+        <div className="flex min-w-0 flex-1 flex-col items-start gap-1">
+          <span className="min-w-0 break-words text-sm font-medium leading-tight text-foreground">
+            {ejercicio.nombre}
+          </span>
+          {puedeRenombrar && (
+            <button
+              type="button"
+              onClick={onRenombrar}
+              aria-label={`Renombrar ejercicio ${ejercicio.nombre}`}
+              className="inline-flex items-center gap-1 rounded text-xs text-primary-soft hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <Pencil size={12} aria-hidden />
+              Renombrar Ejercicio
+            </button>
+          )}
+        </div>
 
         <div className="flex shrink-0 gap-1 sm:gap-2">
           {campos.map(({ campo, corto, largo, min, step }) => (
@@ -128,8 +141,7 @@ function FilaEjercicio({
           ))}
         </div>
 
-        {/* modal={false}: el diálogo de renombrar se abre al elegir un ítem; con el menú modal, Radix puede dejar la página sin responder al cerrarlo. */}
-        {(puedeRenombrar || destinos.length > 0) && (
+        {destinos.length > 0 && (
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button
@@ -143,27 +155,16 @@ function FilaEjercicio({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {puedeRenombrar && (
-                <DropdownMenuItem onSelect={onRenombrar}>
-                  <Pencil size={16} aria-hidden />
-                  Renombrar
+              <DropdownMenuLabel>Mover a</DropdownMenuLabel>
+              {destinos.map((destino) => (
+                <DropdownMenuItem
+                  key={destino.uid}
+                  disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
+                  onSelect={() => onMover(destino.uid)}
+                >
+                  Día {destino.numero}
                 </DropdownMenuItem>
-              )}
-              {destinos.length > 0 && (
-                <>
-                  {puedeRenombrar && <DropdownMenuSeparator />}
-                  <DropdownMenuLabel>Mover a</DropdownMenuLabel>
-                  {destinos.map((destino) => (
-                    <DropdownMenuItem
-                      key={destino.uid}
-                      disabled={destino.exerciseIds.has(ejercicio.exerciseId)}
-                      onSelect={() => onMover(destino.uid)}
-                    >
-                      Día {destino.numero}
-                    </DropdownMenuItem>
-                  ))}
-                </>
-              )}
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
         )}
