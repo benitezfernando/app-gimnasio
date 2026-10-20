@@ -42,6 +42,7 @@ import { ExercisePicker } from './exercise-picker';
 import { GradientIcon } from './ui/gradient-icon';
 import { ExerciseCardData } from './exercise-card';
 import { RenameExerciseDialog } from './rename-exercise-dialog';
+import { ExerciseDetailDialog } from './exercise-detail-dialog';
 import { EjercicioEnEdicion } from '../lib/routine-types';
 import { nuevoUid } from '../lib/routine-days';
 
@@ -60,6 +61,7 @@ function FilaEjercicio({
   onQuitar,
   onMover,
   onRenombrar,
+  onVerDetalle,
   puedeRenombrar,
 }: {
   ejercicio: EjercicioEnEdicion;
@@ -68,6 +70,7 @@ function FilaEjercicio({
   onQuitar: () => void;
   onMover: (diaUid: string) => void;
   onRenombrar: () => void;
+  onVerDetalle: () => void;
   puedeRenombrar: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
@@ -100,7 +103,12 @@ function FilaEjercicio({
           <GripVertical size={20} aria-hidden />
         </Button>
 
-        <div className="relative order-2 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-background">
+        <button
+          type="button"
+          onClick={onVerDetalle}
+          aria-label={`Ver detalle de ${ejercicio.nombre}`}
+          className="relative order-2 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-background transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
           {ejercicio.imageUrl ? (
             <Image
               src={ejercicio.imageUrl}
@@ -115,7 +123,7 @@ function FilaEjercicio({
               <GradientIcon icon={Dumbbell} size={16} />
             </div>
           )}
-        </div>
+        </button>
 
         <div className="order-3 flex min-w-0 flex-1 flex-col items-start gap-1">
           <span className="min-w-0 break-words text-sm font-medium leading-tight text-foreground">
@@ -221,6 +229,7 @@ export function DayExercisesList({
   puedeRenombrar?: boolean;
 }) {
   const [renombrando, setRenombrando] = useState<EjercicioEnEdicion | null>(null);
+  const [viendoDetalle, setViendoDetalle] = useState<EjercicioEnEdicion | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
@@ -292,12 +301,22 @@ export function DayExercisesList({
                   onQuitar={() => onChange(ejercicios.filter((e) => e.uid !== ejercicio.uid))}
                   onMover={(diaUid) => onMoverADia(ejercicio.uid, diaUid)}
                   onRenombrar={() => setRenombrando(ejercicio)}
+                  onVerDetalle={() => setViendoDetalle(ejercicio)}
                   puedeRenombrar={puedeRenombrar}
                 />
               ))}
             </ul>
           </SortableContext>
         </DndContext>
+      )}
+
+      {viendoDetalle && (
+        <ExerciseDetailDialog
+          key={viendoDetalle.uid}
+          exerciseId={viendoDetalle.exerciseId}
+          nombre={viendoDetalle.nombre}
+          onCerrar={() => setViendoDetalle(null)}
+        />
       )}
 
       {renombrando && (
