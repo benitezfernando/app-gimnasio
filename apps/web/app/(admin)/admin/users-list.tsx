@@ -149,8 +149,11 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
         </Alert>
       )}
 
-      {/* Mobile: tarjetas apiladas (default, sin prefijo — oculto desde md:) */}
-      <ul className="flex flex-col gap-3 md:hidden">
+      {/*
+        Tarjetas hasta xl: con 6 columnas y 3 botones, la tabla no entra en
+        anchos de tablet/notebook chica (las columnas se pisaban).
+      */}
+      <ul className="flex flex-col gap-3 xl:hidden">
         {usuariosFiltrados.map((u) => (
           <li key={u.id} className="rounded-xl border border-border p-4">
             <div className="flex items-start justify-between gap-3">
@@ -179,28 +182,32 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
         ))}
       </ul>
 
-      {/* md: en adelante — tabla, columnas más aprovechables en pantalla ancha */}
-      <table className="hidden w-full text-left md:table">
+      {/* xl: en adelante — tabla */}
+      <table className="hidden w-full text-left xl:table">
         <thead>
           <tr className="border-b border-border text-sm text-muted-foreground">
-            <th className="py-2 font-medium">Usuario</th>
-            <th className="py-2 font-medium">Nombre</th>
-            <th className="py-2 font-medium">Rol</th>
-            <th className="py-2 font-medium">Estado</th>
-            <th className="py-2 font-medium">Cartera</th>
-            <th className="py-2 font-medium">Acción</th>
+            <th className="py-2 pr-4 font-medium">Usuario</th>
+            <th className="py-2 pr-4 font-medium">Nombre</th>
+            <th className="py-2 pr-4 font-medium">Rol</th>
+            <th className="py-2 pr-4 font-medium">Estado</th>
+            <th className="py-2 pr-4 font-medium">Cartera</th>
+            <th className="py-2 pr-4 font-medium">Acción</th>
           </tr>
         </thead>
         <tbody>
           {usuariosFiltrados.map((u) => (
             <tr key={u.id} className="border-b border-border last:border-0">
-              <td className="py-3 text-sm text-muted-foreground">@{u.username}</td>
-              <td className="py-3 text-foreground">{u.nombre}</td>
-              <td className="py-3 text-foreground">{ETIQUETA_ROL[u.role]}</td>
-              <td className="py-3">
+              <td className="whitespace-nowrap py-3 pr-4 text-sm text-muted-foreground">
+                @{u.username}
+              </td>
+              <td className="py-3 pr-4 text-foreground">{u.nombre}</td>
+              <td className="whitespace-nowrap py-3 pr-4 text-foreground">
+                {ETIQUETA_ROL[u.role]}
+              </td>
+              <td className="py-3 pr-4">
                 <EstadoBadge activo={u.activo} />
               </td>
-              <td className="py-3">
+              <td className="py-3 pr-4">
                 {u.role === 'ALUMNO' ? (
                   <CarteraPanel alumno={u} profesoresDelGym={profesoresDelGym} />
                 ) : (

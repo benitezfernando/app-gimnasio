@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Search, SearchX } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
 import { ExerciseCard, ExerciseCardData } from '../../../components/exercise-card';
+import { LIMITE_POR_PAGINA, ListExercisesResponse } from './catalogo-api';
 import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors';
 import { EQUIPAMIENTOS, ETIQUETA_EQUIPAMIENTO } from '../../../lib/equipment-options';
 import { PageHeader } from '../../../components/ui/page-header';
@@ -22,16 +23,6 @@ import {
   EmptyTitle,
   EmptyDescription,
 } from '@/components/ui/empty';
-
-export interface ListExercisesResponse {
-  items: ExerciseCardData[];
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
-
-export const LIMITE_POR_PAGINA = 24;
 
 /**
  * La primera página (sin filtros) llega del servidor en `inicial`; la

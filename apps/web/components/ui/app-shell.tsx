@@ -26,7 +26,7 @@ export function AppShell({
     <>
       <Sidebar items={items} user={user} logoutRedirectTo={logoutRedirectTo} />
       <div className="lg:pl-64">{children}</div>
-      {items.length > 0 && <BottomNav items={items} />}
+      <BottomNav items={items} />
     </>
   );
 }

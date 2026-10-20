@@ -1,7 +1,8 @@
 import { apiFetch } from '../../../lib/api-client';
 import { getCurrentUser } from '../../../lib/get-current-user';
 import { homeDeRol } from '../../../lib/role-home';
-import { CatalogoCliente, LIMITE_POR_PAGINA, ListExercisesResponse } from './catalogo-cliente';
+import { CatalogoCliente } from './catalogo-cliente';
+import { LIMITE_POR_PAGINA, ListExercisesResponse } from './catalogo-api';
 
 /**
  * La primera página del catálogo se trae acá, en el servidor (al lado de

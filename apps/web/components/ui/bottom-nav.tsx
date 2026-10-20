@@ -42,6 +42,11 @@ export function BottomNav({ items }: { items: BottomNavItem[] }) {
     items.map((item) => item.href),
   );
 
+  // El chequeo de lista vacía vive acá y no en AppShell: en el servidor
+  // `items` (definido en este módulo 'use client') es una referencia de
+  // cliente sin `length` real; recién en el cliente es el array.
+  if (items.length === 0) return null;
+
   return (
     <nav className="fixed inset-x-0 bottom-0 z-10 flex min-h-16 items-center justify-around border-t border-border/60 bg-card/70 backdrop-blur-xl pb-[env(safe-area-inset-bottom)] lg:hidden">
       {items.map((item) => {
