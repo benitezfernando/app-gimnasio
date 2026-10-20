@@ -1,10 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import { Search, SearchX } from 'lucide-react';
 import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
-import { ExerciseCard, ExerciseCardData } from '../../../components/exercise-card';
+import {
+  ExerciseCard,
+  ExerciseCardData,
+  nombreConOriginal,
+} from '../../../components/exercise-card';
+import { ExerciseDetailDialog } from '../../../components/exercise-detail-dialog';
 import { LIMITE_POR_PAGINA, ListExercisesResponse } from './catalogo-api';
 import { PARTES_CUERPO, ETIQUETA_PARTE_CUERPO } from '../../../lib/region-colors';
 import { EQUIPAMIENTOS, ETIQUETA_EQUIPAMIENTO } from '../../../lib/equipment-options';
@@ -43,6 +47,7 @@ export function CatalogoCliente({
   const [totalPages, setTotalPages] = useState(inicial.totalPages);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [viendoDetalle, setViendoDetalle] = useState<ExerciseCardData | null>(null);
 
   // Una búsqueda nueva cancela la anterior: sin esto, una respuesta lenta de
   // un término viejo podía llegar última y pisar los resultados del actual.
@@ -159,9 +164,15 @@ export function CatalogoCliente({
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {items.map((ejercicio) => (
-          <Link key={ejercicio.id} href={`/catalogo/${ejercicio.id}`}>
+          <button
+            key={ejercicio.id}
+            type="button"
+            onClick={() => setViendoDetalle(ejercicio)}
+            aria-label={`Ver detalle de ${ejercicio.nombre}`}
+            className="rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
             <ExerciseCard ejercicio={ejercicio} />
-          </Link>
+          </button>
         ))}
       </div>
 
@@ -188,6 +199,14 @@ export function CatalogoCliente({
           {cargando && <Spinner data-icon="inline-start" />}
           {cargando ? 'Cargando...' : 'Cargar más'}
         </Button>
+      )}
+      {viendoDetalle && (
+        <ExerciseDetailDialog
+          key={viendoDetalle.id}
+          exerciseId={viendoDetalle.id}
+          nombre={nombreConOriginal(viendoDetalle.nombre, viendoDetalle.nombreOriginal)}
+          onCerrar={() => setViendoDetalle(null)}
+        />
       )}
     </main>
   );

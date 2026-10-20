@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react';
 import { browserApiFetch, BrowserApiError } from '../lib/browser-api-client';
 import { ExerciseDetail, ExerciseDetailBody } from './exercise-detail-body';
-import { nombreConOriginal } from './exercise-card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Spinner } from '@/components/ui/spinner';
 
 /**
- * Detalle del ejercicio encima del editor de plantillas/rutinas: el editor
- * guarda recién al tocar "Guardar", así que navegar a `/catalogo/[id]`
- * perdería los cambios sin guardar.
+ * Detalle del ejercicio en una ventana, sin salir de la pantalla: en el
+ * editor de plantillas/rutinas navegar perdería los cambios sin guardar, y
+ * en la rutina del alumno y el catálogo evita perder el lugar (día elegido,
+ * búsqueda, scroll).
  */
 export function ExerciseDetailDialog({
   exerciseId,
@@ -19,7 +19,11 @@ export function ExerciseDetailDialog({
   onCerrar,
 }: {
   exerciseId: string;
-  /** Nombre ya conocido por el editor, para el título mientras carga. */
+  /**
+   * Título: el nombre tal como lo vio quien tocó el ejercicio. El API le
+   * devuelve al alumno el nombre del catálogo, no el alias de su profesor;
+   * tomar el título del API le cambiaría el nombre al abrirlo.
+   */
   nombre: string;
   onCerrar: () => void;
 }) {
@@ -46,9 +50,7 @@ export function ExerciseDetailDialog({
     >
       <DialogContent className="max-h-[90dvh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>
-            {ejercicio ? nombreConOriginal(ejercicio.nombre, ejercicio.nombreOriginal) : nombre}
-          </DialogTitle>
+          <DialogTitle>{nombre}</DialogTitle>
         </DialogHeader>
 
         {error && (
