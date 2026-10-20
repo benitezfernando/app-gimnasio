@@ -271,6 +271,107 @@ describe('PrismaRoutineTemplateRepository (PGlite)', () => {
     expect(await repo.findDiasByIds([])).toEqual([]);
   });
 
+  describe('update con cambio de nombre', () => {
+    async function instanciaVinculada(opciones: {
+      alumnoId: string;
+      nombre: string;
+      activa?: boolean;
+      diasVinculados: Array<string | null>;
+    }): Promise<string> {
+      const { id } = await prisma.routineInstance.create({
+        data: {
+          gymId: GYM,
+          profesorId: 'prof-1',
+          alumnoId: opciones.alumnoId,
+          nombre: opciones.nombre,
+          activa: opciones.activa ?? true,
+          dias: {
+            create: opciones.diasVinculados.map((vinculadoADiaId, i) => ({
+              numero: i + 1,
+              vinculadoADiaId,
+            })),
+          },
+        },
+        select: { id: true },
+      });
+      return id;
+    }
+
+    const nombreDe = async (id: string) =>
+      (await prisma.routineInstance.findUniqueOrThrow({ where: { id } })).nombre;
+
+    it('renombra las rutinas vigentes que heredaron el nombre y respeta el resto', async () => {
+      const id = await nuevaPlantilla('Fuerza');
+      await repo.guardarDias(
+        id,
+        [{ ejercicios: [ej('ex-1', 1)] }, { ejercicios: [ej('ex-2', 1)] }],
+        [],
+      );
+      const [dia1, dia2] = (await repo.findById(id))!.dias;
+
+      const heredada = await instanciaVinculada({
+        alumnoId: 'alum-1',
+        nombre: 'Fuerza',
+        diasVinculados: [dia1.id, dia2.id],
+      });
+      const nombrePropio = await instanciaVinculada({
+        alumnoId: 'alum-2',
+        nombre: 'Rutina de Ana',
+        diasVinculados: [dia1.id],
+      });
+      const anterior = await instanciaVinculada({
+        alumnoId: 'alum-1',
+        nombre: 'Fuerza',
+        activa: false,
+        diasVinculados: [dia1.id],
+      });
+      const mezclada = await instanciaVinculada({
+        alumnoId: 'alum-2',
+        nombre: 'Fuerza',
+        diasVinculados: [dia1.id, null],
+      });
+
+      const resultado = await repo.update(id, { nombre: 'Fuerza 3 días' });
+
+      expect(resultado.nombre).toBe('Fuerza 3 días');
+      expect(await nombreDe(heredada)).toBe('Fuerza 3 días');
+      expect(await nombreDe(nombrePropio)).toBe('Rutina de Ana');
+      expect(await nombreDe(anterior)).toBe('Fuerza');
+      expect(await nombreDe(mezclada)).toBe('Fuerza');
+    });
+
+    it('no toca las rutinas de otra plantilla con el mismo nombre', async () => {
+      const id = await nuevaPlantilla('Pierna');
+      const otra = await nuevaPlantilla('Pierna');
+      await repo.guardarDias(otra, [{ ejercicios: [ej('ex-1', 1)] }], []);
+      const [diaOtra] = (await repo.findById(otra))!.dias;
+      const deOtra = await instanciaVinculada({
+        alumnoId: 'alum-1',
+        nombre: 'Pierna',
+        diasVinculados: [diaOtra.id],
+      });
+
+      await repo.update(id, { nombre: 'Pierna y glúteos' });
+
+      expect(await nombreDe(deOtra)).toBe('Pierna');
+    });
+
+    it('cambiar solo la descripción no renombra rutinas', async () => {
+      const id = await nuevaPlantilla('Core');
+      await repo.guardarDias(id, [{ ejercicios: [ej('ex-1', 1)] }], []);
+      const [dia] = (await repo.findById(id))!.dias;
+      const rutina = await instanciaVinculada({
+        alumnoId: 'alum-1',
+        nombre: 'Core',
+        diasVinculados: [dia.id],
+      });
+
+      await repo.update(id, { descripcion: 'Abdomen' });
+
+      expect(await nombreDe(rutina)).toBe('Core');
+    });
+  });
+
   it('borrar la plantilla borra sus días y desvincula instancias', async () => {
     const id = await nuevaPlantilla('E');
     await repo.guardarDias(id, [{ ejercicios: [ej('ex-1', 1)] }], []);

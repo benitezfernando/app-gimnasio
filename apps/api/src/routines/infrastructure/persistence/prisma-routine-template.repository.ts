@@ -79,7 +79,41 @@ export class PrismaRoutineTemplateRepository implements RoutineTemplateRepositor
     id: string,
     data: { nombre?: string; descripcion?: string | null; activa?: boolean },
   ): Promise<RoutineTemplateSummary> {
-    return this.prisma.routineTemplate.update({ where: { id }, data, select: SELECT_SUMMARY });
+    if (data.nombre === undefined) {
+      return this.prisma.routineTemplate.update({ where: { id }, data, select: SELECT_SUMMARY });
+    }
+    const nombreNuevo = data.nombre;
+
+    // El nombre de una rutina se copia de la plantilla al asignarla. Si la
+    // plantilla se renombra, las rutinas vigentes que lo heredaron (mismo
+    // nombre y armadas solo con días de esta plantilla) lo siguen, en la
+    // misma transacción. Las de nombre propio, las anteriores y las mezcladas
+    // con otras plantillas no se tocan.
+    return this.prisma.$transaction(async (tx) => {
+      const { nombre: nombreViejo } = await tx.routineTemplate.findUniqueOrThrow({
+        where: { id },
+        select: { nombre: true },
+      });
+      const actualizada = await tx.routineTemplate.update({
+        where: { id },
+        data,
+        select: SELECT_SUMMARY,
+      });
+      if (nombreViejo !== nombreNuevo) {
+        await tx.routineInstance.updateMany({
+          where: {
+            activa: true,
+            nombre: nombreViejo,
+            dias: {
+              some: { vinculadoA: { is: { templateId: id } } },
+              every: { vinculadoA: { is: { templateId: id } } },
+            },
+          },
+          data: { nombre: nombreNuevo },
+        });
+      }
+      return actualizada;
+    }, OPCIONES_TRANSACCION);
   }
 
   async delete(id: string): Promise<void> {

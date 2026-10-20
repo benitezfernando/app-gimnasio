@@ -61,7 +61,8 @@ export function RenameTemplateDialog({
         <DialogHeader>
           <DialogTitle>Renombrar plantilla</DialogTitle>
           <DialogDescription>
-            Las rutinas de tus alumnos ya asignadas con esta plantilla conservan su nombre.
+            También se renombran las rutinas actuales de tus alumnos que tienen el nombre de esta
+            plantilla. Las que tienen otro nombre no cambian.
           </DialogDescription>
         </DialogHeader>
 

@@ -66,6 +66,11 @@ export interface RoutineTemplateRepositoryPort {
     nombre: string;
     descripcion: string | null;
   }): Promise<RoutineTemplateSummary>;
+  /**
+   * Si cambia `nombre`, en la misma transacción renombra las rutinas
+   * vigentes de alumnos que heredaron el nombre viejo (armadas solo con
+   * días de esta plantilla); las de nombre propio no se tocan.
+   */
   update(
     id: string,
     data: { nombre?: string; descripcion?: string | null; activa?: boolean },
