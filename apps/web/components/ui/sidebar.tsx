@@ -2,12 +2,14 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import type { BottomNavItem } from './bottom-nav';
 import { getActiveNavHref } from './bottom-nav-active';
 import { inicialDe } from './avatar-initial';
 import { LogoutButton } from '../logout-button';
 import type { CurrentUser, Role } from '../../lib/get-current-user';
+import logoGimnasio from '../../../../logo/mix-entrenamiento.png';
 
 const ETIQUETA_ROL: Record<Role, string> = {
   ADMIN: 'Admin',
@@ -41,7 +43,14 @@ export function Sidebar({
   return (
     <aside className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col border-r border-border/60 bg-card/60 backdrop-blur-xl lg:flex">
       <div className="px-5 pb-2 pt-6">
-        <span className="text-lg font-bold tracking-wide text-gradient-brand">Gimnasio Mix</span>
+        <div className="h-12 w-12 overflow-hidden rounded-full bg-card">
+          <Image
+            src={logoGimnasio}
+            alt="Gimnasio Mix"
+            sizes="48px"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
 
       <div className="flex items-center gap-3 border-b border-border/60 px-5 py-5">
