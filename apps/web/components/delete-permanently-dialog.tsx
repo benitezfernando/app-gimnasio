@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { browserApiFetch, BrowserApiError } from '../../../lib/browser-api-client';
-import { deletePermanentlyAction } from './actions';
+import { browserApiFetch, BrowserApiError } from '../lib/browser-api-client';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -20,21 +19,30 @@ interface DeletionImpact {
   plantillasABorrar: number;
   instanciasABorrar: number;
   instanciasQueSobreviven: number;
+  instanciasDeOtrosProfesores: number;
   vinculosDeCarteraABorrar: number;
+  otrosProfesores: number;
 }
+
+export type EliminarUsuario = (
+  userId: string,
+) => Promise<{ error: string | null; advertencia?: string }>;
 
 /**
  * HU-03c: nunca un window.confirm genérico para esta acción — el Admin
  * tiene que ver el impacto real antes de poder confirmar (la cascada de
- * un PROFESOR no es predecible de memoria).
+ * un PROFESOR no es predecible de memoria). Lo usan el Admin y el profesor
+ * (sobre sus alumnos); cada uno pasa su propia acción de eliminar.
  */
 export function DeletePermanentlyDialog({
   userId,
   nombre,
+  onEliminar,
   onCerrado,
 }: {
   userId: string;
   nombre: string;
+  onEliminar: EliminarUsuario;
   onCerrado: () => void;
 }) {
   const [impacto, setImpacto] = useState<DeletionImpact | null>(null);
@@ -65,7 +73,7 @@ export function DeletePermanentlyDialog({
   async function confirmar() {
     setEliminando(true);
     setError(null);
-    const resultado = await deletePermanentlyAction(userId);
+    const resultado = await onEliminar(userId);
     if (resultado.error) {
       setError(resultado.error);
       setEliminando(false);
@@ -103,6 +111,20 @@ export function DeletePermanentlyDialog({
             </li>
             <li>Vínculos de cartera que se borran: {impacto.vinculosDeCarteraABorrar}</li>
           </ul>
+        )}
+
+        {impacto && impacto.otrosProfesores > 0 && (
+          <Alert variant="destructive">
+            <AlertDescription>
+              Este alumno también tiene {impacto.otrosProfesores}{' '}
+              {impacto.otrosProfesores === 1 ? 'profesor más' : 'profesores más'}. Se pierden{' '}
+              {impacto.instanciasDeOtrosProfesores}{' '}
+              {impacto.instanciasDeOtrosProfesores === 1
+                ? 'rutina armada por ese profesor'
+                : 'rutinas armadas por esos profesores'}
+              , y el alumno deja de estar en su cartera.
+            </AlertDescription>
+          </Alert>
         )}
 
         {error && (

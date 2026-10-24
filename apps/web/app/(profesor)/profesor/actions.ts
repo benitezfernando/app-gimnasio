@@ -69,3 +69,46 @@ export async function editUserAction(
   revalidatePath('/profesor');
   return { error: null, success: true };
 }
+
+/** Mismos endpoints que el Admin; el API deja al profesor actuar solo sobre alumnos de su cartera. */
+async function cambiarEstadoDeAlumno(
+  alumnoId: string,
+  accion: 'deactivate' | 'reactivate',
+  errorInesperado: string,
+): Promise<{ error: string | null }> {
+  try {
+    await apiFetch(`/users/${alumnoId}/${accion}`, { method: 'PATCH' });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: errorInesperado };
+  }
+  revalidatePath('/profesor');
+  return { error: null };
+}
+
+export async function deactivateAlumnoAction(alumnoId: string): Promise<{ error: string | null }> {
+  return cambiarEstadoDeAlumno(alumnoId, 'deactivate', 'Error inesperado desactivando al alumno.');
+}
+
+export async function reactivateAlumnoAction(alumnoId: string): Promise<{ error: string | null }> {
+  return cambiarEstadoDeAlumno(alumnoId, 'reactivate', 'Error inesperado reactivando al alumno.');
+}
+
+export async function deleteAlumnoPermanentlyAction(
+  alumnoId: string,
+): Promise<{ error: string | null; advertencia?: string }> {
+  try {
+    const resultado = await apiFetch<{ advertencia?: string }>(`/users/${alumnoId}/permanent`, {
+      method: 'DELETE',
+    });
+    revalidatePath('/profesor');
+    return { error: null, advertencia: resultado.advertencia };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return { error: error.message };
+    }
+    return { error: 'Error inesperado eliminando al alumno.' };
+  }
+}

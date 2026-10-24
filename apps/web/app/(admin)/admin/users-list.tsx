@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { deactivateUserAction, editUserAction } from './actions';
+import { deactivateUserAction, deletePermanentlyAction, editUserAction } from './actions';
 import { CarteraPanel } from './cartera-panel';
-import { DeletePermanentlyDialog } from './delete-permanently-dialog';
+import { DeletePermanentlyDialog } from '../../../components/delete-permanently-dialog';
 import { EditUserForm } from '../../../components/edit-user-form';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -238,6 +238,7 @@ export function UsersList({ usuariosIniciales }: { usuariosIniciales: UserRow[] 
         <DeletePermanentlyDialog
           userId={usuarioAEliminar.id}
           nombre={usuarioAEliminar.nombre}
+          onEliminar={deletePermanentlyAction}
           onCerrado={() => setUsuarioAEliminar(null)}
         />
       )}
