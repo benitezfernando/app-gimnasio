@@ -6,6 +6,7 @@ import { UsersController } from './users.controller';
 import { CreateUserUseCase } from '../../application/create-user.use-case';
 import { ListUsersUseCase } from '../../application/list-users.use-case';
 import { DeactivateUserUseCase } from '../../application/deactivate-user.use-case';
+import { ReactivateUserUseCase } from '../../application/reactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
 import { EditUserUseCase } from '../../application/edit-user.use-case';
@@ -74,6 +75,7 @@ describe('PATCH /users/:id (e2e)', () => {
 
   const usuariosPorAuthId: Record<string, UserRecord> = {
     'auth-admin': admin,
+    'auth-prof': profesor,
     'auth-alum': alumno,
   };
 
@@ -86,14 +88,21 @@ describe('PATCH /users/:id (e2e)', () => {
       return null;
     },
     updateNombre: async (id: string, nombre: string) => ({ ...profesor, id, nombre }),
+    deactivate: async (id: string) => ({ ...alumno, id, activo: false }),
+    reactivate: async (id: string) => ({ ...alumno, id, activo: true }),
   };
   const fakeAuthProvider: Partial<AuthProviderPort> = { updateStaffPassword: async () => {} };
-  const fakeCarteraRepository: Partial<CarteraRepositoryPort> = { existe: async () => true };
+  const fakeCarteraRepository: Partial<CarteraRepositoryPort> = {
+    existe: async () => true,
+    findProfesoresDeAlumno: async () => [profesor],
+    findAlumnosDeProfesor: async () => [alumno],
+  };
   const fakeRoutinesCleanup: Partial<RoutinesCleanupPort> = {
     contarImpacto: async () => ({
       plantillasABorrar: 0,
       instanciasABorrar: 0,
       instanciasQueSobreviven: 0,
+      instanciasDeOtrosProfesores: 0,
     }),
     eliminarDatosDe: async () => {},
   };
@@ -109,6 +118,7 @@ describe('PATCH /users/:id (e2e)', () => {
         CreateUserUseCase,
         ListUsersUseCase,
         DeactivateUserUseCase,
+        ReactivateUserUseCase,
         GetUserDeletionImpactUseCase,
         DeleteUserPermanentlyUseCase,
         EditUserUseCase,
@@ -177,6 +187,58 @@ describe('PATCH /users/:id (e2e)', () => {
       .send({ nombre: 'X' });
 
     expect(res.status).toBe(403);
+  });
+
+  describe('baja de alumnos por el profesor', () => {
+    it('PROFESOR desactiva y reactiva a un alumno de su cartera', async () => {
+      const token = await tokenPara('auth-prof');
+
+      const baja = await request(app.getHttpServer())
+        .patch(`/users/${alumno.id}/deactivate`)
+        .set('Authorization', `Bearer ${token}`);
+      const alta = await request(app.getHttpServer())
+        .patch(`/users/${alumno.id}/reactivate`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(baja.status).toBe(200);
+      expect(baja.body.activo).toBe(false);
+      expect(alta.status).toBe(200);
+      expect(alta.body.activo).toBe(true);
+    });
+
+    it('PROFESOR ve el impacto de eliminar a su alumno, con los datos de otros profesores', async () => {
+      const token = await tokenPara('auth-prof');
+      const res = await request(app.getHttpServer())
+        .get(`/users/${alumno.id}/deletion-impact`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('otrosProfesores');
+      expect(res.body).toHaveProperty('instanciasDeOtrosProfesores');
+    });
+
+    it('PROFESOR no puede desactivar a otro profesor', async () => {
+      const token = await tokenPara('auth-prof');
+      const res = await request(app.getHttpServer())
+        .patch(`/users/${profesor.id}/deactivate`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res.status).toBe(404);
+    });
+
+    it.each([
+      ['PATCH', 'deactivate'],
+      ['PATCH', 'reactivate'],
+      ['GET', 'deletion-impact'],
+    ] as const)('un ALUMNO recibe 403 en %s /users/:id/%s', async (metodo, accion) => {
+      const token = await tokenPara('auth-alum');
+      const peticion = request(app.getHttpServer());
+      const res = await (metodo === 'GET' ? peticion.get : peticion.patch)
+        .call(peticion, `/users/${alumno.id}/${accion}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      expect(res.status).toBe(403);
+    });
   });
 
   it('GET /users/me devuelve nombre y username del usuario autenticado', async () => {

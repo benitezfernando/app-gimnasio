@@ -19,12 +19,23 @@ export class PrismaRoutinesCleanupAdapter implements RoutinesCleanupPort {
   async contarImpacto(
     userId: string,
     role: Role.PROFESOR | Role.ALUMNO,
+    profesorInvocadoId?: string,
   ): Promise<RoutinesCleanupImpact> {
     if (role === Role.ALUMNO) {
       const instanciasABorrar = await this.prisma.routineInstance.count({
         where: { alumnoId: userId },
       });
-      return { plantillasABorrar: 0, instanciasABorrar, instanciasQueSobreviven: 0 };
+      const instanciasDeOtrosProfesores = profesorInvocadoId
+        ? await this.prisma.routineInstance.count({
+            where: { alumnoId: userId, profesorId: { not: null, notIn: [profesorInvocadoId] } },
+          })
+        : 0;
+      return {
+        plantillasABorrar: 0,
+        instanciasABorrar,
+        instanciasQueSobreviven: 0,
+        instanciasDeOtrosProfesores,
+      };
     }
 
     const plantillasABorrar = await this.prisma.routineTemplate.count({
@@ -49,7 +60,12 @@ export class PrismaRoutinesCleanupAdapter implements RoutinesCleanupPort {
       }
     }
 
-    return { plantillasABorrar, instanciasABorrar, instanciasQueSobreviven };
+    return {
+      plantillasABorrar,
+      instanciasABorrar,
+      instanciasQueSobreviven,
+      instanciasDeOtrosProfesores: 0,
+    };
   }
 
   async eliminarDatosDe(

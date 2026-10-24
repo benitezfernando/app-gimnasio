@@ -9,6 +9,7 @@ import { RefreshSessionUseCase } from './application/refresh-session.use-case';
 import { SuperAdminLoginUseCase } from './application/super-admin-login.use-case';
 import { ListUsersUseCase } from './application/list-users.use-case';
 import { DeactivateUserUseCase } from './application/deactivate-user.use-case';
+import { ReactivateUserUseCase } from './application/reactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from './application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from './application/delete-user-permanently.use-case';
 import { EditUserUseCase } from './application/edit-user.use-case';
@@ -42,6 +43,7 @@ import { RoutinesCleanupModule } from '../routines/routines-cleanup.module';
     SuperAdminLoginUseCase,
     ListUsersUseCase,
     DeactivateUserUseCase,
+    ReactivateUserUseCase,
     GetUserDeletionImpactUseCase,
     DeleteUserPermanentlyUseCase,
     EditUserUseCase,

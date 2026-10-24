@@ -2,14 +2,12 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Role } from '../domain/role';
 import { AuthenticatedUser } from '../domain/authenticated-user';
 import { USER_REPOSITORY, UserRepositoryPort } from './ports/user-repository.port';
+import { CARTERA_REPOSITORY, CarteraRepositoryPort } from './ports/cartera-repository.port';
 import { ROUTINES_CLEANUP, RoutinesCleanupPort } from './ports/routines-cleanup.port';
 import { AUTH_PROVIDER, AuthProviderPort } from './ports/auth-provider.port';
-import { resolveUserInGym } from './resolve-user-in-gym';
-import { InsufficientRoleError } from './errors/insufficient-role.error';
-import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
+import { resolverAlumnoGestionable } from './resolver-alumno-gestionable';
 import { UserNotInactiveError } from './errors/user-not-inactive.error';
 import { PrismaService } from '../../shared-kernel/prisma.service';
-import { requireGymId } from './require-gym-id';
 
 export interface DeleteUserPermanentlyInput {
   invocadoPor: AuthenticatedUser;
@@ -19,8 +17,6 @@ export interface DeleteUserPermanentlyInput {
 export interface DeleteUserPermanentlyOutput {
   advertencia?: string;
 }
-
-const ROLES_QUE_PUEDEN_ELIMINAR: Role[] = [Role.ADMIN];
 
 /**
  * Hard-delete real (PRD §6 regla 10, HU-03c). `PrismaService` inyectado
@@ -37,24 +33,19 @@ export class DeleteUserPermanentlyUseCase {
 
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: UserRepositoryPort,
+    @Inject(CARTERA_REPOSITORY) private readonly carteraRepository: CarteraRepositoryPort,
     @Inject(ROUTINES_CLEANUP) private readonly routinesCleanup: RoutinesCleanupPort,
     @Inject(AUTH_PROVIDER) private readonly authProvider: AuthProviderPort,
     private readonly prisma: PrismaService,
   ) {}
 
   async execute(input: DeleteUserPermanentlyInput): Promise<DeleteUserPermanentlyOutput> {
-    if (!ROLES_QUE_PUEDEN_ELIMINAR.includes(input.invocadoPor.role)) {
-      throw new InsufficientRoleError(input.invocadoPor.role, ROLES_QUE_PUEDEN_ELIMINAR);
-    }
-
-    const objetivo = await resolveUserInGym(
+    const objetivo = await resolverAlumnoGestionable(
       this.userRepository,
+      this.carteraRepository,
+      input.invocadoPor,
       input.userId,
-      requireGymId(input.invocadoPor),
     );
-    if (objetivo.role === Role.ADMIN) {
-      throw new CannotTargetAdminError(objetivo.id);
-    }
     if (objetivo.activo) {
       throw new UserNotInactiveError(objetivo.id);
     }

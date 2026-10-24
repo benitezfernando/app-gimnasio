@@ -71,6 +71,7 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 - Dado un usuario desactivado, cuando intenta loguearse, entonces el acceso es rechazado.
 - Un profesor desactivado conserva sus plantillas/instancias históricas (no se borran en cascada), y sus asignaciones de cartera quedan registradas (no se borran), aunque ya no pueda operar sobre ellas.
 - La baja lógica es el flujo por defecto y reversible (reactivar = volver `activo: true`). Para eliminar por completo, ver HU-03c.
+- Un Profesor también puede desactivar y reactivar a los alumnos de su cartera (nunca a otros usuarios). Dado que un alumno puede tener más de un profesor, la baja le quita el acceso con todos ellos: antes de confirmar, el sistema lo advierte. Un alumno desactivado sigue apareciendo en la cartera del profesor, marcado como inactivo.
 
 **HU-03b — Gestión de cartera (asignar/quitar profesor de un alumno)**
 
@@ -84,10 +85,13 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 **HU-03c — Eliminación definitiva de un usuario inactivo**
 
 > Como Admin, quiero poder eliminar por completo a un profesor o alumno ya dado de baja, para no acumular cuentas de test o bajas reales sin actividad en el panel.
+>
+> Como Profesor, quiero poder eliminar por completo a un alumno de mi cartera ya dado de baja, con las mismas reglas.
 
 - Solo disponible sobre un usuario con `activo: false` — no se puede eliminar definitivamente a un usuario activo; primero hay que darlo de baja (HU-03).
 - Antes de confirmar, veo el impacto exacto: cuántas plantillas, cuántas instancias se borran, cuántas instancias sobreviven sin profesor asignado, y cuántos vínculos de cartera — es irreversible y la cascada de un profesor no es obvia de memoria.
 - Es irreversible y una acción separada de la baja lógica, nunca su reemplazo por defecto.
+- Si quien elimina es un Profesor y el alumno tiene otros profesores, el impacto lo advierte explícitamente: cuántos otros profesores tiene y cuántas rutinas armadas por ellos se pierden. La eliminación se permite igual.
 - Al eliminar un ALUMNO se borran también sus `RoutineInstance` (con sus ejercicios) y sus filas de cartera.
 - Al eliminar un PROFESOR se borran sus `RoutineTemplate` (propiedad exclusiva, con sus ejercicios) y sus filas de cartera. Sus `RoutineInstance` creadas se borran solo si el alumno correspondiente no tiene otro profesor vigente en su cartera; si lo tiene, la instancia se conserva (sin dueño original) y sigue siendo gestionable por el profesor restante — ver regla de negocio 10 y HLD §Routines.
 
@@ -147,14 +151,14 @@ Esto es fiel a cómo trabaja un profesor en un gym convencional: arranca de una 
 
 1. Un alumno tiene como máximo una `RoutineInstance` vigente a la vez.
 2. Un usuario pertenece a un único gym; no hay usuarios compartidos entre gyms en el MVP.
-3. Borrar un profesor/alumno es baja lógica (`activo: false`) por defecto — preserva histórico. DELETE físico existe solo como acción explícita separada sobre un usuario ya inactivo (ver regla 10, HU-03c), no como comportamiento por defecto.
+3. Borrar un profesor/alumno es baja lógica (`activo: false`) por defecto — preserva histórico. DELETE físico existe solo como acción explícita separada sobre un usuario ya inactivo (ver regla 10, HU-03c), no como comportamiento por defecto. La baja y la reactivación las hace el Admin sobre cualquier usuario de su gym, o el Profesor sobre los alumnos de su cartera.
 4. El alta de usuarios es siempre manual (Admin o Profesor) y 100% sin email: la app no manda ni pide mails a nadie, ni para alta ni para notificaciones. La password inicial la define quien da de alta y se comunica en persona.
 5. El catálogo de ejercicios ([exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset), 1.324 ejercicios con imagen + GIF + instrucciones en español, © Gym Visual) es de solo lectura en el MVP; no hay UI para que el profesor suba ejercicios custom todavía (eso es Fase 2, aunque el modelo de datos ya lo soporta).
 6. **Gate de licencia antes de Fase 3 (multi-gym comercial):** la media del catálogo (GIFs/imágenes) es de Gym Visual con permiso de redistribución pero uso comercial sujeto a licencia propia. Antes de ofrecer la app como servicio pago a otros gimnasios, auditar y reemplazar la media por: licencia comercial comprada, dataset con licencia libre (ej. Free Exercise DB, solo imagen), o contenido propio grabado por cada profesor.
 7. Quién puede invitar a quién: ADMIN puede crear PROFESOR o ALUMNO; PROFESOR solo puede crear ALUMNO. Nadie puede auto-asignarse un rol ni crear uno igual o mayor al propio salvo ADMIN.
 8. **Password diferenciada por rol (riesgo aceptado explícitamente por Fernando):** ADMIN y PROFESOR tienen username + password real, definida por quien los crea. ALUMNO tiene solo username (legible, `nombre.apellido`), sin password real — el username funciona de hecho como el único secreto de la cuenta. Se acepta este riesgo porque el alumno solo tiene acceso de lectura a su propia rutina, sin datos sensibles de por medio. Mitigación mínima: rate-limit del endpoint de login por IP/username.
 9. **Cartera profesor↔alumno (confirmado con el profesor real, ya no es asunción):** cada alumno tiene uno o más profesores asignados explícitamente — no es una relación exclusiva 1 a 1, un alumno puede tener varios profesores a la vez. Un PROFESOR solo puede ver, asignar o editar rutinas (`RoutineTemplate` es propia del profesor; `RoutineInstance` requiere estar en la cartera del alumno) de los alumnos de su cartera — nunca de un alumno ajeno, aunque sea del mismo gym. Solo ADMIN gestiona la cartera (asignar/quitar profesores de un alumno, HU-03b). Si un PROFESOR da de alta a un alumno, ese alumno entra automáticamente en su cartera; si lo da de alta el ADMIN, no queda asignado a nadie hasta que el ADMIN lo asigne explícitamente.
-10. **Eliminación definitiva de usuarios (hard-delete, solo Admin, ver HU-03c):** acción explícita y separada de la baja lógica (regla 3), disponible solo sobre un usuario ya inactivo. Cascada al eliminar un ALUMNO: se borran sus `RoutineInstance` y sus filas de cartera. Cascada al eliminar un PROFESOR: se borran sus `RoutineTemplate` (propiedad exclusiva) y sus filas de cartera; sus `RoutineInstance` se borran solo si el alumno afectado no tiene otro profesor vigente en cartera — si lo tiene, la instancia se conserva con `profesorId` en null, sin afectar al profesor restante que la sigue gestionando. Pensada para depurar cuentas de test o bajas reales sin actividad, no como flujo normal.
+10. **Eliminación definitiva de usuarios (hard-delete, Admin sobre cualquier usuario de su gym o Profesor sobre alumnos de su cartera, ver HU-03c):** acción explícita y separada de la baja lógica (regla 3), disponible solo sobre un usuario ya inactivo. Cascada al eliminar un ALUMNO: se borran sus `RoutineInstance` y sus filas de cartera. Cascada al eliminar un PROFESOR: se borran sus `RoutineTemplate` (propiedad exclusiva) y sus filas de cartera; sus `RoutineInstance` se borran solo si el alumno afectado no tiene otro profesor vigente en cartera — si lo tiene, la instancia se conserva con `profesorId` en null, sin afectar al profesor restante que la sigue gestionando. Pensada para depurar cuentas de test o bajas reales sin actividad, no como flujo normal.
 11. **Eliminación definitiva de plantillas (hard-delete, solo el Profesor dueño, ver HU-07):** mismo gate que la regla 10 — solo sobre una plantilla ya desactivada (`activa: false`), nunca sobre una activa. La baja lógica sigue siendo el flujo por defecto de HU-07; el borrado físico es la acción explícita e irreversible.
 
 ## 7. Métricas de éxito del MVP

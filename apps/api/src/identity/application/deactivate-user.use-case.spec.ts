@@ -1,12 +1,15 @@
 import { Role } from '../domain/role';
 import { DeactivateUserUseCase } from './deactivate-user.use-case';
 import { UserRepositoryPort, UserRecord } from './ports/user-repository.port';
+import { CarteraRepositoryPort } from './ports/cartera-repository.port';
+import { AlumnoNotInCarteraError } from '../../routines/application/errors/alumno-not-in-cartera.error';
 import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { UserNotFoundError } from './errors/user-not-found.error';
 import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
 
 describe('DeactivateUserUseCase', () => {
   let userRepository: jest.Mocked<UserRepositoryPort>;
+  let carteraRepository: jest.Mocked<CarteraRepositoryPort>;
   let useCase: DeactivateUserUseCase;
 
   const admin = { id: 'admin-1', gymId: 'gym-1', role: Role.ADMIN };
@@ -29,14 +32,23 @@ describe('DeactivateUserUseCase', () => {
       findByGymId: jest.fn(),
       findById: jest.fn(),
       deactivate: jest.fn(),
+      reactivate: jest.fn(),
       create: jest.fn(),
       updateNombre: jest.fn(),
     };
-    useCase = new DeactivateUserUseCase(userRepository);
+    carteraRepository = {
+      existe: jest.fn().mockResolvedValue(true),
+      crear: jest.fn(),
+      eliminar: jest.fn(),
+      findAlumnosDeProfesor: jest.fn(),
+      findProfesoresDeAlumno: jest.fn(),
+    };
+    useCase = new DeactivateUserUseCase(userRepository, carteraRepository);
   });
 
-  it('rechaza si quien invoca no es ADMIN', async () => {
-    await expect(useCase.execute({ invocadoPor: profesor, userId: 'target-1' })).rejects.toThrow(
+  it('rechaza si quien invoca no es ADMIN ni PROFESOR', async () => {
+    const alumno = { id: 'alum-9', gymId: 'gym-1', role: Role.ALUMNO };
+    await expect(useCase.execute({ invocadoPor: alumno, userId: 'target-1' })).rejects.toThrow(
       InsufficientRoleError,
     );
     expect(userRepository.findById).not.toHaveBeenCalled();
@@ -76,5 +88,35 @@ describe('DeactivateUserUseCase', () => {
 
     expect(userRepository.deactivate).toHaveBeenCalledWith('target-1');
     expect(resultado.activo).toBe(false);
+  });
+
+  it('PROFESOR desactiva a un alumno de su cartera', async () => {
+    userRepository.findById.mockResolvedValue(usuarioObjetivo);
+    userRepository.deactivate.mockResolvedValue({ ...usuarioObjetivo, activo: false });
+
+    const resultado = await useCase.execute({ invocadoPor: profesor, userId: 'target-1' });
+
+    expect(carteraRepository.existe).toHaveBeenCalledWith('prof-1', 'target-1');
+    expect(userRepository.deactivate).toHaveBeenCalledWith('target-1');
+    expect(resultado.activo).toBe(false);
+  });
+
+  it('PROFESOR no desactiva a un alumno que no está en su cartera', async () => {
+    userRepository.findById.mockResolvedValue(usuarioObjetivo);
+    carteraRepository.existe.mockResolvedValue(false);
+
+    await expect(useCase.execute({ invocadoPor: profesor, userId: 'target-1' })).rejects.toThrow(
+      AlumnoNotInCarteraError,
+    );
+    expect(userRepository.deactivate).not.toHaveBeenCalled();
+  });
+
+  it('PROFESOR no desactiva a otro profesor', async () => {
+    userRepository.findById.mockResolvedValue({ ...usuarioObjetivo, role: Role.PROFESOR });
+
+    await expect(useCase.execute({ invocadoPor: profesor, userId: 'target-1' })).rejects.toThrow(
+      UserNotFoundError,
+    );
+    expect(userRepository.deactivate).not.toHaveBeenCalled();
   });
 });

@@ -49,6 +49,11 @@ export class PrismaUserRepository implements UserRepositoryPort {
     return this.toRecord(user);
   }
 
+  async reactivate(id: string): Promise<UserRecord> {
+    const user = await this.prisma.user.update({ where: { id }, data: { activo: true } });
+    return this.toRecord(user);
+  }
+
   async create(
     data: {
       gymId: string | null;

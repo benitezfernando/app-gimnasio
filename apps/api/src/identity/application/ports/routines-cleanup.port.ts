@@ -7,6 +7,11 @@ export interface RoutinesCleanupImpact {
   plantillasABorrar: number;
   instanciasABorrar: number;
   instanciasQueSobreviven: number;
+  /**
+   * Al borrar un ALUMNO: rutinas suyas armadas por profesores distintos de
+   * `profesorInvocadoId`. 0 si no se indica ese profesor o el objetivo es PROFESOR.
+   */
+  instanciasDeOtrosProfesores: number;
 }
 
 /**
@@ -29,7 +34,11 @@ export interface RoutinesCleanupImpact {
  * `tx` explícitamente.
  */
 export interface RoutinesCleanupPort {
-  contarImpacto(userId: string, role: Role.PROFESOR | Role.ALUMNO): Promise<RoutinesCleanupImpact>;
+  contarImpacto(
+    userId: string,
+    role: Role.PROFESOR | Role.ALUMNO,
+    profesorInvocadoId?: string,
+  ): Promise<RoutinesCleanupImpact>;
   eliminarDatosDe(
     userId: string,
     role: Role.PROFESOR | Role.ALUMNO,

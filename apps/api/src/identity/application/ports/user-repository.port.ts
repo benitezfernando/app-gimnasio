@@ -18,6 +18,7 @@ export interface UserRepositoryPort {
   findByGymId(gymId: string, role?: Role): Promise<UserRecord[]>;
   findById(id: string): Promise<UserRecord | null>;
   deactivate(id: string): Promise<UserRecord>;
+  reactivate(id: string): Promise<UserRecord>;
   create(
     data: {
       gymId: string | null;

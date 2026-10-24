@@ -2,6 +2,8 @@ import { Role } from '../domain/role';
 import { DeleteUserPermanentlyUseCase } from './delete-user-permanently.use-case';
 import { UserRepositoryPort, UserRecord } from './ports/user-repository.port';
 import { RoutinesCleanupPort } from './ports/routines-cleanup.port';
+import { CarteraRepositoryPort } from './ports/cartera-repository.port';
+import { AlumnoNotInCarteraError } from '../../routines/application/errors/alumno-not-in-cartera.error';
 import { AuthProviderPort } from './ports/auth-provider.port';
 import { InsufficientRoleError } from './errors/insufficient-role.error';
 import { CannotTargetAdminError } from './errors/cannot-target-admin.error';
@@ -10,6 +12,7 @@ import { UserNotInactiveError } from './errors/user-not-inactive.error';
 describe('DeleteUserPermanentlyUseCase', () => {
   let userRepository: jest.Mocked<UserRepositoryPort>;
   let routinesCleanup: jest.Mocked<RoutinesCleanupPort>;
+  let carteraRepository: jest.Mocked<CarteraRepositoryPort>;
   let authProvider: jest.Mocked<AuthProviderPort>;
   let prisma: {
     $transaction: jest.Mock;
@@ -38,10 +41,18 @@ describe('DeleteUserPermanentlyUseCase', () => {
       findByGymId: jest.fn(),
       findById: jest.fn(),
       deactivate: jest.fn(),
+      reactivate: jest.fn(),
       create: jest.fn(),
       updateNombre: jest.fn(),
     };
     routinesCleanup = { contarImpacto: jest.fn(), eliminarDatosDe: jest.fn() };
+    carteraRepository = {
+      existe: jest.fn().mockResolvedValue(true),
+      crear: jest.fn(),
+      eliminar: jest.fn(),
+      findAlumnosDeProfesor: jest.fn(),
+      findProfesoresDeAlumno: jest.fn(),
+    };
     authProvider = {
       createStaffUser: jest.fn(),
       createAlumnoUser: jest.fn(),
@@ -58,16 +69,48 @@ describe('DeleteUserPermanentlyUseCase', () => {
     };
     useCase = new DeleteUserPermanentlyUseCase(
       userRepository,
+      carteraRepository,
       routinesCleanup,
       authProvider,
       prisma as never,
     );
   });
 
-  it('rechaza si quien invoca no es ADMIN', async () => {
+  it('rechaza si quien invoca no es ADMIN ni PROFESOR', async () => {
+    const alumno = { id: 'alum-9', gymId: 'gym-1', role: Role.ALUMNO };
+    await expect(useCase.execute({ invocadoPor: alumno, userId: 'alum-1' })).rejects.toThrow(
+      InsufficientRoleError,
+    );
+  });
+
+  it('PROFESOR elimina a un alumno inactivo de su cartera', async () => {
+    userRepository.findById.mockResolvedValue(alumnoInactivo);
+    authProvider.deleteAuthUser.mockResolvedValue(undefined);
+
+    const resultado = await useCase.execute({ invocadoPor: profesorInvocador, userId: 'alum-1' });
+
+    expect(carteraRepository.existe).toHaveBeenCalledWith('prof-1', 'alum-1');
+    expect(prisma.user.delete).toHaveBeenCalledWith({ where: { id: 'alum-1' } });
+    expect(resultado).toEqual({});
+  });
+
+  it('PROFESOR no elimina a un alumno que no está en su cartera', async () => {
+    userRepository.findById.mockResolvedValue(alumnoInactivo);
+    carteraRepository.existe.mockResolvedValue(false);
+
     await expect(
       useCase.execute({ invocadoPor: profesorInvocador, userId: 'alum-1' }),
-    ).rejects.toThrow(InsufficientRoleError);
+    ).rejects.toThrow(AlumnoNotInCarteraError);
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+
+  it('PROFESOR no elimina a un alumno activo (gate del hard-delete)', async () => {
+    userRepository.findById.mockResolvedValue({ ...alumnoInactivo, activo: true });
+
+    await expect(
+      useCase.execute({ invocadoPor: profesorInvocador, userId: 'alum-1' }),
+    ).rejects.toThrow(UserNotInactiveError);
+    expect(prisma.$transaction).not.toHaveBeenCalled();
   });
 
   it('rechaza con CannotTargetAdminError si el objetivo es ADMIN', async () => {

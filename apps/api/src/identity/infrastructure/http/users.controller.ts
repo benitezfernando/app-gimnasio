@@ -18,6 +18,7 @@ import { AuthenticatedUser } from '../../domain/authenticated-user';
 import { CreateUserUseCase } from '../../application/create-user.use-case';
 import { ListUsersUseCase } from '../../application/list-users.use-case';
 import { DeactivateUserUseCase } from '../../application/deactivate-user.use-case';
+import { ReactivateUserUseCase } from '../../application/reactivate-user.use-case';
 import { GetUserDeletionImpactUseCase } from '../../application/get-user-deletion-impact.use-case';
 import { DeleteUserPermanentlyUseCase } from '../../application/delete-user-permanently.use-case';
 import { EditUserUseCase } from '../../application/edit-user.use-case';
@@ -37,6 +38,7 @@ export class UsersController {
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly listUsersUseCase: ListUsersUseCase,
     private readonly deactivateUserUseCase: DeactivateUserUseCase,
+    private readonly reactivateUserUseCase: ReactivateUserUseCase,
     private readonly getUserDeletionImpactUseCase: GetUserDeletionImpactUseCase,
     private readonly deleteUserPermanentlyUseCase: DeleteUserPermanentlyUseCase,
     private readonly editUserUseCase: EditUserUseCase,
@@ -85,9 +87,16 @@ export class UsersController {
   }
 
   @Patch(':id/deactivate')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.PROFESOR)
   async deactivate(@Param('id') id: string, @Req() req: RequestWithUser) {
     const user = await this.deactivateUserUseCase.execute({ invocadoPor: req.user, userId: id });
+    return toUserResponse(user);
+  }
+
+  @Patch(':id/reactivate')
+  @Roles(Role.ADMIN, Role.PROFESOR)
+  async reactivate(@Param('id') id: string, @Req() req: RequestWithUser) {
+    const user = await this.reactivateUserUseCase.execute({ invocadoPor: req.user, userId: id });
     return toUserResponse(user);
   }
 
@@ -107,13 +116,13 @@ export class UsersController {
   }
 
   @Get(':id/deletion-impact')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.PROFESOR)
   async deletionImpact(@Param('id') id: string, @Req() req: RequestWithUser) {
     return this.getUserDeletionImpactUseCase.execute({ invocadoPor: req.user, userId: id });
   }
 
   @Delete(':id/permanent')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.PROFESOR)
   @HttpCode(200)
   async deletePermanently(@Param('id') id: string, @Req() req: RequestWithUser) {
     return this.deleteUserPermanentlyUseCase.execute({ invocadoPor: req.user, userId: id });

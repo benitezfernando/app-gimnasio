@@ -50,6 +50,7 @@ describe('AssignProfesorToAlumnoUseCase', () => {
       findByGymId: jest.fn(),
       findById: jest.fn(),
       deactivate: jest.fn(),
+      reactivate: jest.fn(),
       create: jest.fn(),
       updateNombre: jest.fn(),
     };
